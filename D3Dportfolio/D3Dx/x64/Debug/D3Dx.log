@@ -1,0 +1,24 @@
+﻿  stdafx.cpp
+  D3Dx.cpp
+  cTimeManager.cpp
+  cMainGame.cpp
+  cFontManager.cpp
+  cDeviceManager.cpp
+  cCube.cpp
+c:\users\kang\desktop\고급과정\기본세팅(타임,폰트)\d3dx\ccube.cpp(56): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kang\desktop\고급과정\기본세팅(타임,폰트)\d3dx\ccube.cpp(60): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cCamera.cpp
+  코드를 생성하고 있습니다...
+cCamera.obj : error LNK2019: D3DXVec3TransformCoord 외부 기호(참조 위치: "public: void __cdecl cCamera::Update(void)" (?Update@cCamera@@QEAAXXZ) 함수)에서 확인하지 못했습니다.
+cCamera.obj : error LNK2019: D3DXMatrixMultiply 외부 기호(참조 위치: "public: struct D3DXMATRIX __cdecl D3DXMATRIX::operator*(struct D3DXMATRIX const &)const " (??DD3DXMATRIX@@QEBA?AU0@AEBU0@@Z) 함수)에서 확인하지 못했습니다.
+cCamera.obj : error LNK2019: D3DXMatrixRotationX 외부 기호(참조 위치: "public: void __cdecl cCamera::Update(void)" (?Update@cCamera@@QEAAXXZ) 함수)에서 확인하지 못했습니다.
+cCamera.obj : error LNK2019: D3DXMatrixRotationY 외부 기호(참조 위치: "public: void __cdecl cCamera::Update(void)" (?Update@cCamera@@QEAAXXZ) 함수)에서 확인하지 못했습니다.
+cCamera.obj : error LNK2019: D3DXMatrixLookAtLH 외부 기호(참조 위치: "public: void __cdecl cCamera::Update(void)" (?Update@cCamera@@QEAAXXZ) 함수)에서 확인하지 못했습니다.
+cCamera.obj : error LNK2019: D3DXMatrixPerspectiveFovLH 외부 기호(참조 위치: "public: void __cdecl cCamera::Setup(void)" (?Setup@cCamera@@QEAAXXZ) 함수)에서 확인하지 못했습니다.
+cCube.obj : error LNK2019: D3DXCreateMeshFVF 외부 기호(참조 위치: "public: void __cdecl cCube::Setup(struct D3DXVECTOR3,wchar_t const *)" (?Setup@cCube@@QEAAXUD3DXVECTOR3@@PEB_W@Z) 함수)에서 확인하지 못했습니다.
+cCube.obj : error LNK2019: D3DXCreateTextureFromFileW 외부 기호(참조 위치: "public: void __cdecl cCube::Setup(struct D3DXVECTOR3,wchar_t const *)" (?Setup@cCube@@QEAAXUD3DXVECTOR3@@PEB_W@Z) 함수)에서 확인하지 못했습니다.
+cDeviceManager.obj : error LNK2019: Direct3DCreate9 외부 기호(참조 위치: "private: __cdecl cDeviceManager::cDeviceManager(void)" (??0cDeviceManager@@AEAA@XZ) 함수)에서 확인하지 못했습니다.
+cFontManager.obj : error LNK2019: D3DXCreateFontIndirectW 외부 기호(참조 위치: "public: void __cdecl cFontManager::Setup(void)" (?Setup@cFontManager@@QEAAXXZ) 함수)에서 확인하지 못했습니다.
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86\d3d9.lib : warning LNK4272: 'X86' 라이브러리 컴퓨터 종류가 'x64' 대상 컴퓨터 종류와 충돌합니다.
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86\d3dx9.lib : warning LNK4272: 'X86' 라이브러리 컴퓨터 종류가 'x64' 대상 컴퓨터 종류와 충돌합니다.
+C:\Users\kang\Desktop\고급과정\기본세팅(타임,폰트)\x64\Debug\D3Dx.exe : fatal error LNK1120: 10개의 확인할 수 없는 외부 참조입니다.
