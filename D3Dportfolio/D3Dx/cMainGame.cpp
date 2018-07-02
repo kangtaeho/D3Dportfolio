@@ -17,7 +17,7 @@ cMainGame::~cMainGame()
 	delete m_pCube;
 }
 
-void cMainGame::Setup()
+HRESULT cMainGame::Setup()
 {
 	cGameNode::Setup();
 
@@ -29,6 +29,7 @@ void cMainGame::Setup()
 	m_pCube = new cCube;
 	m_pCube->Setup(D3DXVECTOR3(2.0f, 2.0f, 2.0f), NULL);
 
+	return S_OK;
 }
 
 void cMainGame::Update()

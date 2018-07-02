@@ -43,6 +43,9 @@
     <Filter Include="D3DFramework\cKeyManager">
       <UniqueIdentifier>{4c6451c0-23a4-48a1-91eb-3266a6df5fb6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="D3DFramework\cSceneManager">
+      <UniqueIdentifier>{de3ee641-47b0-4512-9065-ecad05262e02}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -84,6 +87,9 @@
     <ClInclude Include="cKeyManager.h">
       <Filter>D3DFramework\cKeyManager</Filter>
     </ClInclude>
+    <ClInclude Include="cSceneManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -118,6 +124,9 @@
     </ClCompile>
     <ClCompile Include="cKeyManager.cpp">
       <Filter>D3DFramework\cKeyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cSceneManager.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

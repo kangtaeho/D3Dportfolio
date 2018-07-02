@@ -8,7 +8,7 @@ public:
 	cGameNode();
 	virtual ~cGameNode();
 
-	virtual void Setup();
+	virtual HRESULT Setup();
 	virtual void Update();
 	virtual void Render();
 

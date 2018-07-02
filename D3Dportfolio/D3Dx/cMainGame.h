@@ -14,7 +14,7 @@ public:
 	cMainGame();
 	virtual ~cMainGame();
 
-	virtual void Setup();
+	virtual HRESULT Setup();
 	virtual void Update();
 	virtual void Render();
 
