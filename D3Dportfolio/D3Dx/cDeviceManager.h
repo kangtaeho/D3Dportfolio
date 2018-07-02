@@ -12,6 +12,7 @@ class cDeviceManager
 
 public:
 	LPDIRECT3DDEVICE9 GetDevice();
+	void Setup();
 	void Destroy();
 };
 

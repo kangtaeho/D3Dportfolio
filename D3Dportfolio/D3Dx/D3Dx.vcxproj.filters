@@ -31,6 +31,18 @@
     <Filter Include="소스 파일\cMainGame">
       <UniqueIdentifier>{66d68536-eb2c-4396-9c44-6a142ea90a96}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\cCube">
+      <UniqueIdentifier>{bbdf622c-75b3-4268-88af-90b31f52267c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cGameNode">
+      <UniqueIdentifier>{3f210834-1ea0-4d2a-8299-a1c731f92461}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="D3DFramework\cTextureManager">
+      <UniqueIdentifier>{7f7a9d8f-7987-43d8-a6aa-46f8a7ecb231}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="D3DFramework\cKeyManager">
+      <UniqueIdentifier>{4c6451c0-23a4-48a1-91eb-3266a6df5fb6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -43,9 +55,6 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="D3Dx.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cCube.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="cDeviceManager.h">
@@ -63,15 +72,24 @@
     <ClInclude Include="cMainGame.h">
       <Filter>소스 파일\cMainGame</Filter>
     </ClInclude>
+    <ClInclude Include="cCube.h">
+      <Filter>소스 파일\cCube</Filter>
+    </ClInclude>
+    <ClInclude Include="cTextureManager.h">
+      <Filter>D3DFramework\cTextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cGameNode.h">
+      <Filter>cGameNode</Filter>
+    </ClInclude>
+    <ClInclude Include="cKeyManager.h">
+      <Filter>D3DFramework\cKeyManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="D3Dx.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cCube.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="cDeviceManager.cpp">
@@ -88,6 +106,18 @@
     </ClCompile>
     <ClCompile Include="cMainGame.cpp">
       <Filter>소스 파일\cMainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="cCube.cpp">
+      <Filter>소스 파일\cCube</Filter>
+    </ClCompile>
+    <ClCompile Include="cTextureManager.cpp">
+      <Filter>D3DFramework\cTextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cGameNode.cpp">
+      <Filter>cGameNode</Filter>
+    </ClCompile>
+    <ClCompile Include="cKeyManager.cpp">
+      <Filter>D3DFramework\cKeyManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

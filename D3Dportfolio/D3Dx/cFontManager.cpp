@@ -10,7 +10,7 @@ cFontManager::cFontManager()
 
 cFontManager::~cFontManager()
 {
-	m_pFont->Release();
+	
 }
 
 void cFontManager::Setup()
@@ -47,4 +47,9 @@ void cFontManager::TextFont(int x, int y, char* text, ...)
 
 	m_pFont->DrawTextA(NULL, str, -1, &rc, DT_LEFT, D3DCOLOR_XRGB(255, 0, 255));
 
+}
+
+void cFontManager::Destroy()
+{
+	m_pFont->Release();
 }

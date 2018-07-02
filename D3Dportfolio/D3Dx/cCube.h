@@ -19,11 +19,9 @@ private:
 	D3DXVECTOR3					m_vPosition;
 	D3DXMATRIX					m_matWorld;
 
-	LPDIRECT3DTEXTURE9			m_pTexture[3] = { 0,0,0 };
-
 	ID3DXMesh*					m_pMesh;
 
-
+	float						m_fRotY;
 public:
 	void Setup(D3DXVECTOR3 size, LPCWSTR texName);
 	void Update();

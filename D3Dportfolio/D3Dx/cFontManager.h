@@ -14,6 +14,7 @@ public:
 
 	void Setup();
 	void TextFont(int x, int y, char* text, ...);
+	void Destroy();
 
 };
 

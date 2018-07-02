@@ -63,3 +63,8 @@ float cTimeManager::GetWorldTime()
 {
 	return m_fWorldTime;
 }
+
+void cTimeManager::Destory()
+{
+
+}

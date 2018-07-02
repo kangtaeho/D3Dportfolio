@@ -1,9 +1,10 @@
 #pragma once
+#include "cGameNode.h"
 
 class cCamera;
 class cCube;
 
-class cMainGame
+class cMainGame  :public cGameNode
 {
 private:
 	cCamera *	m_pCamera;
@@ -11,11 +12,11 @@ private:
 
 public:
 	cMainGame();
-	~cMainGame();
+	virtual ~cMainGame();
 
-	void Setup();
-	void Update();
-	void Render();
+	virtual void Setup();
+	virtual void Update();
+	virtual void Render();
 
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 };

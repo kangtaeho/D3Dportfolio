@@ -5,6 +5,7 @@
 cCube::cCube()
 	: m_vPosition(0, 0, 0)
 	, m_pMesh(NULL)
+	, m_fRotY(0)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 }
@@ -12,15 +13,11 @@ cCube::cCube()
 
 cCube::~cCube()
 {
+	SAFE_RELEASE(m_pMesh);
 }
 
 void cCube::Setup(D3DXVECTOR3 size, LPCWSTR texName)
 {
-
-	D3DXCreateTextureFromFile(g_pD3DDevice, L"tex00.jpg", &m_pTexture[0]);
-	D3DXCreateTextureFromFile(g_pD3DDevice, L"tex01.jpg", &m_pTexture[1]);
-	D3DXCreateTextureFromFile(g_pD3DDevice, L"tex02.jpg", &m_pTexture[2]);
-
 
 	ST_PNT_VERTEX v;
 	v.p = D3DXVECTOR3(-0.5f*size.x, -0.5f*size.y, -0.5f*size.z);
@@ -177,12 +174,12 @@ void cCube::Setup(D3DXVECTOR3 size, LPCWSTR texName)
 
 void cCube::Update()
 {
-
+	
 }
 
 void cCube::Render()
 {
-	// g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	//g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	// g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
 	// g_pD3DDevice->SetTexture(0, m_pTexture);
 	// g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST,
@@ -193,7 +190,6 @@ void cCube::Render()
 
 	for (int i = 0; i < 3; i++)
 	{
-		g_pD3DDevice->SetTexture(0, m_pTexture[i]);
 		m_pMesh->DrawSubset(i);
 	}
 

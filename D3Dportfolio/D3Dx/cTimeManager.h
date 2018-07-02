@@ -27,5 +27,7 @@ public:
 
 	float GetWorldTime();
 
+	void Destory();
+
 };
 

@@ -15,15 +15,14 @@ cMainGame::~cMainGame()
 {
 	delete m_pCamera;
 	delete m_pCube;
-
-	g_pDeviceManager->Destroy();
 }
 
 void cMainGame::Setup()
 {
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-	g_pFontManager->Setup();
+	cGameNode::Setup();
 
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	
 	m_pCamera = new cCamera;
 	m_pCamera->Setup();
 
@@ -34,10 +33,13 @@ void cMainGame::Setup()
 
 void cMainGame::Update()
 {
-	g_pTimeManager->Update();
+	cGameNode::Update();
 
 	if (m_pCamera)
 		m_pCamera->Update();
+
+	if (m_pCube)
+		m_pCube->Update();
 
 }
 
@@ -52,7 +54,6 @@ void cMainGame::Render()
 
 	if (m_pCube)
 		m_pCube->Render();
-
 
 /*------------------------------------------------------------------------*/
 	g_pD3DDevice->EndScene();
