@@ -22,8 +22,8 @@ private:
 		std::map<std::string, LPDIRECT3DTEXTURE9>   m_mapTexture;
 		std::map<std::string, D3DXMATRIX>			m_mapWorld;
 		std::map<std::string, RECT>					m_mapRect;
-		std::map<std::string, D3DXVECTOR3> m_mapScale;
-		std::map<std::string, D3DXVECTOR3> m_mapPosition;
+		std::map<std::string, D3DXVECTOR3>			m_mapScale;
+		std::map<std::string, D3DXVECTOR3>			m_mapPosition;
 	}m_map;
 
 
@@ -46,6 +46,7 @@ private:
 	D3DXVECTOR3 Position;
 	
 	SYNTHESIZE_REF(int, imageIndex, IMAGEINDEX);
+
 public:
 	LPDIRECT3DTEXTURE9 addTexture(const char* textFileName);
 	void Render(const char* textFileName);
@@ -54,4 +55,5 @@ public:
 	void setPosition(const char* textFileName,D3DXVECTOR3 position);
 
 	std::map<std::string, RECT> GetRect() { return m_map.m_mapRect; }
+
 };

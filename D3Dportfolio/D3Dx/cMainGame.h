@@ -19,9 +19,9 @@ public:
 	virtual void Update();
 	virtual void Render();
 
+	void addSprite();
+
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
-
-	void addSprite();
 };
 

@@ -11,10 +11,13 @@ cGameNode::~cGameNode()
 	// 소멸자는 버추얼 하더라도
 	// 자식 먼저 생성되고 마지막으로 부모가 선언됨(확인해봄)
 	// 소멸자를 Release로 사용
-	g_pSceneManager->Release();
 
+	BITMAP->Destroy();
+
+	g_pSceneManager->Release();
 	g_pFontManager->Destroy();
 	g_pDeviceManager->Destroy();
+
 }
 
 HRESULT cGameNode::Setup()

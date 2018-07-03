@@ -93,14 +93,14 @@
     <ClInclude Include="cKeyManager.h">
       <Filter>D3DFramework\cKeyManager</Filter>
     </ClInclude>
-    <ClInclude Include="cSceneManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Bitmap.h">
       <Filter>D3DFramework\BitMap</Filter>
     </ClInclude>
     <ClInclude Include="cShop.h">
       <Filter>소스 파일\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="cSceneManager.h">
+      <Filter>D3DFramework\cSceneManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -137,9 +137,6 @@
     <ClCompile Include="cKeyManager.cpp">
       <Filter>D3DFramework\cKeyManager</Filter>
     </ClCompile>
-    <ClCompile Include="cSceneManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Bitmap.cpp">
       <Filter>D3DFramework\BitMap</Filter>
     </ClCompile>
@@ -148,6 +145,9 @@
     </ClCompile>
     <ClCompile Include="cShop.cpp">
       <Filter>소스 파일\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="cSceneManager.cpp">
+      <Filter>D3DFramework\cSceneManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

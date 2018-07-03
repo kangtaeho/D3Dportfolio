@@ -16,8 +16,7 @@ Bitmap::Bitmap()
 
 Bitmap::~Bitmap()
 {
-	Destroy();
-	g_pD3DDevice->Release();
+
 }
 
 
@@ -162,6 +161,7 @@ void Bitmap::Render(const char* textFileName)
 
 void Bitmap::Destroy()
 {
+	
 	for (auto p : m_map.m_mapSprite)
 	{
 		SAFE_RELEASE(p.second);
@@ -170,10 +170,12 @@ void Bitmap::Destroy()
 	{
 		SAFE_RELEASE(p.second);
 	}
+	
 
 	m_map.m_mapMatrixS.clear();
 	m_map.m_mapMatrixT.clear();
 	m_map.m_mapRect.clear();
 	m_map.m_mapSprite.clear();
 	m_map.m_mapTexture.clear();
+
 }

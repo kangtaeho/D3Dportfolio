@@ -15,6 +15,7 @@ cMainGame::~cMainGame()
 {
 	delete m_pCamera;
 	delete m_pCube;
+	delete m_pshop;
 }
 
 HRESULT cMainGame::Setup()
