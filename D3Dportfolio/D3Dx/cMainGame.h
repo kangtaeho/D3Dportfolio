@@ -1,6 +1,6 @@
 #pragma once
 #include "cGameNode.h"
-
+#include "cShop.h"
 class cCamera;
 class cCube;
 
@@ -10,6 +10,7 @@ private:
 	cCamera *	m_pCamera;
 	cCube *		m_pCube;
 
+	cShop* m_pshop;
 public:
 	cMainGame();
 	virtual ~cMainGame();
@@ -19,5 +20,8 @@ public:
 	virtual void Render();
 
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+
+
+	void addSprite();
 };
 

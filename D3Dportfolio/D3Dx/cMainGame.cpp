@@ -21,6 +21,8 @@ HRESULT cMainGame::Setup()
 {
 	cGameNode::Setup();
 
+	addSprite();
+
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	
 	m_pCamera = new cCamera;
@@ -29,6 +31,8 @@ HRESULT cMainGame::Setup()
 	m_pCube = new cCube;
 	m_pCube->Setup(D3DXVECTOR3(2.0f, 2.0f, 2.0f), NULL);
 
+	m_pshop = new cShop;
+	m_pshop->setup();
 	return S_OK;
 }
 
@@ -42,6 +46,8 @@ void cMainGame::Update()
 	if (m_pCube)
 		m_pCube->Update();
 
+	if (m_pshop)
+		m_pshop->update();
 }
 
 void cMainGame::Render()
@@ -55,6 +61,9 @@ void cMainGame::Render()
 
 	if (m_pCube)
 		m_pCube->Render();
+
+	if (m_pshop)
+		m_pshop->render();
 
 /*------------------------------------------------------------------------*/
 	g_pD3DDevice->EndScene();

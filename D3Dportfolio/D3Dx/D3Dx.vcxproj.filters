@@ -46,6 +46,12 @@
     <Filter Include="D3DFramework\cSceneManager">
       <UniqueIdentifier>{de3ee641-47b0-4512-9065-ecad05262e02}</UniqueIdentifier>
     </Filter>
+    <Filter Include="D3DFramework\BitMap">
+      <UniqueIdentifier>{16b6944d-a86a-4bca-b34b-cd6260ee5a58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Shop">
+      <UniqueIdentifier>{6784b4fe-8436-4af3-b4d2-7925acde3c6f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -90,6 +96,12 @@
     <ClInclude Include="cSceneManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Bitmap.h">
+      <Filter>D3DFramework\BitMap</Filter>
+    </ClInclude>
+    <ClInclude Include="cShop.h">
+      <Filter>소스 파일\Shop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -127,6 +139,15 @@
     </ClCompile>
     <ClCompile Include="cSceneManager.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Bitmap.cpp">
+      <Filter>D3DFramework\BitMap</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame_AddSprite.cpp">
+      <Filter>소스 파일\cMainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="cShop.cpp">
+      <Filter>소스 파일\Shop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
