@@ -8,15 +8,6 @@ cGameNode::cGameNode()
 
 cGameNode::~cGameNode()
 {
-	// 소멸자는 버추얼 하더라도
-	// 자식 먼저 생성되고 마지막으로 부모가 선언됨(확인해봄)
-	// 소멸자를 Release로 사용
-
-	BITMAP->Destroy();
-
-	g_pSceneManager->Release();
-	g_pFontManager->Destroy();
-	g_pDeviceManager->Destroy();
 
 }
 
@@ -26,6 +17,7 @@ HRESULT cGameNode::Setup()
 	g_pFontManager->Setup();
 	g_pKeyManager->Setup();
 	g_pSceneManager->Setup();
+	g_pCameraManager->Setup();
 
 	return S_OK;
 
@@ -33,11 +25,25 @@ HRESULT cGameNode::Setup()
 
 void cGameNode::Update()
 {
+	g_pCameraManager->Update();
 	g_pTimeManager->Update();
 	g_pKeyManager->Update();
+}
+
+void cGameNode::Release()
+{
+	BITMAP->Destroy();
+	g_pSceneManager->Release();
+	g_pFontManager->Destroy();
+	g_pDeviceManager->Destroy();
 }
 
 void cGameNode::Render()
 {
 
+}
+
+void cGameNode::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	g_pCameraManager->WndProc(hWnd, message, wParam, lParam);
 }

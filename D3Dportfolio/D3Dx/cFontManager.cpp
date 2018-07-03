@@ -32,7 +32,7 @@ void cFontManager::Setup()
 	m_bIsSetup = true;
 }
 
-void cFontManager::TextFont(int x, int y, char* text, ...)
+void cFontManager::TextFont(int x, int y, const char* text, ...)
 {
 	RECT rc;
 	char str[258] = { 0, };		// √ ±‚»≠

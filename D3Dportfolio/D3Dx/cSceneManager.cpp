@@ -30,10 +30,10 @@ void cSceneManager::Release()
 	{
 		if (p.second != NULL)
 		{
-			SAFE_DELETE(p.second);
+			SAFE_RELEASE(p.second);
 		}
 	}
-	m_mapSceneList.clear();
+	 m_mapSceneList.clear();
 }
 
 void cSceneManager::Update()
@@ -74,8 +74,19 @@ HRESULT	cSceneManager::ChangeScene(std::string sceneName)
 
 	if (SUCCEEDED(iter->second->Setup()))
 	{
-		if (m_pCurrentScene)
-			delete m_pCurrentScene;		// 씬에 문제가 생기면 이것부터 체크해보자
+
+		//std::string removeKey;
+
+		for (auto p : m_mapSceneList)
+		{
+			if (p.second == m_pCurrentScene)
+			{
+				m_pCurrentScene->Release();		// 일단 릴리즈하고
+				delete m_pCurrentScene;			// 딜레트로 삭제하고
+				m_mapSceneList.erase(p.first);	// 해당 맵사이즈 줄여주고
+				break;							// 탈출
+			}
+		}
 
 		m_pCurrentScene = iter->second;
 
