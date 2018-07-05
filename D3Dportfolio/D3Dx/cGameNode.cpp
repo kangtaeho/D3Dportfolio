@@ -28,6 +28,7 @@ void cGameNode::Update()
 	g_pCameraManager->Update();
 	g_pTimeManager->Update();
 	g_pKeyManager->Update();
+	g_pSkillManager->Update();
 }
 
 void cGameNode::Release()

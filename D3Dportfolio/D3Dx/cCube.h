@@ -17,7 +17,7 @@ private:
 	std::vector<ST_PNT_VERTEX>	m_vecIndex;
 
 	D3DXVECTOR3					m_vPosition;
-	D3DXMATRIX					m_matWorld;
+	SYNTHESIZE(D3DXMATRIX, m_matWorld, MatWorld);
 
 	ID3DXMesh*					m_pMesh;
 

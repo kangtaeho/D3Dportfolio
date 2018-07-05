@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="D3DFramework">
       <UniqueIdentifier>{cfef4217-4ec9-43b9-8ea3-863b6c410c5b}</UniqueIdentifier>
     </Filter>
@@ -54,6 +50,16 @@
     </Filter>
     <Filter Include="D3DFramework\cCameraManager">
       <UniqueIdentifier>{2a2fa7ce-237d-475b-91cb-5f0ccaae030b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="D3DFramework\cSkillManager">
+      <UniqueIdentifier>{da7f4ba7-3644-4fea-adbf-0c01c7f6effb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\cPlayer">
+      <UniqueIdentifier>{ce995838-eabf-41c0-8612-5dd181ecd6b2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -108,8 +114,29 @@
     <ClInclude Include="cCameraManager.h">
       <Filter>D3DFramework\cCameraManager</Filter>
     </ClInclude>
+    <ClInclude Include="cSkill.h">
+      <Filter>D3DFramework\cSkillManager</Filter>
+    </ClInclude>
     <ClInclude Include="cPlayScene.h">
+      <Filter>소스 파일\cScene</Filter>
+    </ClInclude>
+    <ClInclude Include="cMeleeSkill.h">
+      <Filter>D3DFramework\cSkillManager</Filter>
+    </ClInclude>
+    <ClInclude Include="D3DMacroFunction.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cSkillManager.h">
+      <Filter>D3DFramework\cSkillManager</Filter>
+    </ClInclude>
+    <ClInclude Include="EnumState.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cPlayer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cRangeSkill.h">
+      <Filter>D3DFramework\cSkillManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -161,21 +188,36 @@
     <ClCompile Include="cCameraManager.cpp">
       <Filter>D3DFramework\cCameraManager</Filter>
     </ClCompile>
+    <ClCompile Include="cSkill.cpp">
+      <Filter>D3DFramework\cSkillManager</Filter>
+    </ClCompile>
     <ClCompile Include="cPlayScene.cpp">
+      <Filter>소스 파일\cScene</Filter>
+    </ClCompile>
+    <ClCompile Include="cMeleeSkill.cpp">
+      <Filter>D3DFramework\cSkillManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cSkillManager.cpp">
+      <Filter>D3DFramework\cSkillManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cPlayer.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cRangeSkill.cpp">
+      <Filter>D3DFramework\cSkillManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="D3Dx.rc">
-      <Filter>리소스 파일</Filter>
+      <Filter>소스 파일\리소스 파일</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
-      <Filter>리소스 파일</Filter>
+      <Filter>소스 파일\리소스 파일</Filter>
     </Image>
     <Image Include="D3Dx.ico">
-      <Filter>리소스 파일</Filter>
+      <Filter>소스 파일\리소스 파일</Filter>
     </Image>
   </ItemGroup>
 </Project>
