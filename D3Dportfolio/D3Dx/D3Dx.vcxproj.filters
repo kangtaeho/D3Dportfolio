@@ -61,6 +61,12 @@
     <Filter Include="소스 파일\cPlayer">
       <UniqueIdentifier>{ce995838-eabf-41c0-8612-5dd181ecd6b2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="D3DFramework\XfileManager">
+      <UniqueIdentifier>{374cac35-87ad-484f-9ab6-fb99962069e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\cCollisionMap">
+      <UniqueIdentifier>{5e1b838f-ce0e-4cb5-ba53-bd5ab6d820eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -138,6 +144,18 @@
     <ClInclude Include="cRangeSkill.h">
       <Filter>D3DFramework\cSkillManager</Filter>
     </ClInclude>
+    <ClInclude Include="cAllocatedHierachy.h">
+      <Filter>D3DFramework\XfileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cSkinnedMesh.h">
+      <Filter>D3DFramework\XfileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cXManager.h">
+      <Filter>D3DFramework\XfileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cCollisionMap.h">
+      <Filter>소스 파일\cCollisionMap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -205,6 +223,18 @@
     </ClCompile>
     <ClCompile Include="cRangeSkill.cpp">
       <Filter>D3DFramework\cSkillManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cAllocatedHierachy.cpp">
+      <Filter>D3DFramework\XfileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cSkinnedMesh.cpp">
+      <Filter>D3DFramework\XfileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cXManager.cpp">
+      <Filter>D3DFramework\XfileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cCollisionMap.cpp">
+      <Filter>소스 파일\cCollisionMap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

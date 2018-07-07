@@ -27,10 +27,10 @@ void cCameraManager::Setup()
 
 	D3DXMATRIX matProj;
 	D3DXMatrixPerspectiveFovLH(&matProj,
-		D3DX_PI / 4.0f,
+		D3DX_PI / 8.0f,
 		rc.right / (float)rc.bottom,
 		1.0f,
-		1000.0f);//1. 받아올것 2.시야각
+		100000.0f);//1. 받아올것 2.시야각
 
 	g_pD3DDevice->SetTransform(D3DTS_PROJECTION, &matProj);
 

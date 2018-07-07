@@ -36,6 +36,7 @@ void cGameNode::Release()
 	BITMAP->Destroy();
 	g_pSceneManager->Release();
 	g_pFontManager->Destroy();
+	g_pTextureManager->Destroy();
 	g_pDeviceManager->Destroy();
 }
 

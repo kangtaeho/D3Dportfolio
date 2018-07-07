@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "cPlayScene.h"
 #include "cPlayer.h"
+#include "cCollisionMap.h"
 
 cPlayScene::cPlayScene()
 	:m_pPlayer(NULL)
@@ -17,6 +18,19 @@ HRESULT cPlayScene::Setup()
 {
 	m_pPlayer = new cPlayer;
 	m_pPlayer->Setup();
+
+	g_pXfileManager->AddXfile("Map", "summoner rift", "summoner_rift.x");
+
+	D3DXMATRIX matWorld, matT, matS, matR;
+	D3DXMatrixRotationY(&matR, D3DX_PI);
+	D3DXMatrixScaling(&matS, 300.0f, 300.0f, 300.0f);
+	matWorld = matR * matS;
+	std::vector<D3DXVECTOR3> vMapGround;
+	std::vector<D3DXVECTOR3> vMapObject;
+	cCollisionMap colMap;
+	colMap.LoadSurface(vMapGround, "map collision", "map_skp_sample.obj", &matWorld);
+	colMap.LoadSurface(vMapObject, "map collision", "map_collision.obj", &matWorld);
+
 	return S_OK;
 }
 
@@ -35,4 +49,16 @@ void cPlayScene::Render()
 {
 	if (m_pPlayer)
 		m_pPlayer->Render();
+
+	{//¸ÊÃß°¡
+		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+		g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, true);
+		g_pD3DDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+		D3DXMATRIX mat, matS;
+		D3DXMatrixIdentity(&mat);
+		D3DXMatrixIdentity(&matS);
+		D3DXMatrixScaling(&matS, 300.0f, 300.0f, 300.0f);
+		mat = matS;
+		g_pXfileManager->Render("Map", &mat);
+	}
 }
