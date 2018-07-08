@@ -12,8 +12,7 @@ private:
 	SYNTHESIZE(D3DXVECTOR3*, m_vControlPos, ControlPos); // 컨트롤할 좌표
 
 	cCollisionMap* m_pCM;								 // 충돌맵 포인터
-	cRayPicking* m_pRay;
-
+	
 public:
 	cController();
 	~cController();

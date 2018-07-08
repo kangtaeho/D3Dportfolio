@@ -156,10 +156,10 @@
     <ClInclude Include="cCollisionMap.h">
       <Filter>소스 파일\cCollisionMap</Filter>
     </ClInclude>
-    <ClInclude Include="cCharacter.h">
-      <Filter>소스 파일\cPlayer</Filter>
-    </ClInclude>
     <ClInclude Include="cRayPicking.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cController.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -242,10 +242,10 @@
     <ClCompile Include="cCollisionMap.cpp">
       <Filter>소스 파일\cCollisionMap</Filter>
     </ClCompile>
-    <ClCompile Include="cCharacter.cpp">
-      <Filter>소스 파일\cPlayer</Filter>
-    </ClCompile>
     <ClCompile Include="cRayPicking.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cController.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -4,9 +4,7 @@
 #include "cRayPicking.h"
 
 cController::cController()
-	: m_vOriginal(0, 0, 0)
-	, m_vDirection(0, 0, 1.0f)
-	, m_vMousePos(0,0,0)
+	: m_vMousePos(0,0,0)
 	, m_vControlPos(NULL)
 	, m_pCM(NULL)
 {
@@ -19,7 +17,6 @@ cController::~cController()
 
 HRESULT cController::Setup()
 {
-	m_pRay = new cRayPicking;
 	return S_OK;
 }
 
@@ -44,4 +41,23 @@ void cController::Check2DMousePointer()
 {
 	GetCursorPos(&m_ptMouse);
 	ScreenToClient(g_hWnd, &m_ptMouse);
+}
+
+void cController::Check3DMousePointer()
+{
+	if (!m_pCM) return;
+
+	cRayPicking ray;
+
+	for (int i = 0; i < m_pCM->getMap()->size(); i += 3)
+	{
+		if (ray.PickTri((*m_pCM->getMap())[i],
+			(*m_pCM->getMap())[i + 1],
+			(*m_pCM->getMap())[i + 2],
+			g_pCameraManager->GetCameraEye(),
+			m_vMousePos))
+		{
+			break;
+		}
+	}
 }

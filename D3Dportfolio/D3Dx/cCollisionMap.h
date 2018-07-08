@@ -1,12 +1,5 @@
 #pragma once
 
-struct stCollisionMap
-{
-	std::string sObjName;
-	D3DXVECTOR3 vPosition;
-	std::vector<D3DXVECTOR3> vecTotalVertex;
-};
-
 class cCollisionMap
 {
 private:
