@@ -37,6 +37,7 @@ HRESULT cPlayScene::Setup()
 
 	//테스트용 컨트롤러
 	m_pController = new cController;
+	m_pController->Setup();
 	m_pController->SetCMMemoryAddressLink(colMap);
 
 	return S_OK;

@@ -7,7 +7,7 @@ class cCameraManager
 	SINGLETONE(cCameraManager);
 
 private:
-	D3DXVECTOR3 m_vEye;
+	SYNTHESIZE(D3DXVECTOR3, m_vEye, CameraEye);
 	D3DXVECTOR3 m_vUp;
 	D3DXVECTOR3 m_vLookAt;
 
