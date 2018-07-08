@@ -39,7 +39,7 @@ void cFontManager::TextFont(int x, int y, const char* text, ...)
 
 	va_list ap;
 
-	SetRect(&rc, x, y, 800, 600);
+	SetRect(&rc, x, y, 1200, 800);
 
 	va_start(ap, text);
 	vsprintf_s(str, text, ap);

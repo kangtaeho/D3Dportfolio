@@ -82,6 +82,9 @@
     <ClCompile Include="MainGame_AddSprite.cpp">
       <Filter>해더파일</Filter>
     </ClCompile>
+    <ClCompile Include="cController.cpp">
+      <Filter>소스파일\cController</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cKeyManager.h">
@@ -174,6 +177,7 @@
     <ClInclude Include="D3DMacroFunction.h">
       <Filter>해더파일</Filter>
     </ClInclude>
+    <ClInclude Include="cController.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="D3Dx.ico">
@@ -246,6 +250,9 @@
     </Filter>
     <Filter Include="소스파일\cShop">
       <UniqueIdentifier>{053ebfce-498a-4799-bd1d-ab8b8888edfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스파일\cController">
+      <UniqueIdentifier>{b38a9f2e-9ce6-4cb2-a17a-9b86f8104961}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

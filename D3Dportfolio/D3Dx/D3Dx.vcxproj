@@ -155,6 +155,7 @@
     <ClInclude Include="cAllocatedHierachy.h" />
     <ClInclude Include="cCameraManager.h" />
     <ClInclude Include="cCollisionMap.h" />
+    <ClInclude Include="cController.h" />
     <ClInclude Include="cCube.h" />
     <ClInclude Include="cDeviceManager.h" />
     <ClInclude Include="cFontManager.h" />
@@ -187,6 +188,7 @@
     <ClCompile Include="cAllocatedHierachy.cpp" />
     <ClCompile Include="cCameraManager.cpp" />
     <ClCompile Include="cCollisionMap.cpp" />
+    <ClCompile Include="cController.cpp" />
     <ClCompile Include="cCube.cpp" />
     <ClCompile Include="cDeviceManager.cpp" />
     <ClCompile Include="cFontManager.cpp" />
