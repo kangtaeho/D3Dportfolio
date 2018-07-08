@@ -1,268 +1,256 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="D3DFramework">
-      <UniqueIdentifier>{cfef4217-4ec9-43b9-8ea3-863b6c410c5b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="D3DFramework\cDeviceManager">
-      <UniqueIdentifier>{7027ae13-4178-4a79-9c03-00fa52a7a0b1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="D3DFramework\cFontManager">
-      <UniqueIdentifier>{cbd92519-4191-4079-96b3-1c60d5d62ea3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="D3DFramework\cTimeManager">
-      <UniqueIdentifier>{5f54ecc0-21e0-4edf-a6fa-17692a8e3db0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\cMainGame">
-      <UniqueIdentifier>{66d68536-eb2c-4396-9c44-6a142ea90a96}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\cCube">
-      <UniqueIdentifier>{bbdf622c-75b3-4268-88af-90b31f52267c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cGameNode">
-      <UniqueIdentifier>{3f210834-1ea0-4d2a-8299-a1c731f92461}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="D3DFramework\cTextureManager">
-      <UniqueIdentifier>{7f7a9d8f-7987-43d8-a6aa-46f8a7ecb231}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="D3DFramework\cKeyManager">
-      <UniqueIdentifier>{4c6451c0-23a4-48a1-91eb-3266a6df5fb6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="D3DFramework\cSceneManager">
-      <UniqueIdentifier>{de3ee641-47b0-4512-9065-ecad05262e02}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="D3DFramework\BitMap">
-      <UniqueIdentifier>{16b6944d-a86a-4bca-b34b-cd6260ee5a58}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Shop">
-      <UniqueIdentifier>{6784b4fe-8436-4af3-b4d2-7925acde3c6f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\cScene">
-      <UniqueIdentifier>{ceff46ed-dc68-4067-b128-a373724d4432}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="D3DFramework\cCameraManager">
-      <UniqueIdentifier>{2a2fa7ce-237d-475b-91cb-5f0ccaae030b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="D3DFramework\cSkillManager">
-      <UniqueIdentifier>{da7f4ba7-3644-4fea-adbf-0c01c7f6effb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\cPlayer">
-      <UniqueIdentifier>{ce995838-eabf-41c0-8612-5dd181ecd6b2}</UniqueIdentifier>
-    </Filter>
-<<<<<<< HEAD
-    <Filter Include="소스 파일\cGrid">
-      <UniqueIdentifier>{6b74f4b4-f9f5-49f7-84e5-30bc91f35c39}</UniqueIdentifier>
-=======
-    <Filter Include="D3DFramework\XfileManager">
-      <UniqueIdentifier>{374cac35-87ad-484f-9ab6-fb99962069e7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\cCollisionMap">
-      <UniqueIdentifier>{5e1b838f-ce0e-4cb5-ba53-bd5ab6d820eb}</UniqueIdentifier>
->>>>>>> 7bd941c3a5f710670ae15e5756af97d2900380e3
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="D3Dx.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cDeviceManager.h">
-      <Filter>D3DFramework\cDeviceManager</Filter>
-    </ClInclude>
-    <ClInclude Include="cFontManager.h">
-      <Filter>D3DFramework\cFontManager</Filter>
-    </ClInclude>
-    <ClInclude Include="cTimeManager.h">
-      <Filter>D3DFramework\cTimeManager</Filter>
-    </ClInclude>
-    <ClInclude Include="cMainGame.h">
-      <Filter>소스 파일\cMainGame</Filter>
-    </ClInclude>
-    <ClInclude Include="cCube.h">
-      <Filter>소스 파일\cCube</Filter>
-    </ClInclude>
-    <ClInclude Include="cTextureManager.h">
-      <Filter>D3DFramework\cTextureManager</Filter>
-    </ClInclude>
-    <ClInclude Include="cGameNode.h">
-      <Filter>cGameNode</Filter>
-    </ClInclude>
-    <ClInclude Include="cKeyManager.h">
+    <ClCompile Include="cKeyManager.cpp">
       <Filter>D3DFramework\cKeyManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Bitmap.h">
-      <Filter>D3DFramework\BitMap</Filter>
-    </ClInclude>
-    <ClInclude Include="cShop.h">
-      <Filter>소스 파일\Shop</Filter>
-    </ClInclude>
-    <ClInclude Include="cSceneManager.h">
-      <Filter>D3DFramework\cSceneManager</Filter>
-    </ClInclude>
-    <ClInclude Include="cMainScene.h">
-      <Filter>소스 파일\cScene</Filter>
-    </ClInclude>
-    <ClInclude Include="cCameraManager.h">
-      <Filter>D3DFramework\cCameraManager</Filter>
-    </ClInclude>
-    <ClInclude Include="cSkill.h">
-      <Filter>D3DFramework\cSkillManager</Filter>
-    </ClInclude>
-    <ClInclude Include="cPlayScene.h">
-      <Filter>소스 파일\cScene</Filter>
-    </ClInclude>
-    <ClInclude Include="cMeleeSkill.h">
-      <Filter>D3DFramework\cSkillManager</Filter>
-    </ClInclude>
-    <ClInclude Include="D3DMacroFunction.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cSkillManager.h">
-      <Filter>D3DFramework\cSkillManager</Filter>
-    </ClInclude>
-    <ClInclude Include="EnumState.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cRangeSkill.h">
-      <Filter>D3DFramework\cSkillManager</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="cPlayer.h">
-      <Filter>소스 파일\cPlayer</Filter>
-    </ClInclude>
-    <ClInclude Include="cGrid.h">
-      <Filter>헤더 파일</Filter>
-=======
-    <ClInclude Include="cAllocatedHierachy.h">
-      <Filter>D3DFramework\XfileManager</Filter>
-    </ClInclude>
-    <ClInclude Include="cSkinnedMesh.h">
-      <Filter>D3DFramework\XfileManager</Filter>
-    </ClInclude>
-    <ClInclude Include="cXManager.h">
-      <Filter>D3DFramework\XfileManager</Filter>
-    </ClInclude>
-    <ClInclude Include="cCollisionMap.h">
-      <Filter>소스 파일\cCollisionMap</Filter>
->>>>>>> 7bd941c3a5f710670ae15e5756af97d2900380e3
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="D3Dx.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="cDeviceManager.cpp">
-      <Filter>D3DFramework\cDeviceManager</Filter>
+      <Filter>D3DFramework\cDeviecManager</Filter>
     </ClCompile>
     <ClCompile Include="cFontManager.cpp">
       <Filter>D3DFramework\cFontManager</Filter>
     </ClCompile>
-    <ClCompile Include="cTimeManager.cpp">
-      <Filter>D3DFramework\cTimeManager</Filter>
-    </ClCompile>
-    <ClCompile Include="cMainGame.cpp">
-      <Filter>소스 파일\cMainGame</Filter>
-    </ClCompile>
-    <ClCompile Include="cCube.cpp">
-      <Filter>소스 파일\cCube</Filter>
-    </ClCompile>
-    <ClCompile Include="cTextureManager.cpp">
-      <Filter>D3DFramework\cTextureManager</Filter>
-    </ClCompile>
-    <ClCompile Include="cGameNode.cpp">
-      <Filter>cGameNode</Filter>
-    </ClCompile>
-    <ClCompile Include="cKeyManager.cpp">
-      <Filter>D3DFramework\cKeyManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Bitmap.cpp">
-      <Filter>D3DFramework\BitMap</Filter>
-    </ClCompile>
-    <ClCompile Include="MainGame_AddSprite.cpp">
-      <Filter>소스 파일\cMainGame</Filter>
-    </ClCompile>
-    <ClCompile Include="cShop.cpp">
-      <Filter>소스 파일\Shop</Filter>
-    </ClCompile>
     <ClCompile Include="cSceneManager.cpp">
       <Filter>D3DFramework\cSceneManager</Filter>
-    </ClCompile>
-    <ClCompile Include="cMainScene.cpp">
-      <Filter>소스 파일\cScene</Filter>
-    </ClCompile>
-    <ClCompile Include="cCameraManager.cpp">
-      <Filter>D3DFramework\cCameraManager</Filter>
-    </ClCompile>
-    <ClCompile Include="cSkill.cpp">
-      <Filter>D3DFramework\cSkillManager</Filter>
-    </ClCompile>
-    <ClCompile Include="cPlayScene.cpp">
-      <Filter>소스 파일\cScene</Filter>
-    </ClCompile>
-    <ClCompile Include="cMeleeSkill.cpp">
-      <Filter>D3DFramework\cSkillManager</Filter>
-    </ClCompile>
-    <ClCompile Include="cSkillManager.cpp">
-      <Filter>D3DFramework\cSkillManager</Filter>
     </ClCompile>
     <ClCompile Include="cRangeSkill.cpp">
       <Filter>D3DFramework\cSkillManager</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="cPlayer.cpp">
-      <Filter>소스 파일\cPlayer</Filter>
+    <ClCompile Include="cMeleeSkill.cpp">
+      <Filter>D3DFramework\cSkillManager</Filter>
     </ClCompile>
-    <ClCompile Include="cGrid.cpp">
-      <Filter>소스 파일</Filter>
-=======
-    <ClCompile Include="cAllocatedHierachy.cpp">
-      <Filter>D3DFramework\XfileManager</Filter>
+    <ClCompile Include="Bitmap.cpp">
+      <Filter>D3DFramework\BitMap</Filter>
     </ClCompile>
-    <ClCompile Include="cSkinnedMesh.cpp">
-      <Filter>D3DFramework\XfileManager</Filter>
+    <ClCompile Include="cCameraManager.cpp">
+      <Filter>D3DFramework\cCaemeraManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cTextureManager.cpp">
+      <Filter>D3DFramework\cTextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cSkillManager.cpp">
+      <Filter>D3DFramework\cSkillManager</Filter>
     </ClCompile>
     <ClCompile Include="cXManager.cpp">
-      <Filter>D3DFramework\XfileManager</Filter>
+      <Filter>D3DFramework\cXManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cSkill.cpp">
+      <Filter>D3DFramework\cSkillManager</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cAllocatedHierachy.cpp">
+      <Filter>소스파일</Filter>
     </ClCompile>
     <ClCompile Include="cCollisionMap.cpp">
-      <Filter>소스 파일\cCollisionMap</Filter>
->>>>>>> 7bd941c3a5f710670ae15e5756af97d2900380e3
+      <Filter>소스파일</Filter>
     </ClCompile>
+    <ClCompile Include="D3Dx.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cGameNode.cpp">
+      <Filter>cGameNode</Filter>
+    </ClCompile>
+    <ClCompile Include="cCube.cpp">
+      <Filter>소스파일\cCube</Filter>
+    </ClCompile>
+    <ClCompile Include="cGrid.cpp">
+      <Filter>소스파일\cGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="cMainScene.cpp">
+      <Filter>소스파일\cScene</Filter>
+    </ClCompile>
+    <ClCompile Include="cPlayScene.cpp">
+      <Filter>소스파일\cScene</Filter>
+    </ClCompile>
+    <ClCompile Include="cMainGame.cpp">
+      <Filter>소스파일\cMainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="cSkinnedMesh.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cTimeManager.cpp">
+      <Filter>D3DFramework\cTimeManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cShop.cpp">
+      <Filter>소스파일\cShop</Filter>
+    </ClCompile>
+    <ClCompile Include="cPlayer.cpp">
+      <Filter>소스파일\cPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame_AddSprite.cpp">
+      <Filter>해더파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cKeyManager.h">
+      <Filter>D3DFramework\cKeyManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cDeviceManager.h">
+      <Filter>D3DFramework\cDeviecManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cFontManager.h">
+      <Filter>D3DFramework\cFontManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cSceneManager.h">
+      <Filter>D3DFramework\cSceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cRangeSkill.h">
+      <Filter>D3DFramework\cSkillManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cMeleeSkill.h">
+      <Filter>D3DFramework\cSkillManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Bitmap.h">
+      <Filter>D3DFramework\BitMap</Filter>
+    </ClInclude>
+    <ClInclude Include="cCameraManager.h">
+      <Filter>D3DFramework\cCaemeraManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cTextureManager.h">
+      <Filter>D3DFramework\cTextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cSkillManager.h">
+      <Filter>D3DFramework\cSkillManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cXManager.h">
+      <Filter>D3DFramework\cXManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cSkill.h">
+      <Filter>D3DFramework\cSkillManager</Filter>
+    </ClInclude>
+    <ClInclude Include="D3Dx.h">
+      <Filter>리소스파일</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>해더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>해더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>해더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cAllocatedHierachy.h">
+      <Filter>소스파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cCollisionMap.h">
+      <Filter>소스파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cGameNode.h">
+      <Filter>cGameNode</Filter>
+    </ClInclude>
+    <ClInclude Include="cCube.h">
+      <Filter>소스파일\cCube</Filter>
+    </ClInclude>
+    <ClInclude Include="cGrid.h">
+      <Filter>소스파일\cGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="cMainScene.h">
+      <Filter>소스파일\cScene</Filter>
+    </ClInclude>
+    <ClInclude Include="cPlayScene.h">
+      <Filter>소스파일\cScene</Filter>
+    </ClInclude>
+    <ClInclude Include="cMainGame.h">
+      <Filter>소스파일\cMainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="cSkinnedMesh.h">
+      <Filter>소스파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cTimeManager.h">
+      <Filter>D3DFramework\cTimeManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cShop.h">
+      <Filter>소스파일\cShop</Filter>
+    </ClInclude>
+    <ClInclude Include="cPlayer.h">
+      <Filter>소스파일\cPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="EnumState.h">
+      <Filter>해더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="D3DMacroFunction.h">
+      <Filter>해더파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="D3Dx.ico">
+      <Filter>리소스파일</Filter>
+    </Image>
+    <Image Include="small.ico">
+      <Filter>리소스파일</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="D3DFramework">
+      <UniqueIdentifier>{21d1649d-d60b-4534-b124-68c972c95819}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="D3DFramework\cKeyManager">
+      <UniqueIdentifier>{b5083660-11f3-4232-ab70-25cdc4a1988c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="D3DFramework\cCaemeraManager">
+      <UniqueIdentifier>{3c27be7b-733a-4322-9485-204d4c8508a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="D3DFramework\cDeviecManager">
+      <UniqueIdentifier>{668eafaf-7867-4488-ac5b-91ce1108b7bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="D3DFramework\cFontManager">
+      <UniqueIdentifier>{a5f8f576-2361-441a-bcb2-7df84b67efdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="D3DFramework\cSkillManager">
+      <UniqueIdentifier>{160311cd-6a78-465b-b655-15d1b5cfee54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="D3DFramework\cSceneManager">
+      <UniqueIdentifier>{fb5e14ae-dce8-4421-98a8-bf35bf232a88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="D3DFramework\BitMap">
+      <UniqueIdentifier>{c8488d99-f2f9-4215-941c-31ad1a668e1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="D3DFramework\cTextureManager">
+      <UniqueIdentifier>{2c5d1b35-7488-4810-84ca-2fdd54b1ed65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="D3DFramework\cXManager">
+      <UniqueIdentifier>{690b5666-61c4-4375-a7ed-36c500755e7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="D3DFramework\cTimeManager">
+      <UniqueIdentifier>{17d55769-77d9-4876-aeaf-99b088fe23f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스파일">
+      <UniqueIdentifier>{36745351-9bfe-474e-bbbb-6e5882b45ae5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="해더파일">
+      <UniqueIdentifier>{d9287801-297c-4b37-9e11-eb551127196f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스파일">
+      <UniqueIdentifier>{5042c26b-7d47-45ab-9cd4-71dd150d39b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cGameNode">
+      <UniqueIdentifier>{f3597794-9426-4f80-a017-8e65eeda4c6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스파일\cPlayer">
+      <UniqueIdentifier>{7d6d1c4b-51bd-4406-aa92-a0fb22f3db9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스파일\cCube">
+      <UniqueIdentifier>{f433f14c-1d7f-415e-8163-c822827694f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스파일\cGrid">
+      <UniqueIdentifier>{85b81647-a7da-41e6-9730-9c56dc6bac43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스파일\cScene">
+      <UniqueIdentifier>{0f2b4d7a-acb0-4f0e-b2d7-dcc523136ff6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스파일\cMainGame">
+      <UniqueIdentifier>{e1128e2d-4985-43d1-a98d-e04248daa778}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스파일\cShop">
+      <UniqueIdentifier>{053ebfce-498a-4799-bd1d-ab8b8888edfc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="D3Dx.rc">
-      <Filter>소스 파일\리소스 파일</Filter>
+      <Filter>리소스파일</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="small.ico">
-      <Filter>소스 파일\리소스 파일</Filter>
-    </Image>
-    <Image Include="D3Dx.ico">
-      <Filter>소스 파일\리소스 파일</Filter>
-    </Image>
   </ItemGroup>
 </Project>

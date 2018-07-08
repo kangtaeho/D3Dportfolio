@@ -19,7 +19,7 @@ HRESULT cPlayScene::Setup()
 	m_pPlayer = new cPlayer;
 	m_pPlayer->Setup();
 
-	g_pXfileManager->AddXfile("Map", "summoner rift", "summoner_rift.x");
+	// g_pXfileManager->AddXfile("Map", "summoner rift", "summoner_rift.x");
 
 	D3DXMATRIX matWorld, matT, matS, matR;
 	D3DXMatrixRotationY(&matR, D3DX_PI);
@@ -59,6 +59,6 @@ void cPlayScene::Render()
 		D3DXMatrixIdentity(&matS);
 		D3DXMatrixScaling(&matS, 300.0f, 300.0f, 300.0f);
 		mat = matS;
-		g_pXfileManager->Render("Map", &mat);
+		// g_pXfileManager->Render("Map", &mat);
 	}
 }
