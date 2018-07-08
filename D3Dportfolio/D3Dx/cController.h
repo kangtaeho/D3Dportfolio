@@ -8,6 +8,8 @@ private:
 	POINT			m_ptMouse;
 	D3DXVECTOR3		m_vOriginal;
 	D3DXVECTOR3		m_vDirection;
+	D3DXVECTOR3		m_vMousePos;						 // 마우스 3D좌표
+
 
 	SYNTHESIZE(D3DXVECTOR3*, m_vControlPos, ControlPos); // 컨트롤할 좌표
 
@@ -28,8 +30,6 @@ public:
 	void MouseAtWorldSpace();		// 마우스 3D월드로 변경
 
 	void SetCMMemoryAddressLink(cCollisionMap* cm) { m_pCM = cm; }
-
-
 
 };
 

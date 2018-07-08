@@ -23,7 +23,7 @@
       <Filter>D3DFramework\BitMap</Filter>
     </ClCompile>
     <ClCompile Include="cCameraManager.cpp">
-      <Filter>D3DFramework\cCaemeraManager</Filter>
+      <Filter>D3DFramework\cCameraManager</Filter>
     </ClCompile>
     <ClCompile Include="cTextureManager.cpp">
       <Filter>D3DFramework\cTextureManager</Filter>
@@ -85,6 +85,9 @@
     <ClCompile Include="cController.cpp">
       <Filter>소스파일\cController</Filter>
     </ClCompile>
+    <ClCompile Include="cRayPicking.cpp">
+      <Filter>소스파일\tempPicking</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cKeyManager.h">
@@ -109,7 +112,7 @@
       <Filter>D3DFramework\BitMap</Filter>
     </ClInclude>
     <ClInclude Include="cCameraManager.h">
-      <Filter>D3DFramework\cCaemeraManager</Filter>
+      <Filter>D3DFramework\cCameraManager</Filter>
     </ClInclude>
     <ClInclude Include="cTextureManager.h">
       <Filter>D3DFramework\cTextureManager</Filter>
@@ -177,7 +180,15 @@
     <ClInclude Include="D3DMacroFunction.h">
       <Filter>해더파일</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="cController.h">
+      <Filter>소스파일\cController</Filter>
+=======
     <ClInclude Include="cController.h" />
+    <ClInclude Include="cRayPicking.h">
+      <Filter>소스파일\tempPicking</Filter>
+>>>>>>> be6cd9c0f36bdd82a8f76de5a0ee3d9aeebd956d
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="D3Dx.ico">
@@ -193,9 +204,6 @@
     </Filter>
     <Filter Include="D3DFramework\cKeyManager">
       <UniqueIdentifier>{b5083660-11f3-4232-ab70-25cdc4a1988c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="D3DFramework\cCaemeraManager">
-      <UniqueIdentifier>{3c27be7b-733a-4322-9485-204d4c8508a5}</UniqueIdentifier>
     </Filter>
     <Filter Include="D3DFramework\cDeviecManager">
       <UniqueIdentifier>{668eafaf-7867-4488-ac5b-91ce1108b7bc}</UniqueIdentifier>
@@ -253,6 +261,14 @@
     </Filter>
     <Filter Include="소스파일\cController">
       <UniqueIdentifier>{b38a9f2e-9ce6-4cb2-a17a-9b86f8104961}</UniqueIdentifier>
+    </Filter>
+<<<<<<< HEAD
+    <Filter Include="D3DFramework\cCameraManager">
+      <UniqueIdentifier>{3c27be7b-733a-4322-9485-204d4c8508a5}</UniqueIdentifier>
+=======
+    <Filter Include="소스파일\tempPicking">
+      <UniqueIdentifier>{0587ff6f-96eb-4889-96ee-68235c6cb90e}</UniqueIdentifier>
+>>>>>>> be6cd9c0f36bdd82a8f76de5a0ee3d9aeebd956d
     </Filter>
   </ItemGroup>
   <ItemGroup>

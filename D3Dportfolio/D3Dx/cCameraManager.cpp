@@ -95,7 +95,7 @@ void cCameraManager::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 	break;
 	case WM_MOUSEWHEEL:
 	{
-		m_fDistance -= GET_WHEEL_DELTA_WPARAM(wParam) / 100.0f;
+		m_fDistance -= GET_WHEEL_DELTA_WPARAM(wParam) * 2.0f;
 	}
 	break;
 	}

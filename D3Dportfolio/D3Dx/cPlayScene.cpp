@@ -20,7 +20,7 @@ HRESULT cPlayScene::Setup()
 	m_pPlayer = new cPlayer;
 	m_pPlayer->Setup();
 
-	// g_pXfileManager->AddXfile("Map", "summoner rift", "summoner_rift.x");
+	g_pXfileManager->AddXfile("Map", "summoner rift", "summoner_rift.x");
 
 	D3DXMATRIX matWorld, matT, matS, matR;
 	D3DXMatrixRotationY(&matR, D3DX_PI);
@@ -28,13 +28,16 @@ HRESULT cPlayScene::Setup()
 	matWorld = matR * matS;
 	std::vector<D3DXVECTOR3> vMapGround;
 	std::vector<D3DXVECTOR3> vMapObject;
-	cCollisionMap colMap;
-	colMap.LoadSurface(vMapGround, "map collision", "map_skp_sample.obj", &matWorld);		// 바닥
-	colMap.LoadSurface(vMapObject, "map collision", "map_collision.obj", &matWorld);
+	
+	
+	cCollisionMap* colMap = new cCollisionMap;
+	colMap->LoadSurface(vMapGround, "map collision", "map_skp_sample.obj", &matWorld);		// 바닥
+	colMap->LoadSurface(vMapObject, "map collision", "map_collision.obj", &matWorld);
 
 
 	//테스트용 컨트롤러
 	m_pController = new cController;
+	m_pController->SetCMMemoryAddressLink(colMap);
 
 	return S_OK;
 }
@@ -67,7 +70,7 @@ void cPlayScene::Render()
 		D3DXMatrixIdentity(&matS);
 		D3DXMatrixScaling(&matS, 300.0f, 300.0f, 300.0f);
 		mat = matS;
-		// g_pXfileManager->Render("Map", &mat);
+		g_pXfileManager->Render("Map", &mat);
 	}
 
 	if (m_pController)

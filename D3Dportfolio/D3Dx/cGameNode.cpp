@@ -37,6 +37,11 @@ void cGameNode::Release()
 	g_pSceneManager->Release();
 	g_pFontManager->Destroy();
 	g_pTextureManager->Destroy();
+	g_pXfileManager->Release();
+
+
+
+	//--디바이스는 마지막에 릴리즈 시켜야함--//
 	g_pDeviceManager->Destroy();
 }
 
