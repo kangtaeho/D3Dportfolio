@@ -160,10 +160,14 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="cCharacter.h">
+<<<<<<< HEAD
       <Filter>소스 파일\cCharaceter</Filter>
     </ClInclude>
     <ClInclude Include="cPlayer.h">
       <Filter>소스 파일\cCharaceter</Filter>
+=======
+      <Filter>소스 파일\cPlayer</Filter>
+>>>>>>> 51c5d3d47d7f2a10b14f11a8b18cde19926b629e
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -249,10 +253,14 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="cCharacter.cpp">
+<<<<<<< HEAD
       <Filter>소스 파일\cCharaceter</Filter>
     </ClCompile>
     <ClCompile Include="cPlayer.cpp">
       <Filter>소스 파일\cCharaceter</Filter>
+=======
+      <Filter>소스 파일\cPlayer</Filter>
+>>>>>>> 51c5d3d47d7f2a10b14f11a8b18cde19926b629e
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
