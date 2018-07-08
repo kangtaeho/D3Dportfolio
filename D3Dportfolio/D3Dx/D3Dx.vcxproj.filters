@@ -85,6 +85,9 @@
     <ClCompile Include="cController.cpp">
       <Filter>소스파일\cController</Filter>
     </ClCompile>
+    <ClCompile Include="cRayPicking.cpp">
+      <Filter>소스파일\tempPicking</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cKeyManager.h">
@@ -178,6 +181,9 @@
       <Filter>해더파일</Filter>
     </ClInclude>
     <ClInclude Include="cController.h" />
+    <ClInclude Include="cRayPicking.h">
+      <Filter>소스파일\tempPicking</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="D3Dx.ico">
@@ -253,6 +259,9 @@
     </Filter>
     <Filter Include="소스파일\cController">
       <UniqueIdentifier>{b38a9f2e-9ce6-4cb2-a17a-9b86f8104961}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스파일\tempPicking">
+      <UniqueIdentifier>{0587ff6f-96eb-4889-96ee-68235c6cb90e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
