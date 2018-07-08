@@ -152,7 +152,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h" />
+    <ClInclude Include="cAllocatedHierachy.h" />
     <ClInclude Include="cCameraManager.h" />
+    <ClInclude Include="cCollisionMap.h" />
     <ClInclude Include="cCube.h" />
     <ClInclude Include="cDeviceManager.h" />
     <ClInclude Include="cFontManager.h" />
@@ -169,8 +171,10 @@
     <ClInclude Include="cShop.h" />
     <ClInclude Include="cSkill.h" />
     <ClInclude Include="cSkillManager.h" />
+    <ClInclude Include="cSkinnedMesh.h" />
     <ClInclude Include="cTextureManager.h" />
     <ClInclude Include="cTimeManager.h" />
+    <ClInclude Include="cXManager.h" />
     <ClInclude Include="D3DMacroFunction.h" />
     <ClInclude Include="D3Dx.h" />
     <ClInclude Include="EnumState.h" />
@@ -180,7 +184,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bitmap.cpp" />
+    <ClCompile Include="cAllocatedHierachy.cpp" />
     <ClCompile Include="cCameraManager.cpp" />
+    <ClCompile Include="cCollisionMap.cpp" />
     <ClCompile Include="cCube.cpp" />
     <ClCompile Include="cDeviceManager.cpp" />
     <ClCompile Include="cFontManager.cpp" />
@@ -197,8 +203,10 @@
     <ClCompile Include="cShop.cpp" />
     <ClCompile Include="cSkill.cpp" />
     <ClCompile Include="cSkillManager.cpp" />
+    <ClCompile Include="cSkinnedMesh.cpp" />
     <ClCompile Include="cTextureManager.cpp" />
     <ClCompile Include="cTimeManager.cpp" />
+    <ClCompile Include="cXManager.cpp" />
     <ClCompile Include="D3Dx.cpp" />
     <ClCompile Include="MainGame_AddSprite.cpp" />
     <ClCompile Include="stdafx.cpp">

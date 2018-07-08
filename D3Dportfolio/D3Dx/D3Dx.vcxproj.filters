@@ -61,8 +61,16 @@
     <Filter Include="소스 파일\cPlayer">
       <UniqueIdentifier>{ce995838-eabf-41c0-8612-5dd181ecd6b2}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
     <Filter Include="소스 파일\cGrid">
       <UniqueIdentifier>{6b74f4b4-f9f5-49f7-84e5-30bc91f35c39}</UniqueIdentifier>
+=======
+    <Filter Include="D3DFramework\XfileManager">
+      <UniqueIdentifier>{374cac35-87ad-484f-9ab6-fb99962069e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\cCollisionMap">
+      <UniqueIdentifier>{5e1b838f-ce0e-4cb5-ba53-bd5ab6d820eb}</UniqueIdentifier>
+>>>>>>> 7bd941c3a5f710670ae15e5756af97d2900380e3
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -138,11 +146,25 @@
     <ClInclude Include="cRangeSkill.h">
       <Filter>D3DFramework\cSkillManager</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="cPlayer.h">
       <Filter>소스 파일\cPlayer</Filter>
     </ClInclude>
     <ClInclude Include="cGrid.h">
       <Filter>헤더 파일</Filter>
+=======
+    <ClInclude Include="cAllocatedHierachy.h">
+      <Filter>D3DFramework\XfileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cSkinnedMesh.h">
+      <Filter>D3DFramework\XfileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cXManager.h">
+      <Filter>D3DFramework\XfileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cCollisionMap.h">
+      <Filter>소스 파일\cCollisionMap</Filter>
+>>>>>>> 7bd941c3a5f710670ae15e5756af97d2900380e3
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -209,11 +231,25 @@
     <ClCompile Include="cRangeSkill.cpp">
       <Filter>D3DFramework\cSkillManager</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="cPlayer.cpp">
       <Filter>소스 파일\cPlayer</Filter>
     </ClCompile>
     <ClCompile Include="cGrid.cpp">
       <Filter>소스 파일</Filter>
+=======
+    <ClCompile Include="cAllocatedHierachy.cpp">
+      <Filter>D3DFramework\XfileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cSkinnedMesh.cpp">
+      <Filter>D3DFramework\XfileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cXManager.cpp">
+      <Filter>D3DFramework\XfileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cCollisionMap.cpp">
+      <Filter>소스 파일\cCollisionMap</Filter>
+>>>>>>> 7bd941c3a5f710670ae15e5756af97d2900380e3
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
