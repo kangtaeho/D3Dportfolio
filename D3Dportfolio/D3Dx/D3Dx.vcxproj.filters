@@ -61,6 +61,9 @@
     <Filter Include="소스 파일\cPlayer">
       <UniqueIdentifier>{ce995838-eabf-41c0-8612-5dd181ecd6b2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\cGrid">
+      <UniqueIdentifier>{6b74f4b4-f9f5-49f7-84e5-30bc91f35c39}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -132,11 +135,14 @@
     <ClInclude Include="EnumState.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="cPlayer.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="cRangeSkill.h">
       <Filter>D3DFramework\cSkillManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cPlayer.h">
+      <Filter>소스 파일\cPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="cGrid.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -200,11 +206,14 @@
     <ClCompile Include="cSkillManager.cpp">
       <Filter>D3DFramework\cSkillManager</Filter>
     </ClCompile>
-    <ClCompile Include="cPlayer.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="cRangeSkill.cpp">
       <Filter>D3DFramework\cSkillManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cPlayer.cpp">
+      <Filter>소스 파일\cPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="cGrid.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

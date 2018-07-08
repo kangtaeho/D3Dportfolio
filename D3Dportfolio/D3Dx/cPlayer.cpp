@@ -23,7 +23,7 @@ HRESULT cPlayer::Setup()
 	m_pCube->Setup(D3DXVECTOR3(2,2,2),NULL);
 
 	g_pSkillManager->AddSkill("근거리공격", MELEE_SKILL, 100, 100, 0, 0, 0, 0,false);
-	g_pSkillManager->AddSkill("원거리공격", RANGE_SKILL, 100, 100, 0.05f, 2, 0.5, 3.0, false);
+	g_pSkillManager->AddSkill("원거리공격", RANGE_SKILL, 100, 100, 0.05f, 10.0f, NULL, 5.0, false);
 	return S_OK;
 }
 

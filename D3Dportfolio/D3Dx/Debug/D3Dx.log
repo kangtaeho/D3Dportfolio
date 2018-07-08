@@ -1,8 +1,0 @@
-﻿  cSkill.cpp
-  cRangeSkill.cpp
-c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\crangeskill.cpp(24): warning C4150: 불완전한 형식 'cCube'에 대한 포인터를 삭제했습니다. 소멸자가 호출되지 않습니다.
-  c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\cskill.h(3): note: 'cCube' 선언을 참조하십시오.
-  cPlayer.cpp
-  코드를 생성하고 있습니다...
-  D3Dx.vcxproj -> C:\Users\kang\Documents\GitHub\D3Dportfolio\D3Dportfolio\Debug\D3Dx.exe
-  D3Dx.vcxproj -> C:\Users\kang\Documents\GitHub\D3Dportfolio\D3Dportfolio\Debug\D3Dx.pdb (Full PDB)

@@ -47,6 +47,7 @@ HRESULT cSkill::Setup(SKILL_TYPE skillType,
 	m_fCooldown = cooldown;
 	m_fRemoveTime = removeTime;
 	m_bIsTarget = isTarget;
+	// 아직 캐스팅 타임 안넣었다.
 
 	return S_OK;
 }
@@ -70,12 +71,14 @@ void cSkill::Fire(D3DXVECTOR3 playerPos,
 				D3DXVECTOR3* tagetPos, 
 				float* currentTime)
 {
+	if (m_bIsCasting) return; // 시전 중이거나, 쿨타임 중이면
+	if (m_bIsCooldown) return;
+
 	m_vPos = playerPos;
 	m_pTargetPos = tagetPos;
 
 	if (D3DXVec3Length(&(*m_pTargetPos - m_vPos)) > m_fRange) return;	// 타겟과 플레이어의 위치가 범위보다 크면 리턴
-	if (m_bIsCasting || m_bIsCooldown) return;							// 시전 중이거나, 쿨타임 중이면
-	
+
 	m_bIsCasting = true;												// 시전 할꺼임
 	m_pCurrentTime = currentTime;
 	m_fStartTime = g_pTimeManager->GetLastUpdateTime();
@@ -119,8 +122,8 @@ void cSkill::Casting()
 
 			CastingSkill(e_skillType);
 
-			m_bIsCasting = false;
 			m_bIsCooldown = true;		// 쿨다운 다시 돌린다
+			m_bIsCasting = false;
 
 			// 쿨다운 문제생기면 삭제요망
 			// 리무브 타임에서 재사용
@@ -211,7 +214,7 @@ void cSkill::RemoveTime()
 {
 	if (!m_bIsRemove) return;
 		// 쿨타임이면서 시전중이 아니면
-	m_fPassedTime = g_pTimeManager->GetLastUpdateTime() - m_fStartTime;
+	m_fPassedTime += g_pTimeManager->GetElapsedTime();
 
 	if (m_fPassedTime > m_fRemoveTime)
 	{
@@ -219,6 +222,7 @@ void cSkill::RemoveTime()
 		delete m_pCube;
 		m_pCube = NULL;
 		m_bIsRemove = false;
+		m_fPassedTime = 0.0f;
 	}
 
 }
