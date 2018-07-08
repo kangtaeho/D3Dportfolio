@@ -2,7 +2,6 @@
 #include "cPlayScene.h"
 #include "cPlayer.h"
 #include "cCollisionMap.h"
-#include "cController.h"
 
 cPlayScene::cPlayScene()
 	:m_pPlayer(NULL)
@@ -17,8 +16,6 @@ cPlayScene::~cPlayScene()
 
 HRESULT cPlayScene::Setup()
 {
-	m_pPlayer = new cPlayer;
-	m_pPlayer->Setup();
 
 	g_pXfileManager->AddXfile("Map", "summoner rift", "summoner_rift.x");
 
@@ -34,11 +31,10 @@ HRESULT cPlayScene::Setup()
 	colMap->LoadSurface(vMapGround, "map collision", "map_skp_sample.obj", &matWorld);		// 바닥
 	colMap->LoadSurface(vMapObject, "map collision", "map_collision.obj", &matWorld);
 
-
-	//테스트용 컨트롤러
-	m_pController = new cController;
-	m_pController->Setup();
-	m_pController->SetCMMemoryAddressLink(colMap);
+	m_pPlayer = new cPlayer;
+	m_pPlayer->Setup("Teemo");
+	m_pPlayer->setMap(colMap->getMap());						// 바닥
+	m_pPlayer->setCollisionMap(colMap->getCollisionMap());		// 벽충돌인듯
 
 	return S_OK;
 }
@@ -52,9 +48,6 @@ void cPlayScene::Update()
 {
 	if (m_pPlayer)
 		m_pPlayer->Update();
-
-	if (m_pController)
-		m_pController->Update();
 }
 
 void cPlayScene::Render()
@@ -74,6 +67,4 @@ void cPlayScene::Render()
 		g_pXfileManager->Render("Map", &mat);
 	}
 
-	if (m_pController)
-		m_pController->Render();
 }

@@ -28,43 +28,15 @@ void cCharacter::Release()
 
 void cCharacter::Update()
 {
-	//m_vNextPosition = m_vPosition;
-	// if (GetKeyState('A') & 0x8000)
-	// {
-	// 	m_fRotY -= 0.1;
-	// }
-	// if (GetKeyState('D') & 0x8000)
-	// {
-	// 	m_fRotY += 0.1;
-	// }
-	//D3DXMATRIX mRotation;
-	//D3DXMatrixRotationY(&mRotation, m_fRotY);
-	//D3DXVec3TransformNormal(&m_vDirection, &D3DXVECTOR3(0, 0, 1), &mRotation);
-	//if (GetKeyState('W') & 0x8000)
-	//{
-	//	m_vNextPosition += m_vDirection * m_fSpeed;
-	//}
-	//if (GetKeyState('S') & 0x8000)
-	//{
-	//	m_vNextPosition -= m_vDirection * m_fSpeed;
-	//}
-	// if (g_pKeyManager->IsOnceKeyDown('T'))
-	// {
-	// 	cRayPicking tmp;
-	// 	for (int i = 0; i < m_pMap->size(); i += 3)
-	// 	{
-	// 		if (tmp.PickTri((*m_pMap)[i], (*m_pMap)[i + 1], (*m_pMap)[i + 2], g_pCameraManager->getEye(), m_vNextPosition))
-	// 			break;
-	// 	}
-	// }
-
-	GetCollision(m_vNextPosition.x, m_vNextPosition.y, m_vNextPosition.z);
-	GetHeight(m_vPosition.x, m_vPosition.y, m_vPosition.z);
-	g_pXfileManager->Update(m_sName.c_str());
+	
+	GetCollision(m_vNextPosition.x, m_vNextPosition.y, m_vNextPosition.z); //벽충돌
+	GetHeight(m_vPosition.x, m_vPosition.y, m_vPosition.z);				   // 높이판정
+	g_pXfileManager->Update(m_sName.c_str());				
 }
 
 void cCharacter::Render()
 {
+
 	D3DXMATRIX	matWorld, matS, matR, matT;
 	D3DXMatrixIdentity(&matWorld);
 	D3DXMatrixIdentity(&matS);
@@ -74,10 +46,14 @@ void cCharacter::Render()
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	matWorld = matS * matR * matT;
 	g_pXfileManager->Render(m_sName.c_str(), &matWorld);
+
 }
 
 bool cCharacter::GetHeight(float& x, float & y, float& z)
 {
+
+	if (!m_pMap) return false;
+
 	D3DXVECTOR3 vRayPos(x, 100000.0f, z);
 	D3DXVECTOR3 vRayDir(0, -1, 0);
 
@@ -101,6 +77,8 @@ bool cCharacter::GetHeight(float& x, float & y, float& z)
 
 bool cCharacter::GetCollision(float& x, float & y, float& z)
 {
+	if (!m_pCollisionMap) return false;
+
 	D3DXVECTOR3 gogo = D3DXVECTOR3(x, y, z) - m_vPosition;
 	if (D3DXVec3Length(&gogo) > m_fSpeed)
 	{
@@ -114,7 +92,7 @@ bool cCharacter::GetCollision(float& x, float & y, float& z)
 	for (int i = 0; i < m_pCollisionMap->size(); ++i)
 	{
 		float u, v, f;
-		if (D3DXVec3Length(&((*m_pCollisionMap)[i].vPosition - m_vPosition)) > 1000)continue;
+		if (D3DXVec3Length(&((*m_pCollisionMap)[i].vPosition - m_vPosition)) > 1000) continue;
 		for (int j = 0; j < (*m_pCollisionMap)[i].vecTotalVertex.size(); j += 3)
 		{
 			if (D3DXIntersectTri(&(*m_pCollisionMap)[i].vecTotalVertex[j + 0],

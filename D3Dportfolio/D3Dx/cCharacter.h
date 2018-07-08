@@ -14,7 +14,7 @@ enum CHARACTER_STATE
 
 class cCharacter
 {
-private:
+protected:
 	std::string						m_sName;
 	D3DXVECTOR3						m_vDirection;
 	D3DXVECTOR3						m_vPosition;
