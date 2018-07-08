@@ -187,6 +187,9 @@
     <ClInclude Include="cController.h" />
     <ClInclude Include="cRayPicking.h">
       <Filter>소스파일\tempPicking</Filter>
+<<<<<<< HEAD
+>>>>>>> be6cd9c0f36bdd82a8f76de5a0ee3d9aeebd956d
+=======
 >>>>>>> be6cd9c0f36bdd82a8f76de5a0ee3d9aeebd956d
     </ClInclude>
   </ItemGroup>
@@ -263,8 +266,13 @@
       <UniqueIdentifier>{b38a9f2e-9ce6-4cb2-a17a-9b86f8104961}</UniqueIdentifier>
     </Filter>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Filter Include="D3DFramework\cCameraManager">
       <UniqueIdentifier>{3c27be7b-733a-4322-9485-204d4c8508a5}</UniqueIdentifier>
+=======
+    <Filter Include="소스파일\tempPicking">
+      <UniqueIdentifier>{0587ff6f-96eb-4889-96ee-68235c6cb90e}</UniqueIdentifier>
+>>>>>>> be6cd9c0f36bdd82a8f76de5a0ee3d9aeebd956d
 =======
     <Filter Include="소스파일\tempPicking">
       <UniqueIdentifier>{0587ff6f-96eb-4889-96ee-68235c6cb90e}</UniqueIdentifier>
