@@ -82,6 +82,9 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>소스파일</Filter>
     </ClCompile>
+    <ClCompile Include="cCube.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h">
@@ -173,6 +176,9 @@
     </ClInclude>
     <ClInclude Include="D3DMacroFunction.h">
       <Filter>해더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cCube.h">
+      <Filter>소스파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
