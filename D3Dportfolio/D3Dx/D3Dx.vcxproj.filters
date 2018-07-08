@@ -58,14 +58,14 @@
     <Filter Include="D3DFramework\cSkillManager">
       <UniqueIdentifier>{da7f4ba7-3644-4fea-adbf-0c01c7f6effb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\cPlayer">
-      <UniqueIdentifier>{ce995838-eabf-41c0-8612-5dd181ecd6b2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="D3DFramework\XfileManager">
       <UniqueIdentifier>{374cac35-87ad-484f-9ab6-fb99962069e7}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\cCollisionMap">
       <UniqueIdentifier>{5e1b838f-ce0e-4cb5-ba53-bd5ab6d820eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\cCharaceter">
+      <UniqueIdentifier>{c0b22044-ae16-400c-bccb-ac310fd5dfe9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -138,9 +138,6 @@
     <ClInclude Include="EnumState.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="cPlayer.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="cRangeSkill.h">
       <Filter>D3DFramework\cSkillManager</Filter>
     </ClInclude>
@@ -161,6 +158,12 @@
     </ClInclude>
     <ClInclude Include="cController.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cCharacter.h">
+      <Filter>소스 파일\cCharaceter</Filter>
+    </ClInclude>
+    <ClInclude Include="cPlayer.h">
+      <Filter>소스 파일\cCharaceter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -224,9 +227,6 @@
     <ClCompile Include="cSkillManager.cpp">
       <Filter>D3DFramework\cSkillManager</Filter>
     </ClCompile>
-    <ClCompile Include="cPlayer.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="cRangeSkill.cpp">
       <Filter>D3DFramework\cSkillManager</Filter>
     </ClCompile>
@@ -247,6 +247,12 @@
     </ClCompile>
     <ClCompile Include="cController.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cCharacter.cpp">
+      <Filter>소스 파일\cCharaceter</Filter>
+    </ClCompile>
+    <ClCompile Include="cPlayer.cpp">
+      <Filter>소스 파일\cCharaceter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -31,6 +31,7 @@ public:
 	~cCharacter();
 
 	virtual void Setup(const char* name);
+	virtual void Release();
 	virtual void Update();
 	virtual void Render();
 

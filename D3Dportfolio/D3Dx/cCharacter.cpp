@@ -22,17 +22,21 @@ void cCharacter::Setup(const char* name)
 	g_pXfileManager->AddXfile(m_sName.c_str(), "character", (m_sName + ".x").c_str());
 }
 
+void cCharacter::Release()
+{
+}
+
 void cCharacter::Update()
 {
 	//m_vNextPosition = m_vPosition;
-	if (GetKeyState('A') & 0x8000)
-	{
-		m_fRotY -= 0.1;
-	}
-	if (GetKeyState('D') & 0x8000)
-	{
-		m_fRotY += 0.1;
-	}
+	// if (GetKeyState('A') & 0x8000)
+	// {
+	// 	m_fRotY -= 0.1;
+	// }
+	// if (GetKeyState('D') & 0x8000)
+	// {
+	// 	m_fRotY += 0.1;
+	// }
 	//D3DXMATRIX mRotation;
 	//D3DXMatrixRotationY(&mRotation, m_fRotY);
 	//D3DXVec3TransformNormal(&m_vDirection, &D3DXVECTOR3(0, 0, 1), &mRotation);
@@ -44,15 +48,15 @@ void cCharacter::Update()
 	//{
 	//	m_vNextPosition -= m_vDirection * m_fSpeed;
 	//}
-	if (g_pKeyManager->IsOnceKeyDown('T'))
-	{
-		cRayPicking tmp;
-		for (int i = 0; i < m_pMap->size(); i += 3)
-		{
-			if (tmp.PickTri((*m_pMap)[i], (*m_pMap)[i + 1], (*m_pMap)[i + 2], g_pCameraManager->getEye(), m_vNextPosition))
-				break;
-		}
-	}
+	// if (g_pKeyManager->IsOnceKeyDown('T'))
+	// {
+	// 	cRayPicking tmp;
+	// 	for (int i = 0; i < m_pMap->size(); i += 3)
+	// 	{
+	// 		if (tmp.PickTri((*m_pMap)[i], (*m_pMap)[i + 1], (*m_pMap)[i + 2], g_pCameraManager->getEye(), m_vNextPosition))
+	// 			break;
+	// 	}
+	// }
 
 	GetCollision(m_vNextPosition.x, m_vNextPosition.y, m_vNextPosition.z);
 	GetHeight(m_vPosition.x, m_vPosition.y, m_vPosition.z);
