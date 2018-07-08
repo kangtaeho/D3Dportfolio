@@ -156,7 +156,6 @@
     <ClInclude Include="cCameraManager.h" />
     <ClInclude Include="cCharacter.h" />
     <ClInclude Include="cCollisionMap.h" />
-    <ClInclude Include="cCube.h" />
     <ClInclude Include="cDeviceManager.h" />
     <ClInclude Include="cFontManager.h" />
     <ClInclude Include="cGameNode.h" />
@@ -189,7 +188,6 @@
     <ClCompile Include="cCameraManager.cpp" />
     <ClCompile Include="cCharacter.cpp" />
     <ClCompile Include="cCollisionMap.cpp" />
-    <ClCompile Include="cCube.cpp" />
     <ClCompile Include="cDeviceManager.cpp" />
     <ClCompile Include="cFontManager.cpp" />
     <ClCompile Include="cGameNode.cpp" />
