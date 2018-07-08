@@ -29,7 +29,7 @@ protected:
 public:
 	cCharacter();
 	~cCharacter();
-
+	//name에 이름만 넣으면 알아서 x파일로 불러옵니다~ /character/******.x로요~
 	virtual void Setup(const char* name);
 	virtual void Release();
 	virtual void Update();
