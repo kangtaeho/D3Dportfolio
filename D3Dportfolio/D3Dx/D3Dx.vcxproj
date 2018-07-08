@@ -154,6 +154,7 @@
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="cAllocatedHierachy.h" />
     <ClInclude Include="cCameraManager.h" />
+    <ClInclude Include="cCharacter.h" />
     <ClInclude Include="cCollisionMap.h" />
     <ClInclude Include="cController.h" />
     <ClInclude Include="cCube.h" />
@@ -187,6 +188,7 @@
     <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="cAllocatedHierachy.cpp" />
     <ClCompile Include="cCameraManager.cpp" />
+    <ClCompile Include="cCharacter.cpp" />
     <ClCompile Include="cCollisionMap.cpp" />
     <ClCompile Include="cController.cpp" />
     <ClCompile Include="cCube.cpp" />
