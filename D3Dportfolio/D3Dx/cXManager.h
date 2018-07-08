@@ -17,7 +17,7 @@ public:
 	void Release();
 
 	void AddXfile(const char* name, const char* szFolder, const char* szFile);
-	void Update();
+	void Update(const char* name);
 	void Render(const char* name, D3DXMATRIX* matWorld);
 	cSkinnedMesh* FindXfile(const char* name);
 

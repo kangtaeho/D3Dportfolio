@@ -27,12 +27,10 @@ void cXManager::AddXfile(const char* name, const char* szFolder, const char* szF
 	m_mapXfile.insert(std::make_pair(name, temp));
 }
 
-void cXManager::Update()
+void cXManager::Update(const char* name)
 {
-	for (auto p : m_mapXfile)
-	{
-		p.second->Update();
-	}
+	if (FindXfile(name))
+		FindXfile(name)->Update();
 }
 
 void cXManager::Render(const char* name, D3DXMATRIX* matWorld)
