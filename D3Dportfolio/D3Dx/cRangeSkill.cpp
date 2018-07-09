@@ -30,6 +30,7 @@ void cRangeSkill::Update()
 	CoolDownSetup();
 	Move();
 	RemoveTime();
+	AutoFire();
 }
 
 void cRangeSkill::Render()

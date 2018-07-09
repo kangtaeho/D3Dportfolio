@@ -3,7 +3,7 @@ xof 0303txt 0032
 // DirectX 9.0 file
 // Creator: Ultimate Unwrap3D Pro (x64) v3.50.36
 // Website: http://www.unwrap3d.com
-// Time: Thu Jun 28 09:44:50 2018
+// Time: Mon Jul 09 16:01:21 2018
 
 // Start of Templates
 
@@ -195,14 +195,6 @@ AnimTicksPerSecond {
 }
 
 // Start of Frames
-
-Frame SceneRoot {
-  FrameTransformMatrix {
-   1.000000, 0.000000, 0.000000, 0.000000,
-   0.000000, 1.000000, 0.000000, 0.000000,
-   0.000000, 0.000000, 1.000000, 0.000000,
-   0.000000, 0.000000, 0.000000, 1.000000;;
-  }
 
    Frame root {
       FrameTransformMatrix {
@@ -31400,11 +31392,10 @@ Frame SceneRoot {
 
      }
    }
-}
 
 // Start of Animation
 
-AnimationSet Teemo_Attack1 {
+AnimationSet Attack1 {
    Animation {
       {root}
 
@@ -34222,7 +34213,7 @@ AnimationSet Teemo_Attack1 {
    }
 
 }
-AnimationSet Teemo_Attack2 {
+AnimationSet Attack2 {
    Animation {
       {root}
 
@@ -37040,7 +37031,7 @@ AnimationSet Teemo_Attack2 {
    }
 
 }
-AnimationSet teemo_channel {
+AnimationSet Channel {
    Animation {
       {root}
 
@@ -40826,7 +40817,7 @@ AnimationSet teemo_channel {
    }
 
 }
-AnimationSet Teemo_channel_windup {
+AnimationSet Channel_windup {
    Animation {
       {root}
 
@@ -44612,7 +44603,7 @@ AnimationSet Teemo_channel_windup {
    }
 
 }
-AnimationSet Teemo_Dance {
+AnimationSet Dance {
    Animation {
       {root}
 
@@ -49454,7 +49445,7 @@ AnimationSet Teemo_Dance {
    }
 
 }
-AnimationSet Teemo_Death {
+AnimationSet Death {
    Animation {
       {root}
 
@@ -53504,7 +53495,7 @@ AnimationSet Teemo_Death {
    }
 
 }
-AnimationSet Teemo_Idle1 {
+AnimationSet Idle1 {
    Animation {
       {root}
 
@@ -58786,7 +58777,7 @@ AnimationSet Teemo_Idle1 {
    }
 
 }
-AnimationSet Teemo_Idle2 {
+AnimationSet Idle2 {
    Animation {
       {root}
 
@@ -64596,7 +64587,7 @@ AnimationSet Teemo_Idle2 {
    }
 
 }
-AnimationSet Teemo_Laugh {
+AnimationSet Laugh {
    Animation {
       {root}
 
@@ -71286,7 +71277,7 @@ AnimationSet Teemo_Laugh {
    }
 
 }
-AnimationSet Teemo_Run {
+AnimationSet Run {
    Animation {
       {root}
 
@@ -74192,7 +74183,7 @@ AnimationSet Teemo_Run {
    }
 
 }
-AnimationSet teemo_spell3 {
+AnimationSet Spell3 {
    Animation {
       {root}
 
@@ -78330,7 +78321,7 @@ AnimationSet teemo_spell3 {
    }
 
 }
-AnimationSet teemo_spell4 {
+AnimationSet Spell4 {
    Animation {
       {root}
 
@@ -82028,7 +82019,7 @@ AnimationSet teemo_spell4 {
    }
 
 }
-AnimationSet Teemo_Taunt {
+AnimationSet Taunt {
    Animation {
       {root}
 

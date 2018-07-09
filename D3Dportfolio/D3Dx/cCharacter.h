@@ -25,7 +25,8 @@ protected:
 	std::vector<D3DXVECTOR3>*		m_pMap;
 	std::vector<stCollisionMap>*	m_pCollisionMap;
 	cSkill*							m_pSkill;
-	
+
+
 public:
 	cCharacter();
 	~cCharacter();
@@ -39,7 +40,6 @@ public:
 	void setMap(std::vector<D3DXVECTOR3>* pMap) { m_pMap = pMap; }
 	bool GetHeight(float& x, float & y, float& z);
 	bool GetCollision(float& x, float & y, float& z);
-
 
 };
 

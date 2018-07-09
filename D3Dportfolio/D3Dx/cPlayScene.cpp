@@ -1,10 +1,12 @@
 #include "stdafx.h"
 #include "cPlayScene.h"
 #include "cPlayer.h"
+#include "cTestPlay.h"
 #include "cCollisionMap.h"
 
 cPlayScene::cPlayScene()
-	:m_pPlayer(NULL)
+	: m_pPlayer(NULL)
+	, m_pTestPlay(NULL)
 {
 }
 
@@ -26,7 +28,6 @@ HRESULT cPlayScene::Setup()
 	std::vector<D3DXVECTOR3> vMapGround;
 	std::vector<D3DXVECTOR3> vMapObject;
 	
-	
 	cCollisionMap* colMap = new cCollisionMap;
 	colMap->LoadSurface(vMapGround, "map collision", "map_skp_sample.obj", &matWorld);		// ¹Ù´Ú
 	colMap->LoadSurface(vMapObject, "map collision", "map_collision.obj", &matWorld);
@@ -36,24 +37,34 @@ HRESULT cPlayScene::Setup()
 	m_pPlayer->setMap(colMap->getMap());						// ¹Ù´Ú
 	m_pPlayer->setCollisionMap(colMap->getCollisionMap());		// º®Ãæµ¹ÀÎµí
 
+	m_pTestPlay = new cTestPlay;
+	m_pTestPlay->Setup();
+
 	return S_OK;
 }
 
 void cPlayScene::Release()
 {
 	delete m_pPlayer;
+	delete m_pTestPlay;
 }
 
 void cPlayScene::Update()
 {
 	if (m_pPlayer)
 		m_pPlayer->Update();
+
+	if (m_pTestPlay)
+		m_pTestPlay->Update();
 }
 
 void cPlayScene::Render()
 {
 	if (m_pPlayer)
 		m_pPlayer->Render();
+
+	if (m_pTestPlay)
+		m_pTestPlay->Render();
 
 	{//¸ÊÃß°¡
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);

@@ -73,9 +73,6 @@
     <ClCompile Include="MainGame_AddSprite.cpp">
       <Filter>소스파일\cMainGame</Filter>
     </ClCompile>
-    <ClCompile Include="cSkinnedMesh.cpp">
-      <Filter>소스파일</Filter>
-    </ClCompile>
     <ClCompile Include="D3Dx.cpp">
       <Filter>소스파일</Filter>
     </ClCompile>
@@ -84,6 +81,14 @@
     </ClCompile>
     <ClCompile Include="cCube.cpp">
       <Filter>소스파일</Filter>
+    </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="cTestPlay.cpp">
+      <Filter>소스파일\cCharacter</Filter>
+=======
+    <ClCompile Include="cSkinnedMesh.cpp">
+      <Filter>D3DFramework\cXFileManager</Filter>
+>>>>>>> e2d7eb9983b5f5301be7dbe0ca647a6e03c589d4
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -171,14 +176,19 @@
     <ClInclude Include="stdafx.h">
       <Filter>해더파일</Filter>
     </ClInclude>
-    <ClInclude Include="cSkinnedMesh.h">
-      <Filter>소스파일</Filter>
-    </ClInclude>
     <ClInclude Include="D3DMacroFunction.h">
       <Filter>해더파일</Filter>
     </ClInclude>
     <ClInclude Include="cCube.h">
       <Filter>소스파일</Filter>
+    </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="cTestPlay.h">
+      <Filter>소스파일\cCharacter</Filter>
+=======
+    <ClInclude Include="cSkinnedMesh.h">
+      <Filter>D3DFramework\cXFileManager</Filter>
+>>>>>>> e2d7eb9983b5f5301be7dbe0ca647a6e03c589d4
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

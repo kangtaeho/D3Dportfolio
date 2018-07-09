@@ -38,7 +38,7 @@ void cCameraManager::Setup()
 
 void cCameraManager::Update()
 {
-
+	//m_fRotX = D3DX_PI / 4;
 	m_vEye = D3DXVECTOR3(0, 0, -m_fDistance);
 
 	D3DXMATRIX matRotX;

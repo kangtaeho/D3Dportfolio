@@ -7,7 +7,6 @@ cSkillManager::cSkillManager()
 {
 }
 
-
 cSkillManager::~cSkillManager()
 {
 }
@@ -71,4 +70,19 @@ void cSkillManager::Fire(std::string skillName,
 
 	m_mapSkill[skillName]->Fire(playerPos, tagetPos, currentTime);
 
+}
+
+bool cSkillManager::IsCasting()
+{
+
+	for (auto p : m_mapSkill)
+	{
+		if (p.second->m_bIsCooldown)
+		{
+			return true;
+		}
+		
+	}
+
+	return false;
 }

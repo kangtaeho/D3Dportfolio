@@ -22,6 +22,7 @@ cSkill::cSkill()
 	, m_bIsTarget(false)
 	, m_bIsCooldown(false)
 	, m_bIsRemove(false)
+	, m_bIsAutoFire(false)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 }
@@ -78,14 +79,18 @@ void cSkill::Fire(D3DXVECTOR3 playerPos,
 	m_pTargetPos = tagetPos;
 
 	if (D3DXVec3Length(&(*m_pTargetPos - m_vPos)) > m_fRange) return;	// 타겟과 플레이어의 위치가 범위보다 크면 리턴
+	
+	if (m_bIsTarget) m_bIsAutoFire = true;
+	else m_bIsCasting = true;
 
-	m_bIsCasting = true;												// 시전 할꺼임
 	m_pCurrentTime = currentTime;
 	m_fStartTime = g_pTimeManager->GetLastUpdateTime();
 
-	//m_fRotY = GetAngle(m_vPos.x, m_vPos.z, m_pTargetPos->x, m_pTargetPos->z);		// 앵글
+	m_fRotY = GetAngle(m_vPos, *m_pTargetPos);		// 앵글
 	m_vDir = (*m_pTargetPos) - m_vPos;
-	D3DXVec3Normalize(&m_vDir, &m_vDir);										// 방향벡터
+	D3DXVec3Normalize(&m_vDir, &m_vDir);			// 방향벡터
+
+	
 
 }
 
@@ -232,8 +237,16 @@ void cSkill::RemoveRange()
 
 }
 
+void cSkill::AutoFire()
+{
+	if (!m_bIsAutoFire) return;
 
+	if (D3DXVec3Length(&(*m_pTargetPos - m_vPos)) < m_fRange)
+	{
+		m_bIsCasting = true;
+	}
 
+}
 
 
 
@@ -259,3 +272,4 @@ void cSkill::RenderCube()
 	if (m_pCube)
 		m_pCube->Render();
 }
+

@@ -18,3 +18,12 @@ inline float GetAngle(float x1, float y1, float x2, float y2)
 
 	return angle;
 }
+
+inline float GetAngle(D3DXVECTOR3 v1, D3DXVECTOR3 v2)
+{
+	float dx = v2.x - v1.x;
+	float dz = v2.z - v1.z;
+
+	return atan2(dx, dz);
+
+}

@@ -173,6 +173,7 @@
     <ClInclude Include="cSkill.h" />
     <ClInclude Include="cSkillManager.h" />
     <ClInclude Include="cSkinnedMesh.h" />
+    <ClInclude Include="cTestPlay.h" />
     <ClInclude Include="cTextureManager.h" />
     <ClInclude Include="cTimeManager.h" />
     <ClInclude Include="cXManager.h" />
@@ -206,6 +207,7 @@
     <ClCompile Include="cSkill.cpp" />
     <ClCompile Include="cSkillManager.cpp" />
     <ClCompile Include="cSkinnedMesh.cpp" />
+    <ClCompile Include="cTestPlay.cpp" />
     <ClCompile Include="cTextureManager.cpp" />
     <ClCompile Include="cTimeManager.cpp" />
     <ClCompile Include="cXManager.cpp" />

@@ -40,10 +40,13 @@ protected:
 	float				m_fPassedTime;		// 경과시간.
 	float				m_fRemoveTime;		// 삭제할 시간(오브젝트용)
 
-	bool				m_bIsCasting;		// 시전했냐?
+	SYNTHESIZE(bool, m_bIsCasting, IsCasting);
+	//bool				m_bIsCasting;		// 시전했냐?
 	bool				m_bIsCooldown;		// 쿨타임끝났냐?
 	bool				m_bIsTarget;		// 타겟팅이냐?
 	bool				m_bIsRemove;		// 오브젝트 삭제할꺼냐.
+
+	bool				m_bIsAutoFire;			// 범위안에 있냐?
 
 	// 테스트용 큐브
 	cCube*				m_pCube;
@@ -78,6 +81,7 @@ public:
 	void RemoveTime();					// 시간에 따른 스킬 끝내기
 	void RemoveRange();					// 범위에 따른 스킬 끝내기
 
+	void AutoFire();
 
 	// 일단테스트용 큐브
 	void CreateCube();

@@ -15,7 +15,8 @@ cPlayer::~cPlayer()
 void cPlayer::Setup(const char* name)
 {
 	cCharacter::Setup(name);
-	g_pSkillManager->AddSkill("원거리공격", MELEE_SKILL, 100, 100, 2.0f, 0, 0, 10, false);
+	g_pSkillManager->AddSkill("일반공격", RANGE_SKILL, 100, 300, 4.0f, 0, 0, 20, false);
+
 }
 
 void cPlayer::Release()
@@ -26,7 +27,14 @@ void cPlayer::Release()
 void cPlayer::Update()
 {
 	Check3DMousePointer();
+
 	cCharacter::Update();
+
+	if (g_pSkillManager->IsCasting())
+	{
+		m_vNextPosition = m_vPosition;
+	}
+
 	g_pSkillManager->Update();
 }
 
@@ -60,8 +68,9 @@ void cPlayer::Check3DMousePointer()
 
 	}
 
-	if (g_pKeyManager->IsStayKeyDown(VK_LBUTTON))
+	if (g_pKeyManager->IsOnceKeyDown(VK_LBUTTON))
 	{
+
 		D3DXVECTOR3 v = m_vPosition;
 		cRayPicking ray;
 
@@ -72,17 +81,11 @@ void cPlayer::Check3DMousePointer()
 				(*m_pMap)[i + 2],
 				g_pCameraManager->GetCameraEye(),
 				m_vNextPosition))
-			{
-				m_fRotY = GetAngle(v.x, v.z, m_vNextPosition.x, m_vNextPosition.z);
+			{			
 				break;
 			}
 		}
 
-	}
-
-	if (g_pKeyManager->IsOnceKeyDown(VK_LEFT))
-	{
-		m_fRotY += 0.05f;
 	}
 
 }

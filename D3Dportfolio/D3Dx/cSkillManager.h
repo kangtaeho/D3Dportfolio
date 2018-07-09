@@ -30,5 +30,8 @@ public:
 		D3DXVECTOR3 playerPos,
 		D3DXVECTOR3* tagetPos,
 		float* currentTime);
+
+	bool IsCasting();
+
 };
 
