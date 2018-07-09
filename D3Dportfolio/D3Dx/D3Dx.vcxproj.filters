@@ -82,18 +82,8 @@
     <ClCompile Include="cCube.cpp">
       <Filter>소스파일</Filter>
     </ClCompile>
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <ClCompile Include="cTestPlay.cpp">
-      <Filter>소스파일\cCharacter</Filter>
-=======
     <ClCompile Include="cSkinnedMesh.cpp">
       <Filter>D3DFramework\cXFileManager</Filter>
->>>>>>> e2d7eb9983b5f5301be7dbe0ca647a6e03c589d4
-=======
-    <ClCompile Include="cSkinnedMesh.cpp">
-      <Filter>D3DFramework\cXFileManager</Filter>
->>>>>>> e2d7eb9983b5f5301be7dbe0ca647a6e03c589d4
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -187,18 +177,8 @@
     <ClInclude Include="cCube.h">
       <Filter>소스파일</Filter>
     </ClInclude>
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <ClInclude Include="cTestPlay.h">
-      <Filter>소스파일\cCharacter</Filter>
-=======
     <ClInclude Include="cSkinnedMesh.h">
       <Filter>D3DFramework\cXFileManager</Filter>
->>>>>>> e2d7eb9983b5f5301be7dbe0ca647a6e03c589d4
-=======
-    <ClInclude Include="cSkinnedMesh.h">
-      <Filter>D3DFramework\cXFileManager</Filter>
->>>>>>> e2d7eb9983b5f5301be7dbe0ca647a6e03c589d4
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
