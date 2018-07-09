@@ -83,7 +83,7 @@ void cSkill::Fire(D3DXVECTOR3 playerPos,
 	m_pCurrentTime = currentTime;
 	m_fStartTime = g_pTimeManager->GetLastUpdateTime();
 
-	m_fRotY = GetAngle(m_vPos.x, m_vPos.z, m_pTargetPos->x, m_pTargetPos->z);		// ¾Þ±Û
+	//m_fRotY = GetAngle(m_vPos.x, m_vPos.z, m_pTargetPos->x, m_pTargetPos->z);		// ¾Þ±Û
 	m_vDir = (*m_pTargetPos) - m_vPos;
 	D3DXVec3Normalize(&m_vDir, &m_vDir);										// ¹æÇâº¤ÅÍ
 
@@ -251,7 +251,7 @@ void cSkill::RemoveRange()
 void cSkill::CreateCube()
 {
 	m_pCube = new cCube;
-	m_pCube->Setup(D3DXVECTOR3(1.0, 1.0, 1.0), NULL);
+	m_pCube->Setup(D3DXVECTOR3(200.0, 200.0, 200.0), NULL);
 }
 
 void cSkill::RenderCube()

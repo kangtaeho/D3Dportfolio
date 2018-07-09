@@ -39,5 +39,7 @@ public:
 	void setMap(std::vector<D3DXVECTOR3>* pMap) { m_pMap = pMap; }
 	bool GetHeight(float& x, float & y, float& z);
 	bool GetCollision(float& x, float & y, float& z);
+
+
 };
 

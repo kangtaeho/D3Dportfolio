@@ -28,7 +28,6 @@ void cCharacter::Release()
 
 void cCharacter::Update()
 {
-	
 	GetCollision(m_vNextPosition.x, m_vNextPosition.y, m_vNextPosition.z); //벽충돌
 	GetHeight(m_vPosition.x, m_vPosition.y, m_vPosition.z);				   // 높이판정
 	g_pXfileManager->Update(m_sName.c_str());				
@@ -36,7 +35,6 @@ void cCharacter::Update()
 
 void cCharacter::Render()
 {
-
 	D3DXMATRIX	matWorld, matS, matR, matT;
 	D3DXMatrixIdentity(&matWorld);
 	D3DXMatrixIdentity(&matS);
@@ -46,7 +44,6 @@ void cCharacter::Render()
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	matWorld = matS * matR * matT;
 	g_pXfileManager->Render(m_sName.c_str(), &matWorld);
-
 }
 
 bool cCharacter::GetHeight(float& x, float & y, float& z)
@@ -84,8 +81,10 @@ bool cCharacter::GetCollision(float& x, float & y, float& z)
 	{
 		D3DXVec3Normalize(&gogo, &gogo);
 		gogo *= m_fSpeed;
+
 	}
 	gogo += m_vPosition;
+
 	D3DXVECTOR3 vRayPos(gogo.x, 100000.0f, gogo.z);
 	D3DXVECTOR3 vRayDir(0, -1, 0);
 
@@ -93,6 +92,7 @@ bool cCharacter::GetCollision(float& x, float & y, float& z)
 	{
 		float u, v, f;
 		if (D3DXVec3Length(&((*m_pCollisionMap)[i].vPosition - m_vPosition)) > 1000) continue;
+
 		for (int j = 0; j < (*m_pCollisionMap)[i].vecTotalVertex.size(); j += 3)
 		{
 			if (D3DXIntersectTri(&(*m_pCollisionMap)[i].vecTotalVertex[j + 0],
