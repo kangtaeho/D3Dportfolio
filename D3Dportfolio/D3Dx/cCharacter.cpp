@@ -79,20 +79,20 @@ bool cCharacter::GetCollision(float& x, float & y, float& z)
 {
 	if (!m_pCollisionMap) return false;
 
-	D3DXVECTOR3 gogo = D3DXVECTOR3(x, y, z) - m_vPosition;
-	if (D3DXVec3Length(&gogo) > m_fSpeed)
+	D3DXVECTOR3 gogo = D3DXVECTOR3(x, y, z) - m_vPosition;		//현재 위치에서 도착 위치까지의 백터
+	if (D3DXVec3Length(&gogo) > m_fSpeed)						//백터의 길이가 틱당 스피드보다 길때
 	{
-		D3DXVec3Normalize(&gogo, &gogo);
-		gogo *= m_fSpeed;
+		D3DXVec3Normalize(&gogo, &gogo);						//노멀라이즈로 길이를 1로 만들어주고
+		gogo *= m_fSpeed;										//스피드를 곱해 스피드만큼 이동
 	}
-	gogo += m_vPosition;
-	D3DXVECTOR3 vRayPos(gogo.x, 100000.0f, gogo.z);
-	D3DXVECTOR3 vRayDir(0, -1, 0);
+	gogo += m_vPosition;										//gogo를 도착 위치 백터로 바꿈
+	D3DXVECTOR3 vRayPos(gogo.x, 100000.0f, gogo.z);				//도착 위치 하늘이 레이 위치
+	D3DXVECTOR3 vRayDir(0, -1, 0);								//레이는 수직 아래로 
 
 	for (int i = 0; i < m_pCollisionMap->size(); ++i)
 	{
 		float u, v, f;
-		if (D3DXVec3Length(&((*m_pCollisionMap)[i].vPosition - m_vPosition)) > 1000) continue;
+		if (D3DXVec3Length(&((*m_pCollisionMap)[i].vPosition - m_vPosition)) > 1000) continue;	//충돌맵과 거리가 멀면 컨티뉴(1000이상)
 		for (int j = 0; j < (*m_pCollisionMap)[i].vecTotalVertex.size(); j += 3)
 		{
 			if (D3DXIntersectTri(&(*m_pCollisionMap)[i].vecTotalVertex[j + 0],
@@ -100,13 +100,13 @@ bool cCharacter::GetCollision(float& x, float & y, float& z)
 				&(*m_pCollisionMap)[i].vecTotalVertex[j + 2],
 				&vRayPos,
 				&vRayDir,
-				&u, &v, &f))
+				&u, &v, &f))			//충돌맵과 인터섹트트라이
 			{
 				return true;
 			}
 		}
 	}
-	m_vPosition = gogo;
+	m_vPosition = gogo;		//충돌이 안됬으면 gogo로 이동
 	return false;
 }
 
