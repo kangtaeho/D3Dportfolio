@@ -152,3 +152,12 @@ void cCollisionMap::LoadCollisionSurface(OUT std::vector<stCollisionMap>& VecCol
 		}
 	}
 }
+
+void cCollisionMap::Render()
+{
+	g_pD3DDevice->SetTexture(0, NULL);
+	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST,
+		m_pVecSurface.size() / 3,
+		&m_pVecSurface[0],
+		sizeof(D3DXVECTOR3));
+}
