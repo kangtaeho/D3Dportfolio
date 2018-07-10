@@ -53495,7 +53495,7 @@ AnimationSet Death {
    }
 
 }
-AnimationSet Idle1 {
+AnimationSet Idle {
    Animation {
       {root}
 
