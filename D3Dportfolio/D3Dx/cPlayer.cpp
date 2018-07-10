@@ -44,8 +44,9 @@ void cPlayer::Update()
 
 	}
 
-	m_pSkinnedMesh->setAnimation("Run");
-	m_pSkinnedMesh->SetWorld(m_matWorld);
+	m_pSkinnedMesh->setAnimation("Run");//이거랑
+	m_pSkinnedMesh->SetWorld(m_matWorld);//이거를 주석처리 후
+	//setAnimation("Run");
 }
 
 void cPlayer::Render()
