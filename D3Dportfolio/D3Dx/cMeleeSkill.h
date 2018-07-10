@@ -14,7 +14,6 @@ public:
 		float range,
 		float posSpeed,
 		float cooldown,
-		float castingTime,
 		float removeTime,
 		bool isTarget);
 

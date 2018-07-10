@@ -85,6 +85,9 @@
     <ClCompile Include="cSkinnedMesh.cpp">
       <Filter>D3DFramework\cXFileManager</Filter>
     </ClCompile>
+    <ClCompile Include="cSphere.cpp">
+      <Filter>소스파일\cSphere</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h">
@@ -180,6 +183,9 @@
     <ClInclude Include="cSkinnedMesh.h">
       <Filter>D3DFramework\cXFileManager</Filter>
     </ClInclude>
+    <ClInclude Include="cSphere.h">
+      <Filter>소스파일\cSphere</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="D3Dx.ico">
@@ -252,6 +258,9 @@
     </Filter>
     <Filter Include="해더파일">
       <UniqueIdentifier>{25f3a1a9-58fe-4eee-ac80-3b5cc56c77c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스파일\cSphere">
+      <UniqueIdentifier>{824f96b1-62ef-45c1-b03d-bff673540f8b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

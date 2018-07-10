@@ -11,9 +11,9 @@ cMeleeSkill::~cMeleeSkill()
 {
 }
 
-HRESULT cMeleeSkill::Setup(SKILL_TYPE skillType, float damage, float range, float posSpeed, float cooldown, float castingTime, float removeTime, bool isTarget)
+HRESULT cMeleeSkill::Setup(SKILL_TYPE skillType, float damage, float range, float posSpeed, float cooldown, float removeTime, bool isTarget)
 {
-	cSkill::Setup(skillType, damage, range, posSpeed, cooldown, castingTime, removeTime, isTarget);
+	cSkill::Setup(skillType, damage, range, posSpeed, cooldown, removeTime, isTarget);
 
 	return S_OK;
 }

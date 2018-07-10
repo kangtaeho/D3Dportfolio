@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "cPlayScene.h"
 #include "cPlayer.h"
-
+#include "cSphere.h"
 #include "cCollisionMap.h"
 
 cPlayScene::cPlayScene()
@@ -18,7 +18,7 @@ cPlayScene::~cPlayScene()
 HRESULT cPlayScene::Setup()
 {
 
-	g_pXfileManager->AddXfile("Map", "summoner rift", "summoner_rift.x");
+	//g_pXfileManager->AddXfile("Map", "summoner rift", "summoner_rift.x");
 
 	D3DXMATRIX matWorld, matT, matS, matR;
 	D3DXMatrixRotationY(&matR, D3DX_PI);
@@ -27,15 +27,14 @@ HRESULT cPlayScene::Setup()
 	std::vector<D3DXVECTOR3> vMapGround;
 	std::vector<D3DXVECTOR3> vMapObject;
 	
-	cCollisionMap* colMap = new cCollisionMap;
-	colMap->LoadSurface(vMapGround, "map collision", "map_skp_sample.obj", &matWorld);		// ¹Ù´Ú
-	colMap->LoadSurface(vMapObject, "map collision", "map_collision.obj", &matWorld);
+	colMap = new cCollisionMap;
+	//colMap->LoadSurface(vMapGround, "map collision", "map_skp_sample.obj", &matWorld);		// ¹Ù´Ú
+	//colMap->LoadSurface(vMapObject, "map collision", "map_collision.obj", &matWorld);
 
 	m_pPlayer = new cPlayer;
 	m_pPlayer->Setup("Teemo");
 	m_pPlayer->setMap(colMap->getMap());						// ¹Ù´Ú
 	m_pPlayer->setCollisionMap(colMap->getCollisionMap());		// º®Ãæµ¹ÀÎµí
-
 
 	return S_OK;
 }
@@ -50,6 +49,7 @@ void cPlayScene::Update()
 {
 	if (m_pPlayer)
 		m_pPlayer->Update();
+
 }
 
 void cPlayScene::Render()
@@ -68,5 +68,7 @@ void cPlayScene::Render()
 		mat = matS;
 		g_pXfileManager->Render("Map", &mat);
 	}
+
+	colMap->Render();
 
 }

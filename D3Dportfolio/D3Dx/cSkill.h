@@ -18,7 +18,8 @@ protected:
 	SKILL_TYPE			e_skillType;		// 어떤 스킬일 것이냐,
 	
 	D3DXMATRIX			m_matWorld;
-	D3DXVECTOR3			m_vPos;				// 위치(플레이어 위치)
+	D3DXVECTOR3			m_vPos;				// 미사일 위치
+	D3DXVECTOR3*		m_pPlayerPos;		// 플레이어 위치
 	D3DXVECTOR3*		m_pTargetPos;		// 타겟위치
 	D3DXVECTOR3			m_vDir;				// 방향벡터
 
@@ -60,7 +61,6 @@ public:
 						float range,
 						float posSpeed,
 						float cooldown,
-						float castingTime,
 						float removeTime,
 						bool isTarget);
 
@@ -68,7 +68,7 @@ public:
 	virtual void	Update();
 	virtual void	Render();
 
-	void Fire(D3DXVECTOR3 playerPos,
+	void Fire(D3DXVECTOR3* playerPos,
 			D3DXVECTOR3* tagetPos, 
 			float* currentTIme = NULL);
 
@@ -80,12 +80,15 @@ public:
 
 	void RemoveTime();					// 시간에 따른 스킬 끝내기
 	void RemoveRange();					// 범위에 따른 스킬 끝내기
+	void RemoveTarget();				// 타겟일때 오브젝트 삭제
 
 	void AutoFire();
 
 	// 일단테스트용 큐브
 	void CreateCube();
 	void RenderCube();
+
+
 
 };
 

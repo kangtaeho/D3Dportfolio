@@ -1,8 +1,11 @@
 #include "stdafx.h"
 #include "cPlayer.h"
 #include "cRayPicking.h"
+#include "cSphere.h"
 
 cPlayer::cPlayer()
+	:m_bIsTarget(false)
+	,m_fRange(400)
 {
 	
 }
@@ -15,7 +18,10 @@ cPlayer::~cPlayer()
 void cPlayer::Setup(const char* name)
 {
 	cCharacter::Setup(name);
-	g_pSkillManager->AddSkill("일반공격", RANGE_SKILL, 100, 300, 4.0f, 0, 0, 20, false);
+	g_pSkillManager->AddSkill("평타", RANGE_SKILL, 100, m_fRange, 4.0f, 3.0f, 20, true);
+
+	m_pSphere = new cSphere;
+	m_pSphere->Setup(D3DXVECTOR3(200, 5172, 200), 100);
 
 }
 
@@ -30,12 +36,15 @@ void cPlayer::Update()
 
 	cCharacter::Update();
 
+
+	g_pSkillManager->Update();
+
 	if (g_pSkillManager->IsCasting())
 	{
 		m_vNextPosition = m_vPosition;
+
 	}
 
-	g_pSkillManager->Update();
 }
 
 void cPlayer::Render()
@@ -45,11 +54,11 @@ void cPlayer::Render()
 	ScreenToClient(g_hWnd, &ptMouse);
 	g_pFontManager->TextFont(ptMouse.x, ptMouse.y, "2D : %0.2f, %0.2f", (float)ptMouse.x, (float)ptMouse.y);
 	g_pFontManager->TextFont(ptMouse.x, ptMouse.y + 20, "3D : %0.2f, %0.2f, %0.2f", (float)m_vNextPosition.x, (float)m_vNextPosition.y, (float)m_vNextPosition.z);
-	
-	g_pFontManager->TextFont(20, 300, "3D : %0.2f", m_fRotY);
-	g_pFontManager->TextFont(20, 320, "3D : %0.2f, %0.2f, %0.2f", (float)m_vPosition.x, (float)m_vPosition.y, (float)m_vPosition.z);
+	g_pFontManager->TextFont(10, 250, "테스트 :%d", m_bIsTarget);
 	
 	g_pSkillManager->Render();
+
+	m_pSphere->Render();
 
 	cCharacter::Render();
 }
@@ -57,11 +66,6 @@ void cPlayer::Render()
 void cPlayer::Check3DMousePointer()
 {
 	if (!m_pMap) return;
-
-	if (g_pKeyManager->IsOnceKeyDown('S'))
-	{
-		g_pSkillManager->Fire("원거리공격", m_vPosition, &m_vNextPosition, NULL);
-	}
 
 	if (g_pKeyManager->IsOnceKeyDown(VK_LBUTTON))
 	{
@@ -81,9 +85,21 @@ void cPlayer::Check3DMousePointer()
 				(*m_pMap)[i + 2],
 				g_pCameraManager->GetCameraEye(),
 				m_vNextPosition))
-			{			
+			{	
 				break;
 			}
+		}
+
+		if (ray.PickSphere(m_pSphere->GetPos(), 100))
+		{
+			D3DXVECTOR3	v = m_vPosition - m_pSphere->GetPos();
+			float s = D3DXVec3Length(&v);
+			if (D3DXVec3Length(&(m_vPosition - m_pSphere->GetPos())) < m_fRange)
+			{
+				m_fRotY = GetAngle(m_vPosition, m_pSphere->GetPos());
+				m_vNextPosition = m_vPosition;
+			}
+			g_pSkillManager->Fire("평타", &m_vPosition, &m_pSphere->GetPos(), NULL);
 		}
 
 	}

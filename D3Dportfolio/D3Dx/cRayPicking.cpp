@@ -42,3 +42,25 @@ bool cRayPicking::PickTri(D3DXVECTOR3 a, D3DXVECTOR3 b, D3DXVECTOR3 c, D3DXVECTO
 	}
 	return tmpBool;
 }
+
+bool cRayPicking::PickSphere(D3DXVECTOR3 pos, float radius)
+{
+	D3DXVECTOR3	v = g_pCameraManager->GetCameraEye() - pos;
+
+	float b = 2.0f*D3DXVec3Dot(&m_vDirection, &v);
+	float c = D3DXVec3Dot(&v, &v) - (radius*radius);
+
+	float discriminant = b * b - (4.0f * c);
+
+	if (discriminant < 0.0f) return false; //판별식이 작을 경우에는 교차하지 않는다.
+
+	discriminant = sqrtf(discriminant);
+
+	float s0 = (-b + discriminant) / 2.0f;
+	float s1 = (-b - discriminant) / 2.0f;
+
+	if (s0 >= 0.0f || s1 >= 0.0f) return true;
+
+	return false;
+
+}

@@ -8,26 +8,35 @@ class cSkillManager
 	SINGLETONE(cSkillManager);
 
 private:
+	std::vector<std::map<std::string, cSkill*>> m_mapAllSkill;
 	std::map<std::string, cSkill*> m_mapSkill;
 
 public:
-
 	void Update();
 	void Release();
 	void Render();
 
-	void AddSkill(std::string skillName, 
-		SKILL_TYPE skillType, 
-		float damage, 
-		float range, 
-		float posSpeed, 
-		float cooldown, 
-		float castingTime,
+	// void AddSkill(std::string skillName, 
+	// 	SKILL_TYPE skillType, 
+	// 	float damage, 
+	// 	float range, 
+	// 	float posSpeed, 
+	// 	float cooldown, 
+	// 	float castingTime,
+	// 	float removeTime,
+	// 	bool isTarget);
+
+	void AddSkill(std::string skillName,
+		SKILL_TYPE skillType,
+		float damage,
+		float range,
+		float posSpeed,
+		float cooldown,
 		float removeTime,
 		bool isTarget);
 
 	void Fire(std::string skillName,
-		D3DXVECTOR3 playerPos,
+		D3DXVECTOR3* playerPos,
 		D3DXVECTOR3* tagetPos,
 		float* currentTime);
 

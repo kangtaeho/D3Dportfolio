@@ -1,10 +1,15 @@
 #pragma once
 #include "cCharacter.h"
 
+class cSphere;
+
 class cPlayer : public cCharacter
 {
 private:
-	
+	cSphere*		m_pSphere;
+	bool			m_bIsTarget;
+	float			m_fRange;
+
 public:
 	cPlayer();
 	~cPlayer();
@@ -15,6 +20,7 @@ public:
 	virtual void Render();
 
 	void Check3DMousePointer();				// 마우스 체크
-	
+
+
 };
 

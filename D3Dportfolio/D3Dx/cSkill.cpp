@@ -6,6 +6,7 @@ cSkill::cSkill()
 	: e_skillType(TYPE_COUNT)
 	, m_vPos(0,0,0)
 	, m_vDir(0,0,0)
+	, m_pPlayerPos(NULL)
 	, m_pTargetPos(NULL)
 	, m_fRotY(0.0f)
 	, m_fDamage(0)
@@ -37,7 +38,6 @@ HRESULT cSkill::Setup(SKILL_TYPE skillType,
 					float range,
 					float posSpeed,
 					float cooldown,
-					float castingTime,
 					float removeTime,
 					bool isTarget)
 {
@@ -68,20 +68,26 @@ void cSkill::Render()
 
 }
 
-void cSkill::Fire(D3DXVECTOR3 playerPos,
+void cSkill::Fire(D3DXVECTOR3* playerPos,
 				D3DXVECTOR3* tagetPos, 
 				float* currentTime)
 {
 	if (m_bIsCasting) return; // 시전 중이거나, 쿨타임 중이면
 	if (m_bIsCooldown) return;
 
-	m_vPos = playerPos;
+	m_vPos = *playerPos;		// 미사일 시작 위치
+	m_pPlayerPos = playerPos;	// 플레이어 좌표 포인터
 	m_pTargetPos = tagetPos;
 
-	if (D3DXVec3Length(&(*m_pTargetPos - m_vPos)) > m_fRange) return;	// 타겟과 플레이어의 위치가 범위보다 크면 리턴
-	
-	if (m_bIsTarget) m_bIsAutoFire = true;
-	else m_bIsCasting = true;
+	// 타겟과 플레이어의 위치가 범위보다 클때
+	if (D3DXVec3Length(&(*m_pTargetPos - m_vPos)) > m_fRange)
+	{
+		if (m_bIsTarget) m_bIsAutoFire = true;	//타겟팅이라면 오토 실행
+		
+	}
+	else {
+		m_bIsCasting = true;
+	}
 
 	m_pCurrentTime = currentTime;
 	m_fStartTime = g_pTimeManager->GetLastUpdateTime();
@@ -98,7 +104,7 @@ void cSkill::Move()
 {
 	if (m_pCube)
 	{
-		m_fRotY = GetAngle(m_vPos.x, m_vPos.z, m_pTargetPos->x, m_pTargetPos->z);		// 앵글
+		m_fRotY = GetAngle(m_vPos, *m_pTargetPos);
 		m_vDir = (*m_pTargetPos) - m_vPos;
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 
@@ -121,7 +127,7 @@ void cSkill::Casting()
 	{
 		m_fPassedTime = g_pTimeManager->GetLastUpdateTime() - m_fStartTime;
 		if (m_fPassedTime > m_fCastingTime)
-		{
+	{	
 
 			// 이제 여기서 오브젝트 나가도록 하면 된다.
 
@@ -237,21 +243,30 @@ void cSkill::RemoveRange()
 
 }
 
+void cSkill::RemoveTarget()
+{
+	if (!m_pTargetPos) return; // 대상 타겟이 없으면 리턴
+
+	if (D3DXVec3Length(&(*m_pTargetPos - m_vPos)) < 2.0f)
+	{
+		delete m_pCube;
+		m_pCube = NULL;
+		m_bIsRemove = false;
+	}
+}
+
 void cSkill::AutoFire()
 {
 	if (!m_bIsAutoFire) return;
 
-	if (D3DXVec3Length(&(*m_pTargetPos - m_vPos)) < m_fRange)
+	if (D3DXVec3Length(&(*m_pTargetPos - *m_pPlayerPos)) < m_fRange)
 	{
 		m_bIsCasting = true;
+		m_vPos = *m_pPlayerPos;
+		m_bIsAutoFire = false;
 	}
 
 }
-
-
-
-
-
 
 
 
@@ -263,8 +278,9 @@ void cSkill::AutoFire()
 
 void cSkill::CreateCube()
 {
+	if (m_pCube) return;
 	m_pCube = new cCube;
-	m_pCube->Setup(D3DXVECTOR3(200.0, 200.0, 200.0), NULL);
+	m_pCube->Setup(D3DXVECTOR3(50.0, 50.0, 50.0), NULL);
 }
 
 void cSkill::RenderCube()
