@@ -12,6 +12,7 @@ cSkinnedMesh::cSkinnedMesh()
 	, m_iCurrAni(0)
 	, m_iNextAni(0)
 {
+	D3DXMatrixIdentity(&m_matWorld);
 }
 
 cSkinnedMesh::~cSkinnedMesh()
@@ -196,6 +197,7 @@ void cSkinnedMesh::SetAnimationIndex(int nIndex)
 	LPD3DXANIMATIONSET	pAniSet = NULL;
 	m_pAnimController->GetAnimationSet(nIndex, &pAniSet);
 	m_pAnimController->SetTrackAnimationSet(0, pAniSet);
+	m_pAnimController->SetTrackPosition(0, 0);
 
 	SAFE_RELEASE(pAniSet);
 }
@@ -231,7 +233,7 @@ void cSkinnedMesh::SetAnimationIndexBlend(int nIndex)
 int cSkinnedMesh::findAnimation(const char* name)
 {
 	LPD3DXANIMATIONSET	pAniSet = NULL;
-	int i;
+	int i = m_pAnimController->GetMaxNumAnimationSets();
 	for (i = 0; i <= m_pAnimController->GetMaxNumAnimationSets(); ++i)
 	{
 		m_pAnimController->GetAnimationSet(i, &pAniSet);
@@ -239,7 +241,7 @@ int cSkinnedMesh::findAnimation(const char* name)
 	}
 
 	SAFE_RELEASE(pAniSet);
-	if (i == m_pAnimController->GetMaxNumAnimationSets())i = 999;
+	if (i > m_pAnimController->GetMaxNumAnimationSets())i = findAnimation("Idle");
 	return i;
 }
 
@@ -248,6 +250,7 @@ void cSkinnedMesh::setAnimation(const char* name, const char* nextName, bool rep
 	m_iCurrAni = findAnimation(name);
 	m_iNextAni = findAnimation(nextName);
 	m_bRepeat = repeat;
+	SetAnimationIndex(m_iCurrAni);
 }
 
 void cSkinnedMesh::UpdateAnimation()

@@ -19,27 +19,34 @@ void cXManager::Release()
 	}
 }
 
-void cXManager::AddXfile(const char* name, const char* szFolder, const char* szFile)
+void cXManager::Update()
 {
-	cSkinnedMesh* temp = new cSkinnedMesh;
+	for (auto p : m_mapXfile)
+	{
+		p.second->Update();
+	}
+}
+
+void cXManager::Render()
+{
+	for (auto p : m_mapXfile)
+	{
+		g_pD3DDevice->SetTransform(D3DTS_WORLD, &p.second->GetWorld());
+		p.second->Render(NULL);
+	}
+}
+
+LPCSKINNEDMESH cXManager::AddXfile(const char* name, const char* szFolder, const char* szFile)
+{
+	cSkinnedMesh* temp = FindXfile(name);
+	if(temp) return temp;
+	temp = new cSkinnedMesh;
 	temp->Setup(szFolder, szFile);
 	m_mapXfile.insert(std::make_pair(name, temp));
+	return temp;
 }
 
-void cXManager::Update(const char* name)
-{
-	if (FindXfile(name))
-		FindXfile(name)->Update();
-}
-
-void cXManager::Render(const char* name, D3DXMATRIX* matWorld)
-{
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, matWorld);
-	if(FindXfile(name))
-		FindXfile(name)->Render(NULL);
-}
-
-cSkinnedMesh* cXManager::FindXfile(const char* name)
+LPCSKINNEDMESH cXManager::FindXfile(const char* name)
 {
 	miXfile p = m_mapXfile.find(name);
 	if (p != m_mapXfile.end())return p->second;
