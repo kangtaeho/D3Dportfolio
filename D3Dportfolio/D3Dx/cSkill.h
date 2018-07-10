@@ -1,6 +1,7 @@
 #pragma once
 
 class cCube;
+class cSkinnedMesh;
 
 enum SKILL_TYPE
 {
@@ -52,9 +53,7 @@ protected:
 
 
 	// 오브젝트
-	LPCSKINNEDMESH		m_pMesh;
-
-	// 테스트용 큐브
+	cSkinnedMesh*		m_pMesh;
 	cCube*				m_pCube;
 
 public:

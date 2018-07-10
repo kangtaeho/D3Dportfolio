@@ -20,9 +20,9 @@ cCharacter::~cCharacter()
 
 void cCharacter::Setup(const char* name)
 {
-	m_sName = name;//삭제해도 무방
-	m_pSkinnedMesh = g_pXfileManager->AddXfile(m_sName.c_str(), "character", (m_sName + ".x").c_str());
-	//m_pSkinnedMesh = g_pXfileManager->AddXfile(name, "character", (std::string(name) + ".x").c_str());
+	
+	m_pSkinnedMesh = g_pXfileManager->AddXfile(name, "character", (std::string(name) + ".x").c_str());
+	m_pSkinnedMesh->CloneAniController(&m_pAnimController);
 }
 
 void cCharacter::Release()
@@ -48,8 +48,8 @@ void cCharacter::Render()
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pXfileManager->FindXfile(m_sName.c_str())->Render(NULL);//여기 주석 후
 	//애니메이션을 넣을때 cAction을 상속받은 후 아래처럼 사용
-	//UpdateAnimation();
-	//m_pSkinnedMesh->Update(m_pAnimController);
+	UpdateAnimation();
+	m_pSkinnedMesh->Update(m_pAnimController);
 }
 
 bool cCharacter::GetHeight(float& x, float & y, float& z)

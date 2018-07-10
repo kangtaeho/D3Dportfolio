@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "cSkill.h"
 #include "cCube.h"
+#include "cSkinnedMesh.h"
 
 cSkill::cSkill()
 	: e_skillType(TYPE_COUNT)
@@ -24,6 +25,7 @@ cSkill::cSkill()
 	, m_bIsCooldown(false)
 	, m_bIsRemove(false)
 	, m_bIsAutoFire(false)
+	, m_pMesh(NULL)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 }
