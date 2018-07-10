@@ -1943,7 +1943,7 @@ AnimTicksPerSecond {
 
 // Start of Animation
 
-AnimationSet death {
+AnimationSet Death {
    Animation {
       {base}
 
@@ -2073,7 +2073,7 @@ AnimationSet death {
    }
 
 }
-AnimationSet idle {
+AnimationSet Idle {
    Animation {
       {base}
 
