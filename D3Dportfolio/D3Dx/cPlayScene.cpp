@@ -49,7 +49,6 @@ void cPlayScene::Update()
 {
 	if (m_pPlayer)
 		m_pPlayer->Update();
-
 }
 
 void cPlayScene::Render()
@@ -66,7 +65,7 @@ void cPlayScene::Render()
 		D3DXMatrixIdentity(&matS);
 		D3DXMatrixScaling(&matS, 300.0f, 300.0f, 300.0f);
 		mat = matS;
-		g_pXfileManager->Render("Map", &mat);
+		//g_pXfileManager->Render("Map", &mat);
 	}
 
 	colMap->Render();

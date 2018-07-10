@@ -8,7 +8,9 @@ cCharacter::cCharacter()
 	, m_fRotY(0.0f)
 	, m_vNextPosition(0, 0, 0)
 	, m_fSpeed(10.0f)
+	, m_pSkinnedMesh(NULL)
 {
+	D3DXMatrixIdentity(&m_matWorld);
 }
 
 
@@ -19,7 +21,7 @@ cCharacter::~cCharacter()
 void cCharacter::Setup(const char* name)
 {
 	m_sName = name;
-	g_pXfileManager->AddXfile(m_sName.c_str(), "character", (m_sName + ".x").c_str());
+	m_pSkinnedMesh = g_pXfileManager->AddXfile(m_sName.c_str(), "character", (m_sName + ".x").c_str());
 }
 
 void cCharacter::Release()
@@ -29,8 +31,7 @@ void cCharacter::Release()
 void cCharacter::Update()
 {
 	GetCollision(m_vNextPosition.x, m_vNextPosition.y, m_vNextPosition.z); //벽충돌
-	GetHeight(m_vPosition.x, m_vPosition.y, m_vPosition.z);				   // 높이판정
-	g_pXfileManager->Update(m_sName.c_str());				
+	GetHeight(m_vPosition.x, m_vPosition.y, m_vPosition.z);				   // 높이판정			
 }
 
 void cCharacter::Render()
@@ -42,8 +43,10 @@ void cCharacter::Render()
 	D3DXMatrixIdentity(&matT);
 	D3DXMatrixRotationY(&matR, m_fRotY);
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-	matWorld = matS * matR * matT;
-	g_pXfileManager->Render(m_sName.c_str(), &matWorld);
+	m_matWorld = matS * matR * matT;
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	g_pXfileManager->FindXfile(m_sName.c_str())->Render(NULL);
+
 }
 
 bool cCharacter::GetHeight(float& x, float & y, float& z)

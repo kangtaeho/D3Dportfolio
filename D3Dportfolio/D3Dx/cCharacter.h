@@ -15,10 +15,16 @@ enum CHARACTER_STATE
 class cCharacter
 {
 protected:
+
+	LPCSKINNEDMESH					m_pSkinnedMesh;
+
 	std::string						m_sName;
 	D3DXVECTOR3						m_vDirection;
 	D3DXVECTOR3						m_vPosition;
 	D3DXVECTOR3						m_vNextPosition;
+
+	D3DXMATRIX						m_matWorld;
+
 	float							m_fRotY;
 	float							m_fSpeed;
 

@@ -23,6 +23,8 @@ protected:
 	D3DXVECTOR3*		m_pTargetPos;		// 타겟위치
 	D3DXVECTOR3			m_vDir;				// 방향벡터
 
+	std::string			m_sObjectName;		// 오브젝트 이름
+
 	int					m_nLevel;			// 스킬레벨
 
 	float				m_fRotY;

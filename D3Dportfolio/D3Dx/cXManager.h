@@ -3,6 +3,8 @@
 
 #define g_pXfileManager cXManager::GetInstance()
 
+
+
 class cXManager
 {
 	SINGLETONE(cXManager);

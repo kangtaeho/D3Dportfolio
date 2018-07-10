@@ -8,7 +8,7 @@ class cPlayScene : public cGameNode
 {
 private:
 	cPlayer*		m_pPlayer;
-	cCollisionMap* colMap;
+	cCollisionMap*  colMap;
 
 public:
 	cPlayScene();

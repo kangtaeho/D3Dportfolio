@@ -160,19 +160,12 @@ void LoadCollisionSurface(OUT std::vector<stCollisionMap>& VecCollisionFace, IN 
 
 void cCollisionMap::Render()
 {
-<<<<<<< HEAD
-	D3DXMATRIX world;
-	D3DXMatrixIdentity(&world);
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &world);
-	//g_pD3DDevice->SetTexture(0, NULL);
-=======
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	D3DXMATRIX m_matWorld;
 	D3DXMatrixIdentity(&m_matWorld);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetTexture(0, NULL);
 	g_pD3DDevice->SetFVF(D3DFVF_XYZ);
->>>>>>> 7f467cce3eae88d1d63b8b2de9887e7e73b9c9f3
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST,
 		m_pVecSurface.size() / 3,
 		&m_pVecSurface[0],

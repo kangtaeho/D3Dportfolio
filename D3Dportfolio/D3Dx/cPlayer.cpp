@@ -36,7 +36,6 @@ void cPlayer::Update()
 
 	cCharacter::Update();
 
-
 	g_pSkillManager->Update();
 
 	if (g_pSkillManager->IsCasting())
@@ -45,6 +44,8 @@ void cPlayer::Update()
 
 	}
 
+	m_pSkinnedMesh->setAnimation("Run");
+	m_pSkinnedMesh->SetWorld(m_matWorld);
 }
 
 void cPlayer::Render()
