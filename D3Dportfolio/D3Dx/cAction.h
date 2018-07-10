@@ -21,6 +21,8 @@ public:
 	//===================================여기까지 안쓰셔도 무방합니다.
 	//name에 현재 애니메이션 이름, nextName에 다음 애니메이션 이름(안넣으면 Idle), repeat은 반복할건지 반복하면 next만 반복
 	void setAnimation(const char* name, const char* nextName = "Idle", bool repeat = true);
+	//지금 Idle 상태인가?
+	bool isIdle();
 };
 /*
 상속받은 후에 setAnimation을 맘껏 사용~ 애니메이션 잘 됩니다.

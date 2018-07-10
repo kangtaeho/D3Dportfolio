@@ -44,7 +44,7 @@ void cPlayer::Update()
 
 	}
 
-	setAnimation("Run");
+	setAnimation("Run", "Run");
 }
 
 void cPlayer::Render()
