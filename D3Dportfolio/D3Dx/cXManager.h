@@ -1,4 +1,5 @@
 #pragma once
+#include "cSkinnedMesh.h"
 
 #define g_pXfileManager cXManager::GetInstance()
 

@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "cXManager.h"
-#include "cSkinnedMesh.h"
 
 
 cXManager::cXManager()
@@ -45,9 +44,4 @@ cSkinnedMesh* cXManager::FindXfile(const char* name)
 	miXfile p = m_mapXfile.find(name);
 	if (p != m_mapXfile.end())return p->second;
 	return NULL;
-}
-
-void cXManager::setAnimation(const char* name, int nIndex)
-{
-	FindXfile(name)->SetAnimationIndex(nIndex);
 }
