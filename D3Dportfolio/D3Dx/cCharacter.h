@@ -19,7 +19,6 @@ protected:
 
 	LPCSKINNEDMESH					m_pSkinnedMesh;
 
-	std::string						m_sName;
 	D3DXVECTOR3						m_vDirection;
 	D3DXVECTOR3						m_vPosition;
 	D3DXVECTOR3						m_vNextPosition;

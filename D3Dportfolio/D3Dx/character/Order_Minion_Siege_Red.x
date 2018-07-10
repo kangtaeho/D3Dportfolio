@@ -24163,7 +24163,7 @@ AnimationSet Attack3 {
    }
 
 }
-AnimationSet Death1 {
+AnimationSet Death {
    Animation {
       {Root}
 
@@ -27514,7 +27514,7 @@ AnimationSet Death1 {
    }
 
 }
-AnimationSet Idle1 {
+AnimationSet Idle {
    Animation {
       {Root}
 
