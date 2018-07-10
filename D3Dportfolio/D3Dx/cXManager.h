@@ -21,7 +21,5 @@ public:
 	void Update(const char* name);
 	void Render(const char* name, D3DXMATRIX* matWorld);
 	cSkinnedMesh* FindXfile(const char* name);
-
-	void setAnimation(const char* name, int nIndex);
 };
 
