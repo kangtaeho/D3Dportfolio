@@ -21,7 +21,7 @@ HRESULT cRangeSkill::Setup(SKILL_TYPE skillType, float damage, float range, floa
 
 void cRangeSkill::Release()
 {
-	delete m_pCube;
+
 }
 
 void cRangeSkill::Update()

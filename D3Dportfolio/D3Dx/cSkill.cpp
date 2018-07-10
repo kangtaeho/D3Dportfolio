@@ -48,7 +48,6 @@ HRESULT cSkill::Setup(SKILL_TYPE skillType,
 	m_fCooldown = cooldown;
 	m_fRemoveTime = removeTime;
 	m_bIsTarget = isTarget;
-	// 아직 캐스팅 타임 안넣었다.
 
 	return S_OK;
 }
@@ -195,8 +194,8 @@ void cSkill::CastingSkill(SKILL_TYPE skillType)
 		// 타겟팅 위치에 바로 큐브생성
 		D3DXMatrixTranslation(&matT, m_pTargetPos->x, m_pTargetPos->y, m_pTargetPos->z);
 		m_matWorld = matR*matT;
-		m_pCube->SetMatWorld(m_matWorld);
-		//---------------------------테스트--------------------//
+		// m_pCube->SetMatWorld(m_matWorld);
+		// ---------------------------테스트--------------------//
 
 
 	}
@@ -268,19 +267,12 @@ void cSkill::AutoFire()
 
 }
 
-
-
-
-
-
-
 //나중에 삭제
 
 void cSkill::CreateCube()
 {
-	if (m_pCube) return;
 	m_pCube = new cCube;
-	m_pCube->Setup(D3DXVECTOR3(50.0, 50.0, 50.0), NULL);
+	m_pCube->Setup(D3DXVECTOR3(50.0, 20.0, 20.0), NULL);
 }
 
 void cSkill::RenderCube()

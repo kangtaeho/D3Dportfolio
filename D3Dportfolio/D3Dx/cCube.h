@@ -20,8 +20,10 @@ private:
 	SYNTHESIZE(D3DXMATRIX, m_matWorld, MatWorld);
 
 	ID3DXMesh*					m_pMesh;
-
 	float						m_fRotY;
+
+	LPDIRECT3DTEXTURE9			m_pTexture;
+
 public:
 	void Setup(D3DXVECTOR3 size, LPCWSTR texName);
 	void Update();

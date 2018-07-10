@@ -10,7 +10,6 @@ enum SKILL_TYPE
 	TYPE_COUNT
 };
 
-
 class cSkill
 {
 protected:
@@ -50,6 +49,10 @@ protected:
 	bool				m_bIsRemove;		// 오브젝트 삭제할꺼냐.
 
 	bool				m_bIsAutoFire;			// 범위안에 있냐?
+
+
+	// 오브젝트
+	LPCSKINNEDMESH		m_pMesh;
 
 	// 테스트용 큐브
 	cCube*				m_pCube;
