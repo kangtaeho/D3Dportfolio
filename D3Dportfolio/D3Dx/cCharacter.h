@@ -1,4 +1,5 @@
 #pragma once
+#include "cAction.h"
 
 enum CHARACTER_STATE
 {
@@ -12,7 +13,7 @@ enum CHARACTER_STATE
 	SKILL4
 };
 
-class cCharacter
+class cCharacter : public cAction
 {
 protected:
 

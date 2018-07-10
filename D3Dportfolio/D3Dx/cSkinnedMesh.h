@@ -10,37 +10,25 @@ private:
 	float	m_fPassedBlendTime;
 	bool	m_bBlend;
 
-	int		m_iCurrAni;
-	int		m_iNextAni;
-	bool	m_bRepeat;
-
 public:
 	cSkinnedMesh();
 	~cSkinnedMesh();
 
 	void Release(LPD3DXFRAME pFrame);
 
+	void CloneAniController(LPD3DXANIMATIONCONTROLLER* ppAnimController) { m_pAnimController->CloneAnimationController(m_pAnimController->GetMaxNumAnimationOutputs(), m_pAnimController->GetMaxNumAnimationSets(), m_pAnimController->GetMaxNumTracks(), m_pAnimController->GetMaxNumEvents(), ppAnimController); }
+	
 	void Setup(const char* szFolder, const char* szFile);
-	void Update();
+	//애니메이션 있는 랜더 돌릴 땐 업데이트
+	void Update(LPD3DXANIMATIONCONTROLLER pAnimController);
 	void Update(LPD3DXFRAME pFrame, LPD3DXFRAME pParent);
 	void UpdateSkinnedMesh(LPD3DXFRAME pFrame);
-
+	//그냥 랜더만 돌릴 땐 랜더
 	void Render(LPD3DXFRAME pFrame);
 
 	void SetupBoneMatrixPtrs(LPD3DXFRAME pFrame);
-	//==================================여기부터
-	void SetAnimationIndex(int nIndex);
-	void SetAnimationIndexBlend(int nIndex);
-	
-	int findAnimation(const char* name);
-	void UpdateAnimation();
-	bool EndAnimation();
-	//===================================여기까지 안쓰셔도 무방합니다.
-	//name에 현재 애니메이션 이름, nextName에 다음 애니메이션 이름(안넣으면 Idle), repeat은 반복할건지 반복하면 next만 반복
-	
-	void setAnimation(const char* name, const char* nextName = "Idle", bool repeat = true);
 
-	SYNTHESIZE_REF(D3DXMATRIX, m_matWorld, World)
+	void SetAnimationIndexBlend(int nIndex);
 };
 
 #define LPCSKINNEDMESH cSkinnedMesh*

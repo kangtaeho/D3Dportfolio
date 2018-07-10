@@ -88,6 +88,9 @@
     <ClCompile Include="cSphere.cpp">
       <Filter>소스파일\cSphere</Filter>
     </ClCompile>
+    <ClCompile Include="cAction.cpp">
+      <Filter>D3DFramework\cXFileManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h">
@@ -185,6 +188,9 @@
     </ClInclude>
     <ClInclude Include="cSphere.h">
       <Filter>소스파일\cSphere</Filter>
+    </ClInclude>
+    <ClInclude Include="cAction.h">
+      <Filter>D3DFramework\cXFileManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
