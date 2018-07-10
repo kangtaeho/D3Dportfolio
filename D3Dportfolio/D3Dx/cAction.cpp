@@ -43,10 +43,15 @@ int cAction::findAnimation(const char* name)
 
 void cAction::setAnimation(const char* name, const char* nextName, bool repeat)
 {
-	m_iCurrAni = findAnimation(name);
-	m_iNextAni = findAnimation(nextName);
-	m_bRepeat = repeat;
-	SetAnimationIndex(m_iCurrAni);
+	if (m_iCurrAni != findAnimation(name) &&
+		m_iNextAni != findAnimation(nextName) &&
+		m_bRepeat != repeat)
+	{
+		m_iCurrAni = findAnimation(name);
+		m_iNextAni = findAnimation(nextName);
+		m_bRepeat = repeat;
+		SetAnimationIndex(m_iCurrAni);
+	}
 }
 
 void cAction::UpdateAnimation()
