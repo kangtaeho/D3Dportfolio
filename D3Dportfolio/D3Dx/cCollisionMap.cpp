@@ -1,6 +1,11 @@
 #include "stdafx.h"
 #include "cCollisionMap.h"
 
+void LoadSurface(OUT std::vector<D3DXVECTOR3>& vecSurface,
+	IN const char* szFolder, IN const char* szFile,
+	IN D3DXMATRIX* pMat = NULL);
+void LoadCollisionSurface(OUT std::vector<stCollisionMap>& VecCollisionFace, IN const char * szFolder, IN const char * szFile, IN D3DXMATRIX* pMat);
+
 
 cCollisionMap::cCollisionMap()
 {
@@ -17,7 +22,7 @@ cCollisionMap::~cCollisionMap()
 {
 }
 
-void cCollisionMap::LoadSurface(OUT std::vector<D3DXVECTOR3>& vecSurface, IN const char * szFolder, IN const char * szFile, IN D3DXMATRIX* pMat)
+void LoadSurface(OUT std::vector<D3DXVECTOR3>& vecSurface, IN const char * szFolder, IN const char * szFile, IN D3DXMATRIX* pMat)
 {
 	std::vector<D3DXVECTOR3>	vecV;
 
@@ -74,7 +79,7 @@ void cCollisionMap::LoadSurface(OUT std::vector<D3DXVECTOR3>& vecSurface, IN con
 	}
 }
 
-void cCollisionMap::LoadCollisionSurface(OUT std::vector<stCollisionMap>& VecCollisionFace, IN const char * szFolder, IN const char * szFile, IN D3DXMATRIX* pMat)
+void LoadCollisionSurface(OUT std::vector<stCollisionMap>& VecCollisionFace, IN const char * szFolder, IN const char * szFile, IN D3DXMATRIX* pMat)
 {
 	std::vector<D3DXVECTOR3>	vecV;
 
@@ -155,10 +160,19 @@ void cCollisionMap::LoadCollisionSurface(OUT std::vector<stCollisionMap>& VecCol
 
 void cCollisionMap::Render()
 {
+<<<<<<< HEAD
 	D3DXMATRIX world;
 	D3DXMatrixIdentity(&world);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &world);
 	//g_pD3DDevice->SetTexture(0, NULL);
+=======
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	D3DXMATRIX m_matWorld;
+	D3DXMatrixIdentity(&m_matWorld);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	g_pD3DDevice->SetTexture(0, NULL);
+	g_pD3DDevice->SetFVF(D3DFVF_XYZ);
+>>>>>>> 7f467cce3eae88d1d63b8b2de9887e7e73b9c9f3
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST,
 		m_pVecSurface.size() / 3,
 		&m_pVecSurface[0],
