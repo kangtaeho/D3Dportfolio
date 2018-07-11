@@ -95,24 +95,27 @@ bool cCharacter::GetCollision(float& x, float & y, float& z)
 	D3DXVECTOR3 vRayPos(gogo.x, 100000.0f, gogo.z);				//도착 위치 하늘이 레이 위치
 	D3DXVECTOR3 vRayDir(0, -1, 0);								//레이는 수직 아래로 
 
-	for (int i = 0; i < m_pCollisionMap->size(); ++i)
-	{
-		float u, v, f;
-
-		if (D3DXVec3Length(&((*m_pCollisionMap)[i].vPosition - m_vPosition)) > 1000) continue;	//충돌맵과 거리가 멀면 컨티뉴(1000이상)
-		for (int j = 0; j < (*m_pCollisionMap)[i].vecTotalVertex.size(); j += 3)
-		{
-			if (D3DXIntersectTri(&(*m_pCollisionMap)[i].vecTotalVertex[j + 0],
-				&(*m_pCollisionMap)[i].vecTotalVertex[j + 1],
-				&(*m_pCollisionMap)[i].vecTotalVertex[j + 2],
-				&vRayPos,
-				&vRayDir,
-				&u, &v, &f))			//충돌맵과 인터섹트트라이
-			{
-				return true;
-			}
-		}
-	}
+	//for (int i = 0; i < m_pCollisionMap->size(); ++i)
+	//{
+	//	float u, v, f;
+	//
+	//	if (D3DXVec3Length(&((*m_pCollisionMap)[i].vPosition - m_vPosition)) > 1000) continue;	//충돌맵과 거리가 멀면 컨티뉴(1000이상)
+	//	for (int j = 0; j < (*m_pCollisionMap)[i].vecTotalVertex.size(); j += 3)
+	//	{
+	//		if (D3DXIntersectTri(&(*m_pCollisionMap)[i].vecTotalVertex[j + 0],
+	//			&(*m_pCollisionMap)[i].vecTotalVertex[j + 1],
+	//			&(*m_pCollisionMap)[i].vecTotalVertex[j + 2],
+	//			&vRayPos,
+	//			&vRayDir,
+	//			&u, &v, &f))			//충돌맵과 인터섹트트라이
+	//		{
+	//			x = m_vPosition.x;
+	//			y = m_vPosition.y;
+	//			z = m_vPosition.z;
+	//			return true;
+	//		}
+	//	}
+	//}
 	m_vPosition = gogo;		//충돌이 안됬으면 gogo로 이동
 	return false;
 }

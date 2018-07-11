@@ -4,6 +4,7 @@
 cAction::cAction()
 	: m_bRepeat(true)
 	, m_iCurrAni(0)
+	, m_fFrameSpeed(1.0f)
 {
 }
 
@@ -40,8 +41,9 @@ int cAction::findAnimation(const char* name)
 	return i;																		//Index 리턴
 }
 
-void cAction::setAnimation(const char* name, bool repeat)
+void cAction::setAnimation(const char* name, bool repeat, float fSpeed)
 {
+	m_fFrameSpeed = fSpeed;
 	if (m_iCurrAni == findAnimation(name) &&
 		m_bRepeat == repeat)return;						//원래랑 같은 명령인지 확인 후 같으면 리턴
 	m_iCurrAni = findAnimation(name);					//바로 실행할 애니메이션
@@ -72,7 +74,7 @@ void cAction::UpdateAnimation()
 	}
 	else
 	{
-		m_pAnimController->AdvanceTime(g_pTimeManager->GetElapsedTime(), NULL);		//애니메이션 안끝났으면 시간 올리자
+		m_pAnimController->AdvanceTime(g_pTimeManager->GetElapsedTime() * m_fFrameSpeed, NULL);		//애니메이션 안끝났으면 시간 올리자
 	}
 }
 
