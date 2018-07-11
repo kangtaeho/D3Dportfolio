@@ -41,13 +41,12 @@ int cAction::findAnimation(const char* name)
 	return i;																		//Index 리턴
 }
 
-void cAction::setAnimation(const char* name, const char* nextName, bool repeat)
+void cAction::setAnimation(const char* name, bool repeat)
 {
 	if (m_iCurrAni == findAnimation(name) &&
-		m_iNextAni == findAnimation(nextName) &&
 		m_bRepeat == repeat)return;						//원래랑 같은 명령인지 확인 후 같으면 리턴
 	m_iCurrAni = findAnimation(name);					//바로 실행할 애니메이션
-	m_iNextAni = findAnimation(nextName);				//바로 실행한 것 끝나고 계속 실행할 것
+	m_iNextAni = findAnimation("Idle");					//다음은 무조건 Idle
 	m_bRepeat = repeat;									//반복할건지
 	SetAnimationIndex(m_iCurrAni);						//현재 애니메이션 실행
 }
@@ -69,7 +68,11 @@ void cAction::UpdateAnimation()
 	{
 		if (m_bRepeat)																//반복용인지 확인
 		{
-			SetAnimationIndex(m_iNextAni);											//반복용이면 다음거 틀자
+			if (m_iNextAni != m_iCurrAni)											//반복용인데 지금이랑 다음이랑 다르면 지금걸로 바꾸자
+			{
+				m_iCurrAni = m_iNextAni;
+			}
+			SetAnimationIndex(m_iCurrAni);											//반복용이면 지금거 틀자
 		}
 		m_pAnimController->AdvanceTime(0, NULL);									//애니메이션 끝났으면 시간 올리지 말자
 	}
