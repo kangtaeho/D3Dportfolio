@@ -4,7 +4,6 @@
 cAction::cAction()
 	: m_bRepeat(true)
 	, m_iCurrAni(0)
-	, m_iNextAni(0)
 {
 }
 
@@ -46,7 +45,6 @@ void cAction::setAnimation(const char* name, bool repeat)
 	if (m_iCurrAni == findAnimation(name) &&
 		m_bRepeat == repeat)return;						//원래랑 같은 명령인지 확인 후 같으면 리턴
 	m_iCurrAni = findAnimation(name);					//바로 실행할 애니메이션
-	m_iNextAni = findAnimation("Idle");					//다음은 무조건 Idle
 	m_bRepeat = repeat;									//반복할건지
 	SetAnimationIndex(m_iCurrAni);						//현재 애니메이션 실행
 }
@@ -68,10 +66,6 @@ void cAction::UpdateAnimation()
 	{
 		if (m_bRepeat)																//반복용인지 확인
 		{
-			if (m_iNextAni != m_iCurrAni)											//반복용인데 지금이랑 다음이랑 다르면 지금걸로 바꾸자
-			{
-				m_iCurrAni = m_iNextAni;
-			}
 			SetAnimationIndex(m_iCurrAni);											//반복용이면 지금거 틀자
 		}
 		m_pAnimController->AdvanceTime(0, NULL);									//애니메이션 끝났으면 시간 올리지 말자
@@ -97,4 +91,17 @@ bool cAction::EndAnimation()
 	SAFE_RELEASE(pAniSet);
 
 	return 1 - NowPer <= tick;										//1 - 현재 흐른 시간의 퍼센트가 흐른 값의 틱값보다 작은지, 작으면 끝난거다.
+}
+
+bool cAction::isNameAniPlaying(const char* name)
+{
+	bool temp = false;
+	LPD3DXANIMATIONSET	pAniSet = NULL;
+
+	m_pAnimController->GetTrackAnimationSet(0, &pAniSet);
+	if (std::string(pAniSet->GetName()) == std::string(name) && !EndAnimation())temp = true;
+
+	SAFE_RELEASE(pAniSet);
+
+	return temp;
 }

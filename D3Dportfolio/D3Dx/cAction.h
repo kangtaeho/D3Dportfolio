@@ -4,7 +4,6 @@ class cAction
 {
 protected:
 	int		m_iCurrAni;
-	int		m_iNextAni;
 	bool	m_bRepeat;
 
 	LPD3DXANIMATIONCONTROLLER m_pAnimController;
@@ -23,6 +22,8 @@ public:
 	void setAnimation(const char* name = "Idle", bool repeat = true);
 	//지금 Idle 상태인가?
 	bool isIdle();
+	//name을 찾아서 지금 애니메이션인지, 끝나지 않았는지 확인, 이름이 같고 끝나지 않았으면 true, 이름 같은데 끝났으면 false
+	bool isNameAniPlaying(const char* name);
 };
 /*
 상속받은 후에 setAnimation을 맘껏 사용~ 애니메이션 잘 됩니다.
