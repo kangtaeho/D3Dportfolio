@@ -12,7 +12,7 @@ cPlayer::cPlayer()
 
 cPlayer::~cPlayer()
 {
-	
+	delete m_pSphere;
 }
 
 void cPlayer::Setup(const char* name)
@@ -58,6 +58,7 @@ void cPlayer::Render()
 	
 	g_pSkillManager->Render();
 
+	if(m_pSphere)
 	m_pSphere->Render();
 
 	cCharacter::Render();
