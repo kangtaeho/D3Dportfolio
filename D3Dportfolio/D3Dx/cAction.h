@@ -19,8 +19,8 @@ public:
 	bool EndAnimation();
 	void SetAnimationIndex(int nIndex);
 	//===================================여기까지 안쓰셔도 무방합니다.
-	//name에 현재 애니메이션 이름, nextName에 다음 애니메이션 이름(안넣으면 Idle), repeat은 반복할건지 반복하면 next만 반복
-	void setAnimation(const char* name, const char* nextName = "Idle", bool repeat = true);
+	//name에 현재 애니메이션 이름, repeat은 반복할건지, 쓸때는 업데이트에서 계속 setAnimation()을 호출해주시면 됩니다.
+	void setAnimation(const char* name = "Idle", bool repeat = true);
 	//지금 Idle 상태인가?
 	bool isIdle();
 };
