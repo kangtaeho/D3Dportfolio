@@ -248,7 +248,7 @@ void cSkill::RemoveTarget()
 {
 	if (!m_pTargetPos) return; // 대상 타겟이 없으면 리턴
 
-	if (D3DXVec3Length(&(*m_pTargetPos - m_vPos)) < 2.0f)
+	if (D3DXVec3Length(&(*m_pTargetPos - m_vPos)) < 10.0f)
 	{
 		delete m_pCube;
 		m_pCube = NULL;
@@ -274,7 +274,7 @@ void cSkill::AutoFire()
 void cSkill::CreateCube()
 {
 	m_pCube = new cCube;
-	m_pCube->Setup(D3DXVECTOR3(50.0, 20.0, 20.0), NULL);
+	m_pCube->Setup(D3DXVECTOR3(20.0, 20.0, 50.0), NULL);
 }
 
 void cSkill::RenderCube()

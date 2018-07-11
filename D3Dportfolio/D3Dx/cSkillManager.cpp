@@ -23,6 +23,7 @@ void cSkillManager::Release()
 {
 	for (auto p : m_mapSkill)
 	{
+
 		SAFE_RELEASE(p.second);
 		SAFE_DELETE(p.second);
 	}

@@ -41,8 +41,7 @@ HRESULT cPlayScene::Setup()
 
 void cPlayScene::Release()
 {
-	delete m_pPlayer;
-
+	m_pPlayer->Release();
 }
 
 void cPlayScene::Update()

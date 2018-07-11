@@ -13,6 +13,7 @@ cSphere::cSphere()
 
 cSphere::~cSphere()
 {
+	m_pMesh->Release();
 }
 
 void cSphere::Setup(D3DXVECTOR3 pos, float radius)
@@ -31,6 +32,7 @@ void cSphere::Setup(D3DXVECTOR3 pos, float radius)
 
 	LPDIRECT3DVERTEXBUFFER9	pVB;
 	m_pMesh->GetVertexBuffer(&pVB);
+	pVB->Release();
 
 }
 

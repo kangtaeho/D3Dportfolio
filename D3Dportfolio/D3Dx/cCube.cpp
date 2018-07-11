@@ -15,12 +15,13 @@ cCube::cCube()
 cCube::~cCube()
 {
 	SAFE_RELEASE(m_pMesh);
+	//m_pTexture->Release();
 }
 
 void cCube::Setup(D3DXVECTOR3 size, LPCWSTR texName)
 {
 
-	D3DXCreateTextureFromFile(g_pD3DDevice, "tex00.jpg", &m_pTexture);
+	m_pTexture = g_pTextureManager->GetTexture("tex00.jpg");
 
 	ST_PNT_VERTEX v;
 

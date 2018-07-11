@@ -12,13 +12,13 @@ cPlayer::cPlayer()
 
 cPlayer::~cPlayer()
 {
-	delete m_pSphere;
+	
 }
 
 void cPlayer::Setup(const char* name)
 {
 	cCharacter::Setup(name);
-	g_pSkillManager->AddSkill("평타", RANGE_SKILL, 100, m_fRange, 4.0f, 3.0f, 20, true);
+	g_pSkillManager->AddSkill("평타", RANGE_SKILL, 100, m_fRange, 10.0f, 3.0f, 20, true);
 
 	m_pSphere = new cSphere;
 	m_pSphere->Setup(D3DXVECTOR3(200, 5172, 200), 100);
@@ -27,7 +27,8 @@ void cPlayer::Setup(const char* name)
 
 void cPlayer::Release()
 {
-
+	delete m_pSphere;
+	g_pSkillManager->Release();
 }
 
 void cPlayer::Update()
@@ -44,7 +45,6 @@ void cPlayer::Update()
 
 	}
 
-	setAnimation("Run", "Run");
 }
 
 void cPlayer::Render()
