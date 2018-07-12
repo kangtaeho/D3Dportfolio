@@ -39,24 +39,33 @@ HRESULT cSkill::Setup(SKILL_TYPE skillType,
 					float damage,
 					float range,
 					float posSpeed,
+					float castingTime,
 					float cooldown,
 					float removeTime,
-					bool isTarget)
+					bool isTarget,
+					const char* name)
 {
 	e_skillType = skillType;
 	m_fDamage = damage;
 	m_fRange = range;
 	m_fPosSpeed = posSpeed;
+	m_fCastingTime = castingTime;
 	m_fCooldown = cooldown;
 	m_fRemoveTime = removeTime;
 	m_bIsTarget = isTarget;
+
+	if (name)
+	{
+		m_pMesh = g_pXfileManager->AddXfile(name, "character", (std::string(name) + ".x").c_str());
+		m_pMesh->CloneAniController(&m_pAnimController);
+	}
 
 	return S_OK;
 }
 
 void cSkill::Release()
 {
-	
+	if (m_pCube) delete m_pCube;
 }
 
 void cSkill::Update()
@@ -118,50 +127,29 @@ void cSkill::Move()
 		m_matWorld = matR*matT;
 		m_pCube->SetMatWorld(m_matWorld);
 	}
+	
 }
 
 void cSkill::Casting()
 {
 	if (!m_bIsCasting) return;
 
-	if (m_fCastingTime == NULL)		// 받는 캐스팅 타임포인터가 없을때
-	{
-		m_fPassedTime = g_pTimeManager->GetLastUpdateTime() - m_fStartTime;
-		if (m_fPassedTime > m_fCastingTime)
+	m_fPassedTime = g_pTimeManager->GetLastUpdateTime() - m_fStartTime;
+	if (m_fPassedTime > m_fCastingTime)
 	{	
 
-			// 이제 여기서 오브젝트 나가도록 하면 된다.
+		// 이제 여기서 오브젝트 나가도록 하면 된다.
+		CreateMesh();
 
-			CastingSkill(e_skillType);
+		m_bIsCooldown = true;		// 쿨다운 다시 돌린다
+		m_bIsCasting = false;
 
-			m_bIsCooldown = true;		// 쿨다운 다시 돌린다
-			m_bIsCasting = false;
+		// 쿨다운 문제생기면 삭제요망
+		// 리무브 타임에서 재사용
+		m_fStartTime = g_pTimeManager->GetLastUpdateTime();
+		m_bIsRemove = true;
 
-			// 쿨다운 문제생기면 삭제요망
-			// 리무브 타임에서 재사용
-			m_fStartTime = g_pTimeManager->GetLastUpdateTime();
-			m_bIsRemove = true;
-
-		}
 	}
-	else
-	{
-		if (*m_pCurrentTime > m_fCastingTime)
-		{
-
-			// 이제 여기서 오브젝트 나가도록 하면 된다.
-
-			CastingSkill(e_skillType);
-
-			m_bIsCasting = false;
-			m_bIsCooldown = true;		// 쿨다운 다시 돌린다
-
-			m_fStartTime = g_pTimeManager->GetLastUpdateTime();
-			m_bIsRemove = true;
-
-		}
-	}
-
 }
 
 void cSkill::CoolDownSetup()
@@ -179,50 +167,7 @@ void cSkill::CoolDownSetup()
 
 }
 
-void cSkill::CastingSkill(SKILL_TYPE skillType)
-{
-
-	// if (m_bIsCasting || m_bIsCooldown) return;
-
-
-	if (skillType == MELEE_SKILL)
-	{
-
-		//---------------------------테스트--------------------//
-		// 일단 테스트
-		CreateCube();
-		D3DXMATRIX matR, matT;
-		D3DXMatrixRotationY(&matR, m_fRotY);
-		// 타겟팅 위치에 바로 큐브생성
-		D3DXMatrixTranslation(&matT, m_pTargetPos->x, m_pTargetPos->y, m_pTargetPos->z);
-		m_matWorld = matR*matT;
-		// m_pCube->SetMatWorld(m_matWorld);
-		// ---------------------------테스트--------------------//
-
-
-	}
-	else if (skillType == RANGE_SKILL)
-	{
-
-		//---------------------------테스트--------------------//
-		CreateCube();
-		D3DXMATRIX matR, matT;
-		D3DXMatrixRotationY(&matR, m_fRotY);
-		//  플레이어 위치에 바로 큐브생성
-		D3DXMatrixTranslation(&matT, m_vPos.x, m_vPos.y, m_vPos.z);
-		m_matWorld = matR*matT;
-		m_pCube->SetMatWorld(m_matWorld);
-		//---------------------------테스트--------------------//
-
-	}
-	else if (skillType == OBJECT_SKILL)
-	{
-
-	}
-
-}
-
-void cSkill::RemoveTime()
+void cSkill::RemoveCubeTime()
 {
 	if (!m_bIsRemove) return;
 		// 쿨타임이면서 시전중이 아니면
@@ -256,6 +201,10 @@ void cSkill::RemoveTarget()
 	}
 }
 
+void cSkill::RemoveMeshTime()
+{
+}
+
 void cSkill::AutoFire()
 {
 	if (!m_bIsAutoFire) return;
@@ -266,20 +215,61 @@ void cSkill::AutoFire()
 		m_vPos = *m_pPlayerPos;
 		m_bIsAutoFire = false;
 	}
-
 }
 
 //나중에 삭제
-
-void cSkill::CreateCube()
-{
-	m_pCube = new cCube;
-	m_pCube->Setup(D3DXVECTOR3(20.0, 20.0, 50.0), NULL);
-}
-
 void cSkill::RenderCube()
 {
 	if (m_pCube)
 		m_pCube->Render();
+}
+
+void cSkill::CreateMesh()
+{
+	if (e_skillType == MELEE_SKILL)
+	{
+		// 일단 테스트
+		D3DXMATRIX matR, matT;
+		D3DXMatrixRotationY(&matR, m_fRotY);
+		// 타겟팅 위치에 바로 큐브생성
+		D3DXMatrixTranslation(&matT, m_pTargetPos->x, m_pTargetPos->y, m_pTargetPos->z);
+		m_matWorld = matR*matT;
+		// m_pCube->SetMatWorld(m_matWorld);
+	}
+	else if (e_skillType == RANGE_SKILL)
+	{
+		if (m_pCube) return;
+		m_pCube = new cCube;
+		m_pCube->Setup(D3DXVECTOR3(20.0, 20.0, 50.0), NULL);
+		D3DXMATRIX matR, matT;
+		D3DXMatrixRotationY(&matR, m_fRotY);
+		//  플레이어 위치에 바로 큐브생성
+		D3DXMatrixTranslation(&matT, m_vPos.x, m_vPos.y, m_vPos.z);
+		m_matWorld = matR*matT;
+		m_pCube->SetMatWorld(m_matWorld);
+	}
+	else if (e_skillType == OBJECT_SKILL)
+	{
+		if (m_pMesh)
+		{
+			OBJECT_MESH mesh;
+			D3DXMATRIX matT;
+			D3DXMatrixTranslation(&matT, m_pTargetPos->x, m_pTargetPos->y, m_pTargetPos->z);
+			mesh.world = matT;
+			mesh.removeTime = 0;
+			m_vecMesh.push_back(mesh);
+		}
+	}
+	
+}
+
+void cSkill::RenderVecMesh()
+{
+	for (int i = 0; i < m_vecMesh.size(); i++)
+	{
+		g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_vecMesh[i].world);
+		UpdateAnimation();
+		m_pMesh->Update(m_pAnimController);
+	}
 }
 

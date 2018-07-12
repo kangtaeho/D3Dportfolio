@@ -1,4 +1,5 @@
 #pragma once
+#include "cAction.h"
 
 class cCube;
 class cSkinnedMesh;
@@ -11,7 +12,13 @@ enum SKILL_TYPE
 	TYPE_COUNT
 };
 
-class cSkill
+struct OBJECT_MESH
+{
+	D3DXMATRIX	world;
+	float		removeTime;
+};
+
+class cSkill : public cAction
 {
 protected:
 
@@ -51,10 +58,11 @@ protected:
 
 	bool				m_bIsAutoFire;			// 범위안에 있냐?
 
-
 	// 오브젝트
 	cSkinnedMesh*		m_pMesh;
 	cCube*				m_pCube;
+
+	std::vector<OBJECT_MESH> m_vecMesh;
 
 public:
 	cSkill();
@@ -64,9 +72,11 @@ public:
 						float damage,
 						float range,
 						float posSpeed,
+						float castingTime,
 						float cooldown,
 						float removeTime,
-						bool isTarget);
+						bool isTarget,
+						const char* name);
 
 	virtual void	Release();
 	virtual void	Update();
@@ -80,19 +90,18 @@ public:
 	void Casting();
 	void CoolDownSetup();				// 쿨다운
 
-	void CastingSkill(SKILL_TYPE skillType);
-
-	void RemoveTime();					// 시간에 따른 스킬 끝내기
+	void RemoveCubeTime();					// 시간에 따른 스킬 끝내기
 	void RemoveRange();					// 범위에 따른 스킬 끝내기
 	void RemoveTarget();				// 타겟일때 오브젝트 삭제
+	void RemoveMeshTime();
 
 	void AutoFire();
 
 	// 일단테스트용 큐브
-	void CreateCube();
 	void RenderCube();
 
-
+	void CreateMesh();
+	void RenderVecMesh();
 
 };
 

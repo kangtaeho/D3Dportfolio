@@ -1,12 +1,12 @@
 #pragma once
 #include "cSkill.h"
-
-class cMeleeSkill :
+class cObjectSkill :
 	public cSkill
 {
 public:
-	cMeleeSkill();
-	virtual ~cMeleeSkill();
+	cObjectSkill();
+	virtual~cObjectSkill();
+
 
 	virtual HRESULT Setup(
 		SKILL_TYPE skillType,

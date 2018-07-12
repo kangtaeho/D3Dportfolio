@@ -37,14 +37,16 @@ void cSkillManager::Render()
 	}
 }
 
-void cSkillManager::AddSkill(std::string skillName, 
-	SKILL_TYPE skillType, 
-	float damage, 
-	float range, 
-	float posSpeed, 
-	float cooldown, 
+void cSkillManager::AddSkill(std::string skillName,
+	SKILL_TYPE skillType,
+	float damage,
+	float range,
+	float posSpeed,
+	float castingTime,
+	float cooldown,
 	float removeTime,
-	bool isTarget)
+	bool isTarget,
+	const char* name)
 {
 
 	if (m_mapSkill.find(skillName) == m_mapSkill.end())
@@ -52,13 +54,13 @@ void cSkillManager::AddSkill(std::string skillName,
 		if (skillType == MELEE_SKILL)
 		{
 			cMeleeSkill* pMelee = new cMeleeSkill;
-			pMelee->Setup(skillType, damage, range, posSpeed, cooldown, removeTime, isTarget);
+			pMelee->Setup(skillType, damage, range, posSpeed, castingTime, cooldown, removeTime, isTarget, name);
 			m_mapSkill.insert(std::make_pair(skillName, pMelee));
 		}
 		else if (skillType == RANGE_SKILL)
 		{
 			cRangeSkill*pRange = new cRangeSkill;
-			pRange->Setup(skillType, damage, range, posSpeed, cooldown, removeTime, isTarget);
+			pRange->Setup(skillType, damage, range, posSpeed, castingTime, cooldown, removeTime, isTarget, name);
 			m_mapSkill.insert(std::make_pair(skillName, pRange));
 		}
 		else if (skillType == OBJECT_SKILL)

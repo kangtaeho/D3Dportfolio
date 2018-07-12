@@ -20,9 +20,11 @@ public:
 		float damage,
 		float range,
 		float posSpeed,
+		float castingTime,
 		float cooldown,
 		float removeTime,
-		bool isTarget);
+		bool isTarget,
+		const char* name = NULL);
 
 	void Fire(std::string skillName,
 		D3DXVECTOR3* playerPos,

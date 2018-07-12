@@ -18,7 +18,7 @@ cPlayer::~cPlayer()
 void cPlayer::Setup(const char* name)
 {
 	cCharacter::Setup(name);
-	g_pSkillManager->AddSkill("평타", RANGE_SKILL, 100, m_fRange, 10.0f, 3.0f, 20, true);
+	g_pSkillManager->AddSkill("평타", RANGE_SKILL, 100, m_fRange, 20.0f, 0.3f, 3.0f, 20, true);
 
 	m_pSphere = new cSphere;
 	m_pSphere->Setup(D3DXVECTOR3(200, 5172, 200), 100);
@@ -42,8 +42,17 @@ void cPlayer::Update()
 	if (g_pSkillManager->IsCasting())
 	{
 		m_vNextPosition = m_vPosition;
-
+		setAnimation("Attack1");
 	}
+	else if(D3DXVec3Length(&(m_vPosition - m_vNextPosition)) < m_fSpeed)
+	{
+		setAnimation();
+	}
+	else
+	{
+		setAnimation("Run");
+	}
+
 
 }
 

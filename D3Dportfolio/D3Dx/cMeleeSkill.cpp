@@ -11,16 +11,25 @@ cMeleeSkill::~cMeleeSkill()
 {
 }
 
-HRESULT cMeleeSkill::Setup(SKILL_TYPE skillType, float damage, float range, float posSpeed, float cooldown, float removeTime, bool isTarget)
+HRESULT cMeleeSkill::Setup(
+	SKILL_TYPE skillType,
+	float damage,
+	float range,
+	float posSpeed,
+	float castingTime,
+	float cooldown,
+	float removeTime,
+	bool isTarget,
+	const char* name)
 {
-	cSkill::Setup(skillType, damage, range, posSpeed, cooldown, removeTime, isTarget);
+	cSkill::Setup(skillType, damage, range, posSpeed, castingTime,cooldown, removeTime, isTarget, name);
 
 	return S_OK;
 }
 
 void cMeleeSkill::Release()
 {
-	delete m_pCube;
+	cSkill::Release();
 }
 
 void cMeleeSkill::Update()

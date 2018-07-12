@@ -12,9 +12,11 @@ public:
 		float damage,
 		float range,
 		float posSpeed,
+		float castingTime,
 		float cooldown,
 		float removeTime,
-		bool isTarget);
+		bool isTarget,
+		const char* name);
 
 	virtual void	Release();
 	virtual void	Update();

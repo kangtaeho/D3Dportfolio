@@ -15,7 +15,6 @@ cCube::cCube()
 cCube::~cCube()
 {
 	SAFE_RELEASE(m_pMesh);
-	//m_pTexture->Release();
 }
 
 void cCube::Setup(D3DXVECTOR3 size, LPCWSTR texName)
