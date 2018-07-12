@@ -14,8 +14,6 @@ private:
 
 public:
 	void Release();
-	void Update();
-	void Render();
 
 	//LPCSkinnedMesh를 선언해서 사용하세요
 	LPCSKINNEDMESH AddXfile(const char* name, const char* szFolder, const char* szFile);
