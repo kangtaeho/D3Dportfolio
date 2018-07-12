@@ -13,6 +13,10 @@ public:
 	cAction();
 	~cAction();
 
+	LPD3DXANIMATIONCONTROLLER& getAniController() { return m_pAnimController; }
+
+	void aniCloneAniController(LPD3DXANIMATIONCONTROLLER* ppAnimController) { m_pAnimController->CloneAnimationController(m_pAnimController->GetMaxNumAnimationOutputs(), m_pAnimController->GetMaxNumAnimationSets(), m_pAnimController->GetMaxNumTracks(), m_pAnimController->GetMaxNumEvents(), ppAnimController); }
+
 	//==================================여기부터
 	int findAnimation(const char* name);
 	void UpdateAnimation();

@@ -2,6 +2,7 @@
 #include "cSkillManager.h"
 #include "cMeleeSkill.h"
 #include "cRangeSkill.h"
+#include "cObjectSkill.h"
 
 cSkillManager::cSkillManager()
 {
@@ -65,7 +66,9 @@ void cSkillManager::AddSkill(std::string skillName,
 		}
 		else if (skillType == OBJECT_SKILL)
 		{
-
+			cObjectSkill* pObj = new cObjectSkill;
+			pObj->Setup(skillType, damage, range, posSpeed, castingTime, cooldown, removeTime, isTarget, name);
+			m_mapSkill.insert(std::make_pair(skillName, pObj));
 		}
 
 	}

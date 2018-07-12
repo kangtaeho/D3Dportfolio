@@ -14,8 +14,10 @@ enum SKILL_TYPE
 
 struct OBJECT_MESH
 {
-	D3DXMATRIX	world;
+	D3DXVECTOR3	pos;
+	D3DXVECTOR3	target;
 	float		removeTime;
+	bool		isAttack;
 };
 
 class cSkill : public cAction
@@ -87,6 +89,7 @@ public:
 			float* currentTIme = NULL);
 
 	void Move();
+	void MeshMove();					// 매쉬 이동
 	void Casting();
 	void CoolDownSetup();				// 쿨다운
 

@@ -19,6 +19,7 @@ void cPlayer::Setup(const char* name)
 {
 	cCharacter::Setup(name);
 	g_pSkillManager->AddSkill("ÆòÅ¸", RANGE_SKILL, 100, m_fRange, 20.0f, 0.3f, 3.0f, 20, true);
+	g_pSkillManager->AddSkill("¹ö¼¸", OBJECT_SKILL, 100, 400, 10.0f, 0.3f, 3.0f, 20, true, "BantamTrap");
 
 	m_pSphere = new cSphere;
 	m_pSphere->Setup(D3DXVECTOR3(200, 5172, 200), 100);
@@ -109,7 +110,7 @@ void cPlayer::Check3DMousePointer()
 				m_fRotY = GetAngle(m_vPosition, m_pSphere->GetPos());
 				m_vNextPosition = m_vPosition;
 			}
-			g_pSkillManager->Fire("ÆòÅ¸", &m_vPosition, &m_pSphere->GetPos(), NULL);
+			g_pSkillManager->Fire("¹ö¼¸", &m_vPosition, &m_pSphere->GetPos(), NULL);
 		}
 
 	}

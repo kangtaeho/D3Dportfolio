@@ -5,6 +5,7 @@ cAction::cAction()
 	: m_bRepeat(true)
 	, m_iCurrAni(0)
 	, m_fFrameSpeed(1.0f)
+	, m_pAnimController(NULL)
 {
 }
 

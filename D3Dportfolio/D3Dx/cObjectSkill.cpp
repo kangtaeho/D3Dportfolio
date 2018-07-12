@@ -32,10 +32,14 @@ void cObjectSkill::Release()
 
 void cObjectSkill::Update()
 {
-
+	Casting();
+	CoolDownSetup();
+	MeshMove();
+	RemoveMeshTime();	// 시간이 다됬을때 자동적으로 처리
+	AutoFire();
 }
 
 void cObjectSkill::Render()
 {
-
+	RenderVecMesh();
 }

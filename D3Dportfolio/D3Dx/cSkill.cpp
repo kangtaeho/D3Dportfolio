@@ -130,6 +130,27 @@ void cSkill::Move()
 	
 }
 
+void cSkill::MeshMove()
+{
+	for (int i = 0; i < m_vecMesh.size(); i++)
+	{
+		if (D3DXVec3Length(&(m_vecMesh[i].target - m_vecMesh[i].pos))<m_fPosSpeed) continue;
+
+		// float rotY = GetAngle(m_vecMesh[i].pos, m_vecMesh[i].target);
+		// 
+		// D3DXMATRIX matR;
+		// D3DXMatrixRotationY(&matR, rotY);
+		// 
+		 D3DXVECTOR3 dir = m_vecMesh[i].target - m_vecMesh[i].pos;
+		//D3DXVec3TransformNormal(&dir, &dir, &matR);
+		D3DXVec3Normalize(&dir, &dir);
+
+
+		m_vecMesh[i].pos += dir*m_fPosSpeed;
+
+	}
+}
+
 void cSkill::Casting()
 {
 	if (!m_bIsCasting) return;
@@ -203,6 +224,7 @@ void cSkill::RemoveTarget()
 
 void cSkill::RemoveMeshTime()
 {
+
 }
 
 void cSkill::AutoFire()
@@ -253,10 +275,10 @@ void cSkill::CreateMesh()
 		if (m_pMesh)
 		{
 			OBJECT_MESH mesh;
-			D3DXMATRIX matT;
-			D3DXMatrixTranslation(&matT, m_pTargetPos->x, m_pTargetPos->y, m_pTargetPos->z);
-			mesh.world = matT;
+			mesh.pos = m_vPos;
+			mesh.target = *m_pTargetPos;
 			mesh.removeTime = 0;
+			mesh.isAttack = false;
 			m_vecMesh.push_back(mesh);
 		}
 	}
@@ -267,7 +289,9 @@ void cSkill::RenderVecMesh()
 {
 	for (int i = 0; i < m_vecMesh.size(); i++)
 	{
-		g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_vecMesh[i].world);
+		D3DXMATRIX	matT;
+		D3DXMatrixTranslation(&matT, m_vecMesh[i].pos.x, m_vecMesh[i].pos.y, m_vecMesh[i].pos.z);
+		g_pD3DDevice->SetTransform(D3DTS_WORLD, &matT);
 		UpdateAnimation();
 		m_pMesh->Update(m_pAnimController);
 	}
