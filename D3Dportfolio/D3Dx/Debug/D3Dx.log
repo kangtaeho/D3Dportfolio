@@ -1,2 +1,58 @@
-﻿  D3Dx.vcxproj -> C:\Users\kang\Documents\GitHub\D3Dportfolio\D3Dportfolio\Debug\D3Dx.exe
+﻿  stdafx.cpp
+  cXManager.cpp
+  cTimeManager.cpp
+  cTextureManager.cpp
+  cSphere.cpp
+  cSkinnedMesh.cpp
+  cSkillManager.cpp
+  cSkill.cpp
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\cskill.cpp(135): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\cskill.cpp(223): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\cskill.cpp(294): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\cskill.cpp(306): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  cShop.cpp
+  cSceneManager.cpp
+  cRayPicking.cpp
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\craypicking.cpp(38): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  cRangeSkill.cpp
+  cPlayer.cpp
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\cplayer.cpp(92): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  cPlayScene.cpp
+  cObjectSkill.cpp
+  cMeleeSkill.cpp
+  cMainScene.cpp
+  cMainGame.cpp
+  cKeyManager.cpp
+  cGameNode.cpp
+  cFontManager.cpp
+  코드를 생성하고 있습니다...
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\cscenemanager.cpp(95): warning C4715: 'cSceneManager::ChangeScene': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  컴파일하고 있습니다...
+  cDeviceManager.cpp
+  cCube.cpp
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\ccube.cpp(57): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\ccube.cpp(61): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\ccube.cpp(148): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\ccube.cpp(159): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  cCollisionMap.cpp
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\ccollisionmap.cpp(75): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\ccollisionmap.cpp(136): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\ccollisionmap.cpp(139): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\ccollisionmap.cpp(148): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\ccollisionmap.cpp(153): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  cCharacter.cpp
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\ccharacter.cpp(61): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  cCameraManager.cpp
+  cAllocatedHierachy.cpp
+  cAction.cpp
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\caction.cpp(34): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\caction.cpp(41): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\caction.cpp(89): warning C4244: '초기화 중': 'DOUBLE'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\caction.cpp(90): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  MainGame_AddSprite.cpp
+  D3Dx.cpp
+  Bitmap.cpp
+  코드를 생성하고 있습니다...
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\bitmap.cpp(91): warning C4715: 'Bitmap::addTexture': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  D3Dx.vcxproj -> C:\Users\kang\Documents\GitHub\D3Dportfolio\D3Dportfolio\Debug\D3Dx.exe
   D3Dx.vcxproj -> C:\Users\kang\Documents\GitHub\D3Dportfolio\D3Dportfolio\Debug\D3Dx.pdb (Full PDB)

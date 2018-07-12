@@ -19,7 +19,7 @@ void cPlayer::Setup(const char* name)
 {
 	cCharacter::Setup(name);
 	g_pSkillManager->AddSkill("ÆòÅ¸", RANGE_SKILL, 100, m_fRange, 20.0f, 0.3f, 3.0f, 20, true);
-	g_pSkillManager->AddSkill("¹ö¼¸", OBJECT_SKILL, 100, 400, 10.0f, 0.3f, 3.0f, 20, true, "BantamTrap");
+	g_pSkillManager->AddSkill("¹ö¼¸", OBJECT_SKILL, 100, 400, 10.0f, 0.3f, 3.0f, 5, true, "BantamTrap");
 
 	m_pSphere = new cSphere;
 	m_pSphere->Setup(D3DXVECTOR3(200, 5172, 200), 100);
@@ -78,9 +78,9 @@ void cPlayer::Check3DMousePointer()
 {
 	if (!m_pMap) return;
 
-	if (g_pKeyManager->IsOnceKeyDown(VK_LBUTTON))
+	if (g_pKeyManager->IsOnceKeyDown(VK_RBUTTON))
 	{
-
+		
 	}
 
 	if (g_pKeyManager->IsOnceKeyDown(VK_LBUTTON))
@@ -97,6 +97,8 @@ void cPlayer::Check3DMousePointer()
 				g_pCameraManager->GetCameraEye(),
 				m_vNextPosition))
 			{	
+				m_vClickPos = m_vNextPosition;
+				g_pSkillManager->Fire("¹ö¼¸", &m_vPosition, &m_vClickPos, NULL);
 				break;
 			}
 		}

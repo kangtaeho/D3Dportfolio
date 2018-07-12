@@ -136,15 +136,8 @@ void cSkill::MeshMove()
 	{
 		if (D3DXVec3Length(&(m_vecMesh[i].target - m_vecMesh[i].pos))<m_fPosSpeed) continue;
 
-		// float rotY = GetAngle(m_vecMesh[i].pos, m_vecMesh[i].target);
-		// 
-		// D3DXMATRIX matR;
-		// D3DXMatrixRotationY(&matR, rotY);
-		// 
-		 D3DXVECTOR3 dir = m_vecMesh[i].target - m_vecMesh[i].pos;
-		//D3DXVec3TransformNormal(&dir, &dir, &matR);
+		D3DXVECTOR3 dir = m_vecMesh[i].target - m_vecMesh[i].pos;
 		D3DXVec3Normalize(&dir, &dir);
-
 
 		m_vecMesh[i].pos += dir*m_fPosSpeed;
 
@@ -224,6 +217,17 @@ void cSkill::RemoveTarget()
 
 void cSkill::RemoveMeshTime()
 {
+	if (!m_bIsRemove) return;
+	// 쿨타임이면서 시전중이 아니면
+
+	for (int i = 0; i < m_vecMesh.size(); i++)
+	{
+		m_vecMesh[i].removeTime += g_pTimeManager->GetElapsedTime();
+		if (m_vecMesh[i].removeTime > m_fRemoveTime)
+		{
+			m_vecMesh.erase(m_vecMesh.begin() + i);
+		}
+	}
 
 }
 
@@ -295,5 +299,18 @@ void cSkill::RenderVecMesh()
 		UpdateAnimation();
 		m_pMesh->Update(m_pAnimController);
 	}
+}
+
+bool cSkill::CollisionMesh(D3DXVECTOR3 enemyPos)
+{
+	for (int i = 0; i < m_vecMesh.size(); i++)
+	{
+		if (D3DXVec3Length(&(m_vecMesh[i].pos - enemyPos)) < 5.0f)	// 거리가 가까우면
+		{
+			m_vecMesh.erase(m_vecMesh.begin() + i);
+			return true;
+		}
+	}
+	return false;
 }
 

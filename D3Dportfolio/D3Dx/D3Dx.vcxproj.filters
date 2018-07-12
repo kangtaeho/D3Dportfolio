@@ -91,6 +91,9 @@
     <ClCompile Include="cAction.cpp">
       <Filter>D3DFramework\cXFileManager</Filter>
     </ClCompile>
+    <ClCompile Include="cObjectSkill.cpp">
+      <Filter>D3DFramework\cSkillManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h">
@@ -191,6 +194,9 @@
     </ClInclude>
     <ClInclude Include="cAction.h">
       <Filter>D3DFramework\cXFileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cObjectSkill.h">
+      <Filter>D3DFramework\cSkillManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

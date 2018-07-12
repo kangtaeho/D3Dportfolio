@@ -165,6 +165,7 @@
     <ClInclude Include="cMainGame.h" />
     <ClInclude Include="cMainScene.h" />
     <ClInclude Include="cMeleeSkill.h" />
+    <ClInclude Include="cObjectSkill.h" />
     <ClInclude Include="cPlayer.h" />
     <ClInclude Include="cPlayScene.h" />
     <ClInclude Include="cRangeSkill.h" />
@@ -200,6 +201,7 @@
     <ClCompile Include="cMainGame.cpp" />
     <ClCompile Include="cMainScene.cpp" />
     <ClCompile Include="cMeleeSkill.cpp" />
+    <ClCompile Include="cObjectSkill.cpp" />
     <ClCompile Include="cPlayer.cpp" />
     <ClCompile Include="cPlayScene.cpp" />
     <ClCompile Include="cRangeSkill.cpp" />

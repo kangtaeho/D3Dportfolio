@@ -10,6 +10,8 @@ private:
 	bool			m_bIsTarget;
 	float			m_fRange;
 
+	D3DXVECTOR3		m_vClickPos;
+
 public:
 	cPlayer();
 	~cPlayer();

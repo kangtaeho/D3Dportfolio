@@ -93,7 +93,7 @@ public:
 	void Casting();
 	void CoolDownSetup();				// 쿨다운
 
-	void RemoveCubeTime();					// 시간에 따른 스킬 끝내기
+	void RemoveCubeTime();				// 시간에 따른 스킬 끝내기
 	void RemoveRange();					// 범위에 따른 스킬 끝내기
 	void RemoveTarget();				// 타겟일때 오브젝트 삭제
 	void RemoveMeshTime();
@@ -105,6 +105,8 @@ public:
 
 	void CreateMesh();
 	void RenderVecMesh();
+
+	bool CollisionMesh(D3DXVECTOR3 enemyPos);		// 경훈이형 나중에 적이랑 충돌용으로 만들어놓음 (버섯이랑 적이랑 거리판정해서 충돌이면 true 아니면 false 반환)
 
 };
 
