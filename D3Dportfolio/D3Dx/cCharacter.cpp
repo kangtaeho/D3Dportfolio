@@ -98,7 +98,7 @@ bool cCharacter::GetCollision(float& x, float & y, float& z)
 	//for (int i = 0; i < m_pCollisionMap->size(); ++i)
 	//{
 	//	float u, v, f;
-
+	//
 	//	if (D3DXVec3Length(&((*m_pCollisionMap)[i].vPosition - m_vPosition)) > 1000) continue;	//충돌맵과 거리가 멀면 컨티뉴(1000이상)
 	//	for (int j = 0; j < (*m_pCollisionMap)[i].vecTotalVertex.size(); j += 3)
 	//	{
@@ -109,7 +109,12 @@ bool cCharacter::GetCollision(float& x, float & y, float& z)
 	//			&vRayDir,
 	//			&u, &v, &f))			//충돌맵과 인터섹트트라이
 	//		{
+
 	//			D3DXVECTOR3(x, y, z) = m_vPosition;
+
+	//			x = m_vPosition.x;
+	//			y = m_vPosition.y;
+	//			z = m_vPosition.z;
 	//			return true;
 	//		}
 	//	}
