@@ -65,6 +65,7 @@ HRESULT cSkill::Setup(SKILL_TYPE skillType,
 
 void cSkill::Release()
 {
+	
 	if (m_pCube) delete m_pCube;
 }
 
@@ -106,7 +107,7 @@ void cSkill::Fire(D3DXVECTOR3* playerPos,
 	m_vDir = (*m_pTargetPos) - m_vPos;
 	D3DXVec3Normalize(&m_vDir, &m_vDir);			// ¹æÇâº¤ÅÍ
 
-	
+
 
 }
 
@@ -225,6 +226,7 @@ void cSkill::RemoveMeshTime()
 		m_vecMesh[i].removeTime += g_pTimeManager->GetElapsedTime();
 		if (m_vecMesh[i].removeTime > m_fRemoveTime)
 		{
+			SAFE_DELETE(m_vecMesh[i].animation);
 			m_vecMesh.erase(m_vecMesh.begin() + i);
 		}
 	}
@@ -283,7 +285,9 @@ void cSkill::CreateMesh()
 			mesh.target = *m_pTargetPos;
 			mesh.removeTime = 0;
 			mesh.isAttack = false;
+			aniCloneAniController(&mesh.animation->getAniController());
 			m_vecMesh.push_back(mesh);
+			m_vecMesh.back().animation->setAnimation();
 		}
 	}
 	
@@ -296,8 +300,8 @@ void cSkill::RenderVecMesh()
 		D3DXMATRIX	matT;
 		D3DXMatrixTranslation(&matT, m_vecMesh[i].pos.x, m_vecMesh[i].pos.y, m_vecMesh[i].pos.z);
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &matT);
-		UpdateAnimation();
-		m_pMesh->Update(m_pAnimController);
+		m_vecMesh[i].animation->UpdateAnimation();
+		m_pMesh->Update(m_vecMesh[i].animation->getAniController());
 	}
 }
 

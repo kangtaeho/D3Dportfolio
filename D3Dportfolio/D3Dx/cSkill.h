@@ -18,9 +18,11 @@ struct OBJECT_MESH
 	D3DXVECTOR3	target;
 	float		removeTime;
 	bool		isAttack;
+	cAction*	animation;
+	OBJECT_MESH() { animation = new cAction; }
 };
 
-class cSkill : public cAction
+class cSkill : public cAction	// 부모에서 받는 애니메이션은 원본임(사실 잘 모르겟음)
 {
 protected:
 
