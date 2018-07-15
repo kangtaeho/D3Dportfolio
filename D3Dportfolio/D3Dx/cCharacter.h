@@ -26,7 +26,7 @@ protected:
 	D3DXMATRIX						m_matWorld;
 
 	float							m_fRotY;
-	float							m_fSpeed;
+	SYNTHESIZE(float, m_fSpeed, Speed);
 
 	std::vector<D3DXVECTOR3>*		m_pMap;
 	std::vector<stCollisionMap>*	m_pCollisionMap;

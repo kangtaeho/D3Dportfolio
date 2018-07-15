@@ -2,9 +2,10 @@
 #include "cSkill.h"
 #include "cCube.h"
 #include "cSkinnedMesh.h"
+#include "cPlayer.h"
 
 cSkill::cSkill()
-	: e_skillType(TYPE_COUNT)
+	: e_skillType(SKILL_TYPE_COUNT)
 	, m_vPos(0,0,0)
 	, m_vDir(0,0,0)
 	, m_pPlayerPos(NULL)
@@ -27,6 +28,8 @@ cSkill::cSkill()
 	, m_bIsAutoFire(false)
 	, m_bIsReady(false)
 	, m_pMesh(NULL)
+	, m_pPlayer(NULL)
+	, e_BuffType(BUFF_TYPE_COUNT)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 }
@@ -157,7 +160,9 @@ void cSkill::Casting()
 	if (m_fPassedTime > m_fCastingTime)
 	{	
 		// 이제 여기서 오브젝트 나가도록 하면 된다.
-		CreateMesh();
+
+		if (e_skillType = BUFF_SKILL) BuffStart();		// 타입이 버프 스킬이라면
+		else CreateMesh();
 
 		m_bIsCooldown = true;		// 쿨다운 다시 돌린다
 		m_bIsCasting = false;
@@ -165,6 +170,7 @@ void cSkill::Casting()
 		// 쿨다운 문제생기면 삭제요망
 		// 리무브 타임에서 재사용
 		m_fStartTime = g_pTimeManager->GetLastUpdateTime();
+		m_fPassedTime = 0.0f;
 		m_bIsRemove = true;
 
 		m_bIsReady = false;
@@ -322,3 +328,44 @@ bool cSkill::CollisionMesh(D3DXVECTOR3 enemyPos)
 	return false;
 }
 
+void cSkill::BuffStart()
+{
+	if (!m_pPlayer) return;
+
+	switch (e_BuffType)
+	{
+	case MOVEUP:
+		m_pPlayer->SetSpeed(m_pPlayer->GetSpeed()*5.0f);
+		break;
+	case DAMAGEUP:
+		break;
+	}
+
+}
+
+void cSkill::BuffEnd()
+{
+	if (!m_pPlayer) return;
+	if (!m_bIsRemove) return;
+	// 쿨타임이면서 시전중이 아니면
+	m_fPassedTime += g_pTimeManager->GetElapsedTime();
+
+	if (m_fPassedTime > m_fRemoveTime)
+	{
+		switch (e_BuffType)
+		{
+		case MOVEUP:
+			m_pPlayer->SetSpeed(m_pPlayer->GetSpeed() / 5.0f);
+			break;
+		case DAMAGEUP:
+			break;
+		}
+		m_bIsRemove = false;
+	}
+
+}
+
+void cSkill::ReadyIsCasting()
+{
+	if (m_bIsReady) m_bIsCasting = true;
+}

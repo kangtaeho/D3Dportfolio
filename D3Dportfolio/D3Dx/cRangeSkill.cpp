@@ -20,7 +20,7 @@ HRESULT cRangeSkill::Setup(
 	float cooldown,
 	float removeTime,
 	bool isTarget,
-	const char* name = NULL)
+	const char* name)
 {
 
 	cSkill::Setup(skillType, damage, range, posSpeed, castingTime, cooldown, removeTime, isTarget, name);

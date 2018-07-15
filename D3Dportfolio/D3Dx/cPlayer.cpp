@@ -20,6 +20,9 @@ void cPlayer::Setup(const char* name)
 	cCharacter::Setup(name);
 	g_pSkillManager->AddSkill("평타", RANGE_SKILL, 100, m_fRange, 20.0f, 0.3f, 3.0f, 20, true);
 	g_pSkillManager->AddSkill("버섯", OBJECT_SKILL, 100, 400, 10.0f, 0.5f, 3.0f, 20, true, "BantamTrap");
+	g_pSkillManager->AddSkill("이속업", BUFF_SKILL, 0, 0, 0, 0.5, 10, 10, false, NULL);
+	g_pSkillManager->GetSkill("이속업")->SetPlayer(this);
+	g_pSkillManager->GetSkill("이속업")->SetBuffType(MOVEUP);
 
 	m_pSphere = new cSphere;
 	m_pSphere->Setup(D3DXVECTOR3(200, 5172, 200), 100);
@@ -82,6 +85,11 @@ void cPlayer::Check3DMousePointer()
 	if (g_pKeyManager->IsOnceKeyDown('W'))
 	{
 		g_pSkillManager->IsReady("버섯");
+	}
+
+	if (g_pKeyManager->IsOnceKeyDown('Q'))
+	{
+		g_pSkillManager->IsReady("이속업");
 	}
 
 	if (g_pKeyManager->IsOnceKeyDown(VK_LBUTTON))

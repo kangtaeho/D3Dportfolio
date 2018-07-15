@@ -3,13 +3,22 @@
 
 class cCube;
 class cSkinnedMesh;
+class cPlayer;
 
 enum SKILL_TYPE
 {
 	MELEE_SKILL,
 	RANGE_SKILL,
 	OBJECT_SKILL,
-	TYPE_COUNT
+	BUFF_SKILL,
+	SKILL_TYPE_COUNT
+};
+
+enum BUFF_TYPE
+{
+	MOVEUP,
+	DAMAGEUP,
+	BUFF_TYPE_COUNT
 };
 
 struct OBJECT_MESH
@@ -64,6 +73,11 @@ protected:
 
 	SYNTHESIZE(bool, m_bIsReady, IsReady); // 스킬 사용 준비가 되었냐?
 
+	// 버프 받았을때 상태 처리를 위한 플레이어 포인터
+	SYNTHESIZE(cPlayer*, m_pPlayer, Player);		// 버프를 생각을 못함,,, 구조 ㅄ됨
+	// SYNTHESIZE_REF(BUFF_TYPE, e_BuffType, , BuffType); 이렇게하면 겟셋안됨
+	BUFF_TYPE e_BuffType;
+	
 	// 오브젝트
 	cSkinnedMesh*		m_pMesh;
 	cCube*				m_pCube;
@@ -114,5 +128,11 @@ public:
 
 	bool CollisionMesh(D3DXVECTOR3 enemyPos);		// 경훈이형 나중에 적이랑 충돌용으로 만들어놓음 (버섯이랑 적이랑 거리판정해서 충돌이면 true 아니면 false 반환)
 
+	// 버프용 함수
+	void BuffStart();
+	void BuffEnd();
+	void ReadyIsCasting();
+
+	void SetBuffType(BUFF_TYPE buffType) { e_BuffType = buffType; }
 };
 

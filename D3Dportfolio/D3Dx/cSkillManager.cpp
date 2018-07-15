@@ -3,6 +3,7 @@
 #include "cMeleeSkill.h"
 #include "cRangeSkill.h"
 #include "cObjectSkill.h"
+#include "cBuffSkill.h"
 
 cSkillManager::cSkillManager()
 {
@@ -72,6 +73,12 @@ void cSkillManager::AddSkill(std::string skillName,
 			pObj->Setup(skillType, damage, range, posSpeed, castingTime, cooldown, removeTime, isTarget, name);
 			m_mapSkill.insert(std::make_pair(skillName, pObj));
 		}
+		else if (skillType == BUFF_SKILL)
+		{
+			cBuffSkill* pBuff = new cBuffSkill;
+			pBuff->Setup(skillType, damage, range, posSpeed, castingTime, cooldown, removeTime, isTarget, name);
+			m_mapSkill.insert(std::make_pair(skillName, pBuff));
+		}
 
 	}
 
@@ -137,11 +144,18 @@ bool cSkillManager::CheckReady()
 
 void cSkillManager::CancelSkill()
 {
-	if (g_pKeyManager->IsOnceKeyDown(VK_CLEAR))
+	if (g_pKeyManager->IsOnceKeyDown(VK_ESCAPE))
 	{
 		for (auto p : m_mapSkill)	// 다른 스킬이 하나라도 입력을 받았으면
 		{
 			p.second->SetIsReady(false);
 		}
 	}
+}
+
+cSkill* cSkillManager::GetSkill(std::string skillName)
+{
+	if (m_mapSkill.find(skillName) == m_mapSkill.end()) return nullptr;
+
+	return m_mapSkill[skillName];
 }
