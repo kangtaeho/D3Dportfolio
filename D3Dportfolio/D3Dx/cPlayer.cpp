@@ -76,7 +76,9 @@ void cPlayer::Render()
 
 void cPlayer::Check3DMousePointer()
 {
-	if (!m_pMap) return;
+	if (!m_pMap) return;		// Ãæµ¹ ÆÇÁ¤ ¸ÊÀÌ ¾ø´Ù¸é,
+
+	cRayPicking ray;
 
 	if (g_pKeyManager->IsOnceKeyDown(VK_RBUTTON))
 	{
@@ -85,9 +87,6 @@ void cPlayer::Check3DMousePointer()
 
 	if (g_pKeyManager->IsOnceKeyDown(VK_LBUTTON))
 	{
-
-		D3DXVECTOR3 v = m_vPosition;
-		cRayPicking ray;
 
 		for (int i = 0; i < m_pMap->size(); i += 3)
 		{
@@ -98,21 +97,20 @@ void cPlayer::Check3DMousePointer()
 				m_vNextPosition))
 			{	
 				m_vClickPos = m_vNextPosition;
-				g_pSkillManager->Fire("¹ö¼¸", &m_vPosition, &m_vClickPos, NULL);
+				g_pSkillManager->Fire("¹ö¼¸", &m_vPosition, &m_vClickPos);
 				break;
 			}
 		}
 
 		if (ray.PickSphere(m_pSphere->GetPos(), 100))
 		{
-			D3DXVECTOR3	v = m_vPosition - m_pSphere->GetPos();
-			float s = D3DXVec3Length(&v);
+
 			if (D3DXVec3Length(&(m_vPosition - m_pSphere->GetPos())) < m_fRange)
 			{
 				m_fRotY = GetAngle(m_vPosition, m_pSphere->GetPos());
 				m_vNextPosition = m_vPosition;
 			}
-			g_pSkillManager->Fire("¹ö¼¸", &m_vPosition, &m_pSphere->GetPos(), NULL);
+			g_pSkillManager->Fire("¹ö¼¸", &m_vPosition, &m_pSphere->GetPos());
 		}
 
 	}

@@ -20,6 +20,9 @@ private:
 
 	bool m_isRButtonDown;
 
+	float m_fCameraPosX;
+	float m_fCameraPosZ;
+
 public:
 
 	void Setup();
@@ -27,5 +30,6 @@ public:
 
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 	
+	void MoveWindow();		// 화면이동
 };
 

@@ -18,6 +18,8 @@ void cSkillManager::Update()
 	{
 		p.second->Update();
 	}
+
+	CancelSkill();		// 스킬 취소
 }
 
 void cSkillManager::Release()
@@ -78,12 +80,12 @@ void cSkillManager::AddSkill(std::string skillName,
 void cSkillManager::Fire(std::string skillName,
 	D3DXVECTOR3* playerPos,
 	D3DXVECTOR3* tagetPos,
-	float* currentTime)
+	bool isNormal)
 {
 
 	if (m_mapSkill.find(skillName) == m_mapSkill.end()) return;
 
-	m_mapSkill[skillName]->Fire(playerPos, tagetPos, currentTime);
+	m_mapSkill[skillName]->Fire(playerPos, tagetPos, isNormal);
 
 }
 
@@ -101,4 +103,33 @@ bool cSkillManager::IsCasting()
 	}
 
 	return false;
+}
+
+void cSkillManager::IsReady(std::string skillName)
+{
+	if (m_mapSkill.find(skillName) == m_mapSkill.end()) return;
+
+	for (auto p : m_mapSkill)	// 다른 스킬이 하나라도 입력을 받았으면
+	{
+		if (p.second->GetIsReady())
+		{
+			return;
+		}
+	}
+
+	// 여기까지 도달했다는건 모두 false라는 뜻
+
+	m_mapSkill[skillName]->SetIsReady(true);
+
+}
+
+void cSkillManager::CancelSkill()
+{
+	if (g_pKeyManager->IsOnceKeyDown(VK_CLEAR))
+	{
+		for (auto p : m_mapSkill)	// 다른 스킬이 하나라도 입력을 받았으면
+		{
+			p.second->SetIsReady(false);
+		}
+	}
 }

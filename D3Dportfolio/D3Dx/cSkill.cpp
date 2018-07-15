@@ -25,6 +25,7 @@ cSkill::cSkill()
 	, m_bIsCooldown(false)
 	, m_bIsRemove(false)
 	, m_bIsAutoFire(false)
+	, m_bIsReady(false)
 	, m_pMesh(NULL)
 {
 	D3DXMatrixIdentity(&m_matWorld);
@@ -65,7 +66,7 @@ HRESULT cSkill::Setup(SKILL_TYPE skillType,
 
 void cSkill::Release()
 {
-	
+
 	if (m_pCube) delete m_pCube;
 }
 
@@ -80,9 +81,15 @@ void cSkill::Render()
 }
 
 void cSkill::Fire(D3DXVECTOR3* playerPos,
-				D3DXVECTOR3* tagetPos, 
-				float* currentTime)
+				D3DXVECTOR3* tagetPos,
+				bool isNormal)
+
 {
+	if (!isNormal)	// 평타가 아닐때
+	{
+		if (!m_bIsReady) return;	// 스킬시전이 아니라면
+	}
+
 	if (m_bIsCasting) return; // 시전 중이거나, 쿨타임 중이면
 	if (m_bIsCooldown) return;
 
@@ -94,20 +101,17 @@ void cSkill::Fire(D3DXVECTOR3* playerPos,
 	if (D3DXVec3Length(&(*m_pTargetPos - m_vPos)) > m_fRange)
 	{
 		if (m_bIsTarget) m_bIsAutoFire = true;	//타겟팅이라면 오토 실행
-		
 	}
-	else {
+	else 
+	{
 		m_bIsCasting = true;
 	}
 
-	m_pCurrentTime = currentTime;
 	m_fStartTime = g_pTimeManager->GetLastUpdateTime();
 
 	m_fRotY = GetAngle(m_vPos, *m_pTargetPos);		// 앵글
 	m_vDir = (*m_pTargetPos) - m_vPos;
 	D3DXVec3Normalize(&m_vDir, &m_vDir);			// 방향벡터
-
-
 
 }
 
@@ -152,7 +156,6 @@ void cSkill::Casting()
 	m_fPassedTime = g_pTimeManager->GetLastUpdateTime() - m_fStartTime;
 	if (m_fPassedTime > m_fCastingTime)
 	{	
-
 		// 이제 여기서 오브젝트 나가도록 하면 된다.
 		CreateMesh();
 
@@ -164,6 +167,7 @@ void cSkill::Casting()
 		m_fStartTime = g_pTimeManager->GetLastUpdateTime();
 		m_bIsRemove = true;
 
+		m_bIsReady = false;
 	}
 }
 

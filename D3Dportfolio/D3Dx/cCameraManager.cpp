@@ -3,13 +3,15 @@
 
 
 cCameraManager::cCameraManager()
-	: m_vEye(0, 0, -10)
+	: m_vEye(0, 0, -5000)
 	, m_vUp(0, 1, 0)
-	, m_vLookAt(0, 0, 0)
+	, m_vLookAt(0, 5100, 0)
 	, m_fRotX(0)
 	, m_fRotY(0)
-	, m_fDistance(10)
+	, m_fDistance(5000)
 	, m_isRButtonDown(false)
+	, m_fCameraPosX(0)
+	, m_fCameraPosZ(0)
 {
 }
 
@@ -38,8 +40,9 @@ void cCameraManager::Setup()
 
 void cCameraManager::Update()
 {
-	//m_fRotX = D3DX_PI / 4;
-	m_vEye = D3DXVECTOR3(0, 0, -m_fDistance);
+	MoveWindow();
+
+	m_fRotX = D3DX_PI / 4;
 
 	D3DXMATRIX matRotX;
 	D3DXMatrixRotationX(&matRotX, m_fRotX);
@@ -47,7 +50,12 @@ void cCameraManager::Update()
 	D3DXMATRIX matRotY;
 	D3DXMatrixRotationY(&matRotY, m_fRotY);
 
+	m_vEye = D3DXVECTOR3(0, 0, -m_fDistance);
+
 	D3DXVec3TransformCoord(&m_vEye, &m_vEye, &(matRotX*matRotY));
+
+	m_vLookAt = D3DXVECTOR3(m_fCameraPosX, 5100, m_fCameraPosZ);
+	m_vEye = m_vLookAt + m_vEye;
 
 	D3DXMATRIX matView;
 	D3DXMatrixLookAtLH(&matView, &m_vEye, &m_vLookAt, &m_vUp);
@@ -60,39 +68,39 @@ void cCameraManager::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 {
 	switch (message)
 	{
-	case WM_RBUTTONDOWN:
-	{
-		m_ptPrevMouse.x = LOWORD(lParam);
-		m_ptPrevMouse.y = HIWORD(lParam);
-		m_isRButtonDown = true;
-	}
-	break;
-	case WM_RBUTTONUP:
-	{
-		m_isRButtonDown = false;
-	}
-	break;
-	case WM_MOUSEMOVE:
-	{
-		if (m_isRButtonDown)
-		{
-			POINT ptCurrMouse;
-			ptCurrMouse.x = LOWORD(lParam);
-			ptCurrMouse.y = HIWORD(lParam);
-
-			m_fRotY += (ptCurrMouse.x - m_ptPrevMouse.x) / 100.0f;
-			m_fRotX += (ptCurrMouse.y - m_ptPrevMouse.y) / 100.0f;
-
-			// X축 회전은 위아래 90도 제한한다.
-			if (m_fRotX <= -D3DX_PI * 0.5f + FLT_EPSILON)
-				m_fRotX = -D3DX_PI * 0.5f + FLT_EPSILON;
-			else if (m_fRotX >= D3DX_PI * 0.5f + FLT_EPSILON)
-				m_fRotX = D3DX_PI * 0.5f + FLT_EPSILON;
-
-			m_ptPrevMouse = ptCurrMouse;
-		}
-	}
-	break;
+	// case WM_RBUTTONDOWN:
+	// {
+	// 	m_ptPrevMouse.x = LOWORD(lParam);
+	// 	m_ptPrevMouse.y = HIWORD(lParam);
+	// 	m_isRButtonDown = true;
+	// }
+	// break;
+	// case WM_RBUTTONUP:
+	// {
+	// 	m_isRButtonDown = false;
+	// }
+	// break;
+	// case WM_MOUSEMOVE:
+	// {
+	// 	if (m_isRButtonDown)
+	// 	{
+	// 		POINT ptCurrMouse;
+	// 		ptCurrMouse.x = LOWORD(lParam);
+	// 		ptCurrMouse.y = HIWORD(lParam);
+	// 
+	// 		m_fRotY += (ptCurrMouse.x - m_ptPrevMouse.x) / 100.0f;
+	// 		m_fRotX += (ptCurrMouse.y - m_ptPrevMouse.y) / 100.0f;
+	// 
+	// 		// X축 회전은 위아래 90도 제한한다.
+	// 		if (m_fRotX <= -D3DX_PI * 0.5f + FLT_EPSILON)
+	// 			m_fRotX = -D3DX_PI * 0.5f + FLT_EPSILON;
+	// 		else if (m_fRotX >= D3DX_PI * 0.5f + FLT_EPSILON)
+	// 			m_fRotX = D3DX_PI * 0.5f + FLT_EPSILON;
+	// 
+	// 		m_ptPrevMouse = ptCurrMouse;
+	// 	}
+	// }
+	// break;
 	case WM_MOUSEWHEEL:
 	{
 		m_fDistance -= GET_WHEEL_DELTA_WPARAM(wParam) * 2.0f;
@@ -100,4 +108,30 @@ void cCameraManager::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 	break;
 	}
 
+}
+
+void cCameraManager::MoveWindow()
+{
+	POINT ptMouse;
+	GetCursorPos(&ptMouse);
+	ScreenToClient(g_hWnd, &ptMouse);
+
+	if (ptMouse.x <= 0)
+	{
+		m_fCameraPosX -= 10.0f;
+	}
+	else if(ptMouse.x>=WINSIZEX)
+	{
+		m_fCameraPosX += 10.0f;
+	}
+
+
+	if (ptMouse.y <= 0)
+	{
+		m_fCameraPosZ += 10.0f;
+	}
+	else if (ptMouse.y>=WINSIZEY)
+	{
+		m_fCameraPosZ -= 10.0f;
+	}
 }

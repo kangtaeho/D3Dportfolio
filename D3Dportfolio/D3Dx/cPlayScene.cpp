@@ -41,7 +41,8 @@ HRESULT cPlayScene::Setup()
 
 void cPlayScene::Release()
 {
-	m_pPlayer->Release();
+	if(m_pPlayer)
+		m_pPlayer->Release();
 }
 
 void cPlayScene::Update()
@@ -66,6 +67,6 @@ void cPlayScene::Render()
 		mat = matS;
 	}
 
-	// colMap->Render();
+	 colMap->Render();
 
 }

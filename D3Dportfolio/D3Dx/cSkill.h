@@ -62,11 +62,15 @@ protected:
 
 	bool				m_bIsAutoFire;			// 범위안에 있냐?
 
+	SYNTHESIZE(bool, m_bIsReady, IsReady); // 스킬 사용 준비가 되었냐?
+
 	// 오브젝트
 	cSkinnedMesh*		m_pMesh;
 	cCube*				m_pCube;
 
 	std::vector<OBJECT_MESH> m_vecMesh;
+
+
 
 public:
 	cSkill();
@@ -87,8 +91,8 @@ public:
 	virtual void	Render();
 
 	void Fire(D3DXVECTOR3* playerPos,
-			D3DXVECTOR3* tagetPos, 
-			float* currentTIme = NULL);
+			D3DXVECTOR3* tagetPos,
+			bool isNormal);
 
 	void Move();
 	void MeshMove();					// 매쉬 이동
