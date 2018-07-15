@@ -64,7 +64,6 @@ void cPlayer::Render()
 	ScreenToClient(g_hWnd, &ptMouse);
 	g_pFontManager->TextFont(ptMouse.x, ptMouse.y, "2D : %0.2f, %0.2f", (float)ptMouse.x, (float)ptMouse.y);
 	g_pFontManager->TextFont(ptMouse.x, ptMouse.y + 20, "3D : %0.2f, %0.2f, %0.2f", (float)m_vNextPosition.x, (float)m_vNextPosition.y, (float)m_vNextPosition.z);
-	g_pFontManager->TextFont(10, 250, "Å×½ºÆ® :%d", m_bIsTarget);
 	
 	g_pSkillManager->Render();
 
@@ -80,12 +79,31 @@ void cPlayer::Check3DMousePointer()
 
 	cRayPicking ray;
 
-	if (g_pKeyManager->IsOnceKeyDown(VK_RBUTTON))
+	if (g_pKeyManager->IsOnceKeyDown('W'))
 	{
-		
+		g_pSkillManager->IsReady("¹ö¼¸");
 	}
 
 	if (g_pKeyManager->IsOnceKeyDown(VK_LBUTTON))
+	{
+		if (!g_pSkillManager->CheckReady()) return;
+
+		for (int i = 0; i < m_pMap->size(); i += 3)
+		{
+			if (ray.PickTri((*m_pMap)[i],
+				(*m_pMap)[i + 1],
+				(*m_pMap)[i + 2],
+				g_pCameraManager->GetCameraEye(),
+				m_vNextPosition)) break;
+		}
+
+		m_vClickPos = m_vNextPosition;
+
+		g_pSkillManager->Fire("¹ö¼¸", &m_vPosition, &m_vClickPos, false);
+
+	}
+
+	if (g_pKeyManager->IsOnceKeyDown(VK_RBUTTON))
 	{
 
 		for (int i = 0; i < m_pMap->size(); i += 3)
@@ -94,23 +112,17 @@ void cPlayer::Check3DMousePointer()
 				(*m_pMap)[i + 1],
 				(*m_pMap)[i + 2],
 				g_pCameraManager->GetCameraEye(),
-				m_vNextPosition))
-			{	
-				m_vClickPos = m_vNextPosition;
-				g_pSkillManager->Fire("¹ö¼¸", &m_vPosition, &m_vClickPos);
-				break;
-			}
+				m_vNextPosition)) break;
 		}
 
 		if (ray.PickSphere(m_pSphere->GetPos(), 100))
 		{
-
 			if (D3DXVec3Length(&(m_vPosition - m_pSphere->GetPos())) < m_fRange)
 			{
 				m_fRotY = GetAngle(m_vPosition, m_pSphere->GetPos());
 				m_vNextPosition = m_vPosition;
 			}
-			g_pSkillManager->Fire("¹ö¼¸", &m_vPosition, &m_pSphere->GetPos());
+			g_pSkillManager->Fire("ÆòÅ¸", &m_vPosition, &m_pSphere->GetPos());
 		}
 
 	}

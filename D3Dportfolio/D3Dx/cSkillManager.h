@@ -34,6 +34,7 @@ public:
 	bool IsCasting();
 	
 	void IsReady(std::string skillName);
+	bool CheckReady();			// 레디 상태인지 체크한다.
 	void CancelSkill();
 
 };

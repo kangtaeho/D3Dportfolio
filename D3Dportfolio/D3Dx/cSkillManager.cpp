@@ -123,6 +123,18 @@ void cSkillManager::IsReady(std::string skillName)
 
 }
 
+bool cSkillManager::CheckReady()
+{
+	for (auto p : m_mapSkill)	// 다른 스킬이 하나라도 입력을 받았으면
+	{
+		if (p.second->GetIsReady())
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 void cSkillManager::CancelSkill()
 {
 	if (g_pKeyManager->IsOnceKeyDown(VK_CLEAR))

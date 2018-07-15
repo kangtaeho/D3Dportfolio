@@ -118,20 +118,20 @@ void cCameraManager::MoveWindow()
 
 	if (ptMouse.x <= 0)
 	{
-		m_fCameraPosX -= 10.0f;
+		m_fCameraPosX -= 20.0f;
 	}
 	else if(ptMouse.x>=WINSIZEX)
 	{
-		m_fCameraPosX += 10.0f;
+		m_fCameraPosX += 20.0f;
 	}
 
 
 	if (ptMouse.y <= 0)
 	{
-		m_fCameraPosZ += 10.0f;
+		m_fCameraPosZ += 20.0f;
 	}
 	else if (ptMouse.y>=WINSIZEY)
 	{
-		m_fCameraPosZ -= 10.0f;
+		m_fCameraPosZ -= 20.0f;
 	}
 }
