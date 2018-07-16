@@ -161,7 +161,7 @@ void cSkill::Casting()
 	{	
 		// 이제 여기서 오브젝트 나가도록 하면 된다.
 
-		if (e_skillType = BUFF_SKILL) BuffStart();		// 타입이 버프 스킬이라면
+		if (e_skillType == BUFF_SKILL) BuffStart();		// 타입이 버프 스킬이라면
 		else CreateMesh();
 
 		m_bIsCooldown = true;		// 쿨다운 다시 돌린다
