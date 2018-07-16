@@ -116,21 +116,21 @@ void cCameraManager::MoveWindow()
 	GetCursorPos(&ptMouse);
 	ScreenToClient(g_hWnd, &ptMouse);
 
-	if (ptMouse.x <= 0)
+	if (ptMouse.x <= 10)
 	{
 		m_fCameraPosX -= 20.0f;
 	}
-	else if(ptMouse.x>=WINSIZEX)
+	else if(ptMouse.x>=WINSIZEX-10)
 	{
 		m_fCameraPosX += 20.0f;
 	}
 
 
-	if (ptMouse.y <= 0)
+	if (ptMouse.y <= 10)
 	{
 		m_fCameraPosZ += 20.0f;
 	}
-	else if (ptMouse.y>=WINSIZEY)
+	else if (ptMouse.y>=WINSIZEY-10)
 	{
 		m_fCameraPosZ -= 20.0f;
 	}
