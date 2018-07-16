@@ -1,59 +1,75 @@
 #pragma once
 
-#define BITMAP Bitmap::GetInstance()
-
 class Bitmap
 {
-private:
-	SINGLETONE(Bitmap)
-
-private:
-	enum {
-		UI = 0,
-		ITEM = 1
-	};
-
-	struct tagMap
+protected:
+	typedef struct tagTextureInfo
 	{
-		std::map<std::string, D3DXMATRIX>			m_mapMatrixT;
-		std::map<std::string, D3DXMATRIX>			m_mapMatrixS;
-		std::map<std::string, LPD3DXSPRITE>			m_mapSprite;
-		std::map<std::string, D3DXIMAGE_INFO>		m_mapImageInfo;
-		std::map<std::string, LPDIRECT3DTEXTURE9>   m_mapTexture;
-		std::map<std::string, D3DXMATRIX>			m_mapWorld;
-		std::map<std::string, RECT>					m_mapRect;
-		std::map<std::string, D3DXVECTOR3>			m_mapScale;
-		std::map<std::string, D3DXVECTOR3>			m_mapPosition;
-	}m_map;
+		D3DXVECTOR3 Scale, Position;
+		D3DXMATRIX matT, matS, matWorld;
+		LPD3DXSPRITE Sprite;
+		D3DXIMAGE_INFO ImageInfo;
+		LPDIRECT3DTEXTURE9 texture;
+		RECT rc;
+
+		//스프라이트 애니메이션;
+		RECT rectFrameSize;
+		int nFrameCountWidth;
+		int nFrameCountHeight;
+		int nFrameCountAll;
+		int niCurrentFrameNum;
+		D3DXVECTOR3 vAniCenter;
+		D3DXVECTOR3 vAniPosition;
+		float fAccumTime; //누적시간;
+		float fFrameTime; //프레임 변경시간;
+		RECT rectRenderFrame; //그려질 프레임 위치;
+
+		tagTextureInfo()
+		{
+			Scale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
+			Position = D3DXVECTOR3(0, 0, 0);
+			Sprite = NULL;
+			texture = NULL;
+		}
+	}TEXTURE_INFO, *LPTEXTURE_INFO;
+
+protected:
+	LPTEXTURE_INFO texture_Info;
+	SYNTHESIZE(Bitmap*, m_pParent, Parent);
 
 
 private:
-	const char* szItemName;
-	const char* szUiName;
-	D3DXMATRIX matT, matS;
-	D3DXMATRIX mat_World;
-	LPD3DXSPRITE	m_pSprite;
-	RECT rc;
-
-
-	std::map<std::string, D3DXVECTOR3> m_mapScale;
-	std::map<std::string, D3DXVECTOR3> m_mapPosition;
-
-	std::map<int, tagMap> m_Map;
-
-	SYNTHESIZE_REF(unsigned int, alphaValue, alphavalue);
-	D3DXVECTOR3 scale;
-	D3DXVECTOR3 Position;
-	
+	SYNTHESIZE(int, alphaValue, alphavalue);
 	SYNTHESIZE_REF(int, imageIndex, IMAGEINDEX);
-
+	SYNTHESIZE_REF(int, imageState, IMAGESTATE);
 public:
-	LPDIRECT3DTEXTURE9 addTexture(const char* textFileName);
-	void Render(const char* textFileName);
-	void Destroy();
-	void setScale(const char* textFileName, D3DXVECTOR3 scale);
-	void setPosition(const char* textFileName,D3DXVECTOR3 position);
+	Bitmap();
+	~Bitmap();
+	HRESULT addTexture(const char* textFileName);
+	HRESULT addTexture(const char* textFileName, int frameWidth, int frameHeight);
 
-	std::map<std::string, RECT> GetRect() { return m_map.m_mapRect; }
+	
+	void Render();
+	void aniRender();
+	void release();
 
+	void update();
+	void update(float _dt);
+
+	RECT GetRect() { return texture_Info->rc; }
+	D3DXMATRIX &GetWolrdMatrix() { return texture_Info->matWorld; }
+	int GetIndex() { return imageIndex; }
+	void setIndex(int index) { imageIndex = index; }
+	D3DXIMAGE_INFO GetImageInfo() { return texture_Info->ImageInfo; }
+	LPDIRECT3DTEXTURE9 GetTexture() { return texture_Info->texture; }
+	LPD3DXSPRITE GetSprite() { return texture_Info->Sprite; }
+	void setScale(D3DXVECTOR3 scale) { texture_Info->Scale = scale; }
+	void setPosition(D3DXVECTOR3 position) { texture_Info->Position = position; }
+	D3DXVECTOR3 GetPosition() { return texture_Info->Position; }
+	D3DXVECTOR3* Getposition() { return &texture_Info->Position; }
+
+	D3DXVECTOR3 GetAniPosition() { return texture_Info->vAniPosition; }
+	RECT* GetrectFrameSize() { return  &texture_Info->rectFrameSize; }
+	void SetRectFrameSize(RECT rc) { texture_Info->rectFrameSize = rc; }
+	void setCurrentFrame(float index) { texture_Info->niCurrentFrameNum = index; }
 };

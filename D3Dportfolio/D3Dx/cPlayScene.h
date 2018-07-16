@@ -1,6 +1,6 @@
 #pragma once
 #include "cGameNode.h"
-
+#include  "cMainUI.h"
 class cPlayer;
 class cCollisionMap;
 
@@ -10,6 +10,7 @@ private:
 	cPlayer*		m_pPlayer;
 	cCollisionMap*  colMap;
 
+	cMainUI* m_pMainUi;
 public:
 	cPlayScene();
 	~cPlayScene();

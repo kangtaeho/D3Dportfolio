@@ -16,15 +16,13 @@ cMainScene::~cMainScene()
 HRESULT cMainScene::Setup()
 {
 
-	m_pshop = new cShop;
-	m_pshop->setup();
 
 	return S_OK;
 }
 
 void cMainScene::Release()
 {
-	delete m_pshop;
+	
 }
 
 void cMainScene::Update()
@@ -39,6 +37,4 @@ void cMainScene::Update()
 void cMainScene::Render()
 {
 
-	if (m_pshop)
-		m_pshop->render();
 }

@@ -3,7 +3,8 @@
 #include "cPlayer.h"
 #include "cSphere.h"
 #include "cCollisionMap.h"
-
+#include "cShop.h"
+#include "cStatus.h"
 cPlayScene::cPlayScene()
 	: m_pPlayer(NULL)
 {
@@ -17,7 +18,27 @@ cPlayScene::~cPlayScene()
 
 HRESULT cPlayScene::Setup()
 {
-
+	g_pTextureManager->addTexture("selecteButton", "./testFile/selected2.dds", BUTTON, NULL);
+	g_pTextureManager->addTexture("purchaseButton", "./testFile/purchase.dds", BUTTON, NULL);
+	g_pTextureManager->addTexture("purchaseButtonDown", "./testFile/purchaseButtonDown.dds", BUTTON, NULL);
+	g_pTextureManager->addTexture("purchaseButtonOver", "./testFile/purchaseButtonOver.dds", BUTTON, NULL);
+	g_pTextureManager->addTexture("saleButtonDown", "./testFile/saleButtonDown.dds", BUTTON, NULL);
+	g_pTextureManager->addTexture("saleButtonOver", "./testFile/saleButtonOver.dds", BUTTON, NULL);
+	g_pTextureManager->addTexture("saleButtonUp", "./testFile/saleButtonUp.dds", BUTTON, NULL);
+	g_pTextureManager->addTexture("returnButtonUp", "./testFile/returnButtonUp.dds", BUTTON, NULL);
+	g_pTextureManager->addTexture("returnButtonOver", "./testFile/returnButtonOver.dds", BUTTON, NULL);
+	g_pTextureManager->addTexture("returnButtonDown", "./testFile/returnButtonDown.dds", BUTTON, NULL);
+	g_pTextureManager->addTexture("wholeButtonDown", "./testFile/wholeButtonDown.dds", BUTTON, NULL);
+	g_pTextureManager->addTexture("wholeButtonOver", "./testFile/wholeButtonOver.dds", BUTTON, NULL);
+	g_pTextureManager->addTexture("wholeButtonUp", "./testFile/wholeButtonUp.dds", BUTTON, NULL);
+	g_pTextureManager->addTexture("recommandButtonUp", "./testFile/recommandButtonUp.dds", BUTTON, NULL);
+	g_pTextureManager->addTexture("recommandButtonOver", "./testFile/recommandButtonOver.dds", BUTTON, NULL);
+	g_pTextureManager->addTexture("recommandButtonDown", "./testFile/recommandButtonDown.dds", BUTTON, NULL);
+	g_pTextureManager->addTexture("ListBoxTrue", "./testFile/ListBoxTrue.dds", BUTTON, NULL);
+	g_pTextureManager->addTexture("ListBoxFalse", "./testFile/ListBoxFalse.dds", BUTTON, NULL);
+	g_pTextureManager->addTexture("shopButtonDown", "./status/shopButtonDown.dds", BUTTON, 1, 1);
+	g_pTextureManager->addTexture("shopButtonOver", "./status/shopButtonOver.dds", BUTTON, 1, 1);
+	g_pTextureManager->addTexture("shopButtonUP", "./status/shopButtonUP.dds", BUTTON, 1, 1);
 	//g_pXfileManager->AddXfile("Map", "summoner rift", "summoner_rift.x");
 
 	D3DXMATRIX matWorld, matT, matS, matR;
@@ -36,6 +57,13 @@ HRESULT cPlayScene::Setup()
 	m_pPlayer->setMap(colMap->getMap());						// ¹Ù´Ú
 	m_pPlayer->setCollisionMap(colMap->getCollisionMap());		// º®Ãæµ¹ÀÎµí
 
+
+	cShop* shop = new cShop;
+	cStatus* status = new cStatus;
+
+	m_pMainUi = status;
+	m_pMainUi->AddChild(shop, "SHOP");
+	m_pMainUi->setup();
 	return S_OK;
 }
 
@@ -49,12 +77,31 @@ void cPlayScene::Update()
 {
 	if (m_pPlayer)
 		m_pPlayer->Update();
+
+
+	if (g_pKeyManager->IsOnceKeyDown('O'))
+	{
+		m_pMainUi->SetNodeName("SHOP");
+	}
+	if (g_pKeyManager->IsOnceKeyDown(VK_ESCAPE))
+	{
+		m_pMainUi->SetNodeName("");
+	}
+
+	if (m_pMainUi)
+	{
+		m_pMainUi->update();
+
+	}
 }
 
 void cPlayScene::Render()
 {
 	if (m_pPlayer)
 		m_pPlayer->Render();
+
+	if (m_pMainUi)
+		m_pMainUi->render();
 
 	{//¸ÊÃß°¡
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);

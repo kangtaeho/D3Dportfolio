@@ -3,179 +3,213 @@
 
 
 Bitmap::Bitmap()
-	:
-	scale(1.0f,1.0f,1.0f),
-	Position(0,0,0),
+	: texture_Info(NULL),
 	alphaValue(255),
-	imageIndex(3)
+	imageIndex(UI)
 {
-	szItemName = "./item";
-	szUiName = "./testFile";
-}
 
+}
 
 Bitmap::~Bitmap()
 {
-
+	release();
 }
 
 
-LPDIRECT3DTEXTURE9 Bitmap::addTexture(const char* textFileName)
+HRESULT Bitmap::addTexture(const char* textFileName)
 {
-	
-	if (m_map.m_mapTexture.find(textFileName) == m_map.m_mapTexture.end() ||
-		m_map.m_mapImageInfo.find(textFileName) == m_map.m_mapImageInfo.end())
+	if (texture_Info != NULL) release();
+
+	texture_Info = new TEXTURE_INFO;
+
+	D3DXCreateTextureFromFileEx(
+		g_pD3DDevice,
+		textFileName,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED,
+		D3DX_FILTER_NONE,
+		D3DX_DEFAULT,
+		D3DXCOLOR(255, 255, 255, 255),
+		&texture_Info->ImageInfo,
+		0,
+		&texture_Info->texture);
+
+	D3DXCreateSprite(g_pD3DDevice, &texture_Info->Sprite);
+	SetRect(&texture_Info->rc, 0, 0, texture_Info->ImageInfo.Width, texture_Info->ImageInfo.Height);
+
+	D3DXMatrixIdentity(&texture_Info->matWorld);
+
+
+	if (texture_Info->texture == NULL)
 	{
-		D3DXCreateTextureFromFileEx(
-			g_pD3DDevice,
-			textFileName,
-			D3DX_DEFAULT_NONPOW2,
-			D3DX_DEFAULT_NONPOW2,
-			D3DX_DEFAULT,
-			0,
-			D3DFMT_UNKNOWN,
-			D3DPOOL_MANAGED,
-			D3DX_FILTER_NONE,
-			D3DX_DEFAULT,
-			0,
-			&m_map.m_mapImageInfo[textFileName],
-			0,
-			&m_map.m_mapTexture[textFileName]);
+		release();
+
+		return E_FAIL;
 	}
 
-	if (m_map.m_mapSprite.find(textFileName) == m_map.m_mapSprite.end())
-	{
-		D3DXCreateSprite(g_pD3DDevice, &m_pSprite);
-		m_map.m_mapSprite.insert(std::make_pair(textFileName, m_pSprite));
-	}
-	if (m_map.m_mapMatrixS.find(textFileName) == m_map.m_mapMatrixS.end())
-	{
-		m_map.m_mapMatrixS.insert(std::make_pair(textFileName, matS));
-	}
-	if (m_map.m_mapMatrixT.find(textFileName) == m_map.m_mapMatrixT.end())
-	{
-		m_map.m_mapMatrixT.insert(std::make_pair(textFileName, matT));
-	}
-	if (m_map.m_mapRect.find(textFileName) == m_map.m_mapRect.end())
-	{
-		m_map.m_mapRect.insert(std::make_pair(textFileName, rc));
-	}
-	if (m_mapScale.find(textFileName) == m_mapScale.end())
-	{
-		m_mapScale.insert(std::make_pair(textFileName, scale));
-	}
-	if (m_mapPosition.find(textFileName) == m_mapPosition.end())
-	{
-		m_mapPosition.insert(std::make_pair(textFileName, Position));
-	}
-
-	if (!strncmp(szItemName,textFileName,6))
-	{
-		imageIndex = ITEM;
-		m_Map.insert(std::make_pair(imageIndex, m_map));
-	}
-
-	if (!strncmp(szUiName, textFileName, 10))
-	{
-		imageIndex = UI;
-		m_Map.insert(std::make_pair(imageIndex, m_map));
-	}
-
-	
-
-	for (auto p : m_Map)
-	{
-		return p.second.m_mapTexture[textFileName];
-	}
-	//return m_map.m_mapTexture[textFileName];
+	return S_OK;
 }
-
-void Bitmap::setScale(const char* textFileName, D3DXVECTOR3 scale)
+HRESULT Bitmap::addTexture(const char* textFileName, int frameWidth, int frameHeight)
 {
-	/*for (auto p : m_Map)
+	if (texture_Info != NULL) release();
+
+	texture_Info = new TEXTURE_INFO;
+
+	D3DXCreateTextureFromFileEx(
+		g_pD3DDevice,
+		textFileName,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED,
+		D3DX_FILTER_NONE,
+		D3DX_DEFAULT,
+		D3DXCOLOR(255, 255, 255, 255),
+		&texture_Info->ImageInfo,
+		0,
+		&texture_Info->texture);
+
+	D3DXCreateSprite(g_pD3DDevice, &texture_Info->Sprite);
+
+	D3DXMatrixIdentity(&texture_Info->matWorld);
+
+
+	if (texture_Info->texture == NULL)
 	{
-		p.second.m_mapScale[textFileName] = scale;
-	}*/
-	m_mapScale[textFileName] = scale;
+		release();
+
+		return E_FAIL;
+	}
+	ST_UI_SIZE stSize;
+
+	stSize.nWidth = texture_Info->ImageInfo.Width;
+	stSize.nHeight = texture_Info->ImageInfo.Height;
+
+	SetRect(&texture_Info->rectFrameSize, 0, 0, stSize.nWidth / frameWidth, stSize.nHeight / frameHeight);
+
+	texture_Info->fAccumTime = 0.0f;
+	texture_Info->fFrameTime = 0.0f;
+	texture_Info->niCurrentFrameNum = 0.0f;
+	texture_Info->nFrameCountAll = 0.0f;
+	texture_Info->nFrameCountHeight = 0.0f;
+	texture_Info->nFrameCountWidth = 0.0f;
+
+	texture_Info->nFrameCountWidth = frameWidth;
+	texture_Info->nFrameCountHeight = frameHeight;
+
+	texture_Info->nFrameCountAll = texture_Info->nFrameCountWidth * texture_Info->nFrameCountHeight;
+	texture_Info->fFrameTime = 1.0f / texture_Info->nFrameCountAll;
+
+	texture_Info->vAniCenter =
+	{
+		texture_Info->rectFrameSize.right / 2.0f,
+		texture_Info->rectFrameSize.bottom / 2.0f,
+		0.0f
+	};
+
+	texture_Info->Position = { 0.0f,0.0f,0.0f };
+	return S_OK;
 }
-void Bitmap::setPosition(const char* textFileName, D3DXVECTOR3 position)
+void Bitmap::update()
 {
-	/*for (auto p : m_Map)
+	if (texture_Info != NULL && imageIndex != ITEM)
 	{
-		p.second.m_mapPosition[textFileName] = position;
-	}*/
-	m_mapPosition[textFileName] = position;
+		D3DXMatrixScaling(&texture_Info->matS, texture_Info->Scale.x, texture_Info->Scale.y, texture_Info->Scale.z);
+		D3DXMatrixTranslation(&texture_Info->matT, texture_Info->Position.x, texture_Info->Position.y, texture_Info->Position.z);
+
+		texture_Info->matWorld = texture_Info->matS * texture_Info->matT;
+	}
 }
-void Bitmap::Render(const char* textFileName)
+void Bitmap::update(float _dt)
 {
+	texture_Info->fAccumTime += _dt;
 
-	for (auto p : m_Map)
+	if (texture_Info->fAccumTime >= texture_Info->fFrameTime)
 	{
-		//p.second.m_mapScale[textFileName] = D3DXVECTOR3(0.5f, 0.5f, 0.5f);
+		int x, y;
+		texture_Info->fAccumTime = 0.0f;
+		++texture_Info->niCurrentFrameNum;
 
-		D3DXMatrixScaling(&p.second.m_mapMatrixS[textFileName], m_mapScale[textFileName].x, m_mapScale[textFileName].y, m_mapScale[textFileName].z);
-		D3DXMatrixTranslation(&p.second.m_mapMatrixT[textFileName], m_mapPosition[textFileName].x, m_mapPosition[textFileName].y, m_mapPosition[textFileName].z);
+		if (texture_Info->niCurrentFrameNum >= texture_Info->nFrameCountAll)
+			texture_Info->niCurrentFrameNum = 0;
 
-		p.second.m_mapWorld[textFileName] = p.second.m_mapMatrixS[textFileName] * p.second.m_mapMatrixT[textFileName];
+		x = (texture_Info->niCurrentFrameNum % texture_Info->nFrameCountWidth) * texture_Info->rectFrameSize.right;
+		//y = (texture_Info->niCurrentFrameNum / texture_Info->nFrameCountHeight) * texture_Info->rectFrameSize.top;
+		y = 1;
+		SetRect(&texture_Info->rectRenderFrame, x, y, x + texture_Info->rectFrameSize.right, y + texture_Info->rectFrameSize.bottom);
 
-		if (p.second.m_mapSprite.find(textFileName) != p.second.m_mapSprite.end())
+		int a = 0;
+	}
+	else
+	{
+		int x = (texture_Info->niCurrentFrameNum % texture_Info->nFrameCountWidth) * texture_Info->rectFrameSize.right;
+		int y = 1; //(texture_Info->niCurrentFrameNum / texture_Info->nFrameCountHeight) * texture_Info->rectFrameSize.top;
+
+		SetRect(&texture_Info->rectRenderFrame, x, y, x + texture_Info->rectFrameSize.right, y + texture_Info->rectFrameSize.bottom);
+	}
+}
+void Bitmap::Render()
+{
+	if (texture_Info != NULL)
+	{
+		if (imageIndex == ITEM)
 		{
-			SetRect(&p.second.m_mapRect[textFileName], 0, 0, p.second.m_mapImageInfo[textFileName].Width, p.second.m_mapImageInfo[textFileName].Height);
+			D3DXMatrixScaling(&texture_Info->matS, texture_Info->Scale.x, texture_Info->Scale.y, texture_Info->Scale.z);
+			D3DXMatrixTranslation(&texture_Info->matT, texture_Info->Position.x, texture_Info->Position.y, texture_Info->Position.z);
 
-			p.second.m_mapSprite[textFileName]->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_TEXTURE);
-
-			p.second.m_mapSprite[textFileName]->Draw(
-				p.second.m_mapTexture[textFileName],
-				&p.second.m_mapRect[textFileName],
-				&D3DXVECTOR3(0, 0, 0),
-				&D3DXVECTOR3(0, 0, 0),
-				D3DCOLOR_ARGB(alphaValue, 255, 255, 255));
-
-			p.second.m_mapSprite[textFileName]->End();
+			texture_Info->matWorld = texture_Info->matS * texture_Info->matT;
 		}
-	}
+		texture_Info->Sprite->SetTransform(&texture_Info->matWorld);
 
-	/*D3DXMatrixScaling(&m_map.m_mapMatrixS[textFileName], m_mapScale[textFileName].x, m_mapScale[textFileName].y,m_mapScale[textFileName].z);
-	D3DXMatrixTranslation(&m_map.m_mapMatrixT[textFileName], m_mapPosition[textFileName].x,m_mapPosition[textFileName].y,m_mapPosition[textFileName].z);
-	
-	m_map.m_mapWorld[textFileName] = m_map.m_mapMatrixS[textFileName] * m_map.m_mapMatrixT[textFileName];
+		SetRect(&texture_Info->rc, 0, 0, texture_Info->ImageInfo.Width, texture_Info->ImageInfo.Height);
 
-	if (m_map.m_mapSprite.find(textFileName) != m_map.m_mapSprite.end())
-	{
-		m_map.m_mapSprite[textFileName]->SetTransform(&m_map.m_mapWorld[textFileName]);
-	
-		SetRect(&m_map.m_mapRect[textFileName], 0, 0, m_map.m_mapImageInfo[textFileName].Width, m_map.m_mapImageInfo[textFileName].Height);
-	
-		m_map.m_mapSprite[textFileName]->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_TEXTURE);
-	
-		m_map.m_mapSprite[textFileName]->Draw(
-			m_map.m_mapTexture[textFileName],
-			&m_map.m_mapRect[textFileName],
-			&D3DXVECTOR3(0, 0, 0),
-			&D3DXVECTOR3(0, 0, 0),
+		texture_Info->Sprite->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_TEXTURE);
+
+		texture_Info->Sprite->Draw(
+			texture_Info->texture,
+			&texture_Info->rc,
+			&D3DXVECTOR3(texture_Info->Position.x, texture_Info->Position.y, 0),
+			&D3DXVECTOR3(texture_Info->Position.x, texture_Info->Position.y, 0),
 			D3DCOLOR_ARGB(alphaValue, 255, 255, 255));
-	
-		m_map.m_mapSprite[textFileName]->End();
-	}*/
+
+		texture_Info->Sprite->End();
+	}
 }
-
-void Bitmap::Destroy()
+void Bitmap::aniRender()
 {
-	
-	for (auto p : m_map.m_mapSprite)
+	if (texture_Info != NULL)
 	{
-		SAFE_RELEASE(p.second);
+		D3DXMatrixScaling(&texture_Info->matS, texture_Info->Scale.x, texture_Info->Scale.y, texture_Info->Scale.z);
+		D3DXMatrixTranslation(&texture_Info->matT, texture_Info->Position.x, texture_Info->Position.y, texture_Info->Position.z);
+		texture_Info->matWorld = texture_Info->matS * texture_Info->matT;
+
+		texture_Info->Sprite->SetTransform(&texture_Info->matWorld);
+
+		texture_Info->Sprite->Begin(D3DXSPRITE_ALPHABLEND);
+
+		texture_Info->Sprite->Draw(
+			texture_Info->texture,
+			&texture_Info->rectRenderFrame,
+			&texture_Info->Position,
+			&texture_Info->Position,
+			D3DCOLOR_ARGB(alphaValue, 255, 255, 255));
+
+		texture_Info->Sprite->End();
 	}
-	for (auto p : m_map.m_mapTexture)
+}
+void Bitmap::release()
+{
+	if (texture_Info)
 	{
-		SAFE_RELEASE(p.second);
+		SAFE_RELEASE(texture_Info->texture);
+		SAFE_RELEASE(texture_Info->Sprite);
+
+		SAFE_DELETE(texture_Info);
 	}
-	
-
-	m_map.m_mapMatrixS.clear();
-	m_map.m_mapMatrixT.clear();
-	m_map.m_mapRect.clear();
-	m_map.m_mapSprite.clear();
-	m_map.m_mapTexture.clear();
-
 }
