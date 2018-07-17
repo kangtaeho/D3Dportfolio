@@ -93,6 +93,11 @@ void cPlayScene::Update()
 		m_pMainUi->update();
 
 	}
+
+	if (g_pKeyManager->IsOnceKeyDown('0'))
+	{
+		g_pSceneManager->ChangeScene("º±≈√√¢");
+	}
 }
 
 void cPlayScene::Render()

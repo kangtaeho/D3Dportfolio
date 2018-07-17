@@ -2,6 +2,7 @@
 #include "cMainGame.h"
 #include "cMainScene.h"
 #include "cPlayScene.h"
+#include "cSelectScene.h"
 
 
 cMainGame::cMainGame()
@@ -23,6 +24,7 @@ HRESULT cMainGame::Setup()
 	
 	g_pSceneManager->AddScene("테스트", new cMainScene);
 	g_pSceneManager->AddScene("플레이씬", new cPlayScene);
+	g_pSceneManager->AddScene("선택창", new cSelectScene);
 
 	g_pSceneManager->ChangeScene("테스트");
 

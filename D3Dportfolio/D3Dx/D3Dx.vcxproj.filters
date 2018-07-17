@@ -115,6 +115,9 @@
     <ClCompile Include="cUIButton.cpp">
       <Filter>소스파일\cUiButton</Filter>
     </ClCompile>
+    <ClCompile Include="cSelectScene.cpp">
+      <Filter>소스파일\cScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h">
@@ -239,6 +242,9 @@
     </ClInclude>
     <ClInclude Include="cUIButton.h">
       <Filter>소스파일\cUiButton</Filter>
+    </ClInclude>
+    <ClInclude Include="cSelectScene.h">
+      <Filter>소스파일\cScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
