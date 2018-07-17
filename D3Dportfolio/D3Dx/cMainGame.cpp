@@ -26,7 +26,7 @@ HRESULT cMainGame::Setup()
 	g_pSceneManager->AddScene("플레이씬", new cPlayScene);
 	g_pSceneManager->AddScene("선택창", new cSelectScene);
 
-	g_pSceneManager->ChangeScene("테스트");
+	g_pSceneManager->ChangeScene("선택창");
 
 	return S_OK;
 }

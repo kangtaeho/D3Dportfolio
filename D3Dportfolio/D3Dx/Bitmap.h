@@ -62,6 +62,7 @@ public:
 	void setIndex(int index) { imageIndex = index; }
 	D3DXIMAGE_INFO GetImageInfo() { return texture_Info->ImageInfo; }
 	LPDIRECT3DTEXTURE9 GetTexture() { return texture_Info->texture; }
+	void setTexture(LPDIRECT3DTEXTURE9 texture) { texture_Info->texture = texture; }
 	LPD3DXSPRITE GetSprite() { return texture_Info->Sprite; }
 	void setScale(D3DXVECTOR3 scale) { texture_Info->Scale = scale; }
 	void setPosition(D3DXVECTOR3 position) { texture_Info->Position = position; }
