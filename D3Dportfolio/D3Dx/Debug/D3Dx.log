@@ -1,2 +1,136 @@
-﻿  cPlayScene.cpp
-  D3Dx.vcxproj -> C:\Users\USER\Desktop\DirectXPP\D3Dportfolio\D3Dportfolio\Debug\D3Dx.exe
+﻿  stdafx.cpp
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\bitmap.h(74): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  MainGame_AddSprite.cpp
+  D3Dx.cpp
+  cXManager.cpp
+  cUIButton.cpp
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cuibutton.cpp(47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cTimeManager.cpp
+  cTextureManager.cpp
+  cStatus.cpp
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(80): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(81): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(84): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(157): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(158): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(159): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(160): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cSphere.cpp
+  cSkinnedMesh.cpp
+  cSkillManager.cpp
+  cSkill.cpp
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cskill.cpp(143): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cskill.cpp(234): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cskill.cpp(308): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cskill.cpp(320): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  cShop.cpp
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(146): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(177): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(178): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(179): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(180): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(193): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(198): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(203): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(220): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(246): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(471): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(487): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(515): warning C4244: '인수': 'tagShopState'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(527): warning C4244: '인수': 'tagShopState'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(544): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(555): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(606): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(610): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(640): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(655): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(709): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(711): warning C4018: '>=': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(733): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(746): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(748): warning C4018: '>=': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(843): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(853): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(871): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(894): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(915): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(936): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(998): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1017): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1039): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1050): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1058): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1083): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1092): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1100): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1126): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1134): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1142): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1201): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1202): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1203): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1204): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1227): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1233): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1352): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1373): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1393): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1397): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1398): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1450): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(1365): warning C4101: 'jtemp' :참조되지 않은 지역 변수입니다.
+  cSceneManager.cpp
+  cRayPicking.cpp
+  cRangeSkill.cpp
+  cPlayScene.cpp
+  cPlayer.cpp
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cplayer.cpp(99): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cplayer.cpp(117): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  cObjectSkill.cpp
+  cMeleeSkill.cpp
+  cMainUI.cpp
+  코드를 생성하고 있습니다...
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cscenemanager.cpp(95): warning C4715: 'cSceneManager::ChangeScene': 모든 제어 경로에서 값을 반환하지는 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cshop.cpp(669): warning C4715: 'cShop::isSoldInvenitem': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  컴파일하고 있습니다...
+  cMainScene.cpp
+  cMainGame.cpp
+  cKeyManager.cpp
+  citem.cpp
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\citem.cpp(34): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\citem.cpp(35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\citem.cpp(36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cInventory.cpp
+  cGameNode.cpp
+  cFontManager.cpp
+  cDeviceManager.cpp
+  cCube.cpp
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\ccube.cpp(57): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\ccube.cpp(61): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\ccube.cpp(148): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\ccube.cpp(159): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  cCollisionMap.cpp
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\ccollisionmap.cpp(75): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\ccollisionmap.cpp(136): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\ccollisionmap.cpp(139): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\ccollisionmap.cpp(148): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\ccollisionmap.cpp(153): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  cCharacter.cpp
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\ccharacter.cpp(61): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  cCameraManager.cpp
+  cBuffSkill.cpp
+  cBluePrint.cpp
+  cAllocatedHierachy.cpp
+  cAction.cpp
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\caction.cpp(34): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\caction.cpp(41): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\caction.cpp(89): warning C4244: '초기화 중': 'DOUBLE'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\caction.cpp(90): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Bitmap.cpp
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\bitmap.cpp(98): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\bitmap.cpp(99): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\bitmap.cpp(100): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\bitmap.cpp(101): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+  D3Dx.vcxproj -> C:\Users\user\Desktop\D3Dportfolio\D3Dportfolio\Debug\D3Dx.exe
+  D3Dx.vcxproj -> C:\Users\user\Desktop\D3Dportfolio\D3Dportfolio\Debug\D3Dx.pdb (Partial PDB)
