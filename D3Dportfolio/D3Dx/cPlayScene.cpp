@@ -63,8 +63,6 @@ HRESULT cPlayScene::Setup()
 	std::vector<D3DXVECTOR3> vMapObject;
 	
 	colMap = new cCollisionMap;
-	//colMap->LoadSurface(vMapGround, "map collision", "map_skp_sample.obj", &matWorld);		// ¹Ù´Ú
-	//colMap->LoadSurface(vMapObject, "map collision", "map_collision.obj", &matWorld);
 
 	m_pPlayer = new cPlayer;
 	m_pPlayer->Setup("Teemo");
