@@ -86,7 +86,10 @@ protected:
 	int m_nDragIndex;
 	bool m_bIsDrag;
 
-
+	D3DXMATRIX* m_matWorld;
+	D3DXMATRIX* matT;
+	D3DXMATRIX* matS;
+	D3DXVECTOR3* scale, *position;
 	std::vector<cInventory*> m_vecWholeItem;
 public:
 	cShop();
@@ -127,5 +130,8 @@ public:
 
 	void swap(D3DXVECTOR3* a, D3DXVECTOR3* b);
 	void quickSort(int left, int right, std::vector<cInventory*> data);
+
+
+	void InvenRender();
 };
 

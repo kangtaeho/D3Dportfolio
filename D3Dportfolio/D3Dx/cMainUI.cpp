@@ -46,14 +46,14 @@ void cMainUI::update()
 }
 void cMainUI::render()
 {
+	InvenRender();
+
 	m_mapiter = m_mapChild.find(m_pNodeName);
 
 	if (m_mapiter != m_mapChild.end())
 	{
 		m_mapiter->second->render();
 	}
-	
-
 }
 
 bool cMainUI::isClickUi()

@@ -62,13 +62,16 @@ public:
 
 	RECT GetRect() { return texture_Info->rc; }
 	D3DXMATRIX &GetWolrdMatrix() { return texture_Info->matWorld; }
+
+	LPD3DXSPRITE GetSprite() { return texture_Info->Sprite; }
+	void setWorldMatrix(D3DXMATRIX matrix) { texture_Info->matWorld = matrix; }
 	int GetIndex() { return imageIndex; }
 	void setIndex(int index) { imageIndex = index; }
 	void setImageState(int state) { imageState = state; }
 	D3DXIMAGE_INFO GetImageInfo() { return texture_Info->ImageInfo; }
 	LPDIRECT3DTEXTURE9 GetTexture() { return texture_Info->texture; }
 	void setTexture(LPDIRECT3DTEXTURE9 texture) { texture_Info->texture = texture; }
-	LPD3DXSPRITE GetSprite() { return texture_Info->Sprite; }
+	
 	void setScale(D3DXVECTOR3 scale) { texture_Info->Scale = scale; }
 	void setPosition(D3DXVECTOR3 position) { texture_Info->Position = position; }
 	D3DXVECTOR3 GetPosition() { return texture_Info->Position; }

@@ -123,6 +123,7 @@ void cShop::setup()
 	m_pGold.Gold_thous = g_pTextureManager->addTexture("Gold_thous", "./item/GoldNum.dds", ANIMATION, 10.0f, 1.0f);
 
 
+	
 }
 void cShop::sortItemInfo()
 {
@@ -662,7 +663,23 @@ void cShop::update()
 
 	ItemDragDrop();
 
-	
+	/*
+	for (int i = 0; i < m_vecPrintitem.size(); i++)
+	{
+		if (m_vecPrintitem.size() == 0)continue;
+
+		if (m_vecPrintitem[i]->GetItemInfo() != NULL)
+		{
+			position[i] = D3DXVECTOR3(m_vecMtrlPos[i].x, m_vecMtrlPos[i].y, 0);
+
+			D3DXMatrixTranslation(&matT[i], position[i].x,
+				position[i].y, 0);
+
+			m_matWorld[i] = matT[i];
+
+			m_vecPrintitem[i]->GetItemInfo()->Itemtexture->setWorldMatrix(m_matWorld[i]);
+		}
+	}*/
 
 	cMainUI::update();
 }
@@ -1013,7 +1030,6 @@ void cShop::render()
 		{
 			p.second->render();
 		}
-
 	}
 	for (auto p : m_vecSoldButton)
 	{
@@ -1479,5 +1495,10 @@ void cShop::ItemDragDrop()
 		if (m_bIsDrag)
 			m_vecInventory[m_nDragIndex]->GetinvitemInfo()->GetItemInfo()->Itemtexture->setPosition(D3DXVECTOR3(pt.x - 12, pt.y - 10, 0));
 	}
+
+}
+
+void cShop::InvenRender()
+{
 
 }

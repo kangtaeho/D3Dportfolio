@@ -132,8 +132,11 @@ private:
 	float rcSize;
 	Bitmap* m_pStatusHealthBar;
 	Bitmap* m_pStatusMpBar;
-	
-
+	D3DXMATRIX* WorldMatrix;
+	D3DXMATRIX* matT;
+	D3DXMATRIX* matS;
+	D3DXVECTOR3* s;
+	D3DXVECTOR3* t;
 	Bitmap* m_pCharacterBar;
 	Bitmap* m_pCharacterIcon;
 	Bitmap* m_pStatusInventory;

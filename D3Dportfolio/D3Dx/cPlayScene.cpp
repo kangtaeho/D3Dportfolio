@@ -96,11 +96,6 @@ void cPlayScene::Update()
 	if (g_pKeyManager->IsOnceKeyDown('O'))
 	{
 		m_pMainUi->SetNodeName("SHOP");
-
-		status->SetvecInven(shop->GetvecInventory());
-		status->InvenUpdate();
-
-		shop->SetvecInventory(status->GetvecInven());
 	}
 	if (g_pKeyManager->IsOnceKeyDown(VK_ESCAPE))
 	{
@@ -112,7 +107,8 @@ void cPlayScene::Update()
 	{
 		m_pMainUi->update();
 	}
-
+	status->SetvecInven(shop->GetvecInventory());
+	status->InvenUpdate();
 	if (g_pKeyManager->IsOnceKeyDown('0'))
 	{
 		g_pSceneManager->ChangeScene("선택창");
@@ -123,12 +119,14 @@ void cPlayScene::Render()
 {
 	if (m_pPlayer)
 		m_pPlayer->Render();
+	
+
+	//status->InvenRender();
 
 	if (m_pMainUi)
 		m_pMainUi->render();
 
-
-	status->InvenRender();
+	
 
 	{//맵추가
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);

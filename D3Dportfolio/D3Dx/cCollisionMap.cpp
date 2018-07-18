@@ -41,7 +41,6 @@ void LoadSurface(OUT std::vector<D3DXVECTOR3>& vecSurface, IN const char * szFol
 		char szTemp[1024];
 		fgets(szTemp, 1024, fp);
 
-
 		if (szTemp[0] == '#')
 		{
 			continue;

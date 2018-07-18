@@ -45,6 +45,7 @@ public:
 
 	virtual void GoldUpdate() = 0;
 	virtual void GoldRender() = 0;
+	virtual void InvenRender() = 0;
 	std::map<std::string, cMainUI*> GetUIinfo() { return m_mapChild; }
 };
 

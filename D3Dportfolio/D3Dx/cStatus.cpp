@@ -16,7 +16,6 @@ cStatus::~cStatus()
 }
 void cStatus::setup()
 {
-
 	g_pTextureManager->addTexture("shopButtonDown", "./status/shopButtonDown.dds", BUTTON, 1, 1);
 	g_pTextureManager->addTexture("shopButtonOver", "./status/shopButtonOver.dds", BUTTON, 1, 1);
 	g_pTextureManager->addTexture("shopButtonUP", "./status/shopButtonUP.dds", BUTTON, 1, 1);
@@ -157,13 +156,19 @@ void cStatus::setup()
 	m_pStatusHealthBar->SetRectFrameSize(rc);
 	m_pStatusHealthBar->setScale(D3DXVECTOR3(rcSize, 1.1f, 0));
 
+	t = new D3DXVECTOR3[m_pStatusInvenInfo.size()];
+	s = new D3DXVECTOR3[m_pStatusInvenInfo.size()];
+	WorldMatrix = new D3DXMATRIX[m_pStatusInvenInfo.size()];
+	matT = new D3DXMATRIX[m_pStatusInvenInfo.size()];
+	matS = new D3DXMATRIX[m_pStatusInvenInfo.size()];
+
 	cMainUI::setup();
 }
 
 void cStatus::setInventoryInfo()
 {
-	float x = 600; float y = 600;
-	float xdistance = 40; float ydistance = 40;
+	float x = 820; float y = 595;
+	float xdistance = 50; float ydistance = 50;
 
 	for (int i = 0; i < 2; i++)
 	{
@@ -173,7 +178,7 @@ void cStatus::setInventoryInfo()
 		}
 	}
 	D3DXVECTOR3 vtemp = m_vecInvenPos.back();
-	m_vecInvenPos.push_back(D3DXVECTOR3(vtemp.x + 37, vtemp.y - 20, 0));
+	m_vecInvenPos.push_back(D3DXVECTOR3(vtemp.x + 54, vtemp.y - 45, 0));
 	for (int i = 0; i < m_vecInvenPos.size(); i++)
 	{
 		m_pInvenInfo = new cInventory;
@@ -201,6 +206,11 @@ void cStatus::update()
 	if (m_pCharacterBar)
 		m_pCharacterBar->update();
 
+	for (auto p : m_pStatusInvenInfo)
+	{
+		if (p.GetinvitemInfo()->GetItemInfo() != NULL)
+			p.GetinvitemInfo()->GetItemInfo()->Itemtexture->update();
+	}
 	HitProgress();
 
 	if (g_pKeyManager->IsOnceKeyDown('V'))
@@ -395,7 +405,17 @@ void cStatus::InvenUpdate()
 		{
 			m_pStatusInvenInfo[i].SetinvitemInfo(m_vecInven[i]->GetinvitemInfo());
 
-			m_pStatusInvenInfo[i].GetinvitemInfo()->GetItemInfo()->Itemtexture->setPosition(m_pStatusInvenInfo[i].GetvInvenPos());
+			t[i] = D3DXVECTOR3(m_vecInvenPos[i].x, m_vecInvenPos[i].y, 0);
+			s[i] = D3DXVECTOR3(0.65f, 0.65f, 0.7f);
+
+			D3DXMatrixScaling(&matS[i], s[i].x, s[i].y, s[i].z);
+			D3DXMatrixTranslation(&matT[i], t[i].x,
+				t[i].y,
+				t[i].z);
+
+			WorldMatrix[i] = matS[i]*matT[i];
+
+			m_pStatusInvenInfo[i].GetinvitemInfo()->GetItemInfo()->Itemtexture->setWorldMatrix(WorldMatrix[i]);
 		}
 	}
 }
@@ -404,7 +424,21 @@ void cStatus::InvenRender()
 	for (int i = 0; i < m_pStatusInvenInfo.size(); i++)
 	{
 		if (m_pStatusInvenInfo[i].GetinvitemInfo()->GetItemInfo() != NULL)
-			m_pStatusInvenInfo[i].render();
+		{
+			m_pStatusInvenInfo[i].GetinvitemInfo()->GetItemInfo()->Itemtexture->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_TEXTURE);
+
+			m_pStatusInvenInfo[i].GetinvitemInfo()->GetItemInfo()->Itemtexture->GetSprite()->SetTransform(&WorldMatrix[i]);
+
+			m_pStatusInvenInfo[i].GetinvitemInfo()->GetItemInfo()->Itemtexture->GetSprite()->Draw
+			(
+				m_pStatusInvenInfo[i].GetinvitemInfo()->GetItemInfo()->Itemtexture->GetTexture(),
+				&m_pStatusInvenInfo[i].GetinvitemInfo()->GetItemInfo()->Itemtexture->GetRect(),
+				&D3DXVECTOR3(0, 0, 0),
+				&D3DXVECTOR3(0, 0, 0),
+				D3DCOLOR_ARGB(255, 255, 255, 255));
+
+			m_pStatusInvenInfo[i].GetinvitemInfo()->GetItemInfo()->Itemtexture->GetSprite()->End();
+		}
 	}
 }
 
