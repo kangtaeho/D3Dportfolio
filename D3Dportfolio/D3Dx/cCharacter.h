@@ -47,5 +47,6 @@ public:
 	bool GetHeight(float& x, float & y, float& z);
 	bool GetCollision(float& x, float & y, float& z);
 
+	D3DXVECTOR3 getPosition() { return m_vPosition; }
 };
 
