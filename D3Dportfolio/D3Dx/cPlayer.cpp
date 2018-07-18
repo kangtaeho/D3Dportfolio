@@ -82,16 +82,6 @@ void cPlayer::Check3DMousePointer()
 
 	cRayPicking ray;
 
-	if (g_pKeyManager->IsOnceKeyDown('W'))
-	{
-		g_pSkillManager->IsReady("¹ö¼¸");
-	}
-
-	if (g_pKeyManager->IsOnceKeyDown('Q'))
-	{
-		g_pSkillManager->IsReady("ÀÌ¼Ó¾÷");
-	}
-
 	if (g_pKeyManager->IsOnceKeyDown(VK_LBUTTON))
 	{
 		if (!g_pSkillManager->CheckReady()) return;

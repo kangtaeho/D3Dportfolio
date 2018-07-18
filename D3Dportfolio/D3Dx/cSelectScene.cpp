@@ -3,7 +3,11 @@
 #include "Bitmap.h"
 
 cSelectScene::cSelectScene()
-	:m_bIsLockIn(false)
+	: m_bIsLockIn(false)
+	, m_fStartTime(0.0f)
+	, m_fPassedTime(0.0f)
+	, m_fLimitedTime(20.0f)
+	, m_bIsStartCountDown(false)
 {
 }
 
@@ -22,6 +26,8 @@ HRESULT cSelectScene::Setup()
 	g_pTextureManager->addTexture("pickIn02", "./select/pickIn02.png", NULL, NULL);
 	g_pTextureManager->addTexture("pickIn03", "./select/pickIn03.png", NULL, NULL);
 	g_pTextureManager->addTexture("skin", "./select/skin.png", NULL, NULL);
+	g_pTextureManager->addTexture("numFirst", "./select/number.png", ANIMATION, 10, 1);
+	g_pTextureManager->addTexture("numSecond", "./select/number.png", ANIMATION, 10, 1);
 	m_vecIcon.push_back(g_pTextureManager->addTexture("cIcon01", "./select/cIcon01.png", NULL, NULL));
 	m_vecIcon.push_back(g_pTextureManager->addTexture("cIcon02", "./select/cIcon02.png", NULL, NULL));
 	m_vecIcon.push_back(g_pTextureManager->addTexture("cIcon03", "./select/cIcon03.png", NULL, NULL));
@@ -61,6 +67,19 @@ HRESULT cSelectScene::Setup()
 	m_pPickIn->setPosition(D3DXVECTOR3(rc_PickIn.left, rc_PickIn.top, 0));
 	m_pPickIn->setScale(D3DXVECTOR3(1, 1, 1));
 
+
+	m_pNumFirst = g_pTextureManager->findTexture("numFirst");
+	m_pNumFirst->setPosition(D3DXVECTOR3(313, 68, 0));
+	m_pNumFirst->setScale(D3DXVECTOR3(1, 1, 1));
+	m_pNumFirst->setCurrentFrame(0);
+
+	m_pNumSecond = g_pTextureManager->findTexture("numSecond");
+	m_pNumSecond->setPosition(D3DXVECTOR3(293, 68, 0));
+	m_pNumSecond->setScale(D3DXVECTOR3(1, 1, 1));
+	m_pNumSecond->setCurrentFrame(0);
+
+	m_fStartTime = g_pTimeManager->GetLastUpdateTime();
+
 	return S_OK;
 }
 
@@ -88,6 +107,14 @@ void cSelectScene::Update()
 
 	if (m_pSkin)
 		m_pSkin->update();
+
+	if (m_pNumFirst)
+		m_pNumFirst->update(0);
+
+	if (m_pNumSecond)
+		m_pNumSecond->update(0);
+
+	SelectTimer();
 
 	if (g_pKeyManager->IsOnceKeyDown('0'))
 	{
@@ -118,6 +145,14 @@ void cSelectScene::Render()
 
 	if (m_pSkin)
 		m_pSkin->Render();
+
+	if (m_pNumFirst)
+		m_pNumFirst->aniRender();
+
+	if (m_pNumSecond)
+		m_pNumSecond->aniRender();
+
+	g_pFontManager->TextFont(10, 300, "타임 %0.2f", m_fPassedTime);
 }
 
 void cSelectScene::Release()
@@ -142,6 +177,12 @@ void cSelectScene::Release()
 
 	if (m_pSkin)
 		m_pSkin->release();
+
+	if (m_pNumFirst)
+		m_pNumFirst->release();
+
+	if (m_pNumSecond)
+		m_pNumSecond->release();
 }
 
 void cSelectScene::Control()
@@ -193,33 +234,73 @@ void cSelectScene::Control()
 
 		if (PtInRect(&rc_PickIn, ptMouse)&&!m_bIsLockIn)
 		{
-			m_pPickIn = g_pTextureManager->findTexture("pickIn02");
-			m_pPickIn->setPosition(D3DXVECTOR3(rc_PickIn.left, rc_PickIn.top, 0));
-			m_pPickIn->setScale(D3DXVECTOR3(1, 1, 1));
-
-			m_pPlayerSelect = g_pTextureManager->findTexture("selectPlayerWin01");
-			m_pPlayerSelect->setPosition(D3DXVECTOR3(22.0, 67.0, 0));
-			m_pPlayerSelect->setScale(D3DXVECTOR3(1, 1, 1));
-			m_bIsLockIn = true;
-
-			srand(GetTickCount());
-			int rndNum = rand() % 10;
-
-			while (rndNum == m_nPickIndex)
-			{
-				rndNum = rand() % 10;
-			}
-
-			m_pEnemyChamp = m_vecIcon[rndNum];
-			m_pEnemyChamp->setPosition(D3DXVECTOR3(1111, 74, 0));
-			m_pEnemyChamp->setScale(D3DXVECTOR3(1, 1, 1));
-
-			m_pSkin= g_pTextureManager->findTexture("skin");
-			m_pSkin->setPosition(D3DXVECTOR3(278, 112,0));
-			m_pSkin->setScale(D3DXVECTOR3(1, 1, 1));
-
+			CountDown();
+			SelectChampion();
 		}
 
 	}
 	
+}
+
+void cSelectScene::SelectTimer()
+{
+	m_fPassedTime = g_pTimeManager->GetLastUpdateTime() - m_fStartTime;
+
+	int time = m_fLimitedTime - m_fPassedTime;
+
+
+	int second = time / 10;
+	int first = time % 10;
+
+	m_pNumFirst->setCurrentFrame(first);
+	m_pNumSecond->setCurrentFrame(second);
+
+
+	if (time < 0)
+	{
+		if (m_fLimitedTime == 10)
+		{
+			g_pSceneManager->ChangeScene("플레이씬");
+		}
+		else
+		{
+			CountDown();
+		}
+	}
+
+}
+
+void cSelectScene::SelectChampion()
+{
+	m_pPickIn = g_pTextureManager->findTexture("pickIn02");
+	m_pPickIn->setPosition(D3DXVECTOR3(rc_PickIn.left, rc_PickIn.top, 0));
+	m_pPickIn->setScale(D3DXVECTOR3(1, 1, 1));
+
+	m_pPlayerSelect = g_pTextureManager->findTexture("selectPlayerWin01");
+	m_pPlayerSelect->setPosition(D3DXVECTOR3(22.0, 67.0, 0));
+	m_pPlayerSelect->setScale(D3DXVECTOR3(1, 1, 1));
+	m_bIsLockIn = true;
+
+	srand(GetTickCount());
+	int rndNum = rand() % 10;
+
+	while (rndNum == m_nPickIndex)
+	{
+		rndNum = rand() % 10;
+	}
+
+	m_pEnemyChamp = m_vecIcon[rndNum];
+	m_pEnemyChamp->setPosition(D3DXVECTOR3(1111, 74, 0));
+	m_pEnemyChamp->setScale(D3DXVECTOR3(1, 1, 1));
+
+	m_pSkin = g_pTextureManager->findTexture("skin");
+	m_pSkin->setPosition(D3DXVECTOR3(278, 112, 0));
+	m_pSkin->setScale(D3DXVECTOR3(1, 1, 1));
+}
+
+void cSelectScene::CountDown()
+{
+	m_fStartTime = g_pTimeManager->GetLastUpdateTime();
+	m_fLimitedTime = 10.0f;
+	SelectChampion();
 }

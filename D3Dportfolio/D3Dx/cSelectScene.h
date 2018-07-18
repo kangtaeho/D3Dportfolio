@@ -21,6 +21,14 @@ private:
 
 	int m_nPickIndex;
 	bool m_bIsLockIn;
+	bool m_bIsStartCountDown;
+
+	Bitmap* m_pNumFirst;		// 첫째짜리 숫자
+	Bitmap* m_pNumSecond;		// 둘째 짜리 숫자
+
+	float m_fStartTime;
+	float m_fPassedTime;
+	float m_fLimitedTime;
 
 public:
 	cSelectScene();
@@ -32,6 +40,9 @@ public:
 	void Release();
 
 	void Control();
+	void SelectTimer();
+	void SelectChampion();
+	void CountDown();
 
 };
 
