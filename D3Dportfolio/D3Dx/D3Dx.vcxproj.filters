@@ -115,11 +115,16 @@
     <ClCompile Include="cUIButton.cpp">
       <Filter>소스파일\cUiButton</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="cUiSkill.cpp">
       <Filter>소스파일\cStatus</Filter>
     </ClCompile>
     <ClCompile Include="cHealthProgress.cpp">
       <Filter>소스파일\cStatus</Filter>
+=======
+    <ClCompile Include="cSelectScene.cpp">
+      <Filter>소스파일\cScene</Filter>
+>>>>>>> cd7687dcc206c17de3137e344bdcf1b71cea9aa7
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -246,11 +251,16 @@
     <ClInclude Include="cUIButton.h">
       <Filter>소스파일\cUiButton</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="cUiSkill.h">
       <Filter>소스파일\cStatus</Filter>
     </ClInclude>
     <ClInclude Include="cHealthProgress.h">
       <Filter>소스파일\cStatus</Filter>
+=======
+    <ClInclude Include="cSelectScene.h">
+      <Filter>소스파일\cScene</Filter>
+>>>>>>> cd7687dcc206c17de3137e344bdcf1b71cea9aa7
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

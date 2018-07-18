@@ -27,3 +27,13 @@ inline float GetAngle(D3DXVECTOR3 v1, D3DXVECTOR3 v2)
 	return atan2(dx, dz);
 
 }
+
+inline RECT MakeRectLT(float left, float top, float width, float height)
+{
+	RECT rc;
+	rc.left = left;
+	rc.top = top;
+	rc.right = left + width;
+	rc.bottom = top + height;
+	return rc;
+}
