@@ -95,36 +95,7 @@
       <Filter>D3DFramework\cSkillManager</Filter>
     </ClCompile>
     <ClCompile Include="cBuffSkill.cpp">
-      <Filter>D3DFramework\cSkillManager</Filter>
-    </ClCompile>
-    <ClCompile Include="cBluePrint.cpp">
-      <Filter>소스파일\cShop</Filter>
-    </ClCompile>
-    <ClCompile Include="cInventory.cpp">
-      <Filter>소스파일\cShop</Filter>
-    </ClCompile>
-    <ClCompile Include="cMainUI.cpp">
-      <Filter>소스파일\cMainUi</Filter>
-    </ClCompile>
-    <ClCompile Include="citem.cpp">
-      <Filter>소스파일\cShop</Filter>
-    </ClCompile>
-    <ClCompile Include="cStatus.cpp">
-      <Filter>소스파일\cStatus</Filter>
-    </ClCompile>
-    <ClCompile Include="cUIButton.cpp">
-      <Filter>소스파일\cUiButton</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="cUiSkill.cpp">
-      <Filter>소스파일\cStatus</Filter>
-    </ClCompile>
-    <ClCompile Include="cHealthProgress.cpp">
-      <Filter>소스파일\cStatus</Filter>
-=======
-    <ClCompile Include="cSelectScene.cpp">
-      <Filter>소스파일\cScene</Filter>
->>>>>>> cd7687dcc206c17de3137e344bdcf1b71cea9aa7
+      <Filter>소스파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -231,36 +202,7 @@
       <Filter>D3DFramework\cSkillManager</Filter>
     </ClInclude>
     <ClInclude Include="cBuffSkill.h">
-      <Filter>D3DFramework\cSkillManager</Filter>
-    </ClInclude>
-    <ClInclude Include="cBluePrint.h">
-      <Filter>소스파일\cShop</Filter>
-    </ClInclude>
-    <ClInclude Include="cInventory.h">
-      <Filter>소스파일\cShop</Filter>
-    </ClInclude>
-    <ClInclude Include="cMainUI.h">
-      <Filter>소스파일\cMainUi</Filter>
-    </ClInclude>
-    <ClInclude Include="citem.h">
-      <Filter>소스파일\cShop</Filter>
-    </ClInclude>
-    <ClInclude Include="cStatus.h">
-      <Filter>소스파일\cStatus</Filter>
-    </ClInclude>
-    <ClInclude Include="cUIButton.h">
-      <Filter>소스파일\cUiButton</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="cUiSkill.h">
-      <Filter>소스파일\cStatus</Filter>
-    </ClInclude>
-    <ClInclude Include="cHealthProgress.h">
-      <Filter>소스파일\cStatus</Filter>
-=======
-    <ClInclude Include="cSelectScene.h">
-      <Filter>소스파일\cScene</Filter>
->>>>>>> cd7687dcc206c17de3137e344bdcf1b71cea9aa7
+      <Filter>소스파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -337,15 +279,6 @@
     </Filter>
     <Filter Include="소스파일\cSphere">
       <UniqueIdentifier>{824f96b1-62ef-45c1-b03d-bff673540f8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스파일\cMainUi">
-      <UniqueIdentifier>{755a0dcd-4a83-4518-8c22-1cdf515f0e17}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스파일\cStatus">
-      <UniqueIdentifier>{21457be8-ff71-4942-bc43-9c1347dcbe9a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스파일\cUiButton">
-      <UniqueIdentifier>{4bcd3dd5-9328-485a-8073-132f87dfaf31}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
