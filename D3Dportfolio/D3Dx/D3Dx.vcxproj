@@ -23,7 +23,7 @@
     <ProjectGuid>{590D056D-3D4D-4C0C-811A-8AF55BFB001B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>D3Dx</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -154,6 +154,7 @@
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="cAction.h" />
     <ClInclude Include="cAllocatedHierachy.h" />
+    <ClInclude Include="cBluePrint.h" />
     <ClInclude Include="cBuffSkill.h" />
     <ClInclude Include="cCameraManager.h" />
     <ClInclude Include="cCharacter.h" />
@@ -162,9 +163,13 @@
     <ClInclude Include="cDeviceManager.h" />
     <ClInclude Include="cFontManager.h" />
     <ClInclude Include="cGameNode.h" />
+    <ClInclude Include="cHealthProgress.h" />
+    <ClInclude Include="cInventory.h" />
+    <ClInclude Include="citem.h" />
     <ClInclude Include="cKeyManager.h" />
     <ClInclude Include="cMainGame.h" />
     <ClInclude Include="cMainScene.h" />
+    <ClInclude Include="cMainUI.h" />
     <ClInclude Include="cMeleeSkill.h" />
     <ClInclude Include="cObjectSkill.h" />
     <ClInclude Include="cPlayer.h" />
@@ -172,13 +177,17 @@
     <ClInclude Include="cRangeSkill.h" />
     <ClInclude Include="cRayPicking.h" />
     <ClInclude Include="cSceneManager.h" />
+    <ClInclude Include="cSelectScene.h" />
     <ClInclude Include="cShop.h" />
     <ClInclude Include="cSkill.h" />
     <ClInclude Include="cSkillManager.h" />
     <ClInclude Include="cSkinnedMesh.h" />
     <ClInclude Include="cSphere.h" />
+    <ClInclude Include="cStatus.h" />
     <ClInclude Include="cTextureManager.h" />
     <ClInclude Include="cTimeManager.h" />
+    <ClInclude Include="cUIButton.h" />
+    <ClInclude Include="cUiSkill.h" />
     <ClInclude Include="cXManager.h" />
     <ClInclude Include="D3DMacroFunction.h" />
     <ClInclude Include="D3Dx.h" />
@@ -191,6 +200,7 @@
     <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="cAction.cpp" />
     <ClCompile Include="cAllocatedHierachy.cpp" />
+    <ClCompile Include="cBluePrint.cpp" />
     <ClCompile Include="cBuffSkill.cpp" />
     <ClCompile Include="cCameraManager.cpp" />
     <ClCompile Include="cCharacter.cpp" />
@@ -199,9 +209,13 @@
     <ClCompile Include="cDeviceManager.cpp" />
     <ClCompile Include="cFontManager.cpp" />
     <ClCompile Include="cGameNode.cpp" />
+    <ClCompile Include="cHealthProgress.cpp" />
+    <ClCompile Include="cInventory.cpp" />
+    <ClCompile Include="citem.cpp" />
     <ClCompile Include="cKeyManager.cpp" />
     <ClCompile Include="cMainGame.cpp" />
     <ClCompile Include="cMainScene.cpp" />
+    <ClCompile Include="cMainUI.cpp" />
     <ClCompile Include="cMeleeSkill.cpp" />
     <ClCompile Include="cObjectSkill.cpp" />
     <ClCompile Include="cPlayer.cpp" />
@@ -209,13 +223,17 @@
     <ClCompile Include="cRangeSkill.cpp" />
     <ClCompile Include="cRayPicking.cpp" />
     <ClCompile Include="cSceneManager.cpp" />
+    <ClCompile Include="cSelectScene.cpp" />
     <ClCompile Include="cShop.cpp" />
     <ClCompile Include="cSkill.cpp" />
     <ClCompile Include="cSkillManager.cpp" />
     <ClCompile Include="cSkinnedMesh.cpp" />
     <ClCompile Include="cSphere.cpp" />
+    <ClCompile Include="cStatus.cpp" />
     <ClCompile Include="cTextureManager.cpp" />
     <ClCompile Include="cTimeManager.cpp" />
+    <ClCompile Include="cUIButton.cpp" />
+    <ClCompile Include="cUiSkill.cpp" />
     <ClCompile Include="cXManager.cpp" />
     <ClCompile Include="D3Dx.cpp" />
     <ClCompile Include="MainGame_AddSprite.cpp" />

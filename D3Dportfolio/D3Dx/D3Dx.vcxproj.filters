@@ -97,6 +97,33 @@
     <ClCompile Include="cBuffSkill.cpp">
       <Filter>소스파일</Filter>
     </ClCompile>
+    <ClCompile Include="cStatus.cpp">
+      <Filter>소스파일\cStatus</Filter>
+    </ClCompile>
+    <ClCompile Include="cUiSkill.cpp">
+      <Filter>소스파일\cStatus</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIButton.cpp">
+      <Filter>소스파일\cStatus</Filter>
+    </ClCompile>
+    <ClCompile Include="cSelectScene.cpp">
+      <Filter>소스파일\cScene</Filter>
+    </ClCompile>
+    <ClCompile Include="cMainUI.cpp">
+      <Filter>소스파일\cMainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="cInventory.cpp">
+      <Filter>소스파일\cShop</Filter>
+    </ClCompile>
+    <ClCompile Include="citem.cpp">
+      <Filter>소스파일\cShop</Filter>
+    </ClCompile>
+    <ClCompile Include="cHealthProgress.cpp">
+      <Filter>소스파일\cStatus</Filter>
+    </ClCompile>
+    <ClCompile Include="cBluePrint.cpp">
+      <Filter>소스파일\cShop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h">
@@ -204,6 +231,33 @@
     <ClInclude Include="cBuffSkill.h">
       <Filter>소스파일</Filter>
     </ClInclude>
+    <ClInclude Include="cStatus.h">
+      <Filter>소스파일\cStatus</Filter>
+    </ClInclude>
+    <ClInclude Include="cUiSkill.h">
+      <Filter>소스파일\cStatus</Filter>
+    </ClInclude>
+    <ClInclude Include="cUIButton.h">
+      <Filter>소스파일\cStatus</Filter>
+    </ClInclude>
+    <ClInclude Include="cSelectScene.h">
+      <Filter>소스파일\cScene</Filter>
+    </ClInclude>
+    <ClInclude Include="cMainUI.h">
+      <Filter>소스파일\cMainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="cInventory.h">
+      <Filter>소스파일\cShop</Filter>
+    </ClInclude>
+    <ClInclude Include="citem.h">
+      <Filter>소스파일\cShop</Filter>
+    </ClInclude>
+    <ClInclude Include="cHealthProgress.h">
+      <Filter>소스파일\cStatus</Filter>
+    </ClInclude>
+    <ClInclude Include="cBluePrint.h">
+      <Filter>소스파일\cShop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="D3Dx.ico">
@@ -279,6 +333,12 @@
     </Filter>
     <Filter Include="소스파일\cSphere">
       <UniqueIdentifier>{824f96b1-62ef-45c1-b03d-bff673540f8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스파일\cStatus">
+      <UniqueIdentifier>{a11aaeae-e29f-48ee-9992-ea1c9e784bf4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스파일\cMainUI">
+      <UniqueIdentifier>{37c203be-c8f7-406a-a71c-c1962affee60}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
