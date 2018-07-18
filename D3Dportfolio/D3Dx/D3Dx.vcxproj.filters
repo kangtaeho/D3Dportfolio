@@ -115,6 +115,12 @@
     <ClCompile Include="cUIButton.cpp">
       <Filter>소스파일\cUiButton</Filter>
     </ClCompile>
+    <ClCompile Include="cUiSkill.cpp">
+      <Filter>소스파일\cStatus</Filter>
+    </ClCompile>
+    <ClCompile Include="cHealthProgress.cpp">
+      <Filter>소스파일\cStatus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h">
@@ -239,6 +245,12 @@
     </ClInclude>
     <ClInclude Include="cUIButton.h">
       <Filter>소스파일\cUiButton</Filter>
+    </ClInclude>
+    <ClInclude Include="cUiSkill.h">
+      <Filter>소스파일\cStatus</Filter>
+    </ClInclude>
+    <ClInclude Include="cHealthProgress.h">
+      <Filter>소스파일\cStatus</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

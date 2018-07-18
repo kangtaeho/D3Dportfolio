@@ -6,7 +6,7 @@ class cInventory;
 class cItem;
 class Bitmap;
 class cUIButton;
-
+class cUiSkill;
 struct tagSkillInfo
 {
 	Bitmap* Skill_Q;
@@ -105,16 +105,31 @@ struct tagStatusGoldState
 class cStatus : public cMainUI
 {
 private:
-	std::vector<cInventory*> m_pStatusInvenInfo;
-	std::vector<cInventory*> m_pStatusSkillInfo;
 
+	RECT rc;
+	float MaxHp;
+	float CurrentHp;
+	float hit;
 
+	SYNTHESIZE(std::vector<cInventory*>, m_vecInven, vecInven);
+	RECT* m_pRect;//클릭할 렉트;
 
+	std::vector<cUiSkill*> m_pStatusSkillInfo;
+
+	cUiSkill* m_pSkillInfo;
+	std::vector<cInventory> m_pStatusInvenInfo;
+
+	cInventory* m_pInvenInfo;
+	std::vector<D3DXVECTOR3> m_vecInvenPos;
+
+	bool m_pShopOpend;
 	tagPlayerInfo*  m_pPlayerInfo;
 	tagStatusGoldState m_pStatusGold;
-	bool abc;
-	float a;
-		float b;
+	bool m_bIsHit;
+	bool m_bCheckBar;
+	float rcRight;
+	float rcBottom;
+	float rcSize;
 	Bitmap* m_pStatusHealthBar;
 	Bitmap* m_pStatusMpBar;
 	
@@ -139,6 +154,15 @@ public:
 	virtual void update();
 	virtual void release();
 	virtual void render();
+	
 
+	void HitProgress();
+	void setInventoryInfo();
+	void GoldUpdate();
+	void GoldRender();
+
+	bool isClickedSkill(OUT RECT* Outrc, int index);
+	void InvenUpdate();
+	void InvenRender();
 };
 

@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "cMainUI.h"
 
-
 cMainUI::cMainUI()
 	: m_pParent(NULL)
 	, m_stSize(0,0)
@@ -43,7 +42,7 @@ void cMainUI::update()
 	{
 		m_mapiter->second->update();
 	}
-	GoldUpdate();
+	
 }
 void cMainUI::render()
 {
@@ -53,7 +52,8 @@ void cMainUI::render()
 	{
 		m_mapiter->second->render();
 	}
-	GoldRender();
+	
+
 }
 
 bool cMainUI::isClickUi()
@@ -66,11 +66,3 @@ bool cMainUI::isClickUi()
 	return false;
 }
 
-void cMainUI::GoldUpdate()
-{
-
-}
-void cMainUI::GoldRender()
-{
-
-}

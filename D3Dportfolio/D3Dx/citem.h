@@ -31,5 +31,7 @@ public:
 
  	virtual void setup(const char* itemName, const char* textureFileName, int itemState, int iteminfo);
 	virtual void render();
+
+	Bitmap* GetItemTexture() { return m_pItemStat->Itemtexture; }
 };
 

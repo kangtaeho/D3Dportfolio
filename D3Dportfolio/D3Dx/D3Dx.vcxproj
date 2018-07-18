@@ -163,6 +163,7 @@
     <ClInclude Include="cDeviceManager.h" />
     <ClInclude Include="cFontManager.h" />
     <ClInclude Include="cGameNode.h" />
+    <ClInclude Include="cHealthProgress.h" />
     <ClInclude Include="cInventory.h" />
     <ClInclude Include="citem.h" />
     <ClInclude Include="cKeyManager.h" />
@@ -185,6 +186,7 @@
     <ClInclude Include="cTextureManager.h" />
     <ClInclude Include="cTimeManager.h" />
     <ClInclude Include="cUIButton.h" />
+    <ClInclude Include="cUiSkill.h" />
     <ClInclude Include="cXManager.h" />
     <ClInclude Include="D3DMacroFunction.h" />
     <ClInclude Include="D3Dx.h" />
@@ -206,6 +208,7 @@
     <ClCompile Include="cDeviceManager.cpp" />
     <ClCompile Include="cFontManager.cpp" />
     <ClCompile Include="cGameNode.cpp" />
+    <ClCompile Include="cHealthProgress.cpp" />
     <ClCompile Include="cInventory.cpp" />
     <ClCompile Include="citem.cpp" />
     <ClCompile Include="cKeyManager.cpp" />
@@ -228,6 +231,7 @@
     <ClCompile Include="cTextureManager.cpp" />
     <ClCompile Include="cTimeManager.cpp" />
     <ClCompile Include="cUIButton.cpp" />
+    <ClCompile Include="cUiSkill.cpp" />
     <ClCompile Include="cXManager.cpp" />
     <ClCompile Include="D3Dx.cpp" />
     <ClCompile Include="MainGame_AddSprite.cpp" />

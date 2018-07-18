@@ -35,9 +35,7 @@ void cMainGame::addSprite()
 
 
 
-	g_pTextureManager->addTexture("shopButtonDown", "./status/shopButtonDown.dds", BUTTON, 1, 1);
-	g_pTextureManager->addTexture("shopButtonOver", "./status/shopButtonOver.dds", BUTTON, 1, 1);
-	g_pTextureManager->addTexture("shopButtonUP", "./status/shopButtonUP.dds", BUTTON, 1, 1);
+	
 	//
 	//g_pTextureManager->addTexture("""./testFile/basicshoeEx.dds");
 	//g_pTextureManager->addTexture("./testFile/hammerEx.dds");

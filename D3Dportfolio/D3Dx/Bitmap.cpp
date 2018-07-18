@@ -43,6 +43,8 @@ HRESULT Bitmap::addTexture(const char* textFileName)
 
 	D3DXMatrixIdentity(&texture_Info->matWorld);
 
+	texture_Info->m_stSize.nWidth = texture_Info->ImageInfo.Width;
+	texture_Info->m_stSize.nHeight = texture_Info->ImageInfo.Height;
 
 	if (texture_Info->texture == NULL)
 	{

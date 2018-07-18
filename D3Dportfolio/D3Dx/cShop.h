@@ -32,8 +32,14 @@ protected:
 	citem* tempLongSword; citem* tempDagger;
 	citem* tempphage; citem* tempSheen; citem* tempRed_Orb;
 	citem* tempTrinity_Force; citem* tempsp; citem* tempBlue_Orb;
+
+
+	SYNTHESIZE(std::vector<cInventory*>, m_vecInventory, vecInventory);
+
 	std::vector<D3DXVECTOR3> m_vecShopInven;
-	std::vector<cInventory*> m_vecInventory;
+
+
+	//std::vector<cInventory*> m_vecInventory;
 	cUIButton*			m_pPurchaseB;
 	cUIButton*			m_pSaleB;
 	cUIButton*			m_pReturnB;
@@ -90,7 +96,7 @@ public:
 	virtual void update();
 	virtual void render();
 
-
+	
 	void NewItem();
 	void DeleteItem();
 	void ItemSetting(); //아이템위치세팅

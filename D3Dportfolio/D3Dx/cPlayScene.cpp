@@ -18,6 +18,20 @@ cPlayScene::~cPlayScene()
 
 HRESULT cPlayScene::Setup()
 {
+	g_pTextureManager->addTexture("potion", "./item/potion.dds", START_ITEM, CONSUME);
+	g_pTextureManager->addTexture("shoes", "./item/1001_Boots_of_Speed.dds", START_ITEM, EQUIPABLE);
+	g_pTextureManager->addTexture("LongSword", "./item/1036_Long_Sword.dds", EARLY_ITEM, EQUIPABLE);
+	g_pTextureManager->addTexture("Dagger", "./item/1042_Dagger.dds", EARLY_ITEM, EQUIPABLE);
+	g_pTextureManager->addTexture("phage", "./item/3044_Phage.dds", CORE_ITEM, EQUIPABLE);
+	g_pTextureManager->addTexture("Sheen", "./item/3057_Sheen.dds", CORE_ITEM, EQUIPABLE);
+	g_pTextureManager->addTexture("Red_Orb", "./item/3095_Orb_of_Valor.dds", BASIC_ITEM, EQUIPABLE);
+	g_pTextureManager->addTexture("Trinity_Force", "./item/3078_Trinity_Force.dds", CORE_ITEM, EQUIPABLE);
+	g_pTextureManager->addTexture("Ward", "./item/3350_GreaterYellowTrinket.dds", START_ITEM, ACCESSORY);
+	g_pTextureManager->addTexture("Blue_Orb", "./item/1027_Sapphire_Sphere.dds", START_ITEM, EQUIPABLE);
+	g_pTextureManager->addTexture("sp", "./item/3058_Sheen_and_Phage.dds", START_ITEM, EQUIPABLE);
+
+
+
 	g_pTextureManager->addTexture("selecteButton", "./testFile/selected2.dds", BUTTON, NULL);
 	g_pTextureManager->addTexture("purchaseButton", "./testFile/purchase.dds", BUTTON, NULL);
 	g_pTextureManager->addTexture("purchaseButtonDown", "./testFile/purchaseButtonDown.dds", BUTTON, NULL);
@@ -58,12 +72,14 @@ HRESULT cPlayScene::Setup()
 	m_pPlayer->setCollisionMap(colMap->getCollisionMap());		// 벽충돌인듯
 
 
-	cShop* shop = new cShop;
-	cStatus* status = new cStatus;
+	shop = new cShop;
+	status = new cStatus;
 
 	m_pMainUi = status;
 	m_pMainUi->AddChild(shop, "SHOP");
 	m_pMainUi->setup();
+
+	changed = false;
 	return S_OK;
 }
 
@@ -82,16 +98,21 @@ void cPlayScene::Update()
 	if (g_pKeyManager->IsOnceKeyDown('O'))
 	{
 		m_pMainUi->SetNodeName("SHOP");
+
+		status->SetvecInven(shop->GetvecInventory());
+		status->InvenUpdate();
+
+		shop->SetvecInventory(status->GetvecInven());
 	}
 	if (g_pKeyManager->IsOnceKeyDown(VK_ESCAPE))
 	{
 		m_pMainUi->SetNodeName("");
 	}
 
+	shop->GoldUpdate();
 	if (m_pMainUi)
 	{
 		m_pMainUi->update();
-
 	}
 }
 
@@ -102,6 +123,9 @@ void cPlayScene::Render()
 
 	if (m_pMainUi)
 		m_pMainUi->render();
+
+
+	status->InvenRender();
 
 	{//맵추가
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);

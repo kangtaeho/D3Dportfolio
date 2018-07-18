@@ -17,15 +17,15 @@ void cUIButton::setTexture(const char* szUp, const char* szOver, const char* szD
 
 	stImageInfo = g_pTextureManager->GetImageInfo(szUp);
 
-	m_arrTexture[BT_UP] = g_pTextureManager->GetTexture(szUp);
+	m_arrTexture[BT_UP] = g_pTextureManager->getTexture(szUp);
 
 	m_stSize.nHeight = stImageInfo.Height;
 	m_stSize.nWidth = stImageInfo.Width;
 
 
-	m_arrTexture[BT_OVER] = g_pTextureManager->GetTexture(szOver);
-	
-	m_arrTexture[BT_DOWN] = g_pTextureManager->GetTexture(szDown);
+	m_arrTexture[BT_OVER] = g_pTextureManager->getTexture(szOver);
+
+	m_arrTexture[BT_DOWN] = g_pTextureManager->getTexture(szDown);
 
 
 	m_matWorld = &g_pTextureManager->GetWorldMatrix(szUp);
@@ -59,19 +59,19 @@ void cUIButton::update()
 		}
 		/*if (GetKeyState(VK_LBUTTON) & 0x8000)
 		{
-			if (m_buttonState == BT_OVER)
-			{
-				m_buttonState = BT_DOWN;
-			}
+		if (m_buttonState == BT_OVER)
+		{
+		m_buttonState = BT_DOWN;
+		}
 		}
 		else
 		{
-			if (BT_DOWN == m_buttonState)
-			{
-				if (m_pDelegate)
-					m_pDelegate->OnClick(this);
-			}
-			m_buttonState = BT_OVER;
+		if (BT_DOWN == m_buttonState)
+		{
+		if (m_pDelegate)
+		m_pDelegate->OnClick(this);
+		}
+		m_buttonState = BT_OVER;
 		}*/
 	}
 	else
@@ -84,7 +84,7 @@ void cUIButton::update()
 }
 void cUIButton::Render()
 {
-	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_TEXTURE);
+	m_pSprite->Begin(D3DXSPRITE_SORT_TEXTURE);
 
 	m_pSprite->SetTransform(m_matWorld);
 

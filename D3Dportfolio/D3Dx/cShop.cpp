@@ -53,74 +53,16 @@ cShop::~cShop()
 		SAFE_DELETE(m_pSelected);
 
 }
-void cShop::NewItem()
-{
-	potion = new citem;
-	potion->setup("potion", "./item/potion.dds", START_ITEM, CONSUME);
-	potion->GetItemInfo()->price = 50;
-	potion->GetItemInfo()->Itemtexture->setScale(D3DXVECTOR3(0.7f, 0.7f, 0));
 
-	shoes = new citem;
-	shoes->setup("shoes", "./item/1001_Boots_of_Speed.dds", START_ITEM, EQUIPABLE);
-	shoes->GetItemInfo()->price = 100;
-
-	LongSword = new citem;
-	LongSword->setup("LongSword", "./item/1036_Long_Sword.dds", EARLY_ITEM, EQUIPABLE);
-	LongSword->GetItemInfo()->price = 300;
-	Dagger = new citem;
-	Dagger->setup("Dagger", "./item/1042_Dagger.dds", EARLY_ITEM, EQUIPABLE);
-	Dagger->GetItemInfo()->price = 300;
-	phage = new citem;
-	phage->setup("phage", "./item/3044_Phage.dds", CORE_ITEM, EQUIPABLE);
-	phage->GetItemInfo()->price = 500;
-
-	Sheen = new citem;
-	Sheen->setup("Sheen", "./item/3057_Sheen.dds", CORE_ITEM, EQUIPABLE);
-	Sheen->GetItemInfo()->price = 500;
-	Red_Orb = new citem;
-	Red_Orb->setup("Red_Orb", "./item/3095_Orb_of_Valor.dds", BASIC_ITEM, EQUIPABLE);
-	Red_Orb->GetItemInfo()->price = 200;
-	Trinity_Force = new citem;
-	Trinity_Force->setup("Trinity_Force", "./item/3078_Trinity_Force.dds", CORE_ITEM, EQUIPABLE);
-	Trinity_Force->GetItemInfo()->price = 999;
-	Ward = new citem;
-	Ward->setup("Ward", "./item/3350_GreaterYellowTrinket.dds", START_ITEM, ACCESSORY);
-	Ward->GetItemInfo()->price = 50;
-	sp = new citem;
-	sp->setup("sp", "./item/3058_Sheen_and_Phage.dds", EARLY_ITEM, EQUIPABLE);
-	sp->GetItemInfo()->price = 300;
-	Blue_Orb = new citem;
-	Blue_Orb->setup("Blue_Orb", "./item/1027_Sapphire_Sphere.dds", START_ITEM, EQUIPABLE);
-	Blue_Orb->GetItemInfo()->price = 200;
-}
-void cShop::DeleteItem()
-{
-	delete potion;
-	delete shoes;
-	delete LongSword;
-	delete Dagger;
-	delete phage;
-	delete Sheen;
-	delete Red_Orb;
-	delete Trinity_Force;
-	delete Ward;
-	delete sp;
-	delete Blue_Orb;
-}
 void cShop::setup()
 {
 	cMainUI::setup();
 	tempInvitem = new citem;
 
-	NewItem();
-	Trinity_Force_bp = new cBluePrint;	Sheen_Bp = new cBluePrint;
-	phage_Bp = new cBluePrint; sp_Bp = new cBluePrint;
-	temp = new cBluePrint;
-
 	m_pItemInfo = new citem;
 	m_pRect = new RECT[10];
-	m_pRectCraft = new RECT[20];
-	m_pRectInv = new RECT[20];
+	m_pRectCraft = new RECT[100];
+	m_pRectInv = new RECT[100];
 	m_pPurchaseB = new cUIButton;
 	m_pPurchaseB->setTexture("purchaseButton", "purchaseButtonOver", "purchaseButtonDown");
 
@@ -134,9 +76,9 @@ void cShop::setup()
 	m_pWholeB = new cUIButton;
 	m_pWholeB->setTexture("wholeButtonUp", "wholeButtonOver", "wholeButtonDown");
 
-	/*tempLongSword; tempDagger ;
-	tempphage;  tempSheen;  tempRed_Orb ;
-	tempTrinity_Force;  tempsp ;  tempBlue_Orb;*/
+	tempLongSword = new citem; tempDagger = new citem;
+	tempphage = new citem;  tempSheen = new citem;  tempRed_Orb = new citem;
+	tempTrinity_Force = new citem;  tempsp = new citem;  tempBlue_Orb = new citem;
 
 	m_pSelected = new Bitmap;
 	m_pSelected = g_pTextureManager->addTexture("selecteButton", "./testFile/selected2.dds", BUTTON, NULL);
@@ -162,6 +104,7 @@ void cShop::setup()
 	m_pWholeB->setScale(D3DXVECTOR3(0.75f, 0.75f, 0));
 
 	setInventoryInfo();
+	
 	ItemSetting();
 	setItemPosition();
 	setWholeItemPosition();
@@ -175,7 +118,7 @@ void cShop::setup()
 	m_pGold.Gold_thous = new Bitmap;
 
 	m_pGold.Gold_units = g_pTextureManager->addTexture("Gold_units", "./item/GoldNum.dds", ANIMATION, 10.0f, 1.0f);
-	m_pGold.Gold_tens = g_pTextureManager->addTexture("Gold_tens", "./item/GoldNum.dds", ANIMATION, 10.0f, 1.0f);
+	m_pGold.Gold_tens =  g_pTextureManager->addTexture("Gold_tens", "./item/GoldNum.dds", ANIMATION, 10.0f, 1.0f);
 	m_pGold.Gold_huans = g_pTextureManager->addTexture("Gold_huans", "./item/GoldNum.dds", ANIMATION, 10.0f, 1.0f);
 	m_pGold.Gold_thous = g_pTextureManager->addTexture("Gold_thous", "./item/GoldNum.dds", ANIMATION, 10.0f, 1.0f);
 
@@ -203,6 +146,7 @@ void cShop::sortItemInfo()
 		p->GetItemInfo()->ItemPriceTexture_t->setCurrentFrame(((p->GetItemInfo()->price % 10) / 1));
 	}
 }
+
 void cShop::setInventoryInfo()
 {
 	float x = 165; float y = 583;
@@ -229,16 +173,59 @@ void cShop::setInventoryInfo()
 }
 void cShop::ItemSetting()
 {
+	citem* potion = new citem;
+	potion->setup("potion", "./item/potion.dds", START_ITEM, CONSUME);
+	potion->GetItemInfo()->price = 50;
+	potion->GetItemInfo()->Itemtexture->setScale(D3DXVECTOR3(0.7f, 0.7f, 0));
 	m_vecItem.push_back(potion);
+	citem* shoes = new citem;
+	shoes->setup("shoes", "./item/1001_Boots_of_Speed.dds", START_ITEM, EQUIPABLE);
+	shoes->GetItemInfo()->price = 100;
 	m_vecItem.push_back(shoes);
+
+	citem* LongSword = new citem;
+	LongSword->setup("LongSword", "./item/1036_Long_Sword.dds", EARLY_ITEM, EQUIPABLE);
+	LongSword->GetItemInfo()->price = 300;
 	m_vecItem.push_back(LongSword);
+
+	citem* Dagger = new citem;
+	Dagger->setup("Dagger", "./item/1042_Dagger.dds", EARLY_ITEM, EQUIPABLE);
+	Dagger->GetItemInfo()->price = 300;
 	m_vecItem.push_back(Dagger);
+
+	citem* phage = new citem;
+	phage->setup("phage", "./item/3044_Phage.dds", CORE_ITEM, EQUIPABLE);
+	phage->GetItemInfo()->price = 500;
 	m_vecItem.push_back(phage);
+
+	citem* Sheen = new citem;
+	Sheen->setup("Sheen", "./item/3057_Sheen.dds", CORE_ITEM, EQUIPABLE);
+	Sheen->GetItemInfo()->price = 500;
 	m_vecItem.push_back(Sheen);
+
+	citem* Red_Orb = new citem;
+	Red_Orb->setup("Red_Orb", "./item/3095_Orb_of_Valor.dds", BASIC_ITEM, EQUIPABLE);
+	Red_Orb->GetItemInfo()->price = 200;
 	m_vecItem.push_back(Red_Orb);
+
+	citem* Trinity_Force = new citem;
+	Trinity_Force->setup("Trinity_Force", "./item/3078_Trinity_Force.dds", CORE_ITEM, EQUIPABLE);
+	Trinity_Force->GetItemInfo()->price = 999;
 	m_vecItem.push_back(Trinity_Force);
+
+	citem* Ward = new citem;
+	Ward->setup("Ward", "./item/3350_GreaterYellowTrinket.dds", START_ITEM, ACCESSORY);
+	Ward->GetItemInfo()->price = 50;
 	m_vecItem.push_back(Ward);
+
+	citem* sp = new citem;
+	sp->setup("sp", "./item/3058_Sheen_and_Phage.dds", EARLY_ITEM, EQUIPABLE);
+	sp->GetItemInfo()->price = 300;
 	m_vecItem.push_back(sp);
+
+	citem* Blue_Orb = new citem;
+	Blue_Orb->setup("Blue_Orb", "./item/1027_Sapphire_Sphere.dds", START_ITEM, EQUIPABLE);
+	Blue_Orb->GetItemInfo()->price = 200;
 	m_vecItem.push_back(Blue_Orb);
 }
 void cShop::setBluePrintInfo(std::string strKey, int index)
@@ -278,15 +265,14 @@ void cShop::setBluePrintInfo(std::string strKey, int index)
 			tempBlue_Orb = m_vecItem[i];
 		}
 	}
-
 	m_vecItem.clear();
-	NewItem();
 	ItemSetting();
 	sortItemInfo();
 
-
+	cBluePrint* Trinity_Force_bp = new cBluePrint;	cBluePrint* Sheen_Bp = new cBluePrint;
+	cBluePrint* phage_Bp = new cBluePrint; cBluePrint* sp_Bp = new cBluePrint;
 	sp_Bp = tempsp; phage_Bp = tempphage; Trinity_Force_bp = tempTrinity_Force;
-	Sheen_Bp = tempSheen;
+	Sheen_Bp = tempSheen; cBluePrint* temp = new cBluePrint;
 
 	sp_Bp->AddChild("Dagger", tempDagger);
 
@@ -321,7 +307,6 @@ void cShop::setBluePrintInfo(std::string strKey, int index)
 		m_vecPrintitem.push_back(tempRed_Orb); m_vecPrintitem.push_back(tempTrinity_Force);
 		m_vecPrintitem.push_back(tempSheen);
 		m_vecPrintitem.push_back(tempsp); m_vecPrintitem.push_back(tempBlue_Orb);
-
 	}
 
 	if (strcmp(strKey.c_str(), "SheenBp") == 0)
@@ -447,6 +432,7 @@ void cShop::setBluePrintInfo(std::string strKey, int index)
 }
 void cShop::update()
 {
+	
 	if (m_pShop)
 		m_pShop->update(0);
 
@@ -526,10 +512,13 @@ void cShop::update()
 		shopState = WHOLEITEM;
 		m_pShop->setCurrentFrame(shopState);
 
+
+		m_mapBluePrint.clear();
+
+
 		m_vecItem.clear();
 		ItemSetting();
 		sortItemInfo();
-		m_mapBluePrint.clear();
 		m_vecSoldButton.clear();
 
 	}
@@ -630,14 +619,57 @@ void cShop::update()
 	{
 		p->update();
 	}
-	GoldUpdate();
+	
+	for (int i = 0; i < m_vecInventory.size(); i++)
+	{
+		if (m_vecInventory[i]->GetinvitemInfo()->GetItemInfo() == NULL) continue;
+		for (int j = 0; j < m_vecItem.size(); j++)
+		{
+			if (m_vecItem[j]->GetItemInfo() == NULL)continue;
+			if (m_vecInventory[i]->GetinvitemInfo()->GetItemInfo()->itemName == "LongSword")
+			{
+				if (m_vecItem[j]->GetItemInfo()->itemName == "phage")
+				{
+					m_vecItem[j]->GetItemInfo()->price = 200;
+
+					m_vecItem[j]->GetItemInfo()->ItemPriceTexture_f->setCurrentFrame(m_vecItem[j]->GetItemInfo()->price / 100);
+					m_vecItem[j]->GetItemInfo()->ItemPriceTexture_s->setCurrentFrame((m_vecItem[j]->GetItemInfo()->price % 100) / 10);
+					m_vecItem[j]->GetItemInfo()->ItemPriceTexture_t->setCurrentFrame(((m_vecItem[j]->GetItemInfo()->price % 10) / 1));
+				}
+			}
+			//shoes->setup("shoes", "./item/1001_Boots_of_Speed.dds", START_ITEM, EQUIPABLE);
+			//shoes->GetItemInfo()->price = 100;		
+			//LongSword->setup("LongSword", "./item/1036_Long_Sword.dds", EARLY_ITEM, EQUIPABLE);
+			//LongSword->GetItemInfo()->price = 300;
+			//Dagger->setup("Dagger", "./item/1042_Dagger.dds", EARLY_ITEM, EQUIPABLE);
+			//Dagger->GetItemInfo()->price = 300;
+			//phage->setup("phage", "./item/3044_Phage.dds", CORE_ITEM, EQUIPABLE);
+			//phage->GetItemInfo()->price = 500;
+			//Sheen->setup("Sheen", "./item/3057_Sheen.dds", CORE_ITEM, EQUIPABLE);
+			//Sheen->GetItemInfo()->price = 500;
+			//Red_Orb->setup("Red_Orb", "./item/3095_Orb_of_Valor.dds", BASIC_ITEM, EQUIPABLE);
+			//Red_Orb->GetItemInfo()->price = 200;
+			//Trinity_Force->setup("Trinity_Force", "./item/3078_Trinity_Force.dds", CORE_ITEM, EQUIPABLE);
+			//Trinity_Force->GetItemInfo()->price = 999;		
+			//Ward->setup("Ward", "./item/3350_GreaterYellowTrinket.dds", START_ITEM, ACCESSORY);
+			//Ward->GetItemInfo()->price = 50;		
+			//sp->setup("sp", "./item/3058_Sheen_and_Phage.dds", EARLY_ITEM, EQUIPABLE);
+			//sp->GetItemInfo()->price = 300;
+			//Blue_Orb->setup("Blue_Orb", "./item/1027_Sapphire_Sphere.dds", START_ITEM, EQUIPABLE);
+			//Blue_Orb->GetItemInfo()->price = 200;
+		}
+	}
+
 	ItemDragDrop();
 
+	
+
+	cMainUI::update();
 }
 
 bool cShop::returnItem()
 {
-	for (int i = 0; i < m_vecInventory.size(); i++)
+	for (int i = m_vecInventory.size() - 1; i >=0; i--)
 	{
 		if (m_vecInventory[i]->GetinvitemInfo()->GetItemInfo() != NULL)
 		{
@@ -974,10 +1006,6 @@ void cShop::render()
 	}
 	// 720 250
 
-	for (auto p : m_vecPrintitem)
-	{
-		p->render();
-	}
 
 	for (auto p : m_mapBluePrint)
 	{
@@ -1019,7 +1047,7 @@ void cShop::render()
 		g_pFontManager->TextFont(10, 200 + 20 * i, "ÀÖ³Ä? : %d", m_vecInventory[i]->GethadItem());
 	}
 
-
+	
 
 	//g_pTextureManager->aniRender("Gold");
 	cMainUI::render();
@@ -1103,6 +1131,8 @@ bool cShop::isClickCraft(OUT RECT* Outrc, int index)
 		{
 			if (g_pKeyManager->IsOnceKeyDown(VK_LBUTTON))
 			{
+				tempitem = new citem;
+				tempitem = m_vecPrintitem[index];
 				return true;
 			}
 		}

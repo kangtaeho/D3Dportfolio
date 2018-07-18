@@ -11,7 +11,8 @@ protected:
 		D3DXIMAGE_INFO ImageInfo;
 		LPDIRECT3DTEXTURE9 texture;
 		RECT rc;
-
+		
+		ST_UI_SIZE m_stSize;
 		//스프라이트 애니메이션;
 		RECT rectFrameSize;
 		int nFrameCountWidth;
@@ -56,12 +57,17 @@ public:
 	void update();
 	void update(float _dt);
 
+
+	ST_UI_SIZE GetUiSize() { return texture_Info->m_stSize; }
+
 	RECT GetRect() { return texture_Info->rc; }
 	D3DXMATRIX &GetWolrdMatrix() { return texture_Info->matWorld; }
 	int GetIndex() { return imageIndex; }
 	void setIndex(int index) { imageIndex = index; }
+	void setImageState(int state) { imageState = state; }
 	D3DXIMAGE_INFO GetImageInfo() { return texture_Info->ImageInfo; }
 	LPDIRECT3DTEXTURE9 GetTexture() { return texture_Info->texture; }
+	void setTexture(LPDIRECT3DTEXTURE9 texture) { texture_Info->texture = texture; }
 	LPD3DXSPRITE GetSprite() { return texture_Info->Sprite; }
 	void setScale(D3DXVECTOR3 scale) { texture_Info->Scale = scale; }
 	void setPosition(D3DXVECTOR3 position) { texture_Info->Position = position; }
