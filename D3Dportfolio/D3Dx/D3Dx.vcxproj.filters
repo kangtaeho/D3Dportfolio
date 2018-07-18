@@ -124,6 +124,12 @@
     <ClCompile Include="cBluePrint.cpp">
       <Filter>소스파일\cShop</Filter>
     </ClCompile>
+    <ClCompile Include="cCollisionManager.cpp">
+      <Filter>D3DFramework\cCollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cMapEditer.cpp">
+      <Filter>소스파일\cScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h">
@@ -258,6 +264,12 @@
     <ClInclude Include="cBluePrint.h">
       <Filter>소스파일\cShop</Filter>
     </ClInclude>
+    <ClInclude Include="cCollisionManager.h">
+      <Filter>D3DFramework\cCollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cMapEditer.h">
+      <Filter>소스파일\cScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="D3Dx.ico">
@@ -339,6 +351,9 @@
     </Filter>
     <Filter Include="소스파일\cMainUI">
       <UniqueIdentifier>{37c203be-c8f7-406a-a71c-c1962affee60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="D3DFramework\cCollisionManager">
+      <UniqueIdentifier>{375547c1-a081-4b25-93c2-dfad2c6b1e31}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

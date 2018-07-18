@@ -23,7 +23,7 @@
     <ProjectGuid>{590D056D-3D4D-4C0C-811A-8AF55BFB001B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>D3Dx</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -158,6 +158,7 @@
     <ClInclude Include="cBuffSkill.h" />
     <ClInclude Include="cCameraManager.h" />
     <ClInclude Include="cCharacter.h" />
+    <ClInclude Include="cCollisionManager.h" />
     <ClInclude Include="cCollisionMap.h" />
     <ClInclude Include="cCube.h" />
     <ClInclude Include="cDeviceManager.h" />
@@ -170,6 +171,7 @@
     <ClInclude Include="cMainGame.h" />
     <ClInclude Include="cMainScene.h" />
     <ClInclude Include="cMainUI.h" />
+    <ClInclude Include="cMapEditer.h" />
     <ClInclude Include="cMeleeSkill.h" />
     <ClInclude Include="cObjectSkill.h" />
     <ClInclude Include="cPlayer.h" />
@@ -204,6 +206,7 @@
     <ClCompile Include="cBuffSkill.cpp" />
     <ClCompile Include="cCameraManager.cpp" />
     <ClCompile Include="cCharacter.cpp" />
+    <ClCompile Include="cCollisionManager.cpp" />
     <ClCompile Include="cCollisionMap.cpp" />
     <ClCompile Include="cCube.cpp" />
     <ClCompile Include="cDeviceManager.cpp" />
@@ -216,6 +219,7 @@
     <ClCompile Include="cMainGame.cpp" />
     <ClCompile Include="cMainScene.cpp" />
     <ClCompile Include="cMainUI.cpp" />
+    <ClCompile Include="cMapEditer.cpp" />
     <ClCompile Include="cMeleeSkill.cpp" />
     <ClCompile Include="cObjectSkill.cpp" />
     <ClCompile Include="cPlayer.cpp" />

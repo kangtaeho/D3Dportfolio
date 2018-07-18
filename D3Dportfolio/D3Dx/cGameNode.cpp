@@ -40,6 +40,7 @@ void cGameNode::Release()
 	g_pTextureManager->release();
 	g_pXfileManager->Release();
 	g_pProgreesBar->Release();
+	g_pCollisionManager->Release();
 
 
 	//--디바이스는 마지막에 릴리즈 시켜야함--//
