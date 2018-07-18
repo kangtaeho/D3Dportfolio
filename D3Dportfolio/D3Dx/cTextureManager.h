@@ -13,9 +13,16 @@ private:
 	typedef std::map<std::string, Bitmap*>::iterator mapTextureIter;
 
 	std::map<std::string, LPDIRECT3DTEXTURE9> m_mapTexture;
+<<<<<<< HEAD
 	std::map<std::string, Bitmap> m_maptexture;
 	std::map<std::string, Bitmap>::iterator  m_mapiter;
 	Bitmap* m_items;
+=======
+
+	Bitmap* aaa;
+	Bitmap icon;
+
+>>>>>>> cd7687dcc206c17de3137e344bdcf1b71cea9aa7
 private:
 	mapTextureList m_textureList;
 public:
