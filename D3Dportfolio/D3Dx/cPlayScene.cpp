@@ -2,7 +2,6 @@
 #include "cPlayScene.h"
 #include "cPlayer.h"
 #include "cSphere.h"
-#include "cCollisionMap.h"
 #include "cShop.h"
 #include "cStatus.h"
 cPlayScene::cPlayScene()
@@ -55,19 +54,7 @@ HRESULT cPlayScene::Setup()
 	g_pTextureManager->addTexture("shopButtonUP", "./status/shopButtonUP.dds", BUTTON, 1, 1);
 	//g_pXfileManager->AddXfile("Map", "summoner rift", "summoner_rift.x");
 
-	D3DXMATRIX matWorld, matT, matS, matR;
-	D3DXMatrixRotationY(&matR, D3DX_PI);
-	D3DXMatrixScaling(&matS, 300.0f, 300.0f, 300.0f);
-	matWorld = matR * matS;
-	std::vector<D3DXVECTOR3> vMapGround;
-	std::vector<D3DXVECTOR3> vMapObject;
-	
-	colMap = new cCollisionMap;
-
-	m_pPlayer = new cPlayer;
 	m_pPlayer->Setup("Teemo");
-	m_pPlayer->setMap(colMap->getMap());						// 바닥
-	m_pPlayer->setCollisionMap(colMap->getCollisionMap());		// 벽충돌인듯
 
 
 	shop = new cShop;
@@ -164,7 +151,5 @@ void cPlayScene::Render()
 		D3DXMatrixScaling(&matS, 300.0f, 300.0f, 300.0f);
 		mat = matS;
 	}
-
-	 colMap->Render();
 
 }

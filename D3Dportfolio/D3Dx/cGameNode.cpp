@@ -19,6 +19,7 @@ HRESULT cGameNode::Setup()
 	g_pSceneManager->Setup();
 	g_pCameraManager->Setup();
 	g_pProgreesBar->setup();
+	g_pCollisionManager->Setup();
 
 	return S_OK;
 
