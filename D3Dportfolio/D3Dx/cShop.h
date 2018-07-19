@@ -13,10 +13,52 @@ enum tagShopState
 	RECOMMAND
 };
 
+struct ex {
+	Bitmap* potion;
+	Bitmap* shoes;
+	Bitmap* LongSword;
+	Bitmap* Dagger;
+	Bitmap* phage;
+	Bitmap* Sheen;
+	Bitmap* Red_Orb;
+	Bitmap* Trinity_Force;
+	Bitmap* Ward;
+	Bitmap* sp;
+	Bitmap* Blue_Orb;
 
+	ex() {
+		potion = new Bitmap;
+		potion = g_pTextureManager->addTexture("potionEx", "./ex/potionEx.dds", ITEM, 0);
+		
+
+		shoes = new Bitmap;
+		shoes = g_pTextureManager->addTexture("shoesEx", "./ex/shoesEx.dds", ITEM, 0);
+		LongSword = new Bitmap;
+		LongSword = g_pTextureManager->addTexture("LongSwordEx", "./ex/LongSwordEx.dds", ITEM, 0);
+		Dagger = new Bitmap;
+		Dagger = g_pTextureManager->addTexture("DaggerEx", "./ex/DaggerEx.dds", ITEM, 0);
+		phage = new Bitmap;
+		phage = g_pTextureManager->addTexture("phageEx", "./ex/hammerEx.dds", ITEM, 0);
+		Sheen = new Bitmap;
+		Sheen = g_pTextureManager->addTexture("SheenEx", "./ex/Sword2Ex.dds", ITEM, 0);
+		Red_Orb = new Bitmap;
+		Red_Orb = g_pTextureManager->addTexture("Red_OrbEx", "./ex/Red_OrbEx.dds", ITEM, 0);
+		Trinity_Force = new Bitmap;
+		Trinity_Force = g_pTextureManager->addTexture("Trinity_ForceEx", "./ex/TriForceEx.dds", ITEM, 0);
+		Ward = new Bitmap;
+		Ward = g_pTextureManager->addTexture("WardEx", "./ex/WardEx.dds", ITEM, 0);
+		sp = new Bitmap;
+		sp = g_pTextureManager->addTexture("spEx", "./ex/sword3Ex.dds", ITEM, 0);
+		Blue_Orb = new Bitmap;
+		Blue_Orb = g_pTextureManager->addTexture("shoesEx", "./ex/Blue_OrbEx.dds", ITEM, 0);
+	}
+};
 class cShop : public cMainUI
 {
 private:
+	ex* m_pItemEx;
+	
+
 	citem * potion; citem* shoes; citem* LongSword;
 	citem* Dagger; citem* phage; citem* Sheen;
 	citem* Red_Orb; citem* Trinity_Force; citem* Ward;
@@ -86,6 +128,8 @@ protected:
 	int m_nDragIndex;
 	bool m_bIsDrag;
 
+
+	
 	D3DXMATRIX* m_matWorld;
 	D3DXMATRIX* matT;
 	D3DXMATRIX* matS;

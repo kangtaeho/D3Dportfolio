@@ -128,6 +128,7 @@ public:
 
 	bool CollisionMesh(D3DXVECTOR3 enemyPos);		// 경훈이형 나중에 적이랑 충돌용으로 만들어놓음 (버섯이랑 적이랑 거리판정해서 충돌이면 true 아니면 false 반환)
 
+	float GetCoolDown() { return m_fCurrentCooldown; }
 	// 버프용 함수
 	void BuffStart();
 	void BuffEnd();

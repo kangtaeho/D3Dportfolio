@@ -25,8 +25,8 @@ void cHealthProgress::setup()
 	m_pMpBar = new Bitmap;
 
 	m_pContainer = g_pTextureManager->addTexture("Container", "./status/playerHpContainer.dds", NULL, NULL);
-	m_pHpBar = g_pTextureManager->addTexture("PlayerHpBar", "./status/playerHpBar.dds", NULL, NULL);
-	m_pMpBar = g_pTextureManager->addTexture("PlayerMpBar", "./status/playerMpBar.dds", NULL, NULL);
+	m_pHpBar = g_pTextureManager->addTexture("PlayerHpBar", "./status/playerHpBar.dds",PROGRESSBAR, 1, 1);
+	m_pMpBar = g_pTextureManager->addTexture("PlayerMpBar", "./status/playerMpBar.dds", PROGRESSBAR, 1, 1);
 
 	m_fMaxHp = 500;
 	m_fCurrentHp = 500;
@@ -45,6 +45,7 @@ void cHealthProgress::setup()
 }
 void cHealthProgress::update()
 {
+	m_pContainer->update();
 	m_pHpBar->update(0);
 	m_pMpBar->update(0);
 

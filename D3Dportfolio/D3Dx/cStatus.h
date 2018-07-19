@@ -117,7 +117,7 @@ private:
 	std::vector<cUiSkill*> m_pStatusSkillInfo;
 
 	cUiSkill* m_pSkillInfo;
-	std::vector<cInventory> m_pStatusInvenInfo;
+	std::vector<cInventory*> m_pStatusInvenInfo;
 
 	cInventory* m_pInvenInfo;
 	std::vector<D3DXVECTOR3> m_vecInvenPos;

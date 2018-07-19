@@ -465,17 +465,17 @@ D3DXVECTOR3 cMapEditer::getRay()
 	D3DXVec3Normalize(&m_vDirection, &m_vDirection);
 
 	float u, v, f;
-	int bTemp;
-	DWORD face;
-	D3DXIntersect(g_pCollisionManager->getGround(),
-		&g_pCameraManager->getCameraEye(),
-		&m_vDirection,
-		&bTemp, &face,
-		&u, &v, &f, NULL, NULL);
-	if (bTemp)
-	{
-		return g_pCameraManager->getCameraEye() + m_vDirection * f;
-	}
+	//int bTemp;
+	//DWORD face;
+	//D3DXIntersect(g_pCollisionManager->getGround(),
+	//	&g_pCameraManager->getCameraEye(),
+	//	&m_vDirection,
+	//	&bTemp, &face,
+	//	&u, &v, &f, NULL, NULL);
+	//if (bTemp)
+	//{
+	//	return g_pCameraManager->getCameraEye() + m_vDirection * f;
+	//}
 	return D3DXVECTOR3(0, 0, 0);
 }
 

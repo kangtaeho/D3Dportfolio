@@ -20,6 +20,7 @@ void cStatus::setup()
 	g_pTextureManager->addTexture("shopButtonOver", "./status/shopButtonOver.dds", BUTTON, 1, 1);
 	g_pTextureManager->addTexture("shopButtonUP", "./status/shopButtonUP.dds", BUTTON, 1, 1);
 
+	
 	m_pRect = new RECT[6];
 
 
@@ -94,7 +95,7 @@ void cStatus::setup()
 	m_pPlayerInfo->SkillInfo.Skill_W = g_pTextureManager->addTexture("Teemo_W", "./status/Teemo_W.dds", UI, NULL);
 	m_pPlayerInfo->SkillInfo.Skill_E = g_pTextureManager->addTexture("Teemo_E", "./status/Teemo_E.dds", UI, NULL);
 	m_pPlayerInfo->SkillInfo.Skill_R = g_pTextureManager->addTexture("Teemo_R", "./status/Teemo_R.dds", UI, NULL);
-	m_pPlayerInfo->SkillInfo.Skill_Passive = g_pTextureManager->addTexture("Teemo_E", "./status/Teemo_P.dds", UI, NULL);
+	m_pPlayerInfo->SkillInfo.Skill_Passive = g_pTextureManager->addTexture("Teemo_P", "./status/Teemo_P.dds", UI, NULL);
 
 	m_pPlayerInfo->SkillInfo.Skill_Q->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x + 110, m_pStatusScreen->GetPosition().y + 24, 0));
 	m_pPlayerInfo->SkillInfo.Skill_W->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x + 185, m_pStatusScreen->GetPosition().y + 24, 0));
@@ -103,6 +104,16 @@ void cStatus::setup()
 	m_pPlayerInfo->SkillInfo.Skill_Passive->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x + 110, m_pStatusScreen->GetPosition().y - 35, 0));
 
 	m_pPlayerInfo->SkillInfo.Skill_Passive->setScale(D3DXVECTOR3(0.55f, 0.55f, 0));
+
+	g_pTextureManager->addTexture("Teemo_Q_Done", "./status/Teemo_Q_Done.dds", UI, NULL);
+	g_pTextureManager->addTexture("Teemo_W_Done", "./status/Teemo_W_Done.dds", UI, NULL);
+	g_pTextureManager->addTexture("Teemo_E_Done", "./status/Teemo_E_Done.dds", UI, NULL);
+	g_pTextureManager->addTexture("Teemo_R_Done", "./status/Teemo_R_Done.dds", UI, NULL);
+
+	g_pTextureManager->findTexture("Teemo_Q_Done")->setPosition(m_pPlayerInfo->SkillInfo.Skill_Q->GetPosition());
+	g_pTextureManager->findTexture("Teemo_W_Done")->setPosition(m_pPlayerInfo->SkillInfo.Skill_W->GetPosition());
+	g_pTextureManager->findTexture("Teemo_E_Done")->setPosition(m_pPlayerInfo->SkillInfo.Skill_E->GetPosition());
+	g_pTextureManager->findTexture("Teemo_R_Done")->setPosition(m_pPlayerInfo->SkillInfo.Skill_R->GetPosition());
 
 
 	m_pStatusSkillInfo.reserve(10);
@@ -186,7 +197,7 @@ void cStatus::setInventoryInfo()
 		m_pInvenInfo->SetinvitemInfo(itemInfo);
 		m_pInvenInfo->SethadItem(false);
 		m_pInvenInfo->SetvInvenPos(m_vecInvenPos[i]);
-		m_pStatusInvenInfo.push_back(*m_pInvenInfo);
+		m_pStatusInvenInfo.push_back(m_pInvenInfo);
 	}
 }
 void cStatus::update()
@@ -208,8 +219,8 @@ void cStatus::update()
 
 	for (auto p : m_pStatusInvenInfo)
 	{
-		if (p.GetinvitemInfo()->GetItemInfo() != NULL)
-			p.GetinvitemInfo()->GetItemInfo()->Itemtexture->update();
+		if (p->GetinvitemInfo()->GetItemInfo() != NULL)
+			p->GetinvitemInfo()->GetItemInfo()->Itemtexture->update();
 	}
 	HitProgress();
 
@@ -221,8 +232,6 @@ void cStatus::update()
 	if (m_pStatusHealthBar)
 	{
 		m_pStatusHealthBar->update(0);
-
-
 
 		if (m_pStatusHealthBar->GetrectFrameSize()->left <= m_pStatusHealthBar->GetrectFrameSize()->right &&
 			m_bIsHit)
@@ -306,13 +315,17 @@ void cStatus::update()
 			}
 		}
 	}
+
 	if (g_pKeyManager->IsOnceKeyDown('Q'))
 	{
 		m_pStatusSkillInfo[0]->SetChosen(true);
+		m_pStatusSkillInfo[0]->GetskillInfo() = g_pTextureManager->findTexture("Teemo_Q_Done");
+		g_pSkillManager->IsReady("ÆòÅ¸");
 	}
 	if (g_pKeyManager->IsOnceKeyDown('W'))
 	{
 		m_pStatusSkillInfo[1]->SetChosen(true);
+		g_pSkillManager->IsReady("ÀÌ¼Ó¾÷");
 	}
 	if (g_pKeyManager->IsOnceKeyDown('E'))
 	{
@@ -321,6 +334,9 @@ void cStatus::update()
 	if (g_pKeyManager->IsOnceKeyDown('R'))
 	{
 		m_pStatusSkillInfo[3]->SetChosen(true);
+		m_pStatusSkillInfo[3]->GetskillInfo() = g_pTextureManager->findTexture("Teemo_R_Done");
+		g_pSkillManager->IsReady("¹ö¼¸");
+		float a = g_pSkillManager->GetSkill("¹ö¼¸")->GetCoolDown();
 	}
 
 
@@ -403,7 +419,8 @@ void cStatus::InvenUpdate()
 
 		if (m_vecInven[i]->GetinvitemInfo()->GetItemInfo() != NULL)
 		{
-			m_pStatusInvenInfo[i].SetinvitemInfo(m_vecInven[i]->GetinvitemInfo());
+			m_pStatusInvenInfo = m_vecInven;
+	
 
 			t[i] = D3DXVECTOR3(m_vecInvenPos[i].x, m_vecInvenPos[i].y, 0);
 			s[i] = D3DXVECTOR3(0.65f, 0.65f, 0.7f);
@@ -415,7 +432,7 @@ void cStatus::InvenUpdate()
 
 			WorldMatrix[i] = matS[i]*matT[i];
 
-			m_pStatusInvenInfo[i].GetinvitemInfo()->GetItemInfo()->Itemtexture->setWorldMatrix(WorldMatrix[i]);
+			m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Itemtexture->setWorldMatrix(WorldMatrix[i]);
 		}
 	}
 }
@@ -423,21 +440,21 @@ void cStatus::InvenRender()
 {
 	for (int i = 0; i < m_pStatusInvenInfo.size(); i++)
 	{
-		if (m_pStatusInvenInfo[i].GetinvitemInfo()->GetItemInfo() != NULL)
+		if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo() != NULL)
 		{
-			m_pStatusInvenInfo[i].GetinvitemInfo()->GetItemInfo()->Itemtexture->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_TEXTURE);
+			m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Itemtexture->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_TEXTURE);
 
-			m_pStatusInvenInfo[i].GetinvitemInfo()->GetItemInfo()->Itemtexture->GetSprite()->SetTransform(&WorldMatrix[i]);
+			m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Itemtexture->GetSprite()->SetTransform(&WorldMatrix[i]);
 
-			m_pStatusInvenInfo[i].GetinvitemInfo()->GetItemInfo()->Itemtexture->GetSprite()->Draw
+			m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Itemtexture->GetSprite()->Draw
 			(
-				m_pStatusInvenInfo[i].GetinvitemInfo()->GetItemInfo()->Itemtexture->GetTexture(),
-				&m_pStatusInvenInfo[i].GetinvitemInfo()->GetItemInfo()->Itemtexture->GetRect(),
+				m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Itemtexture->GetTexture(),
+				&m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Itemtexture->GetRect(),
 				&D3DXVECTOR3(0, 0, 0),
 				&D3DXVECTOR3(0, 0, 0),
 				D3DCOLOR_ARGB(255, 255, 255, 255));
 
-			m_pStatusInvenInfo[i].GetinvitemInfo()->GetItemInfo()->Itemtexture->GetSprite()->End();
+			m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Itemtexture->GetSprite()->End();
 		}
 	}
 }

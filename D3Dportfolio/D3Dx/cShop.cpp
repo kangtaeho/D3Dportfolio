@@ -57,6 +57,11 @@ cShop::~cShop()
 void cShop::setup()
 {
 	cMainUI::setup();
+
+
+	m_pItemEx = new ex;
+
+	m_pItemEx->LongSword->setPosition(D3DXVECTOR3(685, 360, 0));
 	tempInvitem = new citem;
 
 	m_pItemInfo = new citem;
@@ -663,6 +668,11 @@ void cShop::update()
 
 	ItemDragDrop();
 
+	
+	if (ClickedItem == "potionBp")
+	{
+		m_pItemEx->potion->setPosition(D3DXVECTOR3(600, 600, 0));
+	}
 	/*
 	for (int i = 0; i < m_vecPrintitem.size(); i++)
 	{
@@ -1006,6 +1016,52 @@ void cShop::render()
 {
 	if (m_pShop)
 		m_pShop->aniRender();
+
+	if (ClickedItem == "LongSwordBp")
+	{
+		m_pItemEx->LongSword->Render();
+	}
+	if (ClickedItem == "DaggerBp")
+	{
+		m_pItemEx->Dagger->Render();
+	}
+	if (ClickedItem == "phageBp")
+	{
+		m_pItemEx->phage->Render();
+	}
+	if (ClickedItem == "SheenBp")
+	{
+		m_pItemEx->Sheen->Render();
+	}
+	if (ClickedItem == "Red_OrbBp")
+	{
+		m_pItemEx->Red_Orb->Render();
+	}
+	if (ClickedItem == "Trinity_ForceBp")
+	{
+		m_pItemEx->Trinity_Force->Render();
+	}
+	if (ClickedItem == "spBp")
+	{
+		m_pItemEx->sp->Render();
+	}
+	if (ClickedItem == "Blue_OrbBp")
+	{
+		m_pItemEx->Blue_Orb->Render();
+	}
+	if (ClickedItem == "shoesBp")
+	{
+		m_pItemEx->shoes->Render();
+	}
+	if (ClickedItem == "WardBp")
+	{
+		m_pItemEx->Ward->Render();
+	}
+	if (ClickedItem == "potionBp")
+	{
+		m_pItemEx->potion->Render();
+	}
+
 	if (m_pPurchaseB)
 		m_pPurchaseB->Render();
 	if (m_pSaleB)
@@ -1031,6 +1087,8 @@ void cShop::render()
 			p.second->render();
 		}
 	}
+
+
 	for (auto p : m_vecSoldButton)
 	{
 		p->Render();
@@ -1054,17 +1112,7 @@ void cShop::render()
 	}
 
 	GoldRender();
-
-
-
-	// 테스트용 렌더 나중에 삭제해야함
-	for (int i = 0; i < m_vecInventory.size(); i++)
-	{
-		g_pFontManager->TextFont(10, 200 + 20 * i, "있냐? : %d", m_vecInventory[i]->GethadItem());
-	}
-
 	
-
 	//g_pTextureManager->aniRender("Gold");
 	cMainUI::render();
 }
@@ -1421,7 +1469,7 @@ void cShop::ItemDragDrop()
 		tempsize = stSize[i];
 		itemp = rc[i];
 
-		//245 583
+	
 		if (PtInRect(&rc[i], pt))
 		{
 			if (g_pKeyManager->IsOnceKeyDown(VK_LBUTTON))

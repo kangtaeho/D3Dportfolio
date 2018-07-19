@@ -12,7 +12,7 @@ struct tagGoldState
 	int amount;
 	int count;
 	tagGoldState() {
-		amount = 9500; //최대 9999;
+		amount = 3000; //최대 9999;
 		goldIncreaseTime = 0;
 		count = 0;
 	}

@@ -89,30 +89,34 @@ void cPlayScene::Release()
 
 void cPlayScene::Update()
 {
+
+	g_pProgreesBar->setBarPosition(m_pPlayer->getPosition(), m_pPlayer->getPosition());
+
 	if (m_pPlayer)
 		m_pPlayer->Update();
 
-
-	if (g_pKeyManager->IsOnceKeyDown('O'))
-	{
-		m_pMainUi->SetNodeName("SHOP");
-	}
-	if (g_pKeyManager->IsOnceKeyDown(VK_ESCAPE))
-	{
-		m_pMainUi->SetNodeName("");
-	}
 
 	shop->GoldUpdate();
 	if (m_pMainUi)
 	{
 		m_pMainUi->update();
 	}
+
+	if (g_pKeyManager->IsOnceKeyDown(VK_ESCAPE))
+	{
+		m_pMainUi->SetNodeName("");
+	}
+
 	status->SetvecInven(shop->GetvecInventory());
 	status->InvenUpdate();
 	if (g_pKeyManager->IsOnceKeyDown('0'))
 	{
 		g_pSceneManager->ChangeScene("선택창");
 	}
+
+
+	
+
 }
 
 void cPlayScene::Render()
@@ -126,7 +130,7 @@ void cPlayScene::Render()
 	if (m_pMainUi)
 		m_pMainUi->render();
 
-	
+	g_pProgreesBar->render();
 
 	{//맵추가
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
