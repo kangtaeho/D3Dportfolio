@@ -79,9 +79,6 @@ HRESULT cPlayScene::Setup()
 
 	changed = false;
 
-
-
-
 	return S_OK;
 }
 

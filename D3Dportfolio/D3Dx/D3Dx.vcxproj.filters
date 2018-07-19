@@ -130,6 +130,7 @@
     <ClCompile Include="cMapEditer.cpp">
       <Filter>소스파일\cScene</Filter>
     </ClCompile>
+    <ClCompile Include="cLoadingScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h">
@@ -270,6 +271,7 @@
     <ClInclude Include="cMapEditer.h">
       <Filter>소스파일\cScene</Filter>
     </ClInclude>
+    <ClInclude Include="cLoadingScene.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="D3Dx.ico">
