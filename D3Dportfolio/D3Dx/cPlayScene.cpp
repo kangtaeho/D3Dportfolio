@@ -78,6 +78,10 @@ HRESULT cPlayScene::Setup()
 	m_pMainUi->setup();
 
 	changed = false;
+
+
+
+
 	return S_OK;
 }
 
@@ -89,8 +93,31 @@ void cPlayScene::Release()
 
 void cPlayScene::Update()
 {
+	g_pProgreesBar->update();
 
-	g_pProgreesBar->setBarPosition(m_pPlayer->getPosition(), m_pPlayer->getPosition());
+	D3DXVECTOR3 tempposition(0, 0, 0);
+	D3DXMATRIX WorldMatrix, matProj, matViewPort, matView;
+	D3DXMatrixTranslation(&WorldMatrix, m_pPlayer->getPosition().x, m_pPlayer->getPosition().y, m_pPlayer->getPosition().y);
+	D3DVIEWPORT9 tempViewPort;
+	g_pD3DDevice->GetViewport(&tempViewPort);
+	D3DXMatrixIdentity(&matViewPort);
+	matViewPort._11 = tempViewPort.Width / (float)2;
+	matViewPort._22 = -(int)tempViewPort.Height / (float)2;
+	matViewPort._33 = tempViewPort.MaxZ - tempViewPort.MinZ;
+	matViewPort._41 = tempViewPort.X + tempViewPort.Width / (float)2;
+	matViewPort._42 = tempViewPort.Y + tempViewPort.Height / (float)2;
+	matViewPort._43 = tempViewPort.MinZ;
+	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
+	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
+
+	WorldMatrix = WorldMatrix * matView * matProj * matViewPort;
+	D3DXVec3TransformCoord(&tempposition, &tempposition, &WorldMatrix);
+
+	g_pProgreesBar->setBarPosition(tempposition, tempposition);
+
+
+
+
 
 	if (m_pPlayer)
 		m_pPlayer->Update();
@@ -109,14 +136,12 @@ void cPlayScene::Update()
 
 	status->SetvecInven(shop->GetvecInventory());
 	status->InvenUpdate();
+
+
 	if (g_pKeyManager->IsOnceKeyDown('0'))
 	{
 		g_pSceneManager->ChangeScene("º±≈√√¢");
 	}
-
-
-	
-
 }
 
 void cPlayScene::Render()

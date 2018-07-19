@@ -14,7 +14,7 @@ private:
 	cShop* shop;
 	cMainUI* m_pMainUi;
 	cStatus* status;
-
+	D3DXMATRIX WorldMatrix, matProj, matViewPort, matView;
 	bool changed;
 public:
 	cPlayScene();

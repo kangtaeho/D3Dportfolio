@@ -12,12 +12,6 @@ cHealthProgress::~cHealthProgress()
 	
 }
 
-void cHealthProgress::setBarPosition(D3DXVECTOR3 HpPosition, D3DXVECTOR3 MpPosition)
-{
-	m_pContainer->setPosition(D3DXVECTOR3(HpPosition.x - 50, HpPosition.y - 30, 0));
-	m_pHpBar->setPosition(HpPosition);
-	m_pMpBar->setPosition(MpPosition);
-}
 void cHealthProgress::setup()
 {
 	m_pContainer = new Bitmap;
@@ -42,6 +36,13 @@ void cHealthProgress::setup()
 	m_pHpBar->setScale(D3DXVECTOR3(m_fBarSize, 1.0f, 0));
 	m_pMpBar->SetRectFrameSize(m_BarRect);
 	m_pMpBar->setScale(D3DXVECTOR3(m_fBarSize, 1.0f, 0));
+}
+
+void cHealthProgress::setBarPosition(D3DXVECTOR3 HpPosition, D3DXVECTOR3 MpPosition)
+{
+	m_pContainer->setPosition(D3DXVECTOR3(HpPosition.x - 50, HpPosition.y - 30, 0));
+	m_pHpBar->setPosition(HpPosition);
+	m_pMpBar->setPosition(MpPosition);
 }
 void cHealthProgress::update()
 {
