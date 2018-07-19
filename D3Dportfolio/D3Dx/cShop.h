@@ -35,6 +35,10 @@ struct ex {
 		shoes = g_pTextureManager->addTexture("shoesEx", "./ex/shoesEx.dds", ITEM, 0);
 		LongSword = new Bitmap;
 		LongSword = g_pTextureManager->addTexture("LongSwordEx", "./ex/LongSwordEx.dds", ITEM, 0);
+
+		LongSword->setPosition(D3DXVECTOR3(685, 360, 0));
+
+
 		Dagger = new Bitmap;
 		Dagger = g_pTextureManager->addTexture("DaggerEx", "./ex/DaggerEx.dds", ITEM, 0);
 		phage = new Bitmap;

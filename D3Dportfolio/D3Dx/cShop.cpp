@@ -61,7 +61,7 @@ void cShop::setup()
 
 	m_pItemEx = new ex;
 
-	m_pItemEx->LongSword->setPosition(D3DXVECTOR3(685, 360, 0));
+	
 	tempInvitem = new citem;
 
 	m_pItemInfo = new citem;
@@ -1017,7 +1017,7 @@ void cShop::render()
 	if (m_pShop)
 		m_pShop->aniRender();
 
-	if (ClickedItem == "LongSwordBp")
+	/*if (ClickedItem == "LongSwordBp")
 	{
 		m_pItemEx->LongSword->Render();
 	}
@@ -1060,7 +1060,9 @@ void cShop::render()
 	if (ClickedItem == "potionBp")
 	{
 		m_pItemEx->potion->Render();
-	}
+	}*/
+
+	int a = 0;
 
 	if (m_pPurchaseB)
 		m_pPurchaseB->Render();
