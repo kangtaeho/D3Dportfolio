@@ -64,9 +64,6 @@
     <ClCompile Include="cPlayScene.cpp">
       <Filter>소스파일\cScene</Filter>
     </ClCompile>
-    <ClCompile Include="cCollisionMap.cpp">
-      <Filter>소스파일\cCollsionMap</Filter>
-    </ClCompile>
     <ClCompile Include="cShop.cpp">
       <Filter>소스파일\cShop</Filter>
     </ClCompile>
@@ -127,8 +124,8 @@
     <ClCompile Include="cCollisionManager.cpp">
       <Filter>D3DFramework\cCollisionManager</Filter>
     </ClCompile>
-    <ClCompile Include="cMapEditer.cpp">
-      <Filter>소스파일\cScene</Filter>
+    <ClCompile Include="cAStar.cpp">
+      <Filter>D3DFramework\cCollisionManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,9 +191,6 @@
     </ClInclude>
     <ClInclude Include="cPlayScene.h">
       <Filter>소스파일\cScene</Filter>
-    </ClInclude>
-    <ClInclude Include="cCollisionMap.h">
-      <Filter>소스파일\cCollsionMap</Filter>
     </ClInclude>
     <ClInclude Include="cShop.h">
       <Filter>소스파일\cShop</Filter>
@@ -267,8 +261,8 @@
     <ClInclude Include="cCollisionManager.h">
       <Filter>D3DFramework\cCollisionManager</Filter>
     </ClInclude>
-    <ClInclude Include="cMapEditer.h">
-      <Filter>소스파일\cScene</Filter>
+    <ClInclude Include="cAStar.h">
+      <Filter>D3DFramework\cCollisionManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -330,9 +324,6 @@
     </Filter>
     <Filter Include="소스파일\cRayPicking">
       <UniqueIdentifier>{514b5b10-153e-4d8c-b165-21a0046b47cd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스파일\cCollsionMap">
-      <UniqueIdentifier>{57b9ad9a-4c7d-44bd-b528-bee627aa4b99}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스파일\cShop">
       <UniqueIdentifier>{c6aff3cf-c07c-4c9a-a23a-907b46bcfbb7}</UniqueIdentifier>

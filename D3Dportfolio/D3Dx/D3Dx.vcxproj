@@ -156,12 +156,12 @@
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="cAction.h" />
     <ClInclude Include="cAllocatedHierachy.h" />
+    <ClInclude Include="cAStar.h" />
     <ClInclude Include="cBluePrint.h" />
     <ClInclude Include="cBuffSkill.h" />
     <ClInclude Include="cCameraManager.h" />
     <ClInclude Include="cCharacter.h" />
     <ClInclude Include="cCollisionManager.h" />
-    <ClInclude Include="cCollisionMap.h" />
     <ClInclude Include="cCube.h" />
     <ClInclude Include="cDeviceManager.h" />
     <ClInclude Include="cFontManager.h" />
@@ -173,7 +173,6 @@
     <ClInclude Include="cMainGame.h" />
     <ClInclude Include="cMainScene.h" />
     <ClInclude Include="cMainUI.h" />
-    <ClInclude Include="cMapEditer.h" />
     <ClInclude Include="cMeleeSkill.h" />
     <ClInclude Include="cObjectSkill.h" />
     <ClInclude Include="cPlayer.h" />
@@ -204,12 +203,12 @@
     <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="cAction.cpp" />
     <ClCompile Include="cAllocatedHierachy.cpp" />
+    <ClCompile Include="cAStar.cpp" />
     <ClCompile Include="cBluePrint.cpp" />
     <ClCompile Include="cBuffSkill.cpp" />
     <ClCompile Include="cCameraManager.cpp" />
     <ClCompile Include="cCharacter.cpp" />
     <ClCompile Include="cCollisionManager.cpp" />
-    <ClCompile Include="cCollisionMap.cpp" />
     <ClCompile Include="cCube.cpp" />
     <ClCompile Include="cDeviceManager.cpp" />
     <ClCompile Include="cFontManager.cpp" />
@@ -221,7 +220,6 @@
     <ClCompile Include="cMainGame.cpp" />
     <ClCompile Include="cMainScene.cpp" />
     <ClCompile Include="cMainUI.cpp" />
-    <ClCompile Include="cMapEditer.cpp" />
     <ClCompile Include="cMeleeSkill.cpp" />
     <ClCompile Include="cObjectSkill.cpp" />
     <ClCompile Include="cPlayer.cpp" />
