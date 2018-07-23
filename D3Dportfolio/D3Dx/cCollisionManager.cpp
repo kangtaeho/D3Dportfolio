@@ -107,6 +107,7 @@ cCollisionManager::cCollisionManager()
 			&vecAdj[0],
 			0, 0, 0);
 	}
+	LoadMap();
 }
 
 cCollisionManager::~cCollisionManager()

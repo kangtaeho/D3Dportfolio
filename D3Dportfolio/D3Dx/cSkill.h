@@ -64,8 +64,7 @@ protected:
 	float				m_fRemoveTime;		// 삭제할 시간(오브젝트용)
 
 	SYNTHESIZE(bool, m_bIsCasting, IsCasting);
-	//bool				m_bIsCasting;		// 시전했냐?
-	bool				m_bIsCooldown;		// 쿨타임끝났냐?
+	SYNTHESIZE(bool, m_bIsCooldown, IsCooldown);// 쿨타임끝났냐?
 	bool				m_bIsTarget;		// 타겟팅이냐?
 	bool				m_bIsRemove;		// 오브젝트 삭제할꺼냐.
 
@@ -135,5 +134,7 @@ public:
 	void ReadyIsCasting();
 
 	void SetBuffType(BUFF_TYPE buffType) { e_BuffType = buffType; }
+	float CooldownTimer();
+
 };
 

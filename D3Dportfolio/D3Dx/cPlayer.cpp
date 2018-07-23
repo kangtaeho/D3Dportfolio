@@ -74,6 +74,8 @@ void cPlayer::Render()
 	
 	g_pSkillManager->Render();
 
+	// g_pCollisionManager->Render();
+
 	if(m_pSphere)
 	m_pSphere->Render();
 
@@ -125,15 +127,16 @@ void cPlayer::Check3DMousePointer()
 		// 		m_vNextPosition)) break;
 		// }
 
-		// if(isPick)
-		// {
-		// 	if (D3DXVec3Length(&(m_vPosition - m_pSphere->GetPos())) < m_fRange)
-		// 	{
-		// 		m_fRotY = GetAngle(m_vPosition, m_pSphere->GetPos());
-		// 		m_vNextPosition = m_vPosition;
-		// 	}
-		// 	g_pSkillManager->Fire("평타", &m_vPosition, &m_pSphere->GetPos());
-		// }
+		if(isPick)
+		{
+			if (D3DXVec3Length(&(m_vPosition - m_pSphere->GetPos())) < m_fRange)
+			{
+				m_fRotY = GetAngle(m_vPosition, m_pSphere->GetPos());
+				m_vNextPosition = m_vPosition;
+				aStar->Setup(m_vPosition, m_fRadius, m_vPosition);
+			}
+			g_pSkillManager->Fire("평타", &m_vPosition, &m_pSphere->GetPos());
+		}
 
 	}
 

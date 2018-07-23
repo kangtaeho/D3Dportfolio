@@ -369,3 +369,8 @@ void cSkill::ReadyIsCasting()
 {
 	if (m_bIsReady) m_bIsCasting = true;
 }
+
+float cSkill::CooldownTimer()
+{
+	return m_fCooldown-m_fCurrentCooldown;
+}
