@@ -46,8 +46,7 @@ void cAStar::Setup(D3DXVECTOR3 position, float radius, D3DXVECTOR3 destination)
 					D3DXMATRIX mat, matT, matR;
 					tempvecposition = TotalAStar.front();
 					tempcircle[i] = FindEndCircle(tempvecposition.back(), tempcircle[i], tempLine);
-					D3DXVECTOR3 tempnextposition = tempcircle[i].mPosition + 
-						FindNextPosition(tempvecposition.back(), tempcircle[i], radius, g_pCollisionManager->WherePositionLR(tempcircle[i].mPosition, tempvecposition.back(), destination));
+					D3DXVECTOR3 tempnextposition = FindNextPosition(tempvecposition.back(), tempcircle[i], radius, g_pCollisionManager->WherePositionLR(tempcircle[i].mPosition, tempvecposition.back(), destination));
 					tempnextposition = PushDestination(tempnextposition, radius);
 					tempvecposition.push_back(tempnextposition);
 					if (g_pCollisionManager->getAngleWithVecters(tempvecposition[tempvecposition.size() - 2], tempcircle[i].mPosition, destination) < D3DX_PI / 2)
@@ -100,6 +99,37 @@ void cAStar::Setup(D3DXVECTOR3 position, float radius, D3DXVECTOR3 destination)
 			if (tempAllLength1 > tempAllLength2)FinalAStar = TotalAStar[i];
 		}
 	}
+
+	////////////////////////////////////////////////////////////////
+/*
+	position.y = 5000.0f;
+	vEndPosition = PushDestination(destination, radius);
+	findAStar(position, destination, radius, NULL, 0);
+
+	AStarFath* finalFath = AllEndAStarFath[0];
+
+	for (int i = 0; i < AllEndAStarFath.size(); ++i)
+	{
+		if (finalFath->fDistance > AllEndAStarFath[i]->fDistance)finalFath = AllEndAStarFath[i];
+	}
+
+	FinalAStar.clear();
+	FinalAStar.push_back(destination);
+
+	while (finalFath->position != position)
+	{
+		FinalAStar.push_back(finalFath->position);
+		finalFath = finalFath->pParent;
+	}
+
+	for (auto p : AllAStarFath)
+	{
+		SAFE_DELETE(p);
+	}
+	AllAStarFath.clear();
+	AllEndAStarFath.clear();
+	mapCircle.clear();
+*/
 }
 
 void cAStar::Update(D3DXVECTOR3& position, float& rotY, float speed, float radius)
@@ -107,7 +137,7 @@ void cAStar::Update(D3DXVECTOR3& position, float& rotY, float speed, float radiu
 	position = g_pCollisionManager->getVector2(position);
 	if (FinalAStar.size())
 	{
-		D3DXVECTOR3 tempend = g_pCollisionManager->getVector2(FinalAStar.front());
+		D3DXVECTOR3 tempend = g_pCollisionManager->getVector2(FinalAStar.back());
 		tempend = PushDestination(tempend, radius);
 		tempend.y = 0;
 		D3DXVECTOR3 tempNextPosition = tempend;
@@ -120,7 +150,7 @@ void cAStar::Update(D3DXVECTOR3& position, float& rotY, float speed, float radiu
 		}
 		tempNextPosition += position;
 
-		if (D3DXVec3Length(&(g_pCollisionManager->getVector2(tempend) - g_pCollisionManager->getVector2(tempNextPosition))) < 0.001f)FinalAStar.erase(FinalAStar.begin());
+		if (D3DXVec3Length(&(g_pCollisionManager->getVector2(tempend) - g_pCollisionManager->getVector2(tempNextPosition))) < 0.001f)FinalAStar.pop_back();
 		STCollisionMapTool temptemptemp = g_pCollisionManager->getCollisionMapTool();
 		for (int i = 0; i < g_pCollisionManager->getCollisionMapTool().vecCircle.size(); ++i)
 		{
@@ -269,10 +299,10 @@ STCIRCLE cAStar::FindEndCircle(D3DXVECTOR3 position, STCIRCLE nowcircle, STLINE*
 					bool temp2 = g_pCollisionManager->WherePositionLR(templine->pCircles[i1]->mPosition, position, tempcircle.mPosition);
 					bool temp3 = g_pCollisionManager->WherePositionLR(tempcircle.vecLines[i]->pCircles[i2]->mPosition, position, tempnowcircle.mPosition);
 
-					if (g_pCollisionManager->WherePositionLR(tempcircle.vecLines[i]->pCircles[i2]->mPosition, position, tempcircle.mPosition) !=
-						g_pCollisionManager->WherePositionLR(templine->pCircles[i1]->mPosition, position, tempcircle.mPosition) &&
-						g_pCollisionManager->WherePositionLR(tempcircle.vecLines[i]->pCircles[i2]->mPosition, position, tempnowcircle.mPosition) !=
-						g_pCollisionManager->WherePositionLR(templine->pCircles[i1]->mPosition, position, tempcircle.mPosition))
+					if ((g_pCollisionManager->WherePositionLR(tempcircle.vecLines[i]->pCircles[i2]->mPosition, position, tempcircle.mPosition) !=
+						g_pCollisionManager->WherePositionLR(templine->pCircles[i1]->mPosition, position, tempcircle.mPosition)) &&
+						(g_pCollisionManager->WherePositionLR(tempcircle.vecLines[i]->pCircles[i2]->mPosition, position, tempnowcircle.mPosition) !=
+						g_pCollisionManager->WherePositionLR(templine->pCircles[i1]->mPosition, position, tempcircle.mPosition)))
 					{
 						tempnowcircle = *tempcircle.vecLines[i]->pCircles[i2];
 						tempnowline = tempcircle.vecLines[i];
@@ -300,6 +330,94 @@ D3DXVECTOR3 cAStar::FindNextPosition(D3DXVECTOR3 position, STCIRCLE nowcircle, f
 	D3DXMATRIX mat;
 	D3DXMatrixRotationY(&mat, angle);
 	D3DXVec3TransformCoord(&temp, &temp, &mat);
+	temp += nowcircle.mPosition;
 
 	return PushDestination(temp, radius);
+}
+
+AStarFath* cAStar::findAStar(D3DXVECTOR3 position, D3DXVECTOR3 destination, float radius, AStarFath* parent, int ChildNum)
+{
+	if (vEndPosition == position)
+	{
+		return NULL;
+	}
+	D3DXVECTOR3 nextPosition = destination;
+	AStarFath* tempFath = new AStarFath;
+	tempFath->position = position;
+	tempFath->pParent = parent;
+	tempFath->pFirstLine = FindFirstLine(position, destination);
+	if (tempFath->pParent)
+	{
+		tempFath->fDistance = D3DXVec3Length(&(tempFath->pParent->position - tempFath->position));
+	}
+	if (tempFath->pFirstLine)
+	{
+		for (int i = 0; i < 2; ++i)
+		{
+			STCIRCLE tempCircle = FindEndCircle(position, *tempFath->pFirstLine->pCircles[i], tempFath->pFirstLine);
+			bool LR = g_pCollisionManager->WherePositionLR(tempCircle.mPosition, position, destination);
+			nextPosition = FindNextPosition(position, tempCircle, radius, LR);
+			if (tempFath->pParent)
+			{
+				std::map<int, STCIRCLE*>::iterator tempiter = mapCircle.find(tempFath->pFirstLine->pCircles[i]->iIndex);
+				if (tempFath->pParent->vecChildCircle.size() > ChildNum &&
+					tempCircle.iIndex == tempFath->pParent->vecChildCircle[ChildNum]->iIndex)
+				{
+					nextPosition = getPositionOutCircle(position, destination, radius, tempFath->pFirstLine->pCircles[i]);
+				}
+				else if (tempiter != mapCircle.end())
+				{
+					continue;
+				}
+			}
+			tempFath->mapCircle.insert(std::make_pair(tempCircle.iIndex, g_pCollisionManager->getCollisionMapTool().vecCircle[tempCircle.iIndex]));
+			mapCircle.insert(std::make_pair(tempCircle.iIndex, g_pCollisionManager->getCollisionMapTool().vecCircle[tempCircle.iIndex]));
+			if (FindFirstLine(position, nextPosition))
+			{
+				findAStar(position, nextPosition, radius, tempFath, ChildNum);
+			}
+			else
+			{
+				tempFath->vecChild.push_back(nextPosition);
+				if (tempFath->pParent && tempFath->pParent->vecChildCircle.size() > ChildNum)
+				{
+					if (tempCircle.iIndex != tempFath->pParent->vecChildCircle[ChildNum]->iIndex)
+					{
+						tempFath->vecChildCircle.push_back(g_pCollisionManager->getCollisionMapTool().vecCircle[tempCircle.iIndex]);
+						tempFath->vecChildNum.push_back(tempFath->vecChildCircle.size() - 1);
+					}
+				}
+				else
+				{
+					tempFath->vecChildCircle.push_back(g_pCollisionManager->getCollisionMapTool().vecCircle[tempCircle.iIndex]);
+					tempFath->vecChildNum.push_back(tempFath->vecChildCircle.size() - 1);
+				}
+			}
+		}
+	}
+	else
+	{
+		AllEndAStarFath.push_back(tempFath);
+	}
+	AllAStarFath.push_back(tempFath);
+
+	for (int i = 0; i < tempFath->vecChild.size(); ++i)
+	{
+		findAStar(tempFath->vecChild[i], destination, radius, tempFath, i);
+	}
+
+
+	return tempFath;
+}
+
+D3DXVECTOR3 cAStar::getPositionOutCircle(D3DXVECTOR3 position, D3DXVECTOR3 destination, float radius, STCIRCLE * circle)
+{
+	bool tempbool = g_pCollisionManager->WherePositionLR(circle->mPosition, position, destination);
+	D3DXVECTOR3 vecLR;
+	D3DXVec3Cross(&vecLR, &(destination - position), &D3DXVECTOR3(0, 1 - 2 * tempbool, 0));
+	D3DXVec3Normalize(&vecLR, &vecLR);
+	vecLR *= radius + circle->fRadius;
+	vecLR += circle->mPosition;
+
+	return vecLR;
 }

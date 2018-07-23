@@ -1,8 +1,32 @@
 #pragma once
+
+struct AStarFath
+{
+	D3DXVECTOR3					position;
+	float						fDistance;
+	STLINE*						pFirstLine;
+
+	AStarFath*					pParent;
+	//std::vector<AStarFath*>		vecChild;
+	std::vector<D3DXVECTOR3>	vecChild;
+	std::vector<STCIRCLE*>		vecChildCircle;
+	std::vector<int>			vecChildNum;
+	std::map<int, STCIRCLE*>	mapCircle;
+
+
+	AStarFath():position(0, 0, 0), fDistance(0), pFirstLine(NULL), pParent(NULL){}
+};
+
 class cAStar
 {
 private:
-	std::vector<D3DXVECTOR3> FinalAStar;
+	std::vector<D3DXVECTOR3>	FinalAStar;
+
+	std::vector<AStarFath*>		AllAStarFath;
+	std::vector<AStarFath*>		AllEndAStarFath;
+	D3DXVECTOR3					vEndPosition;
+	std::map<int, STCIRCLE*>	mapCircle;
+	std::vector<D3DXVECTOR3>	tempNextPosition;
 
 public:
 	cAStar();
@@ -22,8 +46,9 @@ public:
 	STCIRCLE FindEndCircle(D3DXVECTOR3 position, STCIRCLE nowcircle, STLINE* nowline);
 	//다름 위치 찾기(원 기준으로 접선)
 	D3DXVECTOR3 FindNextPosition(D3DXVECTOR3 position, STCIRCLE nowcircle, float radius, bool lr);
+
+
+	AStarFath* findAStar(D3DXVECTOR3 position, D3DXVECTOR3 destination, float radius, AStarFath* parent, int ChildNum);
+	D3DXVECTOR3 getPositionOutCircle(D3DXVECTOR3 position, D3DXVECTOR3 destination, float radius, STCIRCLE* circle);
 };
 
-//AStar 변수 만들어서 사용하시면 됩니다~
-//private에 있는 FinalAStar가 중요한 백터입니다
-//아직 완벽하게 움직이진 않아요.... 다만 다른것도 해야하니 시간 조절해서 일단 여기까지 하려고요....
