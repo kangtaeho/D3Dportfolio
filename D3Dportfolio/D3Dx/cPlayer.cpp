@@ -2,10 +2,12 @@
 #include "cPlayer.h"
 #include "cRayPicking.h"
 #include "cSphere.h"
+#include "cAStar.h"
 
 cPlayer::cPlayer()
 	:m_bIsTarget(false)
 	,m_fRange(400)
+	,m_fRadius(13)
 {
 	
 }
@@ -26,6 +28,7 @@ void cPlayer::Setup(const char* name)
 
 	m_pSphere = new cSphere;
 	m_pSphere->Setup(D3DXVECTOR3(200, 5172, 200), 100);
+	aStar = new cAStar;
 
 }
 
@@ -39,6 +42,7 @@ void cPlayer::Update()
 {
 	Check3DMousePointer();
 
+	aStar->Update(m_vPosition, m_fRotY, m_fSpeed, m_fRadius);
 	cCharacter::Update();
 
 	g_pSkillManager->Update();
@@ -78,7 +82,7 @@ void cPlayer::Render()
 
 void cPlayer::Check3DMousePointer()
 {
-	if (!m_pMap) return;		// 충돌 판정 맵이 없다면,
+	//if (!m_pMap) return;		// 충돌 판정 맵이 없다면,
 
 	cRayPicking ray;
 
@@ -86,14 +90,17 @@ void cPlayer::Check3DMousePointer()
 	{
 		if (!g_pSkillManager->CheckReady()) return;
 
-		for (int i = 0; i < m_pMap->size(); i += 3)
-		{
-			if (ray.PickTri((*m_pMap)[i],
-				(*m_pMap)[i + 1],
-				(*m_pMap)[i + 2],
-				g_pCameraManager->GetCameraEye(),
-				m_vNextPosition)) break;
-		}
+		int isPick = 0;
+		m_vNextPosition = g_pCollisionManager->getRayPosition(isPick);
+
+		// for (int i = 0; i < m_pMap->size(); i += 3)
+		// {
+		// 	if (ray.PickTri((*m_pMap)[i],
+		// 		(*m_pMap)[i + 1],
+		// 		(*m_pMap)[i + 2],
+		// 		g_pCameraManager->GetCameraEye(),
+		// 		m_vNextPosition)) break;
+		// }
 
 		m_vClickPos = m_vNextPosition;
 
@@ -104,24 +111,28 @@ void cPlayer::Check3DMousePointer()
 	if (g_pKeyManager->IsOnceKeyDown(VK_RBUTTON))
 	{
 
-		for (int i = 0; i < m_pMap->size(); i += 3)
-		{
-			if (ray.PickTri((*m_pMap)[i],
-				(*m_pMap)[i + 1],
-				(*m_pMap)[i + 2],
-				g_pCameraManager->GetCameraEye(),
-				m_vNextPosition)) break;
-		}
+		int isPick = 0;
+		m_vNextPosition = g_pCollisionManager->getRayPosition(isPick);
 
-		if (ray.PickSphere(m_pSphere->GetPos(), 100))
-		{
-			if (D3DXVec3Length(&(m_vPosition - m_pSphere->GetPos())) < m_fRange)
-			{
-				m_fRotY = GetAngle(m_vPosition, m_pSphere->GetPos());
-				m_vNextPosition = m_vPosition;
-			}
-			g_pSkillManager->Fire("평타", &m_vPosition, &m_pSphere->GetPos());
-		}
+		aStar->Setup(m_vPosition, m_fRadius, m_vNextPosition);
+		// for (int i = 0; i < m_pMap->size(); i += 3)
+		// {
+		// 	if (ray.PickTri((*m_pMap)[i],
+		// 		(*m_pMap)[i + 1],
+		// 		(*m_pMap)[i + 2],
+		// 		g_pCameraManager->GetCameraEye(),
+		// 		m_vNextPosition)) break;
+		// }
+
+		//if (ray.PickSphere(m_pSphere->GetPos(), 100))
+		//{
+		//	if (D3DXVec3Length(&(m_vPosition - m_pSphere->GetPos())) < m_fRange)
+		//	{
+		//		m_fRotY = GetAngle(m_vPosition, m_pSphere->GetPos());
+		//		m_vNextPosition = m_vPosition;
+		//	}
+		//	g_pSkillManager->Fire("평타", &m_vPosition, &m_pSphere->GetPos());
+		//}
 
 	}
 

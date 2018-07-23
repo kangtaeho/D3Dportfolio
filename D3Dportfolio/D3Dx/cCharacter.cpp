@@ -30,8 +30,9 @@ void cCharacter::Release()
 
 void cCharacter::Update()
 {
-	GetCollision(m_vNextPosition.x, m_vNextPosition.y, m_vNextPosition.z); //벽충돌
-	GetHeight(m_vPosition.x, m_vPosition.y, m_vPosition.z);				   // 높이판정			
+	m_vPosition = g_pCollisionManager->SetHeight(m_vPosition);
+	// GetCollision(m_vNextPosition.x, m_vNextPosition.y, m_vNextPosition.z); //벽충돌
+	// GetHeight(m_vPosition.x, m_vPosition.y, m_vPosition.z);				   // 높이판정			
 }
 
 void cCharacter::Render()

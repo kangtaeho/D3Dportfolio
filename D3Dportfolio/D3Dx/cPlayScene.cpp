@@ -54,6 +54,7 @@ HRESULT cPlayScene::Setup()
 	g_pTextureManager->addTexture("shopButtonUP", "./status/shopButtonUP.dds", BUTTON, 1, 1);
 	//g_pXfileManager->AddXfile("Map", "summoner rift", "summoner_rift.x");
 
+	m_pPlayer = new cPlayer;
 	m_pPlayer->Setup("Teemo");
 
 
