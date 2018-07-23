@@ -137,7 +137,7 @@ void cAStar::Update(D3DXVECTOR3& position, float& rotY, float speed, float radiu
 	position = g_pCollisionManager->getVector2(position);
 	if (FinalAStar.size())
 	{
-		D3DXVECTOR3 tempend = g_pCollisionManager->getVector2(FinalAStar.back());
+		D3DXVECTOR3 tempend = g_pCollisionManager->getVector2(FinalAStar.front());
 		tempend = PushDestination(tempend, radius);
 		tempend.y = 0;
 		D3DXVECTOR3 tempNextPosition = tempend;
@@ -150,7 +150,7 @@ void cAStar::Update(D3DXVECTOR3& position, float& rotY, float speed, float radiu
 		}
 		tempNextPosition += position;
 
-		if (D3DXVec3Length(&(g_pCollisionManager->getVector2(tempend) - g_pCollisionManager->getVector2(tempNextPosition))) < 0.001f)FinalAStar.pop_back();
+		if (D3DXVec3Length(&(g_pCollisionManager->getVector2(tempend) - g_pCollisionManager->getVector2(tempNextPosition))) < 0.001f)FinalAStar.erase(FinalAStar.begin());
 		STCollisionMapTool temptemptemp = g_pCollisionManager->getCollisionMapTool();
 		for (int i = 0; i < g_pCollisionManager->getCollisionMapTool().vecCircle.size(); ++i)
 		{
