@@ -79,7 +79,7 @@ void cAStar::Setup(D3DXVECTOR3 position, float radius, D3DXVECTOR3 destination)
 			if (D3DXVec3Length(&(TotalAStar[i].back() - destination)) < 0.001f)EndingAStar++;
 		}
 	}
-	
+	/*
 	for (int i = 0; i < TotalAStar.size(); ++i)
 	{
 		if (D3DXVec3Length(&(TotalAStar[i].back() - destination)) > 0.001f)continue;
@@ -99,6 +99,8 @@ void cAStar::Setup(D3DXVECTOR3 position, float radius, D3DXVECTOR3 destination)
 			if (tempAllLength1 > tempAllLength2)FinalAStar = TotalAStar[i];
 		}
 	}
+*/
+	FinalAStar = TotalAStar.front();
 
 	////////////////////////////////////////////////////////////////
 /*

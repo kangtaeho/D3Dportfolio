@@ -135,6 +135,7 @@ void cCollisionManager::Release()
 
 void cCollisionManager::Render()
 {
+	D3DXMATRIX mat, matS, matR, matT, matT1;
 	for (auto p : m_stMap.vecCircle)
 	{
 		D3DXMatrixTranslation(&matT1, 0, 0, -CYLINDERHEIGHT / 2);
@@ -143,7 +144,7 @@ void cCollisionManager::Render()
 		D3DXMatrixTranslation(&matT, p->mPosition.x, p->mPosition.y, p->mPosition.z);
 		mat = matT1 * matS * matR * matT;
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &mat);
-		m_pMesh->DrawSubset(0);
+		m_pCylinder->DrawSubset(0);
 	}
 	for (auto p : m_stMap.vecLine)
 	{
@@ -196,7 +197,7 @@ void cCollisionManager::Render()
 			&tempCube[0],
 			sizeof(ST_PC_VERTEX));
 	}
-
+	MapRender();
 
 }
 
