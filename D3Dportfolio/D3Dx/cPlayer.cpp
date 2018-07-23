@@ -29,7 +29,6 @@ void cPlayer::Setup(const char* name)
 	m_pSphere = new cSphere;
 	m_pSphere->Setup(D3DXVECTOR3(200, 5172, 200), 100);
 	aStar = new cAStar;
-
 }
 
 void cPlayer::Release()
@@ -111,10 +110,13 @@ void cPlayer::Check3DMousePointer()
 	if (g_pKeyManager->IsOnceKeyDown(VK_RBUTTON))
 	{
 
-		int isPick = 0;
-		m_vNextPosition = g_pCollisionManager->getRayPosition(isPick);
+		// int isPick = 0;
+		// m_vNextPosition = g_pCollisionManager->getRayPosition(isPick);
+
+		m_vNextPosition = aStar->PushDestination(m_vNextPosition, m_fRadius);
 
 		aStar->Setup(m_vPosition, m_fRadius, m_vNextPosition);
+
 		// for (int i = 0; i < m_pMap->size(); i += 3)
 		// {
 		// 	if (ray.PickTri((*m_pMap)[i],
