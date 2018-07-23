@@ -421,6 +421,53 @@ float cCollisionManager::CrossingVectorLength(D3DXVECTOR3 position1_1, D3DXVECTO
 	return D3DXVec3Length(&tempLength);
 }
 
+D3DXVECTOR3 cCollisionManager::getRayPosition(int isIntersect, LPD3DXMESH Mesh)
+{
+	D3DXVECTOR3		m_vDirection;
+	D3DXMATRIX invProj, invViewPort;
+	D3DVIEWPORT9 tempViewPort;
+	g_pD3DDevice->GetViewport(&tempViewPort);
+	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &invProj);
+
+	POINT ptMouse;
+	GetCursorPos(&ptMouse);
+	ScreenToClient(g_hWnd, &ptMouse);
+
+	m_vDirection.x = ((2.0f * ptMouse.x) / tempViewPort.Width - 1.0f) / invProj._11;
+	m_vDirection.y = ((-2.0f * ptMouse.y) / tempViewPort.Height + 1.0f) / invProj._22;
+	m_vDirection.z = 1.0f;
+
+	D3DXMATRIX invView;
+	g_pD3DDevice->GetTransform(D3DTS_VIEW, &invView);
+	D3DXMatrixInverse(&invView, 0, &invView);
+
+	D3DXVec3TransformNormal(&m_vDirection, &m_vDirection, &invView);
+	D3DXVec3Normalize(&m_vDirection, &m_vDirection);
+
+	float u, v, f;
+	DWORD face;
+	LPD3DXMESH tempMesh = m_pMapMesh;
+	if (Mesh)tempMesh = Mesh;
+	D3DXIntersect(tempMesh,
+		&g_pCameraManager->getEye(),
+		&m_vDirection,
+		&bTemp, &face,
+		&u, &v, &f, NULL, NULL);
+	if (bTemp)
+	{
+		return g_pCameraManager->getEye() + m_vDirection * f;
+	}
+	else
+	{
+		D3DXVECTOR3 tempEye = g_pCameraManager->getEye();
+		float tempAngle = g_pCollisionManager->getAngleWithVecters(m_vDirection + tempEye, tempEye, D3DXVECTOR3(tempEye.x, 5000.0f, tempEye.z));
+		tempEye += m_vDirection * D3DXVec3Length(&D3DXVECTOR3(tempEye.x, 5000.0f, tempEye.z)) / cosf(tempAngle);
+		return tempEye;
+	}
+	return D3DXVECTOR3(0, 0, 0);
+}
+
+
 //=============================================================
 
 //

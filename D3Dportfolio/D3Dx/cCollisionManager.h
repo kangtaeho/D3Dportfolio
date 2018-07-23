@@ -51,6 +51,9 @@ public:
 
 	//포지션 넣으면 높이를 넣어 포지션을 리턴
 	D3DXVECTOR3 SetHeight(D3DXVECTOR3 position);
+	//isIntersect에 int를 넣으면 (아마)맞으면 1, 안맞으면 0을 줍니다.
+	//매쉬에 부딫힐 매쉬를 넣으면 그것과 충돌처리, 아니면 맵과 충돌처리
+	D3DXVECTOR3 getRayPosition(int isIntersect, LPD3DXMESH Mesh = NULL);
 
 	//이 밑에 건 설명하기 힘드네요... 계속 수정될수도 있는 A*용 함수들입니다.
 	D3DXVECTOR3 NextPositionPerTick(D3DXVECTOR3 position, D3DXVECTOR3 nextposition, float speed);
