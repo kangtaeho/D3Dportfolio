@@ -35,6 +35,7 @@ private:
 public:
 	void Setup();
 	void Release();
+	void Render();
 
 	//높이맵 매쉬 불러오기
 	LPD3DXMESH getGround() { return m_pMapMesh; }
