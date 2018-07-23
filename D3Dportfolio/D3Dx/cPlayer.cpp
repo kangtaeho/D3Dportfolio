@@ -42,6 +42,7 @@ void cPlayer::Update()
 	Check3DMousePointer();
 
 	aStar->Update(m_vPosition, m_fRotY, m_fSpeed, m_fRadius);
+	
 	cCharacter::Update();
 
 	g_pSkillManager->Update();
@@ -110,11 +111,9 @@ void cPlayer::Check3DMousePointer()
 	if (g_pKeyManager->IsOnceKeyDown(VK_RBUTTON))
 	{
 
-		// int isPick = 0;
-		// m_vNextPosition = g_pCollisionManager->getRayPosition(isPick);
-
-		m_vNextPosition = aStar->PushDestination(m_vNextPosition, m_fRadius);
-
+		int isPick = 0;
+		m_vNextPosition = g_pCollisionManager->getRayPosition(isPick); //포지션 받고
+		m_vNextPosition = aStar->PushDestination(m_vNextPosition, m_fRadius); //만약에 충돌을 받으면 밀어낸다
 		aStar->Setup(m_vPosition, m_fRadius, m_vNextPosition);
 
 		// for (int i = 0; i < m_pMap->size(); i += 3)
@@ -126,15 +125,15 @@ void cPlayer::Check3DMousePointer()
 		// 		m_vNextPosition)) break;
 		// }
 
-		//if (ray.PickSphere(m_pSphere->GetPos(), 100))
-		//{
-		//	if (D3DXVec3Length(&(m_vPosition - m_pSphere->GetPos())) < m_fRange)
-		//	{
-		//		m_fRotY = GetAngle(m_vPosition, m_pSphere->GetPos());
-		//		m_vNextPosition = m_vPosition;
-		//	}
-		//	g_pSkillManager->Fire("평타", &m_vPosition, &m_pSphere->GetPos());
-		//}
+		// if(isPick)
+		// {
+		// 	if (D3DXVec3Length(&(m_vPosition - m_pSphere->GetPos())) < m_fRange)
+		// 	{
+		// 		m_fRotY = GetAngle(m_vPosition, m_pSphere->GetPos());
+		// 		m_vNextPosition = m_vPosition;
+		// 	}
+		// 	g_pSkillManager->Fire("평타", &m_vPosition, &m_pSphere->GetPos());
+		// }
 
 	}
 
