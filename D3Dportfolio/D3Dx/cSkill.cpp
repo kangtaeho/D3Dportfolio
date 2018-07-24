@@ -379,7 +379,7 @@ int cSkill::CooldownTimer()
 	return m_fCooldown-m_fCurrentCooldown;
 }
 
-void cSkill::CreateAOEMesh(float aoeScale, bool isCreatePointMesh, float pointScale)
+void cSkill::CreateAOEMesh(bool isCreatePointMesh, float pointScale)
 {
 	// ZeroMemory(&s_AoeMesh, sizeof(AOE_MESH));
 	s_AoeMesh = new AOE_MESH;
@@ -440,7 +440,6 @@ void cSkill::CreateAOEMesh(float aoeScale, bool isCreatePointMesh, float pointSc
 	}
 
 	s_AoeMesh->aoeMesh->UnlockIndexBuffer();
-	s_AoeMesh->aoeScale = aoeScale;
 
 	if (isCreatePointMesh)
 	{
@@ -452,7 +451,18 @@ void cSkill::CreateAOEMesh(float aoeScale, bool isCreatePointMesh, float pointSc
 		}
 
 		s_AoeMesh->pointMesh->UnlockVertexBuffer();
+
+		WORD * wM;
+		s_AoeMesh->pointMesh->LockIndexBuffer(0, (void**)&wM);
+
+		for (int i = 0; i < index.size(); i++)
+		{
+			wM[i] = i;
+		}
+
+		s_AoeMesh->pointMesh->UnlockIndexBuffer();
 		s_AoeMesh->pointScale = pointScale;
+
 	}
 
 }
@@ -483,15 +493,13 @@ void cSkill::RenderAOEMesh()
 
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &matAOEWorld);
 		g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
-
-		Bitmap* b;
-		b = g_pTextureManager->addTexture(" ", "./select/skillFloor03.dds", 0, 0);
-
-		LPDIRECT3DTEXTURE9 texture = g_pTextureManager->GetTexture("./select/skillFloor03.dds");
-		g_pD3DDevice->SetTexture(0, b->GetTexture());
+		LPDIRECT3DTEXTURE9 texture = g_pTextureManager->GetTexture("./select/skillFloor03.png");
+		g_pD3DDevice->SetTexture(0, texture);
 		
 		s_AoeMesh->aoeMesh->DrawSubset(0);
-		g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, false);
+
+		if()
+		s_AoeMesh->pointMesh
 
 	}
 }

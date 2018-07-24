@@ -22,7 +22,7 @@ HRESULT cObjectSkill::Setup(SKILL_TYPE skillType,
 	const char * name)
 {
 	cSkill::Setup(skillType, damage, range, posSpeed, castingTime, cooldown, removeTime, isTarget, name);
-	CreateAOEMesh(10.0f, false, 10.0f);
+	CreateAOEMesh(ture, 100.0f);
 
 	return S_OK;
 }

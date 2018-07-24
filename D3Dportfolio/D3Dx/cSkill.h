@@ -147,7 +147,7 @@ public:
 	void SetBuffType(BUFF_TYPE buffType) { e_BuffType = buffType; }
 	int CooldownTimer();
 
-	void CreateAOEMesh(float aoeScale, bool isCreatePointMesh, float pointScale);
+	void CreateAOEMesh(bool isCreatePointMesh, float pointScale);
 	void DestroyAOEMesh();
 	void RenderAOEMesh();
 
