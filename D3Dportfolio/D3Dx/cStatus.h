@@ -116,7 +116,7 @@ struct tagStatInfo
 class cStatus : public cMainUI
 {
 private:
-	
+	float prevRectSize;
 	bool m_bUsedSkill;
 	bool m_bSelected;
 	Bitmap* m_pSkill_Done_Q;
@@ -131,13 +131,12 @@ private:
 	RECT HpRc;
 	RECT MpRc;
 	// 스텟치
-	int MaxHp;
-	int CurrentHp;
-	int hit;
-
-	int MaxMp;
-	int CurrentMp;
-	int UsedMp;
+	SYNTHESIZE(int, MaxHp, MAXHP);
+	SYNTHESIZE(int, CurrentHp, CURRENTHP);
+	SYNTHESIZE(int, hit, HitValue);
+	SYNTHESIZE(int, MaxMp, MAXMP);
+	SYNTHESIZE(int, CurrentMp, CURRENTMP);
+	SYNTHESIZE(int, UsedMp, USEDMP);
 	//
 	SYNTHESIZE(std::vector<cInventory*>, m_vecInven, vecInven);
 	RECT* m_pRect;//클릭할 렉트;
@@ -157,14 +156,17 @@ private:
 	tagStatusGoldState m_pStatusGold;
 
 	//맞았니 , 스킬썼니 체크
-	bool m_bIsHit;
-	bool m_bCheckHpBar;
+
+	SYNTHESIZE(bool, m_bIsHit, IsHit);
+	SYNTHESIZE(bool, m_bCheckHpBar, CheckHpBar);
+	SYNTHESIZE(bool, m_bCheckMpBar, CheckMpBar);
+
 	float HprcRight;
 	float HprcBottom;
 	float HprcSize;
 
 	bool m_bIsUsed;
-	bool m_bCheckMpBar;
+	
 
 	float MpRcRight;
 	float MpRcBottom;

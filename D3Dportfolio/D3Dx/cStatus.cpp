@@ -192,6 +192,7 @@ void cStatus::setup()
 	m_pStatusHealthBar->SetRectFrameSize(HpRc);
 	m_pStatusHealthBar->setScale(D3DXVECTOR3(HprcSize, 1.0f, 0));
 
+	prevRectSize = HprcRight;
 	//
 
 	MaxMp = 500;
@@ -265,7 +266,7 @@ void cStatus::update()
 
 	HitProgress();
 
-	if (g_pKeyManager->IsOnceKeyDown('V'))
+	if (g_pKeyManager->IsOnceKeyDown('V')) // 맞았는가 확인 .
 	{
 		m_bIsHit = true;
 		m_bCheckHpBar = true;
@@ -375,7 +376,19 @@ void cStatus::update()
 		}
 	}
 
-	
+	if (g_pKeyManager->IsOnceKeyDown('P'))
+	{
+		MaxHp = 10000;
+		CurrentHp = 10000;
+
+		SetRect(&HpRc, 0, 0, MaxHp, HprcBottom);
+		m_pStatusHealthBar->SetRectFrameSize(HpRc);
+		HprcRight = m_pStatusHealthBar->GetrectFrameSize()->right;
+		HprcBottom = m_pStatusHealthBar->GetrectFrameSize()->bottom;
+
+		HprcSize = (prevRectSize * 0.81f) / HprcRight;
+		m_pStatusHealthBar->setScale(D3DXVECTOR3(HprcSize, 1.0f, 0));
+	}
 
 	if (g_pKeyManager->IsOnceKeyDown('Q'))
 	{
@@ -557,8 +570,10 @@ void cStatus::HitProgress()
 	{
 		if(CurrentHp > 0)
 		CurrentHp = CurrentHp - hit;
+
 		HprcRight = m_pStatusHealthBar->GetrectFrameSize()->right;
 		HprcBottom = m_pStatusHealthBar->GetrectFrameSize()->bottom;
+
 		m_bCheckHpBar = false;
 	}
 
@@ -571,10 +586,6 @@ void cStatus::HitProgress()
 		MpRcBottom = m_pStatusMpBar->GetrectFrameSize()->bottom;
 		m_bCheckMpBar = false;
 	}
-	//SetRect(&rc, 0, 0, CurrentHp, rcBottom);
-	//rcSize = rcRight / MaxHp;
-	//m_pStatusHealthBar->SetRectFrameSize(rc);
-	//m_pStatusHealthBar->setScale(D3DXVECTOR3(rcSize, 1.1f, 0));
 }
 void cStatus::InvenUpdate()
 {

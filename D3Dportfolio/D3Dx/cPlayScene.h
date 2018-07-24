@@ -4,6 +4,7 @@
 class cPlayer;
 class cShop;
 class cStatus;
+class cHealthProgress;
 
 class cPlayScene : public cGameNode
 {
@@ -14,6 +15,9 @@ private:
 	cStatus* status;
 	D3DXMATRIX WorldMatrix, matProj, matViewPort, matView;
 	bool changed;
+
+	std::vector<cHealthProgress*> m_vecHealthProgress;
+	
 public:
 	cPlayScene();
 	~cPlayScene();

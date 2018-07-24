@@ -4,6 +4,7 @@
 #include "cSphere.h"
 #include "cShop.h"
 #include "cStatus.h"
+#include "cHealthProgress.h"
 cPlayScene::cPlayScene()
 	: m_pPlayer(NULL)
 {
@@ -67,6 +68,17 @@ HRESULT cPlayScene::Setup()
 
 	changed = false;
 
+	cHealthProgress* PlayerProgress = new cHealthProgress;
+	Bitmap* Container; Bitmap* HpBar; Bitmap* MpBar;
+	Container = g_pTextureManager->addTexture("Container", "./status/playerHpContainer.dds", NULL, NULL);
+	HpBar = g_pTextureManager->addTexture("PlayerHpBar", "./status/playerHpBar.dds", PROGRESSBAR, 1, 1);
+	MpBar = g_pTextureManager->addTexture("PlayerMpBar", "./status/playerMpBar.dds", PROGRESSBAR, 1, 1);
+	PlayerProgress->SetContainer(Container);
+	PlayerProgress->SetHpBar(HpBar);
+	PlayerProgress->SetMpBar(MpBar);
+	PlayerProgress->setup();
+
+	m_vecHealthProgress.push_back(PlayerProgress);
 	return S_OK;
 }
 
@@ -81,35 +93,6 @@ void cPlayScene::Update()
 	if (m_pPlayer)
 		m_pPlayer->Update();
 
-
-	g_pProgreesBar->update();
-
-	D3DXVECTOR3 tempposition(0, 0, 0);
-	D3DXMATRIX WorldMatrix, matProj, matViewPort, matView;
-	D3DXMatrixTranslation(&WorldMatrix, m_pPlayer->getPosition().x, m_pPlayer->getPosition().y, m_pPlayer->getPosition().z);
-	D3DVIEWPORT9 tempViewPort;
-	g_pD3DDevice->GetViewport(&tempViewPort); //
-	D3DXMatrixIdentity(&matViewPort);
-	matViewPort._11 = tempViewPort.Width / (float)2;
-	matViewPort._22 = -(int)tempViewPort.Height / (float)2;
-	matViewPort._33 = tempViewPort.MaxZ - tempViewPort.MinZ;
-	matViewPort._41 = tempViewPort.X + tempViewPort.Width / (float)2;
-	matViewPort._42 = tempViewPort.Y + tempViewPort.Height / (float)2;
-	matViewPort._43 = tempViewPort.MinZ;
-	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
-	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
-
-
-	float m_fRotZ = D3DX_PI / 2;
-	D3DXMATRIX RotZ;
-
-	D3DXMatrixRotationZ(&RotZ, m_fRotZ);
-
-	WorldMatrix = WorldMatrix * matView * matProj * matViewPort;
-	D3DXVec3TransformCoord(&tempposition, &tempposition, &WorldMatrix);
-
-	g_pProgreesBar->setBarPosition(tempposition, tempposition);
-	
 	shop->GoldUpdate();
 	if (m_pMainUi)
 	{
@@ -129,6 +112,44 @@ void cPlayScene::Update()
 	{
 		g_pSceneManager->ChangeScene("선택창");
 	}
+
+	D3DXVECTOR3 tempposition(0, 0, 0);
+	D3DXMATRIX WorldMatrix, matProj, matViewPort, matView;
+	D3DXMatrixTranslation(&WorldMatrix, m_pPlayer->getPosition().x, m_pPlayer->getPosition().y, m_pPlayer->getPosition().z);
+	D3DVIEWPORT9 tempViewPort;
+	g_pD3DDevice->GetViewport(&tempViewPort); //
+	D3DXMatrixIdentity(&matViewPort);
+	matViewPort._11 = tempViewPort.Width / (float)2;
+	matViewPort._22 = -(int)tempViewPort.Height / (float)2;
+	matViewPort._33 = tempViewPort.MaxZ - tempViewPort.MinZ;
+	matViewPort._41 = tempViewPort.X + tempViewPort.Width / (float)2;
+	matViewPort._42 = tempViewPort.Y + tempViewPort.Height / (float)2;
+	matViewPort._43 = tempViewPort.MinZ;
+	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
+	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
+
+	WorldMatrix = WorldMatrix * matView * matProj * matViewPort;
+	D3DXVec3TransformCoord(&tempposition, &tempposition, &WorldMatrix);
+
+	m_vecHealthProgress[0]->setBarPosition(tempposition, tempposition);
+
+	m_vecHealthProgress[0]->SetMaxHp(status->GetMAXHP());
+	m_vecHealthProgress[0]->SetCurrentHp(status->GetCURRENTHP());
+	m_vecHealthProgress[0]->SetHitValue(status->GetHitValue());
+	m_vecHealthProgress[0]->SetHpBarSize(status->GetCheckHpBar());
+
+	m_vecHealthProgress[0]->SetMaxMp(status->GetMAXMP());
+	m_vecHealthProgress[0]->SetCurrentMp(status->GetCURRENTMP());
+	m_vecHealthProgress[0]->SetMpUsed(status->GetUSEDMP());
+	m_vecHealthProgress[0]->SetMpBarSize(status->GetCheckMpBar());
+
+	m_vecHealthProgress[0]->update();
+
+	if (g_pKeyManager->IsOnceKeyDown('P')) //스탯이 재조정된다면, 재조정되었다 알림.
+	{
+		m_vecHealthProgress[0]->SetReCorret(true);
+	}
+
 }
 
 void cPlayScene::Render()
@@ -142,7 +163,7 @@ void cPlayScene::Render()
 	if (m_pMainUi)
 		m_pMainUi->render();
 
-	g_pProgreesBar->render();
+	m_vecHealthProgress[0]->render();
 
 	{//맵추가
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);

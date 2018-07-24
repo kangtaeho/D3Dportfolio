@@ -2,37 +2,44 @@
 
 class Bitmap;
 
-#define g_pProgreesBar cHealthProgress::GetInstance()
 class cHealthProgress
 {
 private:
-	SINGLETONE(cHealthProgress);
 	RECT  m_HpBarRect;
 	RECT  m_MpBarRect;
-	Bitmap* m_pContainer;
-	Bitmap* m_pHpBar;
-	Bitmap* m_pMpBar;
 
+	float PrevHpSize;
+	float PrevMpSize;
 	float m_fHpBarSize;
 	float m_fHpBarRight;
 	float m_fHpBarBottom;
-	float m_fHitvalue;
 	
 	float m_fMpBarSize;
 	float m_fMpBarRight;
 	float m_fMpBarBottom;
-	float m_fUsedMpValue;
 
+
+	SYNTHESIZE(bool, ReCorrectSize, ReCorret);
+
+
+
+	SYNTHESIZE(Bitmap*, m_pContainer, Container);
+	SYNTHESIZE(float, m_fHitvalue, HitValue);
+	SYNTHESIZE(Bitmap*, m_pHpBar, HpBar);
+	SYNTHESIZE(Bitmap*, m_pMpBar, MpBar);
 	SYNTHESIZE(float, m_fMaxHp, MaxHp);
 	SYNTHESIZE(float, m_fCurrentHp, CurrentHp);
 	SYNTHESIZE(float, m_fMaxMp, MaxMp);
 	SYNTHESIZE(float, m_fCurrentMp, CurrentMp);
 	SYNTHESIZE(bool, m_bCheckHpBarSize, HpBarSize);
-	SYNTHESIZE(bool, m_bCheckHpHit, HpHit);
+	
 	SYNTHESIZE(bool, m_bCheckMpBarSize, MpBarSize);
-	SYNTHESIZE(bool, m_bCheckMpUsed, MpUsed);
+	SYNTHESIZE(float, m_fUsedMpValue, MpUsed);
 	
 public:
+	cHealthProgress();
+	~cHealthProgress();
+
 	void setup();
 	void setBarPosition(D3DXVECTOR3 HpPosition, D3DXVECTOR3 MpPosition);
 	void update();
