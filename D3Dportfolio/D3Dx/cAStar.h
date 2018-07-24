@@ -37,7 +37,7 @@ public:
 	//계속 업데이트 돌려서 캐릭터 포지션, RotY 지정
 	void Update(D3DXVECTOR3& position, float& rotY, float speed, float radius);
 
-	void Stop(D3DXVECTOR3 position, float Range, D3DXVECTOR3* EnemyPosition, float EnemyRadius);
+	bool Stop(D3DXVECTOR3 position, float Range, D3DXVECTOR3* EnemyPosition, float EnemyRadius);
 	void Stop() { FinalAStar.clear(); }
 	//충돌맵과 충돌되면 목적지를 밖으로 이동시켜서 리턴
 	D3DXVECTOR3 PushDestination(D3DXVECTOR3 destination, float characterradius);
