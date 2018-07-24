@@ -127,8 +127,8 @@
     <ClCompile Include="cAStar.cpp">
       <Filter>D3DFramework\cCollisionManager</Filter>
     </ClCompile>
-    <ClCompile Include="cLoadingScene.cpp">
-      <Filter>소스파일\cScene</Filter>
+    <ClCompile Include="cEnemy.cpp">
+      <Filter>소스파일\cCharacter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -267,8 +267,8 @@
     <ClInclude Include="cAStar.h">
       <Filter>D3DFramework\cCollisionManager</Filter>
     </ClInclude>
-    <ClInclude Include="cLoadingScene.h">
-      <Filter>소스파일\cScene</Filter>
+    <ClInclude Include="cEnemy.h">
+      <Filter>소스파일\cCharacter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
