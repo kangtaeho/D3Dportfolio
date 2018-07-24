@@ -46,7 +46,7 @@ void cRangeSkill::Render()
 {
 	
 	 g_pFontManager->TextFont(100, 100, " 쿨다운 %0.2f ", m_fCurrentCooldown);
-	 g_pFontManager->TextFont(100, 120, " 오브젝트재거 시간 %0.2f ", m_fPassedTime);
+	 g_pFontManager->TextFont(100, 120, " 캐스팅시간 %0.2f ", m_fPassedTime);
 	 
 	 if (m_pTargetPos && m_pPlayerPos)
 	 {

@@ -252,6 +252,7 @@ void cSkill::AutoFire()
 
 	if (D3DXVec3Length(&(*m_pTargetPos - *m_pPlayerPos)) < m_fRange)
 	{
+		m_fStartTime = g_pTimeManager->GetLastUpdateTime();
 		m_bIsCasting = true;
 		m_vPos = *m_pPlayerPos;
 		m_bIsAutoFire = false;

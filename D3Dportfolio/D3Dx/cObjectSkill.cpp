@@ -43,9 +43,6 @@ void cObjectSkill::Update()
 
 void cObjectSkill::Render()
 {
-	g_pFontManager->TextFont(10, 500, "%0.3f", m_fCurrentCooldown);
-	g_pFontManager->TextFont(10, 520, "%0.3f", m_fCooldown);
-	g_pFontManager->TextFont(10, 540, "%0.3f", m_fPassedTime);
 	RenderVecMesh();
 	RenderAOEMesh();
 }

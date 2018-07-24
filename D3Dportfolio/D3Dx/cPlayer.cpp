@@ -22,7 +22,7 @@ void cPlayer::Setup(const char* name)
 	m_fMP = 250;
 
 	cCharacter::Setup(name);
-	g_pSkillManager->AddSkill("평타", RANGE_SKILL, 100, m_fRange, 20.0f, 0.3f, 3.0f, 20, true);
+	g_pSkillManager->AddSkill("평타", RANGE_SKILL, 100, m_fRange, 20.0f, 0.5f, 3.0f, 20, true);
 	g_pSkillManager->AddSkill("r", OBJECT_SKILL, 100, 500, 10.0f, 0.5f, 3.0f, 20, true, "BantamTrap");
 	g_pSkillManager->GetSkill("r")->SetPlayer(this);	// 테두리 때문에
 	g_pSkillManager->AddSkill("w", BUFF_SKILL, 0, 0, 0, 0.5, 10, 10, false, NULL);
@@ -44,7 +44,7 @@ void cPlayer::Update()
 {
 	Check3DMousePointer();
 
-	m_AStar.Update(m_vPosition, m_fRotY, m_fSpeed, m_fRadius);
+	m_AStar.Update(m_vPosition, m_fRotY, m_fSpeed, m_fRadius, m_pEnemyPos);
 	m_AStar.Stop(m_vPosition, m_fRange, m_pEnemyPos, 0);
 
 	g_pSkillManager->Update();
@@ -52,6 +52,7 @@ void cPlayer::Update()
 	if (g_pSkillManager->IsCasting())
 	{
 		setAnimation("Attack1");
+		m_AStar.Stop();
 	}
 	else if(m_AStar.getAStarSize())
 	{
@@ -61,6 +62,7 @@ void cPlayer::Update()
 	{
 		setAnimation();
 	}
+
 }
 
 void cPlayer::Render()
