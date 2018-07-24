@@ -76,7 +76,5 @@ void cHealthProgress::render()
 
 void cHealthProgress::Release()
 {
-	SAFE_DELETE(m_pContainer);
-	SAFE_DELETE(m_pHpBar);
-	SAFE_DELETE(m_pMpBar);
+	
 }

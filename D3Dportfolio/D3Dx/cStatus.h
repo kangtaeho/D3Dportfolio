@@ -102,19 +102,48 @@ struct tagStatusGoldState
 	}
 };
 
+struct tagStatInfo
+{
+	Bitmap* Screen;
+
+	tagStatInfo()
+	{
+		Screen = new Bitmap;
+		Screen = g_pTextureManager->addTexture("StatusScreen", "./status/StatusInfoScreen.dds", UI, NULL);
+	}
+
+};
 class cStatus : public cMainUI
 {
 private:
+	
+	bool m_bUsedSkill;
+	bool m_bSelected;
+	Bitmap* m_pSkill_Done_Q;
+	Bitmap* m_pSkill_Done_W;
+	Bitmap* m_pSkill_Done_E;
+	Bitmap* m_pSkill_Done_R;
 
-	RECT rc;
-	float MaxHp;
-	float CurrentHp;
-	float hit;
+	tagStatInfo*  m_pStatInfo;
 
+	std::string m_sSkill_Name;
+
+	RECT HpRc;
+	RECT MpRc;
+	// 스텟치
+	int MaxHp;
+	int CurrentHp;
+	int hit;
+
+	int MaxMp;
+	int CurrentMp;
+	//
 	SYNTHESIZE(std::vector<cInventory*>, m_vecInven, vecInven);
 	RECT* m_pRect;//클릭할 렉트;
 
 	std::vector<cUiSkill*> m_pStatusSkillInfo;
+	std::map<std::string,cUiSkill*> m_mapStatusSkillInfo;
+
 
 	cUiSkill* m_pSkillInfo;
 	std::vector<cInventory*> m_pStatusInvenInfo;
@@ -125,11 +154,21 @@ private:
 	bool m_pShopOpend;
 	tagPlayerInfo*  m_pPlayerInfo;
 	tagStatusGoldState m_pStatusGold;
+
+	//맞았니 , 스킬썼니 체크
 	bool m_bIsHit;
-	bool m_bCheckBar;
-	float rcRight;
-	float rcBottom;
-	float rcSize;
+	bool m_bCheckHpBar;
+	float HprcRight;
+	float HprcBottom;
+	float HprcSize;
+
+	bool m_bIsUsed;
+	bool m_bCheckMpBar;
+
+	float MpRcRight;
+	float MpRcBottom;
+	float MpRcSize;
+	//
 	Bitmap* m_pStatusHealthBar;
 	Bitmap* m_pStatusMpBar;
 	D3DXMATRIX* WorldMatrix;

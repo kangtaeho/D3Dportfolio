@@ -23,57 +23,67 @@ void cStatus::setup()
 	
 	m_pRect = new RECT[6];
 
-
+	m_bUsedSkill = false;
+	m_bSelected = false;
+	m_bIsHit = false;
+	m_bIsUsed = false;
+	m_bCheckHpBar = false;
+	m_bCheckMpBar = false;
+	m_pShopOpend = false;
 	m_pPlayerInfo = new tagPlayerInfo;
 
+	m_pStatInfo = new tagStatInfo;
 
+	m_pStatusScreen = new Bitmap;
+	m_pStatusScreen = g_pTextureManager->addTexture("StatusScreen", "./status/statusScreen.dds", UI, NULL);
+	m_pStatusScreen->setPosition(D3DXVECTOR3(400, 640, 0));
+	m_pStatusScreen->setScale(D3DXVECTOR3(0.8f, 0.8f, 0));
 
-	m_bIsHit = false;
-	m_bCheckBar = false;
-
-
-	m_pShopOpend = false;
 	m_pShopButton = new cUIButton;
 	m_pShopButton->setTexture("shopButtonUP", "shopButtonOver", "shopButtonDown");
-	m_pShopButton->setPosition(D3DXVECTOR3(815, 700, 0));
+	m_pShopButton->setPosition(D3DXVECTOR3(845, m_pStatusScreen->GetPosition().y + 100, 0));
+	m_pShopButton->setScale(D3DXVECTOR3(0.8f, 0.8f, 0));
 
 	m_pStatusHealthBar = new Bitmap;
 	m_pStatusHealthBar = g_pTextureManager->addTexture("HealthBar", "./status/hpBar.dds", PROGRESSBAR, 1, 1);
-	m_pStatusHealthBar->setPosition(D3DXVECTOR3(311, 683, 0));
-	m_pStatusHealthBar->setScale(D3DXVECTOR3(1.018f, 1.1f, 0));
+	m_pStatusHealthBar->setPosition(D3DXVECTOR3(441, m_pStatusScreen->GetPosition().y + 90, 0));
+	m_pStatusHealthBar->setScale(D3DXVECTOR3(0.6f, 1.1f, 0));
 
 	m_pStatusMpBar = new Bitmap;
 	m_pStatusMpBar = g_pTextureManager->addTexture("MpBar", "./status/MpBar.dds", PROGRESSBAR, 1, 1);
-	m_pStatusMpBar->setPosition(D3DXVECTOR3(311, 705, 0));
+	m_pStatusMpBar->setPosition(D3DXVECTOR3(441, m_pStatusScreen->GetPosition().y + 110, 0));
 	m_pStatusMpBar->setScale(D3DXVECTOR3(1.018f, 1.1f, 0));
 
 	m_pCharacterBar = new Bitmap;
 	m_pCharacterBar = g_pTextureManager->addTexture("CharacterIcon", "./status/CharacterIcon.dds", UI, NULL);
-	m_pCharacterBar->setPosition(D3DXVECTOR3(145, 580, 0));
+	m_pCharacterBar->setPosition(D3DXVECTOR3(310, m_pStatusScreen->GetPosition().y + 10, 0));
+	m_pCharacterBar->setScale(D3DXVECTOR3(0.8f, 0.8f, 0));
+
 	m_pStatusInventory = new Bitmap;
 	m_pStatusInventory = g_pTextureManager->addTexture("InventoryTexture", "./status/statusInventory.dds", UI, NULL);
-	m_pStatusInventory->setPosition(D3DXVECTOR3(800, 570, 0));
-
-	m_pStatusScreen = new Bitmap;
-	m_pStatusScreen = g_pTextureManager->addTexture("StatusScreen", "./status/statusScreen.dds", UI, NULL);
-	m_pStatusScreen->setPosition(D3DXVECTOR3(260, 570, 0));
+	m_pStatusInventory->setPosition(D3DXVECTOR3(830, m_pStatusScreen->GetPosition().y, 0));
+	m_pStatusInventory->setScale(D3DXVECTOR3(0.8f, 0.8f, 0));
 
 	m_pCharacterIcon = new Bitmap;
 	m_pCharacterIcon = g_pTextureManager->addTexture("CharacterIcon", "./status/Teemo_Circle_0.dds", UI, NULL);
-	m_pCharacterIcon->setPosition(D3DXVECTOR3(167, 600, 0));
-	m_pCharacterIcon->setScale(D3DXVECTOR3(0.9f, 0.9f, 0));
-
-	m_pBuffInfo = new Bitmap;
-	m_pBuffInfo = g_pTextureManager->addTexture("BuffInfo", "./status/BuffInfo.dds", UI, NULL);
-	m_pBuffInfo->setPosition(D3DXVECTOR3(164, 687, 0));
+	m_pCharacterIcon->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x - 78, m_pStatusScreen->GetPosition().y + 21, 0));
+	m_pCharacterIcon->setScale(D3DXVECTOR3(0.8f, 0.8f, 0));
 
 	m_pStatusPlayerInfoIcon = new Bitmap;
 	m_pStatusPlayerInfoIcon = g_pTextureManager->addTexture("PlayerInfoIcon", "./status/playerInfo.dds", UI, NULL);
-	m_pStatusPlayerInfoIcon->setPosition(D3DXVECTOR3(147, 673, 0));
+	m_pStatusPlayerInfoIcon->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x - 90, m_pStatusScreen->GetPosition().y + 85, 0));
+	m_pStatusPlayerInfoIcon->setScale(D3DXVECTOR3(0.8f, 0.8f, 0));
+
+	m_pBuffInfo = new Bitmap;
+	m_pBuffInfo = g_pTextureManager->addTexture("BuffInfo", "./status/BuffInfo.dds", UI, NULL);
+	m_pBuffInfo->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x - 76, m_pStatusScreen->GetPosition().y + 95, 0));
+	m_pBuffInfo->setScale(D3DXVECTOR3(0.8f, 0.8f, 0));
+
+
 
 	m_pTeleport = new Bitmap;
 	m_pTeleport = g_pTextureManager->addTexture("TeleportHome", "./status/TeleportHome.dds", UI, NULL);
-	m_pTeleport->setPosition(D3DXVECTOR3(975, 650, 0));
+	m_pTeleport->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x + 565, m_pStatusScreen->GetPosition().y + 60, 0));
 	//m_pSkillButton = new cUIButton;
 
 
@@ -97,28 +107,33 @@ void cStatus::setup()
 	m_pPlayerInfo->SkillInfo.Skill_R = g_pTextureManager->addTexture("Teemo_R", "./status/Teemo_R.dds", UI, NULL);
 	m_pPlayerInfo->SkillInfo.Skill_Passive = g_pTextureManager->addTexture("Teemo_P", "./status/Teemo_P.dds", UI, NULL);
 
-	m_pPlayerInfo->SkillInfo.Skill_Q->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x + 110, m_pStatusScreen->GetPosition().y + 24, 0));
-	m_pPlayerInfo->SkillInfo.Skill_W->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x + 185, m_pStatusScreen->GetPosition().y + 24, 0));
-	m_pPlayerInfo->SkillInfo.Skill_E->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x + 260, m_pStatusScreen->GetPosition().y + 24, 0));
-	m_pPlayerInfo->SkillInfo.Skill_R->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x + 335, m_pStatusScreen->GetPosition().y + 24, 0));
+	m_pPlayerInfo->SkillInfo.Skill_Q->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x + 86, m_pStatusScreen->GetPosition().y + 20, 0));
+	m_pPlayerInfo->SkillInfo.Skill_W->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x + 145, m_pStatusScreen->GetPosition().y + 20, 0));
+	m_pPlayerInfo->SkillInfo.Skill_E->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x + 205, m_pStatusScreen->GetPosition().y + 20, 0));
+	m_pPlayerInfo->SkillInfo.Skill_R->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x + 265, m_pStatusScreen->GetPosition().y + 20, 0));
 	m_pPlayerInfo->SkillInfo.Skill_Passive->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x + 110, m_pStatusScreen->GetPosition().y - 35, 0));
 
+
+	m_pPlayerInfo->SkillInfo.Skill_Q->setScale(D3DXVECTOR3(0.8f,0.8f,0));
+	m_pPlayerInfo->SkillInfo.Skill_W->setScale(D3DXVECTOR3(0.8f,0.8f,0));
+	m_pPlayerInfo->SkillInfo.Skill_E->setScale(D3DXVECTOR3(0.8f,0.8f,0));
+	m_pPlayerInfo->SkillInfo.Skill_R->setScale(D3DXVECTOR3(0.8f,0.8f,0));
 	m_pPlayerInfo->SkillInfo.Skill_Passive->setScale(D3DXVECTOR3(0.55f, 0.55f, 0));
 
-	g_pTextureManager->addTexture("Teemo_Q_Done", "./status/Teemo_Q_Done.dds", UI, NULL);
-	g_pTextureManager->addTexture("Teemo_W_Done", "./status/Teemo_W_Done.dds", UI, NULL);
-	g_pTextureManager->addTexture("Teemo_E_Done", "./status/Teemo_E_Done.dds", UI, NULL);
-	g_pTextureManager->addTexture("Teemo_R_Done", "./status/Teemo_R_Done.dds", UI, NULL);
 
-	g_pTextureManager->findTexture("Teemo_Q_Done")->setPosition(m_pPlayerInfo->SkillInfo.Skill_Q->GetPosition());
-	g_pTextureManager->findTexture("Teemo_W_Done")->setPosition(m_pPlayerInfo->SkillInfo.Skill_W->GetPosition());
-	g_pTextureManager->findTexture("Teemo_E_Done")->setPosition(m_pPlayerInfo->SkillInfo.Skill_E->GetPosition());
-	g_pTextureManager->findTexture("Teemo_R_Done")->setPosition(m_pPlayerInfo->SkillInfo.Skill_R->GetPosition());
 
+	m_pStatInfo->Screen->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x - 200, m_pStatusScreen->GetPosition().y + 20, 0));
+	m_pStatInfo->Screen->setScale(D3DXVECTOR3(1.0f, 0.8f, 0));
 
 	m_pStatusSkillInfo.reserve(10);
 
 
+	std::vector<std::string> vecSkillName;
+	vecSkillName.push_back("q");
+	vecSkillName.push_back("w");
+	vecSkillName.push_back("e");
+	vecSkillName.push_back("r");
+	vecSkillName.push_back("p");
 
 	m_pSkillInfo = new cUiSkill;
 	m_pSkillInfo->SetChosen(false);
@@ -126,11 +141,15 @@ void cStatus::setup()
 	m_pSkillInfo->SetvSkillPos(m_pPlayerInfo->SkillInfo.Skill_Q->GetPosition());
 	m_pStatusSkillInfo.push_back(m_pSkillInfo);
 
+	m_mapStatusSkillInfo.insert(std::make_pair(vecSkillName[0], m_pSkillInfo));
+
 	m_pSkillInfo = new cUiSkill;
 	m_pSkillInfo->SetChosen(false);
 	m_pSkillInfo->SetskillInfo(m_pPlayerInfo->SkillInfo.Skill_W);
 	m_pSkillInfo->SetvSkillPos(m_pPlayerInfo->SkillInfo.Skill_W->GetPosition());
 	m_pStatusSkillInfo.push_back(m_pSkillInfo);
+
+	m_mapStatusSkillInfo.insert(std::make_pair(vecSkillName[1], m_pSkillInfo));
 
 	m_pSkillInfo = new cUiSkill;
 	m_pSkillInfo->SetChosen(false);
@@ -138,11 +157,15 @@ void cStatus::setup()
 	m_pSkillInfo->SetvSkillPos(m_pPlayerInfo->SkillInfo.Skill_E->GetPosition());
 	m_pStatusSkillInfo.push_back(m_pSkillInfo);
 
+	m_mapStatusSkillInfo.insert(std::make_pair(vecSkillName[2], m_pSkillInfo));
+
 	m_pSkillInfo = new cUiSkill;
 	m_pSkillInfo->SetChosen(false);
 	m_pSkillInfo->SetskillInfo(m_pPlayerInfo->SkillInfo.Skill_R);
 	m_pSkillInfo->SetvSkillPos(m_pPlayerInfo->SkillInfo.Skill_R->GetPosition());
 	m_pStatusSkillInfo.push_back(m_pSkillInfo);
+
+	m_mapStatusSkillInfo.insert(std::make_pair(vecSkillName[3], m_pSkillInfo));
 
 	m_pSkillInfo = new cUiSkill;
 	m_pSkillInfo->SetChosen(false);
@@ -150,22 +173,36 @@ void cStatus::setup()
 	m_pSkillInfo->SetvSkillPos(m_pPlayerInfo->SkillInfo.Skill_Passive->GetPosition());
 	m_pStatusSkillInfo.push_back(m_pSkillInfo);
 
+	m_mapStatusSkillInfo.insert(std::make_pair(vecSkillName[4], m_pSkillInfo));
 
 
 	setInventoryInfo();
 
-	MaxHp = 3000;
-	CurrentHp = 0;
+	MaxHp = 1000;
+	CurrentHp = MaxHp;
 	m_pPlayerInfo->HealthInfo.Hp = MaxHp;
 	hit = 30;
 
-	rcRight = m_pStatusHealthBar->GetrectFrameSize()->right;
-	rcBottom = m_pStatusHealthBar->GetrectFrameSize()->bottom;
+	HprcRight = m_pStatusHealthBar->GetrectFrameSize()->right;
+	HprcBottom = m_pStatusHealthBar->GetrectFrameSize()->bottom;
 
-	SetRect(&rc, 0, 0, MaxHp, rcBottom);
-	rcSize = rcRight / MaxHp;
-	m_pStatusHealthBar->SetRectFrameSize(rc);
-	m_pStatusHealthBar->setScale(D3DXVECTOR3(rcSize, 1.1f, 0));
+	SetRect(&HpRc, 0, 0, MaxHp, HprcBottom);
+	HprcSize = HprcRight / MaxHp * 0.81f;
+	m_pStatusHealthBar->SetRectFrameSize(HpRc);
+	m_pStatusHealthBar->setScale(D3DXVECTOR3(HprcSize, 1.0f, 0));
+
+	//
+
+	MaxMp = 500;
+	CurrentMp = MaxMp;
+	m_pPlayerInfo->HealthInfo.Mp = MaxMp;
+	MpRcRight = m_pStatusMpBar->GetrectFrameSize()->right;
+	MpRcBottom = m_pStatusMpBar->GetrectFrameSize()->bottom;
+	
+	SetRect(&MpRc, 0, 0, MaxMp, MpRcBottom);
+	MpRcSize = MpRcRight / MaxMp * 0.81f;
+	m_pStatusMpBar->SetRectFrameSize(MpRc);
+	m_pStatusMpBar->setScale(D3DXVECTOR3(MpRcSize, 1.0f, 0));
 
 	t = new D3DXVECTOR3[m_pStatusInvenInfo.size()];
 	s = new D3DXVECTOR3[m_pStatusInvenInfo.size()];
@@ -202,6 +239,8 @@ void cStatus::setInventoryInfo()
 }
 void cStatus::update()
 {
+	
+	m_pStatInfo->Screen->update();
 	if (m_pStatusInventory)
 		m_pStatusInventory->update();
 	if (m_pStatusScreen)
@@ -222,27 +261,49 @@ void cStatus::update()
 		if (p->GetinvitemInfo()->GetItemInfo() != NULL)
 			p->GetinvitemInfo()->GetItemInfo()->Itemtexture->update();
 	}
+
 	HitProgress();
 
 	if (g_pKeyManager->IsOnceKeyDown('V'))
 	{
 		m_bIsHit = true;
-		m_bCheckBar = true;
+		m_bCheckHpBar = true;
+		
 	}
 	if (m_pStatusHealthBar)
 	{
 		m_pStatusHealthBar->update(0);
 
-		if (m_pStatusHealthBar->GetrectFrameSize()->left <= m_pStatusHealthBar->GetrectFrameSize()->right &&
+		if (m_pStatusHealthBar->GetrectFrameSize()->right <= 0) m_pStatusHealthBar->GetrectFrameSize()->right = 0;
+
+		if (m_pStatusHealthBar->GetrectFrameSize()->left < m_pStatusHealthBar->GetrectFrameSize()->right &&
 			m_bIsHit)
 		{
 			m_pStatusHealthBar->GetrectFrameSize()->right -= hit;
 			m_bIsHit = false;
 		}
 	}
-	for (int i = 0; i < m_pStatusSkillInfo.size(); i++)
+	if (m_pStatusMpBar)
+	{
+		m_pStatusMpBar->update(0);
+
+		if (m_pStatusMpBar->GetrectFrameSize()->right <= 0) m_pStatusMpBar->GetrectFrameSize()->right = 0;
+
+		if (m_pStatusMpBar->GetrectFrameSize()->left < m_pStatusMpBar->GetrectFrameSize()->right &&
+			m_bIsUsed)
+		{
+			m_pStatusMpBar->GetrectFrameSize()->right -= hit;
+			m_bIsUsed = false;
+		}
+	}
+	/*for (int i = 0; i < m_pStatusSkillInfo.size(); i++)
 	{
 		m_pStatusSkillInfo[i]->update();
+	}*/
+
+	for (auto p : m_mapStatusSkillInfo)
+	{
+		p.second->update();
 	}
 
 	if (m_pShopButton->GetButttonState() == 2)
@@ -256,12 +317,9 @@ void cStatus::update()
 	if (g_pKeyManager->IsOnceKeyDown(VK_ESCAPE))m_pShopOpend = false;
 
 
-	if (m_pStatusMpBar)
-	{
-		m_pStatusMpBar->update(0);
-	}
+	
 
-
+	
 
 	m_mapiter = m_mapChild.find("SHOP");
 	if (m_mapiter != m_mapChild.end())
@@ -285,10 +343,10 @@ void cStatus::update()
 	m_pStatusGold.Gold_huans->setCurrentFrame((m_pStatusGold.amount % 1000) / 100);
 	m_pStatusGold.Gold_thous->setCurrentFrame(m_pStatusGold.amount / 1000);
 
-	m_pStatusGold.Gold_units->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x + 695, m_pStatusScreen->GetPosition().y + 136, 0));
-	m_pStatusGold.Gold_tens->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x + 680, m_pStatusScreen->GetPosition().y + 136, 0));
-	m_pStatusGold.Gold_huans->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x + 665, m_pStatusScreen->GetPosition().y + 136, 0));
-	m_pStatusGold.Gold_thous->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x + 650, m_pStatusScreen->GetPosition().y + 136, 0));
+	m_pStatusGold.Gold_units->setPosition(D3DXVECTOR3(m_pStatusInventory->GetPosition().x + 135, m_pStatusInventory->GetPosition().y + 105, 0));
+	m_pStatusGold.Gold_tens->setPosition(D3DXVECTOR3(m_pStatusInventory->GetPosition().x + 115, m_pStatusInventory->GetPosition().y + 105, 0));
+	m_pStatusGold.Gold_huans->setPosition(D3DXVECTOR3(m_pStatusInventory->GetPosition().x + 95, m_pStatusInventory->GetPosition().y + 105, 0));
+	m_pStatusGold.Gold_thous->setPosition(D3DXVECTOR3(m_pStatusInventory->GetPosition().x + 75, m_pStatusInventory->GetPosition().y + 105, 0));
 
 	if (m_pShopButton)
 		m_pShopButton->update();
@@ -316,30 +374,90 @@ void cStatus::update()
 		}
 	}
 
+	
+
 	if (g_pKeyManager->IsOnceKeyDown('Q'))
 	{
-		m_pStatusSkillInfo[0]->SetChosen(true);
-		m_pStatusSkillInfo[0]->GetskillInfo() = g_pTextureManager->findTexture("Teemo_Q_Done");
-		g_pSkillManager->IsReady("평타");
+		for (auto p : m_mapStatusSkillInfo)
+		{
+			if (p.first == "q")
+			{
+				p.second->SetChosen(true);
+				p.second->GetskillInfo()->Setalphavalue(100);
+				m_bSelected = true;
+			}
+
+		}
+		g_pSkillManager->IsReady("q");
 	}
 	if (g_pKeyManager->IsOnceKeyDown('W'))
 	{
-		m_pStatusSkillInfo[1]->SetChosen(true);
-		g_pSkillManager->IsReady("이속업");
+		for (auto p : m_mapStatusSkillInfo)
+		{
+			if (p.first == "w" && m_bSelected != true)
+			{
+				if (p.second->GetChosen() == true) continue;
+
+				p.second->SetChosen(true);
+				p.second->GetskillInfo()->Setalphavalue(100);
+				m_bSelected = true;
+				g_pSkillManager->IsReady("w");
+			}
+
+		}
 	}
+
+
 	if (g_pKeyManager->IsOnceKeyDown('E'))
 	{
-		m_pStatusSkillInfo[2]->SetChosen(true);
+		for (auto p : m_mapStatusSkillInfo)
+		{
+			if (p.first == "e" && m_bSelected != true)
+			{
+				if (p.second->GetChosen() == true) continue;
+
+				p.second->SetChosen(true);
+				p.second->GetskillInfo()->Setalphavalue(100);
+				m_bSelected = true;
+			}
+
+		}
+		g_pSkillManager->IsReady("e");
 	}
 	if (g_pKeyManager->IsOnceKeyDown('R'))
 	{
-		m_pStatusSkillInfo[3]->SetChosen(true);
-		m_pStatusSkillInfo[3]->GetskillInfo() = g_pTextureManager->findTexture("Teemo_R_Done");
-		g_pSkillManager->IsReady("r");
-		float a = g_pSkillManager->GetSkill("r")->GetCoolDown();
+		for (auto p : m_mapStatusSkillInfo)
+		{
+			if (p.first == "r" && m_bSelected != true)
+			{
+				if (p.second->GetChosen() == true) continue;
+
+				p.second->SetChosen(true);
+				p.second->GetskillInfo()->Setalphavalue(100);
+				m_bSelected = true;
+
+				g_pSkillManager->IsReady("r");
+			}
+		}
 	}
 
+	if (g_pSkillManager->GetSkill("r")->IsUsingSkill())
+	{
+		m_bIsUsed = true;
+		m_bCheckMpBar = true;
+		m_bUsedSkill = true;
+		m_bSelected = false;
+	}
+	if (g_pSkillManager->GetSkill("w")->IsUsingSkill())
+	{
+		m_bIsUsed = true;
+		m_bCheckMpBar = true;
+		m_bUsedSkill = true;
+		m_bSelected = false;
+	}
 
+	if (CurrentHp <= 0)CurrentHp = 0;
+	if (CurrentMp <= 0)CurrentMp = 0;
 	cMainUI::update();
 }
 void cStatus::release()
@@ -357,6 +475,8 @@ void cStatus::render()
 	if (m_pSkillButton)
 		m_pSkillButton->Render();
 
+	m_pStatInfo->Screen->Render();
+
 	if (m_pCharacterBar)
 		m_pCharacterBar->Render();
 	if (m_pCharacterIcon)
@@ -372,11 +492,9 @@ void cStatus::render()
 		m_pStatusMpBar->aniRender();
 
 
-
-
-	for (int i = 0; i < m_pStatusSkillInfo.size(); i++)
+	for (auto p : m_mapStatusSkillInfo)
 	{
-		m_pStatusSkillInfo[i]->render();
+		p.second->render();
 	}
 
 	if (m_pShopButton)
@@ -393,19 +511,53 @@ void cStatus::render()
 
 
 	cMainUI::render();
-	//g_pFontManager->TextFont(10, 200 + 20, "와썹");
+	
+	for (auto p : m_mapStatusSkillInfo)
+	{
+		if (p.second->GetChosen() == true)
+		{
+			g_pFontManager->TextFont(p.second->GetskillInfo()->GetPosition().x +18,
+				p.second->GetskillInfo()->GetPosition().y + 15, "%d",
+				g_pSkillManager->GetSkill(p.first)->CooldownTimer());
+
+			if (g_pSkillManager->GetSkill(p.first)->CooldownTimer() == 0)
+			{
+				p.second->SetChosen(false);
+				p.second->GetskillInfo()->Setalphavalue(255);
+				m_bUsedSkill = false;
+			}
+		}
+	}
+
+	g_pFontManager->TextFont(m_pStatusHealthBar->GetPosition().x + 200, m_pStatusHealthBar->GetPosition().y, "%d", MaxHp);
+	g_pFontManager->TextFont(m_pStatusHealthBar->GetPosition().x + 180, m_pStatusHealthBar->GetPosition().y, "/");
+	g_pFontManager->TextFont(m_pStatusHealthBar->GetPosition().x + 120, m_pStatusHealthBar->GetPosition().y, "%d", CurrentHp);
+
+	g_pFontManager->TextFont(m_pStatusMpBar->GetPosition().x + 200, m_pStatusMpBar->GetPosition().y, "%d", MaxMp);
+	g_pFontManager->TextFont(m_pStatusMpBar->GetPosition().x + 180, m_pStatusMpBar->GetPosition().y, "/");
+	g_pFontManager->TextFont(m_pStatusMpBar->GetPosition().x + 120, m_pStatusMpBar->GetPosition().y, "%d", CurrentMp);
 }
 
 void cStatus::HitProgress()
 {
-	CurrentHp = MaxHp - hit;
-	if (m_bCheckBar)
+	if (m_bCheckHpBar)
 	{
-		rcRight = m_pStatusHealthBar->GetrectFrameSize()->right;
-		rcBottom = m_pStatusHealthBar->GetrectFrameSize()->bottom;
-		m_bCheckBar = false;
+		if(CurrentHp > 0)
+		CurrentHp = CurrentHp - hit;
+		HprcRight = m_pStatusHealthBar->GetrectFrameSize()->right;
+		HprcBottom = m_pStatusHealthBar->GetrectFrameSize()->bottom;
+		m_bCheckHpBar = false;
 	}
 
+	if (m_bCheckMpBar)
+	{
+		if (CurrentMp > 0)
+			CurrentMp = CurrentMp - hit;
+
+		MpRcRight = m_pStatusMpBar->GetrectFrameSize()->right;
+		MpRcBottom = m_pStatusMpBar->GetrectFrameSize()->bottom;
+		m_bCheckMpBar = false;
+	}
 	//SetRect(&rc, 0, 0, CurrentHp, rcBottom);
 	//rcSize = rcRight / MaxHp;
 	//m_pStatusHealthBar->SetRectFrameSize(rc);
