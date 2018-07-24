@@ -35,7 +35,7 @@ public:
 	//셋업으로 에이스타 지정
 	void Setup(D3DXVECTOR3 position, float radius, D3DXVECTOR3 destination);
 	//계속 업데이트 돌려서 캐릭터 포지션, RotY 지정
-	void Update(D3DXVECTOR3& position, float& rotY, float speed, float radius);
+	void Update(D3DXVECTOR3& position, float& rotY, float speed, float radius, D3DXVECTOR3* pEnemyPos = NULL);
 
 	int getAStarSize() { return FinalAStar.size(); }
 
