@@ -79,8 +79,7 @@ void cAStar::Setup(D3DXVECTOR3 position, float radius, D3DXVECTOR3 destination)
 			if (D3DXVec3Length(&(TotalAStar[i].back() - destination)) < 0.001f)EndingAStar++;
 		}
 	}
-	FinalAStar = TotalAStar.front();
-/*
+	/*
 	for (int i = 0; i < TotalAStar.size(); ++i)
 	{
 		if (D3DXVec3Length(&(TotalAStar[i].back() - destination)) > 0.001f)continue;
@@ -101,6 +100,8 @@ void cAStar::Setup(D3DXVECTOR3 position, float radius, D3DXVECTOR3 destination)
 		}
 	}
 */
+	FinalAStar = TotalAStar.front();
+
 	////////////////////////////////////////////////////////////////
 /*
 	position.y = 5000.0f;
@@ -179,18 +180,11 @@ void cAStar::Update(D3DXVECTOR3& position, float& rotY, float speed, float radiu
 
 			tempNextPosition = g_pCollisionManager->SetHeight(tempNextPosition);
 
-<<<<<<< HEAD
-		rotY = g_pCollisionManager->getDirectionAngle(tempNextPosition - position);
-		rotY += D3DX_PI / 2.0f;
-		position = tempNextPosition;
-=======
 			rotY = g_pCollisionManager->getDirectionAngle(tempNextPosition - position);
 			rotY += D3DX_PI / 2;
 			position = tempNextPosition;
 		}
->>>>>>> 2a8c80e1e216cc6d4fc0ef727542f726cb78c591
 	}
-
 	position = g_pCollisionManager->SetHeight(position);
 }
 
