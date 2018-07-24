@@ -137,6 +137,7 @@ private:
 
 	int MaxMp;
 	int CurrentMp;
+	int UsedMp;
 	//
 	SYNTHESIZE(std::vector<cInventory*>, m_vecInven, vecInven);
 	RECT* m_pRect;//클릭할 렉트;
