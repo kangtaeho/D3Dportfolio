@@ -3,6 +3,7 @@
 #include "cCube.h"
 #include "cSkinnedMesh.h"
 #include "cPlayer.h"
+#include "cEnemy.h"
 
 cSkill::cSkill()
 	: e_skillType(SKILL_TYPE_COUNT)
@@ -30,6 +31,7 @@ cSkill::cSkill()
 	, m_bIsFire(false)
 	, m_pMesh(NULL)
 	, m_pPlayer(NULL)
+	, m_pTargetEnemy(NULL)
 	, e_BuffType(BUFF_TYPE_COUNT)
 {
 	D3DXMatrixIdentity(&m_matWorld);
@@ -88,6 +90,7 @@ void cSkill::Render()
 
 void cSkill::Fire(D3DXVECTOR3* playerPos,
 				D3DXVECTOR3* tagetPos,
+				cEnemy* targetEnemy,
 				bool isNormal)
 
 {
@@ -102,6 +105,7 @@ void cSkill::Fire(D3DXVECTOR3* playerPos,
 	m_vPos = *playerPos;		// 미사일 시작 위치
 	m_pPlayerPos = playerPos;	// 플레이어 좌표 포인터
 	m_pTargetPos = tagetPos;
+	m_pTargetEnemy = targetEnemy;	// 적설정
 
 	// 타겟과 플레이어의 위치가 범위보다 클때
 	if (D3DXVec3Length(&(*m_pTargetPos - m_vPos)) > m_fRange)
@@ -224,12 +228,24 @@ void cSkill::RemoveRange()
 void cSkill::RemoveTarget()
 {
 	if (!m_pTargetPos) return; // 대상 타겟이 없으면 리턴
+	if (!m_pTargetEnemy) return;
 
 	if (D3DXVec3Length(&(*m_pTargetPos - m_vPos)) < 10.0f)
 	{
 		delete m_pCube;
 		m_pCube = NULL;
 		m_bIsRemove = false;
+		m_pTargetPos = NULL;
+
+		switch (e_skillType)
+		{
+		case RANGE_SKILL:
+			m_pTargetEnemy->SetHP(m_pTargetEnemy->GetHP() - m_fDamage);
+			break;
+		case TOXIC_SKILL:
+			AddToxicEnemy(m_pTargetEnemy);
+			break;
+		}
 	}
 }
 
@@ -283,7 +299,7 @@ void cSkill::CreateMesh()
 		m_matWorld = matR*matT;
 		// m_pCube->SetMatWorld(m_matWorld);
 	}
-	else if (e_skillType == RANGE_SKILL)
+	else if (e_skillType == RANGE_SKILL|| e_skillType == TOXIC_SKILL)
 	{
 		if (m_pCube) return;
 		m_pCube = new cCube;
@@ -552,4 +568,35 @@ bool cSkill::IsUsingSkill()
 		return false;
 	}
 
+}
+
+void cSkill::AddToxicEnemy(cEnemy * enemy)
+{
+	TOXIC_ENEMY t;
+	t.enemy = enemy;
+	t.removeTime = 0.0f;
+	t.countTime = 0.0f;
+	t.startTime = g_pTimeManager->GetLastUpdateTime();
+	m_vecToxic.push_back(t);
+}
+
+void cSkill::DamagedToxic()
+{
+
+	for (int i = 0; i < m_vecToxic.size(); i++)
+	{
+		m_vecToxic[i].removeTime = g_pTimeManager->GetLastUpdateTime() - m_vecToxic[i].startTime;
+
+		if ((m_vecToxic[i].removeTime - m_vecToxic[i].countTime) > 0)
+		{
+			m_vecToxic[i].countTime+=2.0f;
+			m_vecToxic[i].enemy->SetHP(m_vecToxic[i].enemy->GetHP() - m_fDamage / 2.0f);
+		}
+
+		if (m_vecToxic[i].removeTime > m_fRemoveTime)
+		{
+			m_vecToxic.erase(m_vecToxic.begin() + i);
+		}
+
+	}
 }

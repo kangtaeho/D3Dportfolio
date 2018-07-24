@@ -4,6 +4,7 @@
 #include "cRangeSkill.h"
 #include "cObjectSkill.h"
 #include "cBuffSkill.h"
+#include "cToxicSkill.h"
 
 cSkillManager::cSkillManager()
 {
@@ -79,6 +80,12 @@ void cSkillManager::AddSkill(std::string skillName,
 			pBuff->Setup(skillType, damage, range, posSpeed, castingTime, cooldown, removeTime, isTarget, name);
 			m_mapSkill.insert(std::make_pair(skillName, pBuff));
 		}
+		else if (skillType == TOXIC_SKILL)
+		{
+			cToxicSkill* pToxic = new cToxicSkill;
+			pToxic->Setup(skillType, damage, range, posSpeed, castingTime, cooldown, removeTime, isTarget, name);
+			m_mapSkill.insert(std::make_pair(skillName, pToxic));
+		}
 
 	}
 
@@ -87,12 +94,13 @@ void cSkillManager::AddSkill(std::string skillName,
 void cSkillManager::Fire(std::string skillName,
 	D3DXVECTOR3* playerPos,
 	D3DXVECTOR3* tagetPos,
+	cEnemy* targetEnemy,
 	bool isNormal)
 {
 
 	if (m_mapSkill.find(skillName) == m_mapSkill.end()) return;
 
-	m_mapSkill[skillName]->Fire(playerPos, tagetPos, isNormal);
+	m_mapSkill[skillName]->Fire(playerPos, tagetPos, targetEnemy,isNormal);
 
 }
 

@@ -23,13 +23,13 @@
     <ProjectGuid>{590D056D-3D4D-4C0C-811A-8AF55BFB001B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>D3Dx</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -191,6 +191,7 @@
     <ClInclude Include="cStatus.h" />
     <ClInclude Include="cTextureManager.h" />
     <ClInclude Include="cTimeManager.h" />
+    <ClInclude Include="cToxicSkill.h" />
     <ClInclude Include="cUIButton.h" />
     <ClInclude Include="cUiSkill.h" />
     <ClInclude Include="cXManager.h" />
@@ -240,6 +241,7 @@
     <ClCompile Include="cStatus.cpp" />
     <ClCompile Include="cTextureManager.cpp" />
     <ClCompile Include="cTimeManager.cpp" />
+    <ClCompile Include="cToxicSkill.cpp" />
     <ClCompile Include="cUIButton.cpp" />
     <ClCompile Include="cUiSkill.cpp" />
     <ClCompile Include="cXManager.cpp" />

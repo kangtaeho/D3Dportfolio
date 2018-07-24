@@ -4,6 +4,7 @@
 class cCube;
 class cSkinnedMesh;
 class cPlayer;
+class cEnemy;
 
 enum SKILL_TYPE
 {
@@ -11,6 +12,7 @@ enum SKILL_TYPE
 	RANGE_SKILL,
 	OBJECT_SKILL,
 	BUFF_SKILL,
+	TOXIC_SKILL,
 	SKILL_TYPE_COUNT
 };
 
@@ -29,6 +31,14 @@ struct OBJECT_MESH
 	bool		isAttack;
 	cAction*	animation;
 	OBJECT_MESH() { animation = new cAction; }
+};
+
+struct TOXIC_ENEMY
+{
+	float removeTime;
+	float countTime;
+	float startTime;
+	cEnemy* enemy;
 };
 
 struct AOE_MESH
@@ -97,6 +107,14 @@ protected:
 
 	AOE_MESH*			s_AoeMesh;
 
+
+	// 독데미지 판정
+	std::vector<TOXIC_ENEMY> m_vecToxic;
+	cEnemy* m_pTargetEnemy;
+
+
+	std::vector<cEnemy>* m_pVecEnemy;
+
 public:
 	cSkill();
 	virtual ~cSkill();
@@ -116,7 +134,8 @@ public:
 	virtual void	Render();
 
 	void Fire(D3DXVECTOR3* playerPos,
-			D3DXVECTOR3* tagetPos,
+		D3DXVECTOR3* tagetPos,
+		cEnemy* targetEnemy,
 			bool isNormal);
 
 	void Move();
@@ -153,6 +172,10 @@ public:
 	void RenderAOEMesh();
 
 	bool IsUsingSkill();
+
+	// 독데미지
+	void AddToxicEnemy(cEnemy* enemy);
+	void DamagedToxic();
 
 };
 

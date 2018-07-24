@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  cStatus.cpp
 c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.h(89): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.h(90): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
@@ -86,3 +87,9 @@ c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cplayscene.cpp(143): warnin
 c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cplayscene.cpp(144): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다...
   D3Dx.vcxproj -> C:\Users\USER\Desktop\D3Dportfolio\D3Dportfolio\Debug\D3Dx.exe
+=======
+﻿  cPlayer.cpp
+c:\users\kang\documents\github\d3dportfolio\d3dportfolio\d3dx\cplayer.cpp(162): warning C4390: ';': 제어된 빈 문이 있습니다. 이 문이 필요합니까?
+  D3Dx.vcxproj -> C:\Users\kang\Documents\GitHub\D3Dportfolio\D3Dportfolio\Debug\D3Dx.exe
+  D3Dx.vcxproj -> C:\Users\kang\Documents\GitHub\D3Dportfolio\D3Dportfolio\Debug\D3Dx.pdb (Full PDB)
+>>>>>>> 366274dac3bfced92a0b1ff143dd6202bdf72d5e
