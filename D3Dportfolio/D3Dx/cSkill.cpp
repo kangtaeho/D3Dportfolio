@@ -443,21 +443,32 @@ void cSkill::CreateAOEMesh(bool isCreatePointMesh, float pointScale)
 
 	if (isCreatePointMesh)
 	{
-		s_AoeMesh->pointMesh->LockVertexBuffer(0, (void**)&vM);
+		D3DXCreateMeshFVF(
+			2,
+			6,
+			D3DXMESH_MANAGED,
+			ST_PNT_VERTEX::FVF,
+			g_pD3DDevice,
+			&s_AoeMesh->pointMesh
+		);
+
+		ST_PNT_VERTEX* vM1;
+
+		s_AoeMesh->pointMesh->LockVertexBuffer(0, (void**)&vM1);
 
 		for (int i = 0; i < index.size(); i++)
 		{
-			vM[i] = index[i];
+			vM1[i] = index[i];
 		}
 
 		s_AoeMesh->pointMesh->UnlockVertexBuffer();
 
-		WORD * wM;
-		s_AoeMesh->pointMesh->LockIndexBuffer(0, (void**)&wM);
+		WORD * wM1;
+		s_AoeMesh->pointMesh->LockIndexBuffer(0, (void**)&wM1);
 
 		for (int i = 0; i < index.size(); i++)
 		{
-			wM[i] = i;
+			wM1[i] = i;
 		}
 
 		s_AoeMesh->pointMesh->UnlockIndexBuffer();
@@ -498,8 +509,24 @@ void cSkill::RenderAOEMesh()
 		
 		s_AoeMesh->aoeMesh->DrawSubset(0);
 
-		if()
-		s_AoeMesh->pointMesh
+		if (s_AoeMesh->pointMesh)
+		{
+			int isPick = 0;
+			D3DXVECTOR3 p = g_pCollisionManager->getRayPosition(isPick);
+
+			D3DXMatrixScaling(&matS, s_AoeMesh->pointScale, 1, s_AoeMesh->pointScale);
+			D3DXMatrixTranslation(&matT, p.x, p.y, p.z);
+
+			matPointWorld = matS*matT;
+
+			g_pD3DDevice->SetTransform(D3DTS_WORLD, &matPointWorld);
+			g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
+			LPDIRECT3DTEXTURE9 texture1 = g_pTextureManager->GetTexture("./select/skillFloor02.png");
+			g_pD3DDevice->SetTexture(0, texture1);
+
+			s_AoeMesh->pointMesh->DrawSubset(0);
+
+		}
 
 	}
 }

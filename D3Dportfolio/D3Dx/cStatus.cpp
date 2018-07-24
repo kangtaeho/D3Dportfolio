@@ -335,8 +335,8 @@ void cStatus::update()
 	{
 		m_pStatusSkillInfo[3]->SetChosen(true);
 		m_pStatusSkillInfo[3]->GetskillInfo() = g_pTextureManager->findTexture("Teemo_R_Done");
-		g_pSkillManager->IsReady("¹ö¼¸");
-		float a = g_pSkillManager->GetSkill("¹ö¼¸")->GetCoolDown();
+		g_pSkillManager->IsReady("r");
+		float a = g_pSkillManager->GetSkill("r")->GetCoolDown();
 	}
 
 
