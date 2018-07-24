@@ -477,6 +477,14 @@ void cStatus::update()
 		HprcSize = (prevRectSize * 0.81f) / HprcRight;
 		m_pStatusHealthBar->setScale(D3DXVECTOR3(HprcSize, 1.0f, 0));
 
+		SetRect(&MpRc, 0, 0, MaxMp, MpRcBottom);
+		m_pStatusMpBar->SetRectFrameSize(MpRc);
+		MpRcRight = m_pStatusMpBar->GetrectFrameSize()->right;
+		MpRcBottom = m_pStatusMpBar->GetrectFrameSize()->bottom;
+
+		MpRcSize = (prevRectSize * 0.81f) / MpRcRight;
+		m_pStatusMpBar->setScale(D3DXVECTOR3(MpRcSize, 1.0f, 0));
+
 		recorrect = false;
 	}
 
