@@ -21,5 +21,6 @@ public:
 	virtual void	Release();
 	virtual void	Update();
 	virtual void	Render();
+
 };
 

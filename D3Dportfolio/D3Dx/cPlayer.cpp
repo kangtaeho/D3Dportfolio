@@ -49,18 +49,17 @@ void cPlayer::Update()
 
 	g_pSkillManager->Update();
 
-	float a = D3DXVec3Length(&(m_vPosition - m_vNextPosition));
 	if (g_pSkillManager->IsCasting())
 	{
 		setAnimation("Attack1");
 	}
-	else if(D3DXVec3Length(&(m_vPosition - m_vNextPosition)) < m_fSpeed)
+	else if(m_AStar.getAStarSize())
 	{
-		setAnimation();
+		setAnimation("Run");
 	}
 	else
 	{
-		setAnimation("Run");
+		setAnimation();
 	}
 }
 
@@ -120,31 +119,9 @@ void cPlayer::Check3DMousePointer()
 			{			
 				m_fRotY = GetAngle(m_vPosition, m_pSphere->GetPos());
 				g_pSkillManager->Fire("평타", &m_vPosition, &m_pSphere->GetPos());
-				
 			}
 		}
 
 	}
 
-}
-
-void cPlayer::ClickEnemy(D3DXVECTOR3 pos, float radius)
-{
-
-	cRayPicking ray;
-
-	if (ray.PickSphere(pos, radius))
-	{
-		if (D3DXVec3Length(&(m_vPosition - pos)) < m_fRange + 0.1f);
-		{
-			m_fRotY = GetAngle(m_vPosition, pos);
-			m_vNextPosition = m_vPosition;
-			g_pSkillManager->Fire("평타", &m_vPosition, &pos);
-		}
-	}
-}
-
-float cPlayer::ModifyRange()
-{
-	return 0.0f;
 }

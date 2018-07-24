@@ -173,7 +173,6 @@ void cSkill::Casting()
 		// 리무브 타임에서 재사용
 		m_fStartTime = g_pTimeManager->GetLastUpdateTime();
 		m_fPassedTime = 0.0f;
-		m_fCurrentCooldown = 0.0f;
 
 		m_bIsRemove = true;
 
