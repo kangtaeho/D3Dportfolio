@@ -30,6 +30,8 @@ void cPlayer::Setup(const char* name)
 	g_pSkillManager->GetSkill("w")->SetPlayer(this);
 	g_pSkillManager->GetSkill("w")->SetBuffType(MOVEUP);
 
+	g_pSkillManager->AddSkill("e", TOXIC_SKILL, 50, 400, 20.0f, 0.5, 5.0f, 10, true);
+
 	m_pSphere = new cSphere;
 	m_pSphere->Setup(D3DXVECTOR3(200, 5000, 200), 100);
 
@@ -91,6 +93,11 @@ void cPlayer::Render()
 void cPlayer::Check3DMousePointer()
 {
 
+	if (g_pKeyManager->IsOnceKeyDown('3'))
+	{
+		g_pSkillManager->IsReady("e");
+	}
+
 	if (g_pKeyManager->IsOnceKeyDown(VK_LBUTTON))
 	{
 		if (!g_pSkillManager->CheckReady()) return;
@@ -98,7 +105,7 @@ void cPlayer::Check3DMousePointer()
 		SAFE_DELETE(m_pEnemyPos);
 
 		int isPick = 0;
-		// m_vNextPosition = g_pCollisionManager->getRayPosition(isPick, m_pSphere->m_pMesh, m_pSphere->GetPos()); //포지션 받고
+		m_vNextPosition = g_pCollisionManager->getRayPosition(isPick, m_pEnemy->getPosition(), m_pEnemy->GetRadius()); //포지션 받고
 		m_vNextPosition = m_AStar.PushDestination(m_vNextPosition, m_fRadius); //만약에 충돌을 받으면 밀어낸다
 		m_AStar.Setup(m_vPosition, m_fRadius, m_vNextPosition);
 
@@ -107,7 +114,8 @@ void cPlayer::Check3DMousePointer()
 
 		m_vClickPos = m_vNextPosition;
 
-		g_pSkillManager->Fire("r", &m_vPosition, &m_vClickPos, false);
+		g_pSkillManager->Fire("e", &m_vPosition, m_pEnemy->getPositionPointer(), m_pEnemy);
+		// g_pSkillManager->Fire("r", &m_vPosition, &m_vClickPos, false);
 
 	}
 
@@ -154,7 +162,7 @@ void cPlayer::AttackEnemy(cEnemy* enemy)
 		if (D3DXVec3Length(&(m_vPosition - enemy->getPosition())) < m_fRange);
 		{
 			m_fRotY = GetAngle(m_vPosition, enemy->getPosition());
-			g_pSkillManager->Fire("평타", &m_vPosition, enemy->getPositionPointer());
+			g_pSkillManager->Fire("평타", &m_vPosition, enemy->getPositionPointer(), enemy);
 		}
 	}
 }

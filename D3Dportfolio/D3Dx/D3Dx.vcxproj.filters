@@ -130,6 +130,9 @@
     <ClCompile Include="cEnemy.cpp">
       <Filter>소스파일\cCharacter</Filter>
     </ClCompile>
+    <ClCompile Include="cToxicSkill.cpp">
+      <Filter>D3DFramework\cSkillManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h">
@@ -269,6 +272,9 @@
     </ClInclude>
     <ClInclude Include="cEnemy.h">
       <Filter>소스파일\cCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="cToxicSkill.h">
+      <Filter>D3DFramework\cSkillManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
