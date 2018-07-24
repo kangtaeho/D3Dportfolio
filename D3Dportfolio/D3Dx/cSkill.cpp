@@ -374,14 +374,14 @@ void cSkill::ReadyIsCasting()
 	if (m_bIsReady) m_bIsCasting = true;
 }
 
-float cSkill::CooldownTimer()
+int cSkill::CooldownTimer()
 {
 	return m_fCooldown-m_fCurrentCooldown;
 }
 
 void cSkill::CreateAOEMesh(float aoeScale, bool isCreatePointMesh, float pointScale)
 {
-	ZeroMemory(&s_AoeMesh, sizeof(AOE_MESH));
+	// ZeroMemory(&s_AoeMesh, sizeof(AOE_MESH));
 	s_AoeMesh = new AOE_MESH;
 
 	ST_PNT_VERTEX v1;
@@ -430,6 +430,16 @@ void cSkill::CreateAOEMesh(float aoeScale, bool isCreatePointMesh, float pointSc
 	}
 
 	s_AoeMesh->aoeMesh->UnlockVertexBuffer();
+
+	WORD * wM;
+	s_AoeMesh->aoeMesh->LockIndexBuffer(0, (void**)&wM);
+
+	for (int i = 0; i < index.size(); i++)
+	{
+		wM[i] = i;
+	}
+
+	s_AoeMesh->aoeMesh->UnlockIndexBuffer();
 	s_AoeMesh->aoeScale = aoeScale;
 
 	if (isCreatePointMesh)

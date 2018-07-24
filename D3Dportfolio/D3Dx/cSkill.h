@@ -145,7 +145,7 @@ public:
 	void ReadyIsCasting();
 
 	void SetBuffType(BUFF_TYPE buffType) { e_BuffType = buffType; }
-	float CooldownTimer();
+	int CooldownTimer();
 
 	void CreateAOEMesh(float aoeScale, bool isCreatePointMesh, float pointScale);
 	void DestroyAOEMesh();
@@ -153,6 +153,5 @@ public:
 
 	bool IsUsingSkill();
 
-	//void SetPlayerPos(D3DXVECTOR3* pos) { m_pPlayerPos = pos; }
 };
 

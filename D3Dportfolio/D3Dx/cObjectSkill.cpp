@@ -43,6 +43,7 @@ void cObjectSkill::Update()
 
 void cObjectSkill::Render()
 {
+	g_pFontManager->TextFont(10, 500, "%d", CooldownTimer());
 	RenderVecMesh();
 	RenderAOEMesh();
 }
