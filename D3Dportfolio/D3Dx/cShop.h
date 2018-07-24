@@ -73,7 +73,10 @@ private:
 protected:
 	tagShopState		shopState;
 	cInventory*			m_pInvenInfo;
-	citem*				m_pItemInfo; citem* tempitem; citem* tempInvitem;
+	citem*				m_pItemInfo; citem* tempitem; 
+	
+
+	SYNTHESIZE(citem*, tempInvitem, Invitem);
 
 	citem* tempLongSword; citem* tempDagger;
 	citem* tempphage; citem* tempSheen; citem* tempRed_Orb;
@@ -84,10 +87,10 @@ protected:
 
 	std::vector<D3DXVECTOR3> m_vecShopInven;
 
-
+	
 	//std::vector<cInventory*> m_vecInventory;
 	cUIButton*			m_pPurchaseB;
-	cUIButton*			m_pSaleB;
+	SYNTHESIZE(cUIButton*, m_pSaleB, SaleButton);
 	cUIButton*			m_pReturnB;
 	cUIButton*			m_pRecommandB;
 	cUIButton*			m_pWholeB;
@@ -139,6 +142,7 @@ protected:
 	D3DXMATRIX* matS;
 	D3DXVECTOR3* scale, *position;
 	std::vector<cInventory*> m_vecWholeItem;
+
 public:
 	cShop();
 	virtual ~cShop();

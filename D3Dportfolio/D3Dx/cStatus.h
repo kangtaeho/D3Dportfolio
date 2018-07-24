@@ -3,10 +3,12 @@
 
 
 class cInventory;
-class cItem;
+class citem;
 class Bitmap;
 class cUIButton;
 class cUiSkill;
+class cStat;
+
 struct tagSkillInfo
 {
 	Bitmap* Skill_Q;
@@ -24,44 +26,7 @@ struct tagSkillInfo
 		Skill_Passive = NULL;
 	};
 };
-struct tagStatus
-{
-	Bitmap* atkUp_texture;
-	Bitmap* atkSpeed_texture;
-	Bitmap* critical_texture;
-	Bitmap* defense_texture;
-	Bitmap* magic_texture;
-	Bitmap* moveSpeed_texture;
-	Bitmap* coolTime_texture;
-	Bitmap* magicDefense_texture;
-	float Atk;
-	float AtkSpeed;
-	float ciritical;
-	float defense;
-	float magic;
-	float moveSpeed;
-	float coolTime;
-	float magicDefense;
-	
-	tagStatus() {
-		atkUp_texture = NULL;
-		atkSpeed_texture = NULL;
-		critical_texture = NULL;
-		defense_texture = NULL;
-		magic_texture = NULL;
-		moveSpeed_texture = NULL;
-		coolTime_texture = NULL;
-		magicDefense_texture = NULL;
-		Atk = NULL;
-		AtkSpeed = NULL;
-		ciritical = NULL;
-		defense = NULL;
-		magic = NULL;
-		moveSpeed = NULL;
-		coolTime = NULL;
-		magicDefense = NULL;
-	};
-};
+
 struct tagHealthInfo
 {
 	Bitmap* HpBar;
@@ -82,7 +47,6 @@ struct tagHealthInfo
 struct tagPlayerInfo
 {
 	tagSkillInfo SkillInfo;
-	tagStatus    StatusInfo;
 	tagHealthInfo HealthInfo;
 };
 
@@ -102,16 +66,62 @@ struct tagStatusGoldState
 	}
 };
 
+struct tagStatNum
+{
+	Bitmap* AttackSpeedNum_unit;
+	Bitmap* AttackSpeedNum_ten;
+	Bitmap* AttackSpeedNum_huand;
+
+	Bitmap* AtkNum_unit;
+	Bitmap* AtkNum_ten;
+	Bitmap* AtkNum_huand;
+
+	Bitmap* DefenseNum_unit;
+	Bitmap* DefenseNum_ten;
+	Bitmap* DefenseNum_huand;
+
+	Bitmap* MoveSpeedNum_unit;
+	Bitmap* MoveSpeedNum_ten;
+	Bitmap* MoveSpeedNum_huand;
+
+	tagStatNum()
+	{
+		AttackSpeedNum_unit = g_pTextureManager->addTexture("AttackSpeedNum_unit", "./status/StatusNum.dds", ANIMATION,10.0f,1.0f);
+		AttackSpeedNum_ten = g_pTextureManager->addTexture("AttackSpeedNum_ten", "./status/StatusNum.dds", ANIMATION, 10.0f, 1.0f);
+		AttackSpeedNum_huand = g_pTextureManager->addTexture("AttackSpeedNum_huand", "./status/StatusNum.dds", ANIMATION, 10.0f, 1.0f);
+
+		AtkNum_unit = g_pTextureManager->addTexture("AtkNum_unit", "./status/StatusNum.dds", ANIMATION, 10.0f, 1.0f);
+		AtkNum_ten = g_pTextureManager->addTexture("AtkNum_ten", "./status/StatusNum.dds", ANIMATION, 10.0f, 1.0f);
+		AtkNum_huand = g_pTextureManager->addTexture("AtkNum_huand", "./status/StatusNum.dds", ANIMATION, 10.0f, 1.0f);
+
+		DefenseNum_unit = g_pTextureManager->addTexture("DefenseNum_unit", "./status/StatusNum.dds", ANIMATION, 10.0f, 1.0f);
+		DefenseNum_ten = g_pTextureManager->addTexture("DefenseNum_ten", "./status/StatusNum.dds", ANIMATION, 10.0f, 1.0f);
+		DefenseNum_huand = g_pTextureManager->addTexture("DefenseNum_huand", "./status/StatusNum.dds", ANIMATION, 10.0f, 1.0f);
+
+		MoveSpeedNum_unit = g_pTextureManager->addTexture("MoveSpeedNum_unit", "./status/StatusNum.dds", ANIMATION, 10.0f, 1.0f);
+		MoveSpeedNum_ten = g_pTextureManager->addTexture("MoveSpeedNum_ten", "./status/StatusNum.dds", ANIMATION, 10.0f, 1.0f);
+		MoveSpeedNum_huand = g_pTextureManager->addTexture("MoveSpeedNum_huand", "./status/StatusNum.dds", ANIMATION, 10.0f, 1.0f);
+	}
+};
 struct tagStatInfo
 {
 	Bitmap* Screen;
+	Bitmap* AttackSpeed;
+	Bitmap* Atk;
+	Bitmap* Defense;
+	Bitmap* MoveSpeed;
 
+	tagStatNum* StatNum;
 	tagStatInfo()
 	{
-		Screen = new Bitmap;
-		Screen = g_pTextureManager->addTexture("StatusScreen", "./status/StatusInfoScreen.dds", UI, NULL);
+		Screen = g_pTextureManager->addTexture("StatusScreen", "./status/StatusInfoScreen.dds", SUBUI, NULL);
+		AttackSpeed = g_pTextureManager->addTexture("AtkSpeed", "./status/atkSpeedUp.dds", SUBUI, NULL);
+		Atk = g_pTextureManager->addTexture("Atk", "./status/atkUp.dds", SUBUI, NULL);
+		Defense = g_pTextureManager->addTexture("Defense", "./status/defenseUp.dds", SUBUI, NULL);
+		MoveSpeed = g_pTextureManager->addTexture("MoveSpeed", "./status/moveSpeedUP.dds", SUBUI, NULL);
+			
+		StatNum = new tagStatNum;
 	}
-
 };
 class cStatus : public cMainUI
 {
@@ -130,15 +140,7 @@ private:
 
 	RECT HpRc;
 	RECT MpRc;
-	// 스텟치
-	SYNTHESIZE(int, MaxHp, MAXHP);
-	SYNTHESIZE(int, CurrentHp, CURRENTHP);
-	SYNTHESIZE(int, hit, HitValue);
-	SYNTHESIZE(int, MaxMp, MAXMP);
-	SYNTHESIZE(int, CurrentMp, CURRENTMP);
-	SYNTHESIZE(int, UsedMp, USEDMP);
-	//
-	SYNTHESIZE(std::vector<cInventory*>, m_vecInven, vecInven);
+	
 	RECT* m_pRect;//클릭할 렉트;
 
 	std::vector<cUiSkill*> m_pStatusSkillInfo;
@@ -157,10 +159,7 @@ private:
 
 	//맞았니 , 스킬썼니 체크
 
-	SYNTHESIZE(bool, m_bIsHit, IsHit);
-	SYNTHESIZE(bool, m_bCheckHpBar, CheckHpBar);
-	SYNTHESIZE(bool, m_bCheckMpBar, CheckMpBar);
-
+	
 	float HprcRight;
 	float HprcBottom;
 	float HprcSize;
@@ -190,6 +189,29 @@ private:
 
 	
 	cUIButton* m_pShopButton;
+
+
+
+	SYNTHESIZE(int, AttackSpeedValue, AttackSpeed);
+	SYNTHESIZE(int, AtkValue, Atk);
+	SYNTHESIZE(int, DefenseValue, Defense);
+	SYNTHESIZE(int, MoveSpeedValue, MoveSpeed);
+
+	SYNTHESIZE(bool, m_bIsHit, IsHit);
+	SYNTHESIZE(bool, m_bCheckHpBar, CheckHpBar);
+	SYNTHESIZE(bool, m_bCheckMpBar, CheckMpBar);
+	// 스텟치
+	SYNTHESIZE(int, MaxHp, MAXHP);
+	SYNTHESIZE(int, CurrentHp, CURRENTHP);
+	SYNTHESIZE(int, hit, HitValue);
+	SYNTHESIZE(int, MaxMp, MAXMP);
+	SYNTHESIZE(int, CurrentMp, CURRENTMP);
+	SYNTHESIZE(int, UsedMp, USEDMP);
+	//
+	SYNTHESIZE(std::vector<cInventory*>, m_vecInven, vecInven);
+
+	SYNTHESIZE(cUIButton*, buttonState, ButtonState);
+	SYNTHESIZE(citem*, tempItemInfo, tempItemInform);
 
 public:
 	cStatus();

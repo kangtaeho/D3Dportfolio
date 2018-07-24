@@ -105,6 +105,7 @@ void cPlayScene::Update()
 	}
 
 	status->SetvecInven(shop->GetvecInventory());
+	
 	status->InvenUpdate();
 
 
@@ -159,11 +160,11 @@ void cPlayScene::Render()
 	
 
 	//status->InvenRender();
-
+	m_vecHealthProgress[0]->render();
 	if (m_pMainUi)
 		m_pMainUi->render();
 
-	m_vecHealthProgress[0]->render();
+	
 
 	{//¸ÊÃß°¡
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);

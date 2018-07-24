@@ -20,6 +20,8 @@ struct tagItemStat
 	Bitmap* ItemPriceTexture_t;
 	tagItemState itemState;
 	tagItemInformation itemInfo;
+
+	SYNTHESIZE( bool, EffectToStat,Effected);
 };
 
 class citem : public cBluePrint

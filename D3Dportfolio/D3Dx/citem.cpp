@@ -28,7 +28,7 @@ void citem::setup(const char* itemName,const char* textureFileName,int itemState
 	m_pItemStat->AttackSpeed = 0.0f;
 	m_pItemStat->Hp = 0.0f;
 	m_pItemStat->Mp = 0.0f;
-
+	m_pItemStat->SetEffected(false);
 	if(m_pItemStat->itemInfo != CONSUME)
 	m_pItemStat->Itemtexture->setScale(D3DXVECTOR3(0.5f, 0.5f, 0.0f));
 

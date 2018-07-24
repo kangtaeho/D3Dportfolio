@@ -130,8 +130,13 @@
     <ClCompile Include="cEnemy.cpp">
       <Filter>소스파일\cCharacter</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="cStat.cpp">
+      <Filter>소스파일\cStatus</Filter>
+=======
     <ClCompile Include="cToxicSkill.cpp">
       <Filter>D3DFramework\cSkillManager</Filter>
+>>>>>>> 366274dac3bfced92a0b1ff143dd6202bdf72d5e
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -273,8 +278,13 @@
     <ClInclude Include="cEnemy.h">
       <Filter>소스파일\cCharacter</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="cStat.h">
+      <Filter>소스파일\cStatus</Filter>
+=======
     <ClInclude Include="cToxicSkill.h">
       <Filter>D3DFramework\cSkillManager</Filter>
+>>>>>>> 366274dac3bfced92a0b1ff143dd6202bdf72d5e
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -183,6 +183,7 @@ void cShop::ItemSetting()
 	potion->setup("potion", "./item/potion.dds", START_ITEM, CONSUME);
 	potion->GetItemInfo()->price = 50;
 	potion->GetItemInfo()->Itemtexture->setScale(D3DXVECTOR3(0.7f, 0.7f, 0));
+	potion->GetItemInfo()->Hp = 30.0f;
 	m_vecItem.push_back(potion);
 	citem* shoes = new citem;
 	shoes->setup("shoes", "./item/1001_Boots_of_Speed.dds", START_ITEM, EQUIPABLE);
@@ -638,45 +639,45 @@ void cShop::update()
 		p->update();
 	}
 	
-	for (int i = 0; i < m_vecInventory.size(); i++)
-	{
-		if (m_vecInventory[i]->GetinvitemInfo()->GetItemInfo() == NULL) continue;
-		for (int j = 0; j < m_vecItem.size(); j++)
-		{
-			if (m_vecItem[j]->GetItemInfo() == NULL)continue;
-			if (m_vecInventory[i]->GetinvitemInfo()->GetItemInfo()->itemName == "LongSword")
-			{
-				if (m_vecItem[j]->GetItemInfo()->itemName == "phage")
-				{
-					m_vecItem[j]->GetItemInfo()->price = 200;
+	//for (int i = 0; i < m_vecInventory.size(); i++)
+	//{
+	//	if (m_vecInventory[i]->GetinvitemInfo()->GetItemInfo() == NULL) continue;
+	//	for (int j = 0; j < m_vecItem.size(); j++)
+	//	{
+	//		if (m_vecItem[j]->GetItemInfo() == NULL)continue;
+	//		if (m_vecInventory[i]->GetinvitemInfo()->GetItemInfo()->itemName == "LongSword")
+	//		{
+	//			if (m_vecItem[j]->GetItemInfo()->itemName == "phage")
+	//			{
+	//				m_vecItem[j]->GetItemInfo()->price = 200;
 
-					m_vecItem[j]->GetItemInfo()->ItemPriceTexture_f->setCurrentFrame(m_vecItem[j]->GetItemInfo()->price / 100);
-					m_vecItem[j]->GetItemInfo()->ItemPriceTexture_s->setCurrentFrame((m_vecItem[j]->GetItemInfo()->price % 100) / 10);
-					m_vecItem[j]->GetItemInfo()->ItemPriceTexture_t->setCurrentFrame(((m_vecItem[j]->GetItemInfo()->price % 10) / 1));
-				}
-			}
-			//shoes->setup("shoes", "./item/1001_Boots_of_Speed.dds", START_ITEM, EQUIPABLE);
-			//shoes->GetItemInfo()->price = 100;		
-			//LongSword->setup("LongSword", "./item/1036_Long_Sword.dds", EARLY_ITEM, EQUIPABLE);
-			//LongSword->GetItemInfo()->price = 300;
-			//Dagger->setup("Dagger", "./item/1042_Dagger.dds", EARLY_ITEM, EQUIPABLE);
-			//Dagger->GetItemInfo()->price = 300;
-			//phage->setup("phage", "./item/3044_Phage.dds", CORE_ITEM, EQUIPABLE);
-			//phage->GetItemInfo()->price = 500;
-			//Sheen->setup("Sheen", "./item/3057_Sheen.dds", CORE_ITEM, EQUIPABLE);
-			//Sheen->GetItemInfo()->price = 500;
-			//Red_Orb->setup("Red_Orb", "./item/3095_Orb_of_Valor.dds", BASIC_ITEM, EQUIPABLE);
-			//Red_Orb->GetItemInfo()->price = 200;
-			//Trinity_Force->setup("Trinity_Force", "./item/3078_Trinity_Force.dds", CORE_ITEM, EQUIPABLE);
-			//Trinity_Force->GetItemInfo()->price = 999;		
-			//Ward->setup("Ward", "./item/3350_GreaterYellowTrinket.dds", START_ITEM, ACCESSORY);
-			//Ward->GetItemInfo()->price = 50;		
-			//sp->setup("sp", "./item/3058_Sheen_and_Phage.dds", EARLY_ITEM, EQUIPABLE);
-			//sp->GetItemInfo()->price = 300;
-			//Blue_Orb->setup("Blue_Orb", "./item/1027_Sapphire_Sphere.dds", START_ITEM, EQUIPABLE);
-			//Blue_Orb->GetItemInfo()->price = 200;
-		}
-	}
+	//				m_vecItem[j]->GetItemInfo()->ItemPriceTexture_f->setCurrentFrame(m_vecItem[j]->GetItemInfo()->price / 100);
+	//				m_vecItem[j]->GetItemInfo()->ItemPriceTexture_s->setCurrentFrame((m_vecItem[j]->GetItemInfo()->price % 100) / 10);
+	//				m_vecItem[j]->GetItemInfo()->ItemPriceTexture_t->setCurrentFrame(((m_vecItem[j]->GetItemInfo()->price % 10) / 1));
+	//			}
+	//		}
+	//		//shoes->setup("shoes", "./item/1001_Boots_of_Speed.dds", START_ITEM, EQUIPABLE);
+	//		//shoes->GetItemInfo()->price = 100;		
+	//		//LongSword->setup("LongSword", "./item/1036_Long_Sword.dds", EARLY_ITEM, EQUIPABLE);
+	//		//LongSword->GetItemInfo()->price = 300;
+	//		//Dagger->setup("Dagger", "./item/1042_Dagger.dds", EARLY_ITEM, EQUIPABLE);
+	//		//Dagger->GetItemInfo()->price = 300;
+	//		//phage->setup("phage", "./item/3044_Phage.dds", CORE_ITEM, EQUIPABLE);
+	//		//phage->GetItemInfo()->price = 500;
+	//		//Sheen->setup("Sheen", "./item/3057_Sheen.dds", CORE_ITEM, EQUIPABLE);
+	//		//Sheen->GetItemInfo()->price = 500;
+	//		//Red_Orb->setup("Red_Orb", "./item/3095_Orb_of_Valor.dds", BASIC_ITEM, EQUIPABLE);
+	//		//Red_Orb->GetItemInfo()->price = 200;
+	//		//Trinity_Force->setup("Trinity_Force", "./item/3078_Trinity_Force.dds", CORE_ITEM, EQUIPABLE);
+	//		//Trinity_Force->GetItemInfo()->price = 999;		
+	//		//Ward->setup("Ward", "./item/3350_GreaterYellowTrinket.dds", START_ITEM, ACCESSORY);
+	//		//Ward->GetItemInfo()->price = 50;		
+	//		//sp->setup("sp", "./item/3058_Sheen_and_Phage.dds", EARLY_ITEM, EQUIPABLE);
+	//		//sp->GetItemInfo()->price = 300;
+	//		//Blue_Orb->setup("Blue_Orb", "./item/1027_Sapphire_Sphere.dds", START_ITEM, EQUIPABLE);
+	//		//Blue_Orb->GetItemInfo()->price = 200;
+	//	}
+	//}
 
 	ItemDragDrop();
 
@@ -1275,6 +1276,11 @@ bool cShop::isClick(OUT RECT* Outrc, int index)
 bool cShop::IsSold()
 {
 	if (ItemPrice == 0) return false;
+
+	if (m_pGold.amount < ItemPrice)
+	{
+		return false;
+	}
 
 	if (m_pGold.amount >= ItemPrice)
 	{
