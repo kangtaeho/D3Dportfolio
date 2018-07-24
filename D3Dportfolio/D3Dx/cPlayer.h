@@ -2,23 +2,12 @@
 #include "cCharacter.h"
 
 class cSphere;
-class cAStar;
 
 class cPlayer : public cCharacter
 {
 private:
 	cSphere*		m_pSphere;
-	bool			m_bIsTarget;
-	float			m_fRange;
-	float			m_fRadius;
-
 	D3DXVECTOR3		m_vClickPos;
-
-	cAStar* aStar;
-
-	bool isTrue;
-
-	D3DXVECTOR3*	m_pEnemyPos;
 
 public:
 	cPlayer();
@@ -31,6 +20,7 @@ public:
 
 	void Check3DMousePointer();				// 마우스 체크
 	void ClickEnemy(D3DXVECTOR3 pos, float radius);
+	float ModifyRange();
 
 };
 

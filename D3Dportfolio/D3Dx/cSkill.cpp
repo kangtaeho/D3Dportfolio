@@ -257,6 +257,7 @@ void cSkill::AutoFire()
 		m_vPos = *m_pPlayerPos;
 		m_bIsAutoFire = false;
 	}
+
 }
 
 //나중에 삭제
@@ -490,6 +491,8 @@ void cSkill::DestroyAOEMesh()
 
 void cSkill::RenderAOEMesh()
 {
+
+	if (m_bIsAutoFire) return;
 	if (!m_bIsReady) return;
 
 	if (s_AoeMesh)

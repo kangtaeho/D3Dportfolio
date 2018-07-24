@@ -135,6 +135,7 @@ void cCollisionManager::Release()
 
 void cCollisionManager::Render()
 {
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	D3DXMATRIX mat, matS, matR, matT, matT1;
 	for (auto p : m_stMap.vecCircle)
 	{
@@ -288,7 +289,7 @@ void cCollisionManager::CylinderRender(D3DXVECTOR3 position, float radius)
 
 void cCollisionManager::MapRender()
 {
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	D3DMATERIAL9 m_mtl;
 	ZeroMemory(&m_mtl, sizeof(D3DMATERIAL9));
 	m_mtl.Ambient = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);

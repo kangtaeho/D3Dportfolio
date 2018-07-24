@@ -5,10 +5,6 @@
 #include "cAStar.h"
 
 cPlayer::cPlayer()
-	:m_bIsTarget(false)
-	,m_fRange(400)
-	,m_fRadius(13)
-	,m_pEnemyPos(NULL)
 {
 	
 }
@@ -20,9 +16,14 @@ cPlayer::~cPlayer()
 
 void cPlayer::Setup(const char* name)
 {
+	m_fRange = 400;
+	m_fSpeed = 10.0f;
+	m_fHP = 300;
+	m_fMP = 250;
+
 	cCharacter::Setup(name);
 	g_pSkillManager->AddSkill("평타", RANGE_SKILL, 100, m_fRange, 20.0f, 0.3f, 3.0f, 20, true);
-	g_pSkillManager->AddSkill("r", OBJECT_SKILL, 100, 400, 10.0f, 0.5f, 3.0f, 20, true, "BantamTrap");
+	g_pSkillManager->AddSkill("r", OBJECT_SKILL, 100, 500, 10.0f, 0.5f, 3.0f, 20, true, "BantamTrap");
 	g_pSkillManager->GetSkill("r")->SetPlayer(this);	// 테두리 때문에
 	g_pSkillManager->AddSkill("w", BUFF_SKILL, 0, 0, 0, 0.5, 10, 10, false, NULL);
 	g_pSkillManager->GetSkill("w")->SetPlayer(this);
@@ -30,7 +31,7 @@ void cPlayer::Setup(const char* name)
 
 	m_pSphere = new cSphere;
 	m_pSphere->Setup(D3DXVECTOR3(200, 5000, 200), 100);
-	aStar = new cAStar;
+
 }
 
 void cPlayer::Release()
@@ -43,14 +44,14 @@ void cPlayer::Update()
 {
 	Check3DMousePointer();
 
-	aStar->Update(m_vPosition, m_fRotY, m_fSpeed, m_fRadius);
-	aStar->Stop(m_vPosition, m_fRange, m_pEnemyPos, 0);
+	m_AStar.Update(m_vPosition, m_fRotY, m_fSpeed, m_fRadius);
+	m_AStar.Stop(m_vPosition, m_fRange, m_pEnemyPos, 0);
 
 	g_pSkillManager->Update();
 
+	float a = D3DXVec3Length(&(m_vPosition - m_vNextPosition));
 	if (g_pSkillManager->IsCasting())
 	{
-		m_vNextPosition = m_vPosition;
 		setAnimation("Attack1");
 	}
 	else if(D3DXVec3Length(&(m_vPosition - m_vNextPosition)) < m_fSpeed)
@@ -73,8 +74,6 @@ void cPlayer::Render()
 
 	g_pSkillManager->Render();
 
-	// g_pCollisionManager->Render();
-
 	if(m_pSphere)
 	m_pSphere->Render();
 
@@ -83,7 +82,6 @@ void cPlayer::Render()
 
 void cPlayer::Check3DMousePointer()
 {
-	//if (!m_pMap) return;		// 충돌 판정 맵이 없다면,
 
 	if (g_pKeyManager->IsOnceKeyDown(VK_LBUTTON))
 	{
@@ -93,8 +91,8 @@ void cPlayer::Check3DMousePointer()
 
 		int isPick = 0;
 		m_vNextPosition = g_pCollisionManager->getRayPosition(isPick, m_pSphere->m_pMesh, m_pSphere->GetPos()); //포지션 받고
-		m_vNextPosition = aStar->PushDestination(m_vNextPosition, m_fRadius); //만약에 충돌을 받으면 밀어낸다
-		aStar->Setup(m_vPosition, m_fRadius, m_vNextPosition);
+		m_vNextPosition = m_AStar.PushDestination(m_vNextPosition, m_fRadius); //만약에 충돌을 받으면 밀어낸다
+		m_AStar.Setup(m_vPosition, m_fRadius, m_vNextPosition);
 
 		m_pEnemyPos = new D3DXVECTOR3;
 		*m_pEnemyPos = m_vNextPosition;
@@ -111,17 +109,18 @@ void cPlayer::Check3DMousePointer()
 
 		int isPick = 0;
 		m_vNextPosition = g_pCollisionManager->getRayPosition(isPick,m_pSphere->m_pMesh,m_pSphere->GetPos()); //포지션 받고
-		m_vNextPosition = aStar->PushDestination(m_vNextPosition, m_fRadius); //만약에 충돌을 받으면 밀어낸다
-		aStar->Setup(m_vPosition, m_fRadius, m_vNextPosition);
+		m_vNextPosition = m_AStar.PushDestination(m_vNextPosition, m_fRadius); //만약에 충돌을 받으면 밀어낸다
+		m_AStar.Setup(m_vPosition, m_fRadius, m_vNextPosition);
 
 		if (isPick)
 		{
 			m_pEnemyPos = new D3DXVECTOR3;
 			*m_pEnemyPos = m_pSphere->GetPos();
-			if (D3DXVec3Length(&(m_vPosition - m_pSphere->GetPos())) < m_fRange)
+			if (D3DXVec3Length(&(m_vPosition - m_pSphere->GetPos())) < m_fRange);
 			{			
 				m_fRotY = GetAngle(m_vPosition, m_pSphere->GetPos());
 				g_pSkillManager->Fire("평타", &m_vPosition, &m_pSphere->GetPos());
+				
 			}
 		}
 
@@ -136,11 +135,16 @@ void cPlayer::ClickEnemy(D3DXVECTOR3 pos, float radius)
 
 	if (ray.PickSphere(pos, radius))
 	{
-		if (D3DXVec3Length(&(m_vPosition - pos)) < m_fRange)
+		if (D3DXVec3Length(&(m_vPosition - pos)) < m_fRange + 0.1f);
 		{
 			m_fRotY = GetAngle(m_vPosition, pos);
 			m_vNextPosition = m_vPosition;
 			g_pSkillManager->Fire("평타", &m_vPosition, &pos);
 		}
 	}
+}
+
+float cPlayer::ModifyRange()
+{
+	return 0.0f;
 }

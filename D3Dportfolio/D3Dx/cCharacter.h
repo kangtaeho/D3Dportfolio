@@ -1,5 +1,6 @@
 #pragma once
 #include "cAction.h"
+#include "cAStar.h"
 
 enum CHARACTER_STATE
 {
@@ -16,7 +17,6 @@ enum CHARACTER_STATE
 class cCharacter : public cAction
 {
 protected:
-
 	LPCSKINNEDMESH					m_pSkinnedMesh;
 
 	D3DXVECTOR3						m_vDirection;
@@ -26,14 +26,25 @@ protected:
 	D3DXMATRIX						m_matWorld;
 
 	float							m_fRotY;
-
-	std::vector<D3DXVECTOR3>*		m_pMap;
-	std::vector<stCollisionMap>*	m_pCollisionMap;
+	float							m_fRange;
+	D3DXVECTOR3*					m_pEnemyPos;
 	cSkill*							m_pSkill;
 
-	// float							m_fRadius;
+	cAStar							m_AStar;
+
+	CHARACTER_STATE					m_eState;
 
 	SYNTHESIZE(float, m_fSpeed, Speed);
+	SYNTHESIZE(float, m_fRadius, Radius);
+
+	SYNTHESIZE(float, m_fHP, HP);
+	SYNTHESIZE(float, m_fMP, MP);
+	SYNTHESIZE(float, m_fATK, ATK);
+	SYNTHESIZE(float, m_fATKSpeed, ATKSpeed);
+	SYNTHESIZE(float, m_fRegainHP, RegainHP);
+	SYNTHESIZE(float, m_fRegainMP, RegainMP);
+	SYNTHESIZE(float, m_fDEF, DEF);
+	SYNTHESIZE(float, m_fMDEF, MDEF);
 
 public:
 	cCharacter();
@@ -44,11 +55,9 @@ public:
 	virtual void Update();
 	virtual void Render();
 
-	void setCollisionMap(std::vector<stCollisionMap>* pCollisionMap) { m_pCollisionMap = pCollisionMap; }
-	void setMap(std::vector<D3DXVECTOR3>* pMap) { m_pMap = pMap; }
-	bool GetHeight(float& x, float & y, float& z);
-	bool GetCollision(float& x, float & y, float& z);
-
+	D3DXVECTOR3 getNextPosition() { return m_vNextPosition; }
+	D3DXVECTOR3* getPositionPointer() { return &m_vPosition; }
 	D3DXVECTOR3 getPosition() { return m_vPosition; }
+
 };
 

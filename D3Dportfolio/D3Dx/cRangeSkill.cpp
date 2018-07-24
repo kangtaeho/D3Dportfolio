@@ -38,7 +38,6 @@ void cRangeSkill::Update()
 	Casting();
 	CoolDownSetup();
 	Move();
-	//RemoveCubeTime();
 	RemoveTarget();
 	AutoFire();
 }

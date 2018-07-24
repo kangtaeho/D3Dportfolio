@@ -7,7 +7,6 @@ cCharacter::cCharacter()
 	: m_vPosition(0, 0, 0)
 	, m_fRotY(0.0f)
 	, m_vNextPosition(0, 0, 0)
-	, m_fSpeed(10.0f)
 	, m_pSkinnedMesh(NULL)
 {
 	D3DXMatrixIdentity(&m_matWorld);
@@ -48,77 +47,3 @@ void cCharacter::Render()
 	UpdateAnimation();
 	m_pSkinnedMesh->Update(m_pAnimController);
 }
-
-bool cCharacter::GetHeight(float& x, float & y, float& z)
-{
-
-	if (!m_pMap) return false;
-
-	D3DXVECTOR3 vRayPos(x, 100000.0f, z);
-	D3DXVECTOR3 vRayDir(0, -1, 0);
-
-	for (int i = 0; i < m_pMap->size(); i += 3)
-	{
-		float u, v, f;
-		if (D3DXIntersectTri(&(*m_pMap)[i + 0],
-			&(*m_pMap)[i + 1],
-			&(*m_pMap)[i + 2],
-			&vRayPos,
-			&vRayDir,
-			&u, &v, &f))
-		{
-			y = 100000.0f - f;
-			return true;
-		}
-	}
-
-	return false;
-}
-
-bool cCharacter::GetCollision(float& x, float & y, float& z)
-{
-	if (!m_pCollisionMap) return false;
-
-
-
-	D3DXVECTOR3 gogo = D3DXVECTOR3(x, y, z) - m_vPosition;		//현재 위치에서 도착 위치까지의 백터
-	if (D3DXVec3Length(&gogo) > m_fSpeed)						//백터의 길이가 틱당 스피드보다 길때
-	{
-		D3DXVec3Normalize(&gogo, &gogo);						//노멀라이즈로 길이를 1로 만들어주고
-		gogo *= m_fSpeed;										//스피드를 곱해 스피드만큼 이동
-
-		m_fRotY = GetAngle(m_vPosition, m_vNextPosition);
-
-	}
-	gogo += m_vPosition;										//gogo를 도착 위치 백터로 바꿈
-	D3DXVECTOR3 vRayPos(gogo.x, 100000.0f, gogo.z);				//도착 위치 하늘이 레이 위치
-	D3DXVECTOR3 vRayDir(0, -1, 0);								//레이는 수직 아래로 
-
-	//for (int i = 0; i < m_pCollisionMap->size(); ++i)
-	//{
-	//	float u, v, f;
-	//
-	//	if (D3DXVec3Length(&((*m_pCollisionMap)[i].vPosition - m_vPosition)) > 1000) continue;	//충돌맵과 거리가 멀면 컨티뉴(1000이상)
-	//	for (int j = 0; j < (*m_pCollisionMap)[i].vecTotalVertex.size(); j += 3)
-	//	{
-	//		if (D3DXIntersectTri(&(*m_pCollisionMap)[i].vecTotalVertex[j + 0],
-	//			&(*m_pCollisionMap)[i].vecTotalVertex[j + 1],
-	//			&(*m_pCollisionMap)[i].vecTotalVertex[j + 2],
-	//			&vRayPos,
-	//			&vRayDir,
-	//			&u, &v, &f))			//충돌맵과 인터섹트트라이
-	//		{
-
-	//			D3DXVECTOR3(x, y, z) = m_vPosition;
-
-	//			x = m_vPosition.x;
-	//			y = m_vPosition.y;
-	//			z = m_vPosition.z;
-	//			return true;
-	//		}
-	//	}
-	//}
-	m_vPosition = gogo;		//충돌이 안됬으면 gogo로 이동
-	return false;
-}
-
