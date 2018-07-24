@@ -28,6 +28,7 @@ struct OBJECT_MESH
 	D3DXVECTOR3	pos;
 	D3DXVECTOR3	target;
 	float		removeTime;
+	float		startTime;
 	bool		isAttack;
 	cAction*	animation;
 	OBJECT_MESH() { animation = new cAction; }
@@ -176,6 +177,8 @@ public:
 	// 독데미지
 	void AddToxicEnemy(cEnemy* enemy);
 	void DamagedToxic();
+
+	void SetVecEnemy(std::vector<cEnemy>* pVecEnemy) { m_pVecEnemy = pVecEnemy; }
 
 };
 

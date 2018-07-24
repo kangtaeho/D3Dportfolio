@@ -257,6 +257,20 @@ void cSkill::RemoveMeshTime()
 	for (int i = 0; i < m_vecMesh.size(); i++)
 	{
 		m_vecMesh[i].removeTime += g_pTimeManager->GetElapsedTime();
+		
+		if (m_pVecEnemy)
+		{
+			for (int j = 0; j < m_pVecEnemy->size(); j++)
+			{
+				if (D3DXVec3Length(&(m_vecMesh[i].pos - (*m_pVecEnemy)[j].getPosition())) < 20)
+				{
+					SAFE_DELETE(m_vecMesh[i].animation);
+					m_vecMesh.erase(m_vecMesh.begin() + i);
+					continue;
+				}
+			}
+		}
+			
 		if (m_vecMesh[i].removeTime > m_fRemoveTime)
 		{
 			SAFE_DELETE(m_vecMesh[i].animation);
@@ -319,6 +333,7 @@ void cSkill::CreateMesh()
 			mesh.pos = m_vPos;
 			mesh.target = *m_pTargetPos;
 			mesh.removeTime = 0;
+			mesh.startTime = g_pTimeManager->GetLastUpdateTime();
 			mesh.isAttack = false;
 			aniCloneAniController(&mesh.animation->getAniController());
 			m_vecMesh.push_back(mesh);

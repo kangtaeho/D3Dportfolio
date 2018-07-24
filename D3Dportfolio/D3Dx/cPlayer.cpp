@@ -24,7 +24,7 @@ void cPlayer::Setup(const char* name)
 
 	cCharacter::Setup(name);
 	g_pSkillManager->AddSkill("평타", RANGE_SKILL, 100, m_fRange, 20.0f, 0.5f, 3.0f, 20, true);
-	g_pSkillManager->AddSkill("r", OBJECT_SKILL, 100, 500, 10.0f, 0.5f, 3.0f, 20, true, "BantamTrap");
+	g_pSkillManager->AddSkill("r", OBJECT_SKILL, 100, 500, 10.0f, 0.5f, 10.0f, 10, true, "BantamTrap");
 	g_pSkillManager->GetSkill("r")->SetPlayer(this);	// 테두리 때문에
 	g_pSkillManager->AddSkill("w", BUFF_SKILL, 0, 0, 0, 0.5, 10, 10, false, NULL);
 	g_pSkillManager->GetSkill("w")->SetPlayer(this);
@@ -114,8 +114,14 @@ void cPlayer::Check3DMousePointer()
 
 		m_vClickPos = m_vNextPosition;
 
-		g_pSkillManager->Fire("e", &m_vPosition, m_pEnemy->getPositionPointer(), m_pEnemy);
-		// g_pSkillManager->Fire("r", &m_vPosition, &m_vClickPos, false);
+		if (g_pSkillManager->GetSkill("e")->GetIsReady())
+		{
+			g_pSkillManager->Fire("e", &m_vPosition, m_pEnemy->getPositionPointer(), m_pEnemy);
+		}
+		else if (g_pSkillManager->GetSkill("r")->GetIsReady())
+		{
+			g_pSkillManager->Fire("r", &m_vPosition, &m_vClickPos, false);
+		}
 
 	}
 
