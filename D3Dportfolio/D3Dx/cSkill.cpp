@@ -171,6 +171,8 @@ void cSkill::Casting()
 		// 리무브 타임에서 재사용
 		m_fStartTime = g_pTimeManager->GetLastUpdateTime();
 		m_fPassedTime = 0.0f;
+		m_fCurrentCooldown = 0.0f;
+
 		m_bIsRemove = true;
 
 		m_bIsReady = false;
@@ -180,16 +182,15 @@ void cSkill::Casting()
 void cSkill::CoolDownSetup()
 {
 	if (!m_bIsCooldown) return;		// 쿨다운이 아니라면 끈다.
-
-	m_fCurrentCooldown += g_pTimeManager->GetElapsedTime();
 	
+	m_fCurrentCooldown += g_pTimeManager->GetElapsedTime();
+
 	if (m_fCurrentCooldown > m_fCooldown)
 	{
 		m_bIsCooldown = false;
 		m_bIsCasting = false;
 		m_fCurrentCooldown = 0.0f;
 	}
-
 }
 
 void cSkill::RemoveCubeTime()
@@ -375,7 +376,7 @@ float cSkill::CooldownTimer()
 	return m_fCooldown-m_fCurrentCooldown;
 }
 
-void cSkill::CreateAOEMesh()
+void cSkill::CreateAOEMesh(bool isCreatePointMesh)
 {
 	ZeroMemory(&s_AoeMesh, sizeof(AOE_MESH));
 
@@ -430,6 +431,6 @@ void cSkill::CreateAOEMesh()
 
 bool cSkill::UsingSkill()
 {
-	if (m_bIsCooldown&&m_fCurrentCooldown == 0) return true;
+	if (m_bIsCooldown&&m_fCurrentCooldown == 0.0f) return true;
 	return false;
 }

@@ -39,7 +39,7 @@ struct AOE_MESH
 	LPD3DXMESH pointMesh;
 	float	   pointScale;
 	D3DXVECTOR3 vPointPos;
-	D3DXMATRIX matWorld;
+	D3DXMATRIX pointWorld;
 };
 
 class cSkill : public cAction	// 부모에서 받는 애니메이션은 원본임(사실 잘 모르겟음)
@@ -147,7 +147,7 @@ public:
 	void SetBuffType(BUFF_TYPE buffType) { e_BuffType = buffType; }
 	float CooldownTimer();
 
-	void CreateAOEMesh();
+	void CreateAOEMesh(bool isCreatePointMesh);
 	bool UsingSkill();
 };
 
