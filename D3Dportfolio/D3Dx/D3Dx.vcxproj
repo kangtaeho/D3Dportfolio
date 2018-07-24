@@ -164,6 +164,7 @@
     <ClInclude Include="cCollisionManager.h" />
     <ClInclude Include="cCube.h" />
     <ClInclude Include="cDeviceManager.h" />
+    <ClInclude Include="cEnemy.h" />
     <ClInclude Include="cFontManager.h" />
     <ClInclude Include="cGameNode.h" />
     <ClInclude Include="cHealthProgress.h" />
@@ -211,6 +212,7 @@
     <ClCompile Include="cCollisionManager.cpp" />
     <ClCompile Include="cCube.cpp" />
     <ClCompile Include="cDeviceManager.cpp" />
+    <ClCompile Include="cEnemy.cpp" />
     <ClCompile Include="cFontManager.cpp" />
     <ClCompile Include="cGameNode.cpp" />
     <ClCompile Include="cHealthProgress.cpp" />
