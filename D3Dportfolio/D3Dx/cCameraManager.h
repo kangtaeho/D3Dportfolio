@@ -23,6 +23,7 @@ private:
 	float m_fCameraPosX;
 	float m_fCameraPosZ;
 
+	bool m_bIsMoveWindow;
 public:
 
 
@@ -32,5 +33,6 @@ public:
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 	
 	void MoveWindow();		// 화면이동
+	void UsingMoveWindow() { m_bIsMoveWindow = true; }
 };
 

@@ -18,6 +18,8 @@ cPlayScene::~cPlayScene()
 
 HRESULT cPlayScene::Setup()
 {
+	g_pCameraManager->UsingMoveWindow();
+
 	g_pTextureManager->addTexture("potion", "./item/potion.dds", START_ITEM, CONSUME);
 	g_pTextureManager->addTexture("shoes", "./item/1001_Boots_of_Speed.dds", START_ITEM, EQUIPABLE);
 	g_pTextureManager->addTexture("LongSword", "./item/1036_Long_Sword.dds", EARLY_ITEM, EQUIPABLE);

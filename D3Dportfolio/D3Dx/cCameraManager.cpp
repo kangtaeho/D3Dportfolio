@@ -3,13 +3,14 @@
 
 
 cCameraManager::cCameraManager()
-	: m_vEye(0, 0, -5000)
+	: m_vEye(0, 0, -3000)
 	, m_vUp(0, 1, 0)
 	, m_vLookAt(0, 5100, 0)
 	, m_fRotX(0)
 	, m_fRotY(0)
-	, m_fDistance(5000)
+	, m_fDistance(3000)
 	, m_isRButtonDown(false)
+	, m_bIsMoveWindow(false)
 	, m_fCameraPosX(0)
 	, m_fCameraPosZ(0)
 {
@@ -112,25 +113,27 @@ void cCameraManager::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 
 void cCameraManager::MoveWindow()
 {
+	if (!m_bIsMoveWindow) return;
+
 	POINT ptMouse;
 	GetCursorPos(&ptMouse);
 	ScreenToClient(g_hWnd, &ptMouse);
 
-	if (ptMouse.x <= 10)
+	if (ptMouse.x <= 20)
 	{
 		m_fCameraPosX -= 20.0f;
 	}
-	else if(ptMouse.x>=WINSIZEX-10)
+	else if(ptMouse.x>=WINSIZEX-20)
 	{
 		m_fCameraPosX += 20.0f;
 	}
 
 
-	if (ptMouse.y <= 10)
+	if (ptMouse.y <= 20)
 	{
 		m_fCameraPosZ += 20.0f;
 	}
-	else if (ptMouse.y>=WINSIZEY-10)
+	else if (ptMouse.y>=WINSIZEY-20)
 	{
 		m_fCameraPosZ -= 20.0f;
 	}
