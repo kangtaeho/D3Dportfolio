@@ -157,6 +157,7 @@ void cAStar::Update(D3DXVECTOR3& position, float& rotY, float speed, float radiu
 				if (D3DXVec3Length(&(*pEnemyPos - position)) < speed)
 				{
 					tempNextPosition = *pEnemyPos - position;
+					Stop();
 				}
 			}
 			if (D3DXVec3Length(&(tempend - position)) < speed)
