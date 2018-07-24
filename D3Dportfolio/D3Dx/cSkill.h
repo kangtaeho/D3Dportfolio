@@ -81,6 +81,8 @@ protected:
 
 	bool				m_bIsAutoFire;			// 범위안에 있냐?
 
+	bool				m_isUsingSkill;			//
+
 	SYNTHESIZE(bool, m_bIsReady, IsReady); // 스킬 사용 준비가 되었냐?
 
 	// 버프 받았을때 상태 처리를 위한 플레이어 포인터
@@ -148,6 +150,6 @@ public:
 	float CooldownTimer();
 
 	void CreateAOEMesh(bool isCreatePointMesh);
-	bool UsingSkill();
+	bool IsUsingSkill();
 };
 

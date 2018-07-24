@@ -176,6 +176,7 @@ void cSkill::Casting()
 		m_bIsRemove = true;
 
 		m_bIsReady = false;
+		m_isUsingSkill = true;
 	}
 }
 
@@ -429,8 +430,16 @@ void cSkill::CreateAOEMesh(bool isCreatePointMesh)
 
 }
 
-bool cSkill::UsingSkill()
+bool cSkill::IsUsingSkill()
 {
-	if (m_bIsCooldown&&m_fCurrentCooldown == 0.0f) return true;
-	return false;
+	if (m_isUsingSkill)
+	{
+		m_isUsingSkill = false;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
 }
