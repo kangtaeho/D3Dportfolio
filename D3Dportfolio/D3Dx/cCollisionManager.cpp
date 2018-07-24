@@ -528,10 +528,13 @@ D3DXVECTOR3 cCollisionManager::getRayPosition(int& isIntersect, LPD3DXMESH Mesh)
 	}
 	else
 	{
-		D3DXVECTOR3 tempEye = g_pCameraManager->GetCameraEye();
-		float tempAngle = g_pCollisionManager->getAngleWithVecters(m_vDirection + tempEye, tempEye, D3DXVECTOR3(tempEye.x, 5000.0f, tempEye.z));
-		tempEye += m_vDirection * D3DXVec3Length(&(D3DXVECTOR3(tempEye.x, 5000.0f, tempEye.z) - tempEye)) / cosf(tempAngle);
-		return tempEye;
+		int tempBool = 0;
+		D3DXIntersect(m_pMapMesh,
+			&g_pCameraManager->GetCameraEye(),
+			&m_vDirection,
+			&tempBool, &face,
+			&u, &v, &f, NULL, NULL);
+		return g_pCameraManager->GetCameraEye() + m_vDirection * f;
 	}
 	return D3DXVECTOR3(0, 0, 0);
 }

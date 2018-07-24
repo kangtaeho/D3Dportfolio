@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "cLoadingScene.h"
 #include "cPlayer.h"
-#include "cCollisionMap.h"
 #include "cShop.h"
 #include "cStatus.h"
 
@@ -42,8 +41,8 @@ void cLoadingScene::LoadingData()
 	m_pPlayer->Setup("Teemo");
 
 	// UI
-	shop = new cShop;
-	status = new cStatus;
+	m_pShop = new cShop;
+	m_pStatus = new cStatus;
 
 	m_bLoadingCompletion = true;
 

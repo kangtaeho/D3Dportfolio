@@ -11,8 +11,8 @@ class cLoadingScene :
 {
 private:
 	cPlayer*		m_pPlayer;
-	cShop* shop;
-	cStatus* status;
+	cShop*			m_pShop;
+	cStatus*		m_pStatus;
 
 	bool m_bLoadingCompletion;
 

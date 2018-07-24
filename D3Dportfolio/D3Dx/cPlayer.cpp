@@ -27,7 +27,7 @@ void cPlayer::Setup(const char* name)
 	g_pSkillManager->GetSkill("이속업")->SetBuffType(MOVEUP);
 
 	m_pSphere = new cSphere;
-	m_pSphere->Setup(D3DXVECTOR3(200, 5172, 200), 100);
+	m_pSphere->Setup(D3DXVECTOR3(200, 5000, 200), 100);
 	aStar = new cAStar;
 }
 
@@ -71,7 +71,7 @@ void cPlayer::Render()
 	ScreenToClient(g_hWnd, &ptMouse);
 	g_pFontManager->TextFont(ptMouse.x, ptMouse.y, "2D : %0.2f, %0.2f", (float)ptMouse.x, (float)ptMouse.y);
 	g_pFontManager->TextFont(ptMouse.x, ptMouse.y + 20, "3D : %0.2f, %0.2f, %0.2f", (float)m_vNextPosition.x, (float)m_vNextPosition.y, (float)m_vNextPosition.z);
-	
+
 	g_pSkillManager->Render();
 
 	// g_pCollisionManager->Render();
@@ -118,26 +118,49 @@ void cPlayer::Check3DMousePointer()
 		m_vNextPosition = aStar->PushDestination(m_vNextPosition, m_fRadius); //만약에 충돌을 받으면 밀어낸다
 		aStar->Setup(m_vPosition, m_fRadius, m_vNextPosition);
 
-		// for (int i = 0; i < m_pMap->size(); i += 3)
+		// ClickEnemy(m_pSphere->GetPos(), 10);
+		// LPD3DXMesh tempSh
+		// D3DXVECTOR3 tempSphere = m_vNextPosition = g_pCollisionManager->getRayPosition(isPick, m_pSphere->m_pMesh);
+		// if (isPick)
 		// {
-		// 	if (ray.PickTri((*m_pMap)[i],
-		// 		(*m_pMap)[i + 1],
-		// 		(*m_pMap)[i + 2],
-		// 		g_pCameraManager->GetCameraEye(),
-		// 		m_vNextPosition)) break;
+		// 	if (D3DXVec3Length(&(m_vPosition - m_pSphere->GetPos())) < m_fRange)
+		// 	{
+		// 		m_fRotY = GetAngle(m_vPosition, m_pSphere->GetPos());
+		// 		//m_vNextPosition = m_vPosition;
+		// 		aStar->Stop();
+		// 		g_pSkillManager->Fire("평타", &m_vPosition, &m_pSphere->GetPos());
+		// 	}
 		// }
 
-		if(isPick)
+
+		if (ray.PickSphere(m_pSphere->GetPos(), 100))
 		{
 			if (D3DXVec3Length(&(m_vPosition - m_pSphere->GetPos())) < m_fRange)
 			{
 				m_fRotY = GetAngle(m_vPosition, m_pSphere->GetPos());
 				m_vNextPosition = m_vPosition;
-				aStar->Setup(m_vPosition, m_fRadius, m_vPosition);
+				aStar->Stop();
+				g_pSkillManager->Fire("평타", &m_vPosition, &m_pSphere->GetPos());
 			}
-			g_pSkillManager->Fire("평타", &m_vPosition, &m_pSphere->GetPos());
 		}
 
 	}
 
+}
+
+void cPlayer::ClickEnemy(D3DXVECTOR3 pos, float radius)
+{
+
+	cRayPicking ray;
+
+	if (ray.PickSphere(pos, radius))
+	{
+		if (D3DXVec3Length(&(m_vPosition - pos)) < m_fRange)
+		{
+			m_fRotY = GetAngle(m_vPosition, pos);
+			m_vNextPosition = m_vPosition;
+			g_pSkillManager->Fire("평타", &m_vPosition, &pos);
+			aStar->Stop();
+		}
+	}
 }

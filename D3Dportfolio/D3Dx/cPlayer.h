@@ -16,6 +16,8 @@ private:
 
 	cAStar* aStar;
 
+	bool isTrue;
+
 public:
 	cPlayer();
 	~cPlayer();
@@ -26,7 +28,7 @@ public:
 	virtual void Render();
 
 	void Check3DMousePointer();				// 마우스 체크
-
+	void ClickEnemy(D3DXVECTOR3 pos, float radius);
 
 };
 
