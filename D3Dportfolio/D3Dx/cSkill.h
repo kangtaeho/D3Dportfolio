@@ -79,7 +79,8 @@ protected:
 
 	bool				m_bIsAutoFire;			// 범위안에 있냐?
 
-	bool				m_isUsingSkill;			//
+	bool				m_isUsingSkill;
+	bool				m_bIsFire;
 
 	SYNTHESIZE(bool, m_bIsReady, IsReady); // 스킬 사용 준비가 되었냐?
 

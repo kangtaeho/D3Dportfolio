@@ -27,6 +27,7 @@ cSkill::cSkill()
 	, m_bIsRemove(false)
 	, m_bIsAutoFire(false)
 	, m_bIsReady(false)
+	, m_bIsFire(false)
 	, m_pMesh(NULL)
 	, m_pPlayer(NULL)
 	, e_BuffType(BUFF_TYPE_COUNT)
@@ -118,6 +119,8 @@ void cSkill::Fire(D3DXVECTOR3* playerPos,
 	m_vDir = (*m_pTargetPos) - m_vPos;
 	D3DXVec3Normalize(&m_vDir, &m_vDir);			// 방향벡터
 
+	// 클릭한 순간에 사라저야함.
+	m_bIsFire = true; // false는 cooldown에 넣어둘 생각임
 }
 
 void cSkill::Move()
@@ -191,6 +194,7 @@ void cSkill::CoolDownSetup()
 	{
 		m_bIsCooldown = false;
 		m_bIsCasting = false;
+		m_bIsFire = false;
 		m_fCurrentCooldown = 0.0f;
 	}
 }
@@ -492,46 +496,48 @@ void cSkill::DestroyAOEMesh()
 void cSkill::RenderAOEMesh()
 {
 
-	if (m_bIsAutoFire) return;
-	if (!m_bIsReady) return;
-
-	if (s_AoeMesh)
+	//if (m_bIsAutoFire) return;
+	if (m_bIsReady && !m_bIsFire)
 	{
-		D3DXMATRIX	matAOEWorld, matPointWorld;
-		D3DXMATRIX	matS, matT;
-
-		D3DXMatrixScaling(&matS, m_fRange, 1, m_fRange);
-		D3DXMatrixTranslation(&matT, m_pPlayer->getPosition().x, m_pPlayer->getPosition().y, m_pPlayer->getPosition().z);
-
-		matAOEWorld = matS*matT;
-
-		g_pD3DDevice->SetTransform(D3DTS_WORLD, &matAOEWorld);
-		g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
-		LPDIRECT3DTEXTURE9 texture = g_pTextureManager->GetTexture("./select/skillFloor03.png");
-		g_pD3DDevice->SetTexture(0, texture);
-		
-		s_AoeMesh->aoeMesh->DrawSubset(0);
-
-		if (s_AoeMesh->pointMesh)
+		if (s_AoeMesh)
 		{
-			int isPick = 0;
-			D3DXVECTOR3 p = g_pCollisionManager->getRayPosition(isPick);
+			D3DXMATRIX	matAOEWorld, matPointWorld;
+			D3DXMATRIX	matS, matT;
 
-			D3DXMatrixScaling(&matS, s_AoeMesh->pointScale, 1, s_AoeMesh->pointScale);
-			D3DXMatrixTranslation(&matT, p.x, p.y, p.z);
+			D3DXMatrixScaling(&matS, m_fRange, 1, m_fRange);
+			D3DXMatrixTranslation(&matT, m_pPlayer->getPosition().x, m_pPlayer->getPosition().y, m_pPlayer->getPosition().z);
 
-			matPointWorld = matS*matT;
+			matAOEWorld = matS*matT;
 
-			g_pD3DDevice->SetTransform(D3DTS_WORLD, &matPointWorld);
+			g_pD3DDevice->SetTransform(D3DTS_WORLD, &matAOEWorld);
 			g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
-			LPDIRECT3DTEXTURE9 texture1 = g_pTextureManager->GetTexture("./select/skillFloor02.png");
-			g_pD3DDevice->SetTexture(0, texture1);
+			LPDIRECT3DTEXTURE9 texture = g_pTextureManager->GetTexture("./select/skillFloor03.png");
+			g_pD3DDevice->SetTexture(0, texture);
 
-			s_AoeMesh->pointMesh->DrawSubset(0);
+			s_AoeMesh->aoeMesh->DrawSubset(0);
+
+			if (s_AoeMesh->pointMesh)
+			{
+				int isPick = 0;
+				D3DXVECTOR3 p = g_pCollisionManager->getRayPosition(isPick);
+
+				D3DXMatrixScaling(&matS, s_AoeMesh->pointScale, 1, s_AoeMesh->pointScale);
+				D3DXMatrixTranslation(&matT, p.x, p.y, p.z);
+
+				matPointWorld = matS*matT;
+
+				g_pD3DDevice->SetTransform(D3DTS_WORLD, &matPointWorld);
+				g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
+				LPDIRECT3DTEXTURE9 texture1 = g_pTextureManager->GetTexture("./select/skillFloor02.png");
+				g_pD3DDevice->SetTexture(0, texture1);
+
+				s_AoeMesh->pointMesh->DrawSubset(0);
+
+			}
 
 		}
-
 	}
+
 }
 
 bool cSkill::IsUsingSkill()
