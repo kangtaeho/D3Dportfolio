@@ -23,6 +23,7 @@ void cStatus::setup()
 	
 	m_pRect = new RECT[6];
 
+	UsedMp = 0;
 	m_bUsedSkill = false;
 	m_bSelected = false;
 	m_bIsHit = false;
@@ -292,7 +293,7 @@ void cStatus::update()
 		if (m_pStatusMpBar->GetrectFrameSize()->left < m_pStatusMpBar->GetrectFrameSize()->right &&
 			m_bIsUsed)
 		{
-			m_pStatusMpBar->GetrectFrameSize()->right -= hit;
+			m_pStatusMpBar->GetrectFrameSize()->right -= UsedMp;
 			m_bIsUsed = false;
 		}
 	}
@@ -400,7 +401,9 @@ void cStatus::update()
 
 				p.second->SetChosen(true);
 				p.second->GetskillInfo()->Setalphavalue(100);
+				
 				m_bSelected = true;
+				UsedMp = 30;
 				g_pSkillManager->IsReady("w");
 			}
 
@@ -434,8 +437,9 @@ void cStatus::update()
 
 				p.second->SetChosen(true);
 				p.second->GetskillInfo()->Setalphavalue(100);
+				
 				m_bSelected = true;
-
+				UsedMp = 50;
 				g_pSkillManager->IsReady("r");
 			}
 		}
@@ -447,6 +451,11 @@ void cStatus::update()
 		m_bCheckMpBar = true;
 		m_bUsedSkill = true;
 		m_bSelected = false;
+
+		for (auto p : m_mapStatusSkillInfo)
+		{
+			if (p.first == "r")p.second->SetUsing(true);
+		}
 	}
 	if (g_pSkillManager->GetSkill("w")->IsUsingSkill())
 	{
@@ -454,6 +463,10 @@ void cStatus::update()
 		m_bCheckMpBar = true;
 		m_bUsedSkill = true;
 		m_bSelected = false;
+		for (auto p : m_mapStatusSkillInfo)
+		{
+			if (p.first == "w")p.second->SetUsing(true);
+		}
 	}
 
 	if (CurrentHp <= 0)CurrentHp = 0;
@@ -514,7 +527,7 @@ void cStatus::render()
 	
 	for (auto p : m_mapStatusSkillInfo)
 	{
-		if (p.second->GetChosen() == true)
+		if (p.second->GetChosen() == true && p.second->GetUsing() == true)
 		{
 			g_pFontManager->TextFont(p.second->GetskillInfo()->GetPosition().x +18,
 				p.second->GetskillInfo()->GetPosition().y + 15, "%d",
@@ -524,7 +537,7 @@ void cStatus::render()
 			{
 				p.second->SetChosen(false);
 				p.second->GetskillInfo()->Setalphavalue(255);
-				m_bUsedSkill = false;
+				p.second->SetUsing(false);
 			}
 		}
 	}
@@ -552,7 +565,7 @@ void cStatus::HitProgress()
 	if (m_bCheckMpBar)
 	{
 		if (CurrentMp > 0)
-			CurrentMp = CurrentMp - hit;
+			CurrentMp = CurrentMp - UsedMp;
 
 		MpRcRight = m_pStatusMpBar->GetrectFrameSize()->right;
 		MpRcBottom = m_pStatusMpBar->GetrectFrameSize()->bottom;

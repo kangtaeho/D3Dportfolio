@@ -1,39 +1,8 @@
-﻿  cStatus.cpp
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(94): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(95): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(96): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(97): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(183): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(186): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(187): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(189): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(198): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(199): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(200): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(202): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(230): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(341): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(342): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(343): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(344): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(355): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(520): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(519): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(532): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(533): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(534): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(536): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(537): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(538): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(547): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(548): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(557): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(558): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(568): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(593): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(626): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(634): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(633): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(642): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cstatus.cpp(641): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  cHealthProgress.cpp
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\chealthprogress.cpp(31): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\chealthprogress.cpp(32): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\chealthprogress.cpp(34): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\chealthprogress.cpp(47): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\chealthprogress.cpp(48): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\chealthprogress.cpp(50): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   D3Dx.vcxproj -> C:\Users\USER\Desktop\D3Dportfolio\D3Dportfolio\Debug\D3Dx.exe

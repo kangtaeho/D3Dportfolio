@@ -7,22 +7,30 @@ class cHealthProgress
 {
 private:
 	SINGLETONE(cHealthProgress);
-	RECT  m_BarRect;
-
+	RECT  m_HpBarRect;
+	RECT  m_MpBarRect;
 	Bitmap* m_pContainer;
 	Bitmap* m_pHpBar;
 	Bitmap* m_pMpBar;
 
-	float m_fBarSize;
-	float m_fBarRight;
-	float m_fBarBottom;
-	float m_fCurrentHp;
+	float m_fHpBarSize;
+	float m_fHpBarRight;
+	float m_fHpBarBottom;
 	float m_fHitvalue;
 	
+	float m_fMpBarSize;
+	float m_fMpBarRight;
+	float m_fMpBarBottom;
+	float m_fUsedMpValue;
+
 	SYNTHESIZE(float, m_fMaxHp, MaxHp);
+	SYNTHESIZE(float, m_fCurrentHp, CurrentHp);
 	SYNTHESIZE(float, m_fMaxMp, MaxMp);
-	SYNTHESIZE(bool, m_bCheckBarSize, BarSize);
-	SYNTHESIZE(bool, m_bCheckHit, Hit);
+	SYNTHESIZE(float, m_fCurrentMp, CurrentMp);
+	SYNTHESIZE(bool, m_bCheckHpBarSize, HpBarSize);
+	SYNTHESIZE(bool, m_bCheckHpHit, HpHit);
+	SYNTHESIZE(bool, m_bCheckMpBarSize, MpBarSize);
+	SYNTHESIZE(bool, m_bCheckMpUsed, MpUsed);
 	
 public:
 	void setup();
