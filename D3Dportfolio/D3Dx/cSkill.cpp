@@ -484,11 +484,15 @@ void cSkill::RenderAOEMesh()
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &matAOEWorld);
 		g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
 
-		LPDIRECT3DTEXTURE9 texture = g_pTextureManager->GetTexture("./select/skillFloor01.png");
-		g_pD3DDevice->SetTexture(0, texture);
+		Bitmap* b;
+		b = g_pTextureManager->addTexture(" ", "./select/skillFloor03.dds", 0, 0);
+
+		LPDIRECT3DTEXTURE9 texture = g_pTextureManager->GetTexture("./select/skillFloor03.dds");
+		g_pD3DDevice->SetTexture(0, b->GetTexture());
 		
 		s_AoeMesh->aoeMesh->DrawSubset(0);
-		
+		g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, false);
+
 	}
 }
 
