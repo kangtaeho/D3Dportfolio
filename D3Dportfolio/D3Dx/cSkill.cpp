@@ -413,17 +413,23 @@ void cSkill::CreateAOEMesh()
 		D3DXMESH_MANAGED,
 		ST_PNT_VERTEX::FVF,
 		g_pD3DDevice,
-		&s_AoeMesh.AOEMesh
+		&s_AoeMesh.aoeMesh
 	);
 
 	ST_PNT_VERTEX* vM;
-	s_AoeMesh.AOEMesh->LockVertexBuffer(0, (void**)&vM);
+	s_AoeMesh.aoeMesh->LockVertexBuffer(0, (void**)&vM);
 
 	for (int i = 0; i < index.size(); i++)
 	{
 		vM[i] = index[i];
 	}
 
-	s_AoeMesh.AOEMesh->UnlockVertexBuffer();
+	s_AoeMesh.aoeMesh->UnlockVertexBuffer();
 
+}
+
+bool cSkill::UsingSkill()
+{
+	if (m_bIsCooldown&&m_fCurrentCooldown == 0) return true;
+	return false;
 }

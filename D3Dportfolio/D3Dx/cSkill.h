@@ -33,10 +33,12 @@ struct OBJECT_MESH
 
 struct AOE_MESH
 {
-	LPD3DXMESH AOEMesh;
+	LPD3DXMESH	aoeMesh;
+	float		aoeScale;
+
 	LPD3DXMESH pointMesh;
-	float		scale;
-	D3DXVECTOR3 vPos;
+	float	   pointScale;
+	D3DXVECTOR3 vPointPos;
 	D3DXMATRIX matWorld;
 };
 
@@ -146,5 +148,6 @@ public:
 	float CooldownTimer();
 
 	void CreateAOEMesh();
+	bool UsingSkill();
 };
 
