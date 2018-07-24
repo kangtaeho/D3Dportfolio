@@ -15,93 +15,94 @@ void cAStar::Setup(D3DXVECTOR3 position, float radius, D3DXVECTOR3 destination)
 {
 	FinalAStar.clear();
 
-	//std::vector<std::vector<D3DXVECTOR3>> TotalAStar;
-	//position.y = 5000.0f;
-	//FinalAStar.push_back(position);
-	//TotalAStar.push_back(FinalAStar);
-	//FinalAStar.clear();
+	std::vector<std::vector<D3DXVECTOR3>> TotalAStar;
+	position.y = 5000.0f;
+	FinalAStar.push_back(position);
+	TotalAStar.push_back(FinalAStar);
+	FinalAStar.clear();
 
-	//int EndingAStar = 0;
-	//while (EndingAStar != TotalAStar.size())
-	//{
-	//	std::vector<D3DXVECTOR3> tempvecposition = TotalAStar.front();
-	//	if (D3DXVec3Length(&(tempvecposition.back() - destination)) > 0.001f)
-	//	{
-	//		STLINE* tempLine = FindFirstLine(tempvecposition.back(), destination);
-	//		if (tempLine == NULL)
-	//		{
-	//			tempvecposition.push_back(PushDestination(destination, radius));
-	//			TotalAStar.push_back(tempvecposition);
-	//		}
-	//		else
-	//		{
-	//			STCIRCLE tempcircle[2];
-	//			for (int i = 0; i < 2; ++i)
-	//			{
-	//				tempcircle[i] = *tempLine->pCircles[i];
-	//			}
-	//			for (int i = 0; i < 2; ++i)
-	//			{
-	//				D3DXVECTOR3 gocircle;
-	//				D3DXMATRIX mat, matT, matR;
-	//				tempvecposition = TotalAStar.front();
-	//				tempcircle[i] = FindEndCircle(tempvecposition.back(), tempcircle[i], tempLine);
-	//				D3DXVECTOR3 tempnextposition = FindNextPosition(tempvecposition.back(), tempcircle[i], radius, g_pCollisionManager->WherePositionLR(tempcircle[i].mPosition, tempvecposition.back(), destination));
-	//				tempnextposition = PushDestination(tempnextposition, radius);
-	//				tempvecposition.push_back(tempnextposition);
-	//				if (g_pCollisionManager->getAngleWithVecters(tempvecposition[tempvecposition.size() - 2], tempcircle[i].mPosition, destination) < D3DX_PI / 2)
-	//				{
-	//					if (g_pCollisionManager->IsCrossingVector(tempvecposition[tempvecposition.size() - 2], destination, tempcircle[i].mPosition, tempcircle[(i + 1) % 2].mPosition))
-	//					{
-	//						for (int j = 0; j < 2; ++j)
-	//						{
-	//							if (D3DXVec3Length(&(tempcircle[i].mPosition - tempcircle[i].vecLines.front()->pCircles[j]->mPosition)) < 0.001f)continue;
+	int EndingAStar = 0;
+	while (EndingAStar != TotalAStar.size())
+	{
+		std::vector<D3DXVECTOR3> tempvecposition = TotalAStar.front();
+		if (D3DXVec3Length(&(tempvecposition.back() - destination)) > 0.001f)
+		{
+			STLINE* tempLine = FindFirstLine(tempvecposition.back(), destination);
+			if (tempLine == NULL)
+			{
+				tempvecposition.push_back(PushDestination(destination, radius));
+				TotalAStar.push_back(tempvecposition);
+			}
+			else
+			{
+				STCIRCLE tempcircle[2];
+				for (int i = 0; i < 2; ++i)
+				{
+					tempcircle[i] = *tempLine->pCircles[i];
+				}
+				for (int i = 0; i < 2; ++i)
+				{
+					D3DXVECTOR3 gocircle;
+					D3DXMATRIX mat, matT, matR;
+					tempvecposition = TotalAStar.front();
+					tempcircle[i] = FindEndCircle(tempvecposition.back(), tempcircle[i], tempLine);
+					D3DXVECTOR3 tempnextposition = FindNextPosition(tempvecposition.back(), tempcircle[i], radius, g_pCollisionManager->WherePositionLR(tempcircle[i].mPosition, tempvecposition.back(), destination));
+					tempnextposition = PushDestination(tempnextposition, radius);
+					tempvecposition.push_back(tempnextposition);
+					if (g_pCollisionManager->getAngleWithVecters(tempvecposition[tempvecposition.size() - 2], tempcircle[i].mPosition, destination) < D3DX_PI / 2)
+					{
+						if (g_pCollisionManager->IsCrossingVector(tempvecposition[tempvecposition.size() - 2], destination, tempcircle[i].mPosition, tempcircle[(i + 1) % 2].mPosition))
+						{
+							for (int j = 0; j < 2; ++j)
+							{
+								if (D3DXVec3Length(&(tempcircle[i].mPosition - tempcircle[i].vecLines.front()->pCircles[j]->mPosition)) < 0.001f)continue;
 
-	//							D3DXVECTOR3 tempendposition = tempcircle[i].vecLines.front()->pCircles[(j + 1) % 2]->mPosition - tempcircle[i].vecLines.front()->pCircles[j]->mPosition;
-	//							D3DXVec3Normalize(&tempendposition, &tempendposition);
-	//							tempendposition *= radius + tempcircle[i].fRadius;
-	//							tempendposition += tempcircle[i].mPosition;
-	//							tempvecposition.push_back(tempendposition);
-	//						}
-	//					}
-	//				}
-	//				TotalAStar.push_back(tempvecposition);
-	//			}
-	//		}
-	//	}
+								D3DXVECTOR3 tempendposition = tempcircle[i].vecLines.front()->pCircles[(j + 1) % 2]->mPosition - tempcircle[i].vecLines.front()->pCircles[j]->mPosition;
+								D3DXVec3Normalize(&tempendposition, &tempendposition);
+								tempendposition *= radius + tempcircle[i].fRadius;
+								tempendposition += tempcircle[i].mPosition;
+								tempvecposition.push_back(tempendposition);
+							}
+						}
+					}
+					TotalAStar.push_back(tempvecposition);
+				}
+			}
+		}
 
-	//	if (D3DXVec3Length(&(TotalAStar.front().back() - destination)) < 0.001f)break;// TotalAStar.push_back(TotalAStar.front());
-	//	TotalAStar.erase(TotalAStar.begin());
+		if (D3DXVec3Length(&(TotalAStar.front().back() - destination)) < 0.001f)break;// TotalAStar.push_back(TotalAStar.front());
+		TotalAStar.erase(TotalAStar.begin());
 
-	//	EndingAStar = 0;
-	//	for (int i = 0; i < TotalAStar.size(); ++i)
-	//	{
-	//		if (D3DXVec3Length(&(TotalAStar[i].back() - destination)) < 0.001f)EndingAStar++;
-	//	}
-	//}
-	//
-	//for (int i = 0; i < TotalAStar.size(); ++i)
-	//{
-	//	if (D3DXVec3Length(&(TotalAStar[i].back() - destination)) > 0.001f)continue;
-	//	if(!FinalAStar.size())FinalAStar = TotalAStar[i];
-	//	else
-	//	{
-	//		float tempAllLength1 = 0;
-	//		float tempAllLength2 = 0;
-	//		for (int j = 1; j < FinalAStar.size(); ++j)
-	//		{
-	//			tempAllLength1 += D3DXVec3Length(&(FinalAStar[j] - FinalAStar[j - 1]));
-	//		}
-	//		for (int j = 1; j < TotalAStar[i].size(); ++j)
-	//		{
-	//			tempAllLength2 += D3DXVec3Length(&(TotalAStar[i][j] - TotalAStar[i][j - 1]));
-	//		}
-	//		if (tempAllLength1 > tempAllLength2)FinalAStar = TotalAStar[i];
-	//	}
-	//}
-
+		EndingAStar = 0;
+		for (int i = 0; i < TotalAStar.size(); ++i)
+		{
+			if (D3DXVec3Length(&(TotalAStar[i].back() - destination)) < 0.001f)EndingAStar++;
+		}
+	}
+	FinalAStar = TotalAStar.front();
+/*
+	for (int i = 0; i < TotalAStar.size(); ++i)
+	{
+		if (D3DXVec3Length(&(TotalAStar[i].back() - destination)) > 0.001f)continue;
+		if(!FinalAStar.size())FinalAStar = TotalAStar[i];
+		else
+		{
+			float tempAllLength1 = 0;
+			float tempAllLength2 = 0;
+			for (int j = 1; j < FinalAStar.size(); ++j)
+			{
+				tempAllLength1 += D3DXVec3Length(&(FinalAStar[j] - FinalAStar[j - 1]));
+			}
+			for (int j = 1; j < TotalAStar[i].size(); ++j)
+			{
+				tempAllLength2 += D3DXVec3Length(&(TotalAStar[i][j] - TotalAStar[i][j - 1]));
+			}
+			if (tempAllLength1 > tempAllLength2)FinalAStar = TotalAStar[i];
+		}
+	}
+*/
 	////////////////////////////////////////////////////////////////
-
+/*
 	position.y = 5000.0f;
 	vEndPosition = PushDestination(destination, radius);
 	findAStar(position, destination, radius, NULL, 0);
@@ -129,6 +130,7 @@ void cAStar::Setup(D3DXVECTOR3 position, float radius, D3DXVECTOR3 destination)
 	AllAStarFath.clear();
 	AllEndAStarFath.clear();
 	mapCircle.clear();
+*/
 }
 
 void cAStar::Update(D3DXVECTOR3& position, float& rotY, float speed, float radius)
@@ -136,46 +138,58 @@ void cAStar::Update(D3DXVECTOR3& position, float& rotY, float speed, float radiu
 	position = g_pCollisionManager->getVector2(position);
 	if (FinalAStar.size())
 	{
-		D3DXVECTOR3 tempend = g_pCollisionManager->getVector2(FinalAStar.back());
-		tempend = PushDestination(tempend, radius);
-		tempend.y = 0;
-		D3DXVECTOR3 tempNextPosition = tempend;
-		tempNextPosition = tempNextPosition - position;
-		D3DXVec3Normalize(&tempNextPosition, &tempNextPosition);
-		tempNextPosition *= speed;
-		if (D3DXVec3Length(&(tempend - position)) < speed)
+		if (D3DXVec3Length(&(g_pCollisionManager->getVector2(position) - g_pCollisionManager->getVector2(FinalAStar.front()))) < 0.001f)
 		{
-			tempNextPosition = tempend - position;
+			FinalAStar.erase(FinalAStar.begin());
 		}
-		tempNextPosition += position;
-
-		if (D3DXVec3Length(&(g_pCollisionManager->getVector2(tempend) - g_pCollisionManager->getVector2(tempNextPosition))) < 0.001f)FinalAStar.pop_back();
-		STCollisionMapTool temptemptemp = g_pCollisionManager->getCollisionMapTool();
-		for (int i = 0; i < g_pCollisionManager->getCollisionMapTool().vecCircle.size(); ++i)
+		else
 		{
-			if (g_pCollisionManager->NextTickInCircle(
-				tempNextPosition,
-				radius,
-				g_pCollisionManager->getCollisionMapTool().vecCircle[i]->mPosition,
-				g_pCollisionManager->getCollisionMapTool().vecCircle[i]->fRadius))
+			D3DXVECTOR3 tempend = g_pCollisionManager->getVector2(FinalAStar.front());
+			tempend = PushDestination(tempend, radius);
+			tempend.y = 0;
+			D3DXVECTOR3 tempNextPosition = tempend;
+			tempNextPosition = tempNextPosition - position;
+			D3DXVec3Normalize(&tempNextPosition, &tempNextPosition);
+			tempNextPosition *= speed;
+			if (D3DXVec3Length(&(tempend - position)) < speed)
 			{
-				tempNextPosition = g_pCollisionManager->MoveInCircle(
-					position,
+				tempNextPosition = tempend - position;
+			}
+			tempNextPosition += position;
+
+			STCollisionMapTool temptemptemp = g_pCollisionManager->getCollisionMapTool();
+			for (int i = 0; i < g_pCollisionManager->getCollisionMapTool().vecCircle.size(); ++i)
+			{
+				if (g_pCollisionManager->NextTickInCircle(
 					tempNextPosition,
 					radius,
-					speed,
 					g_pCollisionManager->getCollisionMapTool().vecCircle[i]->mPosition,
-					g_pCollisionManager->getCollisionMapTool().vecCircle[i]->fRadius);
-				tempNextPosition.y = 0;
+					g_pCollisionManager->getCollisionMapTool().vecCircle[i]->fRadius))
+				{
+					tempNextPosition = g_pCollisionManager->MoveInCircle(
+						position,
+						tempNextPosition,
+						radius,
+						speed,
+						g_pCollisionManager->getCollisionMapTool().vecCircle[i]->mPosition,
+						g_pCollisionManager->getCollisionMapTool().vecCircle[i]->fRadius);
+					tempNextPosition.y = 0;
+				}
 			}
+
+			tempNextPosition = g_pCollisionManager->SetHeight(tempNextPosition);
+
+			rotY = g_pCollisionManager->getDirectionAngle(tempNextPosition - position);
+			rotY += D3DX_PI / 2;
+			position = tempNextPosition;
 		}
-
-		tempNextPosition = g_pCollisionManager->SetHeight(tempNextPosition);
-
-		rotY = g_pCollisionManager->getDirectionAngle(tempNextPosition - position);
-		position = tempNextPosition;
 	}
 	position = g_pCollisionManager->SetHeight(position);
+}
+
+void cAStar::Stop(D3DXVECTOR3 position, float Range, D3DXVECTOR3 EnemyPosition, float EnemyRadius)
+{
+	if (D3DXVec3Length(&(position - EnemyPosition)) < Range + EnemyRadius)FinalAStar.clear();
 }
 
 D3DXVECTOR3 cAStar::PushDestination(D3DXVECTOR3 destination, float characterradius)

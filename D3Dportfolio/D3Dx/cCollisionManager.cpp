@@ -340,7 +340,7 @@ D3DXVECTOR3 cCollisionManager::SetHeight(D3DXVECTOR3 position)
 	return position;
 }
 
-D3DXVECTOR3 cCollisionManager::getRayPosition(int bTemp, LPD3DXMESH Mesh)
+D3DXVECTOR3 cCollisionManager::getRayPosition(int& isIntersect, LPD3DXMESH Mesh, D3DXVECTOR3 position)
 {
 	D3DXVECTOR3		m_vDirection;
 	D3DXMATRIX invProj, invViewPort;
@@ -366,28 +366,24 @@ D3DXVECTOR3 cCollisionManager::getRayPosition(int bTemp, LPD3DXMESH Mesh)
 	float u, v, f;
 	DWORD face;
 	LPD3DXMESH tempMesh = m_pMapMesh;
+	D3DXVECTOR3 tempEye = g_pCameraManager->GetCameraEye();
 	if (Mesh)tempMesh = Mesh;
+	if (D3DXVec3Length(&position) > 0.001f)
+	{
+		tempEye -= position;
+	}
 	D3DXIntersect(tempMesh,
-		&g_pCameraManager->getEye(),
+		&tempEye,
 		&m_vDirection,
-		&bTemp, &face,
+		&isIntersect, &face,
 		&u, &v, &f, NULL, NULL);
-	if (bTemp)
-	{
-		return g_pCameraManager->getEye() + m_vDirection * f;
-	}
-	else
-	{
-		int temptemptemp = 0;
-		D3DXIntersect(m_pMapMesh,
-			&g_pCameraManager->getEye(),
-			&m_vDirection,
-			&temptemptemp, &face,
-			&u, &v, &f, NULL, NULL);
-
-		return g_pCameraManager->getEye() + m_vDirection * f;
-	}
-	return D3DXVECTOR3(0, 0, 0);
+	int tempBool = 0;
+	D3DXIntersect(m_pMapMesh,
+		&g_pCameraManager->GetCameraEye(),
+		&m_vDirection,
+		&tempBool, &face,
+		&u, &v, &f, NULL, NULL);
+	return g_pCameraManager->GetCameraEye() + m_vDirection * f;
 }
 
 D3DXVECTOR3 cCollisionManager::NextPositionPerTick(D3DXVECTOR3 position, D3DXVECTOR3 nextposition, float speed)
