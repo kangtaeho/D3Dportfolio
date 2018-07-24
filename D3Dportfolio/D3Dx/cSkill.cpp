@@ -71,6 +71,8 @@ void cSkill::Release()
 {
 
 	if (m_pCube) delete m_pCube;
+	//if (s_AoeMesh) DestroyAOEMesh();
+
 }
 
 void cSkill::Update()
@@ -377,28 +379,29 @@ float cSkill::CooldownTimer()
 	return m_fCooldown-m_fCurrentCooldown;
 }
 
-void cSkill::CreateAOEMesh(bool isCreatePointMesh)
+void cSkill::CreateAOEMesh(float aoeScale, bool isCreatePointMesh, float pointScale)
 {
 	ZeroMemory(&s_AoeMesh, sizeof(AOE_MESH));
+	s_AoeMesh = new AOE_MESH;
 
 	ST_PNT_VERTEX v1;
 	v1.p = D3DXVECTOR3(-1, 0, 1);
-	v1.n = D3DXVECTOR3(0, 0, 0);
+	v1.n = D3DXVECTOR3(0, 1, 0);
 	v1.t = D3DXVECTOR2(0, 0);
 
 	ST_PNT_VERTEX v2;
 	v2.p = D3DXVECTOR3(1, 0, 1);
-	v2.n = D3DXVECTOR3(0, 0, 0);
+	v2.n = D3DXVECTOR3(0, 1, 0);
 	v2.t = D3DXVECTOR2(1, 0);
 
 	ST_PNT_VERTEX v3;
 	v3.p = D3DXVECTOR3(1, 0, -1);
-	v3.n = D3DXVECTOR3(0, 0, 0);
+	v3.n = D3DXVECTOR3(0, 1, 0);
 	v3.t = D3DXVECTOR2(1, 1);
 
 	ST_PNT_VERTEX v4;
 	v4.p = D3DXVECTOR3(-1, 0, -1);
-	v4.n = D3DXVECTOR3(0, 0, 0);
+	v4.n = D3DXVECTOR3(0, 1, 0);
 	v4.t = D3DXVECTOR2(0, 1);
 
 	std::vector<ST_PNT_VERTEX> index;
@@ -415,19 +418,68 @@ void cSkill::CreateAOEMesh(bool isCreatePointMesh)
 		D3DXMESH_MANAGED,
 		ST_PNT_VERTEX::FVF,
 		g_pD3DDevice,
-		&s_AoeMesh.aoeMesh
+		&s_AoeMesh->aoeMesh
 	);
 
 	ST_PNT_VERTEX* vM;
-	s_AoeMesh.aoeMesh->LockVertexBuffer(0, (void**)&vM);
+	s_AoeMesh->aoeMesh->LockVertexBuffer(0, (void**)&vM);
 
 	for (int i = 0; i < index.size(); i++)
 	{
 		vM[i] = index[i];
 	}
 
-	s_AoeMesh.aoeMesh->UnlockVertexBuffer();
+	s_AoeMesh->aoeMesh->UnlockVertexBuffer();
+	s_AoeMesh->aoeScale = aoeScale;
 
+	if (isCreatePointMesh)
+	{
+		s_AoeMesh->pointMesh->LockVertexBuffer(0, (void**)&vM);
+
+		for (int i = 0; i < index.size(); i++)
+		{
+			vM[i] = index[i];
+		}
+
+		s_AoeMesh->pointMesh->UnlockVertexBuffer();
+		s_AoeMesh->pointScale = pointScale;
+	}
+
+}
+
+void cSkill::DestroyAOEMesh()
+{
+	if (s_AoeMesh)
+	{
+		if (s_AoeMesh->aoeMesh)s_AoeMesh->aoeMesh->Release();
+		if (s_AoeMesh->pointMesh)s_AoeMesh->pointMesh->Release();
+		SAFE_DELETE(s_AoeMesh);
+	}
+}
+
+void cSkill::RenderAOEMesh()
+{
+	if (!m_bIsReady) return;
+
+	if (s_AoeMesh)
+	{
+		D3DXMATRIX	matAOEWorld, matPointWorld;
+		D3DXMATRIX	matS, matT;
+
+		D3DXMatrixScaling(&matS, m_fRange, 1, m_fRange);
+		D3DXMatrixTranslation(&matT, m_pPlayer->getPosition().x, m_pPlayer->getPosition().y, m_pPlayer->getPosition().z);
+
+		matAOEWorld = matS*matT;
+
+		g_pD3DDevice->SetTransform(D3DTS_WORLD, &matAOEWorld);
+		g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
+
+		LPDIRECT3DTEXTURE9 texture = g_pTextureManager->GetTexture("./select/skillFloor01.png");
+		g_pD3DDevice->SetTexture(0, texture);
+		
+		s_AoeMesh->aoeMesh->DrawSubset(0);
+		
+	}
 }
 
 bool cSkill::IsUsingSkill()
