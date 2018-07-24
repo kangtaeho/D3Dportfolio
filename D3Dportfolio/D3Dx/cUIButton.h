@@ -37,6 +37,7 @@ public:
 	void update();
 	void Render();
 	void setPosition(D3DXVECTOR3 vPosition);
+	
 	void setScale(D3DXVECTOR3 vScale);
 	int GetButttonState() { return m_buttonState; }
 };

@@ -78,13 +78,17 @@ void cPlayScene::Release()
 
 void cPlayScene::Update()
 {
+	if (m_pPlayer)
+		m_pPlayer->Update();
+
+
 	g_pProgreesBar->update();
 
 	D3DXVECTOR3 tempposition(0, 0, 0);
 	D3DXMATRIX WorldMatrix, matProj, matViewPort, matView;
-	D3DXMatrixTranslation(&WorldMatrix, m_pPlayer->getPosition().x, m_pPlayer->getPosition().y, m_pPlayer->getPosition().y);
+	D3DXMatrixTranslation(&WorldMatrix, m_pPlayer->getPosition().x, m_pPlayer->getPosition().y, m_pPlayer->getPosition().z);
 	D3DVIEWPORT9 tempViewPort;
-	g_pD3DDevice->GetViewport(&tempViewPort);
+	g_pD3DDevice->GetViewport(&tempViewPort); //
 	D3DXMatrixIdentity(&matViewPort);
 	matViewPort._11 = tempViewPort.Width / (float)2;
 	matViewPort._22 = -(int)tempViewPort.Height / (float)2;
@@ -95,19 +99,17 @@ void cPlayScene::Update()
 	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
 	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
 
+
+	float m_fRotZ = D3DX_PI / 2;
+	D3DXMATRIX RotZ;
+
+	D3DXMatrixRotationZ(&RotZ, m_fRotZ);
+
 	WorldMatrix = WorldMatrix * matView * matProj * matViewPort;
 	D3DXVec3TransformCoord(&tempposition, &tempposition, &WorldMatrix);
 
 	g_pProgreesBar->setBarPosition(tempposition, tempposition);
-
-
-
-
-
-	if (m_pPlayer)
-		m_pPlayer->Update();
-
-
+	
 	shop->GoldUpdate();
 	if (m_pMainUi)
 	{
