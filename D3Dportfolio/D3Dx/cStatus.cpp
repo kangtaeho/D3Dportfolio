@@ -5,6 +5,7 @@
 #include "cInventory.h"
 #include "citem.h"
 #include "cUiSkill.h"
+#include "cstat.h"
 cStatus::cStatus()
 {
 }
@@ -123,8 +124,41 @@ void cStatus::setup()
 
 
 
-	m_pStatInfo->Screen->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x - 200, m_pStatusScreen->GetPosition().y + 20, 0));
-	m_pStatInfo->Screen->setScale(D3DXVECTOR3(1.0f, 0.8f, 0));
+	m_pStatInfo->Screen->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x - 230, m_pStatusScreen->GetPosition().y + 20, 0));
+	m_pStatInfo->Screen->setScale(D3DXVECTOR3(1.2f, 0.7f, 0));
+
+	m_pStatInfo->MoveSpeed->setPosition(D3DXVECTOR3(m_pStatInfo->Screen->GetPosition().x + 10,m_pStatInfo->Screen->GetPosition().y +10,0));
+	m_pStatInfo->Defense->setPosition(D3DXVECTOR3(m_pStatInfo->Screen->GetPosition().x + 80, m_pStatInfo->Screen->GetPosition().y + 10, 0));
+	m_pStatInfo->AttackSpeed->setPosition(D3DXVECTOR3(m_pStatInfo->Screen->GetPosition().x + 10, m_pStatInfo->Screen->GetPosition().y + 60, 0));
+	m_pStatInfo->Atk->setPosition(D3DXVECTOR3(m_pStatInfo->Screen->GetPosition().x + 80, m_pStatInfo->Screen->GetPosition().y + 60, 0));
+
+	m_pStatInfo->MoveSpeed->setScale(D3DXVECTOR3(0.8f, 0.8f, 0));
+	m_pStatInfo->Defense->setScale(D3DXVECTOR3(0.8f, 0.8f, 0));
+	m_pStatInfo->AttackSpeed->setScale(D3DXVECTOR3(0.8f, 0.8f, 0));
+	m_pStatInfo->Atk->setScale(D3DXVECTOR3(0.8f, 0.8f, 0));
+
+
+	m_pStatInfo->StatNum->MoveSpeedNum_unit->setPosition(D3DXVECTOR3(m_pStatInfo->MoveSpeed->GetPosition().x + 48, m_pStatInfo->MoveSpeed->GetPosition().y +3, 0));
+	m_pStatInfo->StatNum->MoveSpeedNum_ten->setPosition(D3DXVECTOR3(m_pStatInfo->MoveSpeed->GetPosition().x + 38, m_pStatInfo->MoveSpeed->GetPosition().y + 3, 0));
+	m_pStatInfo->StatNum->MoveSpeedNum_huand->setPosition(D3DXVECTOR3(m_pStatInfo->MoveSpeed->GetPosition().x + 28, m_pStatInfo->MoveSpeed->GetPosition().y + 3, 0));
+
+	m_pStatInfo->StatNum->DefenseNum_unit->setPosition(D3DXVECTOR3(m_pStatInfo->Defense->GetPosition().x + 48,m_pStatInfo->Defense->GetPosition().y + 3,0));
+	m_pStatInfo->StatNum->DefenseNum_ten->setPosition(D3DXVECTOR3(m_pStatInfo->Defense->GetPosition().x + 38, m_pStatInfo->Defense->GetPosition().y + 3, 0));
+	m_pStatInfo->StatNum->DefenseNum_huand->setPosition(D3DXVECTOR3(m_pStatInfo->Defense->GetPosition().x + 28, m_pStatInfo->Defense->GetPosition().y + 3, 0));
+
+	m_pStatInfo->StatNum->AttackSpeedNum_unit->setPosition(D3DXVECTOR3(m_pStatInfo->AttackSpeed->GetPosition().x + 48, m_pStatInfo->AttackSpeed->GetPosition().y + 3, 0));
+	m_pStatInfo->StatNum->AttackSpeedNum_ten->setPosition(D3DXVECTOR3(m_pStatInfo->AttackSpeed->GetPosition().x + 38, m_pStatInfo->AttackSpeed->GetPosition().y + 3, 0));
+	m_pStatInfo->StatNum->AttackSpeedNum_huand->setPosition(D3DXVECTOR3(m_pStatInfo->AttackSpeed->GetPosition().x + 28, m_pStatInfo->AttackSpeed->GetPosition().y + 3, 0));
+
+	m_pStatInfo->StatNum->AtkNum_unit->setPosition(D3DXVECTOR3(m_pStatInfo->Atk->GetPosition().x + 48, m_pStatInfo->Atk->GetPosition().y + 3, 0));
+	m_pStatInfo->StatNum->AtkNum_ten->setPosition(D3DXVECTOR3(m_pStatInfo->Atk->GetPosition().x + 38, m_pStatInfo->Atk->GetPosition().y + 3, 0));
+	m_pStatInfo->StatNum->AtkNum_huand->setPosition(D3DXVECTOR3(m_pStatInfo->Atk->GetPosition().x + 28, m_pStatInfo->Atk->GetPosition().y + 3, 0));
+
+
+	AttackSpeedValue = 100;
+	AtkValue = 120;
+	DefenseValue = 10;
+	MoveSpeedValue = 50;
 
 	m_pStatusSkillInfo.reserve(10);
 
@@ -217,8 +251,8 @@ void cStatus::setup()
 
 void cStatus::setInventoryInfo()
 {
-	float x = 820; float y = 595;
-	float xdistance = 50; float ydistance = 50;
+	float x = 844; float y = 660;
+	float xdistance = 42; float ydistance = 42;
 
 	for (int i = 0; i < 2; i++)
 	{
@@ -241,8 +275,39 @@ void cStatus::setInventoryInfo()
 }
 void cStatus::update()
 {
+	m_pStatInfo->StatNum->MoveSpeedNum_unit->update(0);
+	m_pStatInfo->StatNum->MoveSpeedNum_ten->update(0);
+	m_pStatInfo->StatNum->MoveSpeedNum_huand->update(0);
+
+	m_pStatInfo->StatNum->MoveSpeedNum_unit->setCurrentFrame((MoveSpeedValue % 10) / 1);
+	m_pStatInfo->StatNum->MoveSpeedNum_ten->setCurrentFrame((MoveSpeedValue % 100) / 10);
+	m_pStatInfo->StatNum->MoveSpeedNum_huand->setCurrentFrame((MoveSpeedValue % 1000) / 100);
+
+	m_pStatInfo->StatNum->DefenseNum_unit->update(0);
+	m_pStatInfo->StatNum->DefenseNum_ten->update(0);
+	m_pStatInfo->StatNum->DefenseNum_huand->update(0);
+
+	m_pStatInfo->StatNum->DefenseNum_unit->setCurrentFrame((DefenseValue % 10) / 1);
+	m_pStatInfo->StatNum->DefenseNum_ten->setCurrentFrame((DefenseValue % 100) / 10);
+	m_pStatInfo->StatNum->DefenseNum_huand->setCurrentFrame((DefenseValue % 1000) / 100);
+
+	m_pStatInfo->StatNum->AttackSpeedNum_unit->update(0);
+	m_pStatInfo->StatNum->AttackSpeedNum_ten->update(0);
+	m_pStatInfo->StatNum->AttackSpeedNum_huand->update(0);
+
+	m_pStatInfo->StatNum->AttackSpeedNum_unit->setCurrentFrame((AttackSpeedValue % 10) / 1);
+	m_pStatInfo->StatNum->AttackSpeedNum_ten->setCurrentFrame((AttackSpeedValue % 100) / 10);
+	m_pStatInfo->StatNum->AttackSpeedNum_huand->setCurrentFrame((AttackSpeedValue % 1000) / 100);
+
+	m_pStatInfo->StatNum->AtkNum_unit->update(0);
+	m_pStatInfo->StatNum->AtkNum_ten->update(0);
+	m_pStatInfo->StatNum->AtkNum_huand->update(0);
+
+	m_pStatInfo->StatNum->AtkNum_unit->setCurrentFrame((AtkValue % 10) / 1);
+	m_pStatInfo->StatNum->AtkNum_ten->setCurrentFrame((AtkValue % 100) / 10);
+	m_pStatInfo->StatNum->AtkNum_huand->setCurrentFrame((AtkValue % 1000) / 100);
 	
-	m_pStatInfo->Screen->update();
+	
 	if (m_pStatusInventory)
 		m_pStatusInventory->update();
 	if (m_pStatusScreen)
@@ -261,7 +326,30 @@ void cStatus::update()
 	for (auto p : m_pStatusInvenInfo)
 	{
 		if (p->GetinvitemInfo()->GetItemInfo() != NULL)
+		{
 			p->GetinvitemInfo()->GetItemInfo()->Itemtexture->update();
+		}
+	}
+
+	for (int i = 0; i < m_pStatusInvenInfo.size(); i++)
+	{
+		if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo() != NULL)
+		{	
+			if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->GetEffected() == true)
+			{
+
+			}
+
+
+			if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Hp != NULL &&
+				m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->GetEffected() == false)
+			{
+				MaxHp += m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Hp;
+				CurrentHp = MaxHp;
+				m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->SetEffected(true);
+				continue;
+			}
+		}
 	}
 
 	HitProgress();
@@ -502,6 +590,39 @@ void cStatus::render()
 		m_pSkillButton->Render();
 
 	m_pStatInfo->Screen->Render();
+	m_pStatInfo->MoveSpeed->Render();
+	m_pStatInfo->AttackSpeed->Render();
+	m_pStatInfo->Atk->Render();
+	m_pStatInfo->Defense->Render();
+
+
+	if(MoveSpeedValue != 0)
+	m_pStatInfo->StatNum->MoveSpeedNum_unit->aniRender();
+	if(MoveSpeedValue >=10)
+	m_pStatInfo->StatNum->MoveSpeedNum_ten->aniRender();
+	if(MoveSpeedValue >=100)
+	m_pStatInfo->StatNum->MoveSpeedNum_huand->aniRender();
+
+	if(DefenseValue != 0)
+	m_pStatInfo->StatNum->DefenseNum_unit->aniRender();
+	if(DefenseValue >=10)
+	m_pStatInfo->StatNum->DefenseNum_ten->aniRender();
+	if(DefenseValue >=100)
+	m_pStatInfo->StatNum->DefenseNum_huand->aniRender();
+
+	if(AttackSpeedValue != 0)
+	m_pStatInfo->StatNum->AttackSpeedNum_unit->aniRender();
+	if(AttackSpeedValue >=10)
+	m_pStatInfo->StatNum->AttackSpeedNum_ten->aniRender();
+	if(AttackSpeedValue >=100)
+	m_pStatInfo->StatNum->AttackSpeedNum_huand->aniRender();
+
+	if(AtkValue != 0)
+	m_pStatInfo->StatNum->AtkNum_unit->aniRender();
+	if(AtkValue >=10)
+	m_pStatInfo->StatNum->AtkNum_ten->aniRender();
+	if(AtkValue >=100)
+	m_pStatInfo->StatNum->AtkNum_huand->aniRender();
 
 	if (m_pCharacterBar)
 		m_pCharacterBar->Render();
@@ -599,7 +720,7 @@ void cStatus::InvenUpdate()
 	
 
 			t[i] = D3DXVECTOR3(m_vecInvenPos[i].x, m_vecInvenPos[i].y, 0);
-			s[i] = D3DXVECTOR3(0.65f, 0.65f, 0.7f);
+			s[i] = D3DXVECTOR3(0.55f, 0.55f, 0.7f);
 
 			D3DXMatrixScaling(&matS[i], s[i].x, s[i].y, s[i].z);
 			D3DXMatrixTranslation(&matT[i], t[i].x,

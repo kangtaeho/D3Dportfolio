@@ -160,7 +160,7 @@ void Bitmap::Render()
 {
 	if (texture_Info != NULL)
 	{
-		if (imageIndex == ITEM)
+		if (imageIndex == ITEM || imageIndex == SUBUI)
 		{
 			D3DXMatrixScaling(&texture_Info->matS, texture_Info->Scale.x, texture_Info->Scale.y, texture_Info->Scale.z);
 			D3DXMatrixTranslation(&texture_Info->matT, texture_Info->Position.x, texture_Info->Position.y, texture_Info->Position.z);
