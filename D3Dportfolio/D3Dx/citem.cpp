@@ -25,6 +25,7 @@ void citem::setup(const char* itemName,const char* textureFileName,int itemState
 	m_pItemStat->Attack = 0.0f;
 	m_pItemStat->Defence = 0.0f;
 	m_pItemStat->Speed = 0.0f;
+	m_pItemStat->AttackSpeed = 0.0f;
 	m_pItemStat->Hp = 0.0f;
 	m_pItemStat->Mp = 0.0f;
 

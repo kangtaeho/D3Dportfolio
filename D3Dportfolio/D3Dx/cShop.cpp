@@ -187,36 +187,48 @@ void cShop::ItemSetting()
 	citem* shoes = new citem;
 	shoes->setup("shoes", "./item/1001_Boots_of_Speed.dds", START_ITEM, EQUIPABLE);
 	shoes->GetItemInfo()->price = 100;
+	shoes->GetItemInfo()->Speed = 1.5f;
 	m_vecItem.push_back(shoes);
 
 	citem* LongSword = new citem;
 	LongSword->setup("LongSword", "./item/1036_Long_Sword.dds", EARLY_ITEM, EQUIPABLE);
 	LongSword->GetItemInfo()->price = 300;
+	LongSword->GetItemInfo()->Attack = 30;
 	m_vecItem.push_back(LongSword);
 
 	citem* Dagger = new citem;
 	Dagger->setup("Dagger", "./item/1042_Dagger.dds", EARLY_ITEM, EQUIPABLE);
 	Dagger->GetItemInfo()->price = 300;
+	Dagger->GetItemInfo()->AttackSpeed = 1.5f;
 	m_vecItem.push_back(Dagger);
 
 	citem* phage = new citem;
 	phage->setup("phage", "./item/3044_Phage.dds", CORE_ITEM, EQUIPABLE);
 	phage->GetItemInfo()->price = 500;
+	phage->GetItemInfo()->Attack = 50.0f;
+	phage->GetItemInfo()->Hp = 100.0f;
 	m_vecItem.push_back(phage);
 
 	citem* Sheen = new citem;
 	Sheen->setup("Sheen", "./item/3057_Sheen.dds", CORE_ITEM, EQUIPABLE);
 	Sheen->GetItemInfo()->price = 500;
+	Sheen->GetItemInfo()->AttackSpeed = 2.0f;
+	Sheen->GetItemInfo()->Attack = 10.0f;
 	m_vecItem.push_back(Sheen);
 
 	citem* Red_Orb = new citem;
 	Red_Orb->setup("Red_Orb", "./item/3095_Orb_of_Valor.dds", BASIC_ITEM, EQUIPABLE);
 	Red_Orb->GetItemInfo()->price = 200;
+	Red_Orb->GetItemInfo()->Hp = 50.0f;
 	m_vecItem.push_back(Red_Orb);
 
 	citem* Trinity_Force = new citem;
 	Trinity_Force->setup("Trinity_Force", "./item/3078_Trinity_Force.dds", CORE_ITEM, EQUIPABLE);
 	Trinity_Force->GetItemInfo()->price = 999;
+	Trinity_Force->GetItemInfo()->Mp = 100.0f;
+	Trinity_Force->GetItemInfo()->Hp = 100.0f;
+	Trinity_Force->GetItemInfo()->AttackSpeed = 2.0f;
+	Trinity_Force->GetItemInfo()->Attack = 50.0f;
 	m_vecItem.push_back(Trinity_Force);
 
 	citem* Ward = new citem;

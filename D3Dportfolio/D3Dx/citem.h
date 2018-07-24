@@ -10,6 +10,7 @@ struct tagItemStat
 	float Attack;
 	float Defence;
 	float Speed;
+	float AttackSpeed;
 	int price;
 	ST_UI_SIZE m_stSize;
 	std::string itemName;
