@@ -188,9 +188,10 @@ void cAStar::Update(D3DXVECTOR3& position, float& rotY, float speed, float radiu
 	position = g_pCollisionManager->SetHeight(position);
 }
 
-void cAStar::Stop(D3DXVECTOR3 position, float Range, D3DXVECTOR3 EnemyPosition, float EnemyRadius)
+void cAStar::Stop(D3DXVECTOR3 position, float Range, D3DXVECTOR3* EnemyPosition, float EnemyRadius)
 {
-	if (D3DXVec3Length(&(position - EnemyPosition)) < Range + EnemyRadius)FinalAStar.clear();
+	if (!EnemyPosition)return;
+	if (D3DXVec3Length(&(position - *EnemyPosition)) < Range + EnemyRadius)FinalAStar.clear();
 }
 
 D3DXVECTOR3 cAStar::PushDestination(D3DXVECTOR3 destination, float characterradius)
