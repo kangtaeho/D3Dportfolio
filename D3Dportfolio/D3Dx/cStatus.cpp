@@ -464,18 +464,20 @@ void cStatus::update()
 		}
 	}
 
-	if (g_pKeyManager->IsOnceKeyDown('P'))
+	if (recorrect)
 	{
-		MaxHp = 10000;
-		CurrentHp = 10000;
-
+		//MaxHp = 10000;
+		//CurrentHp = 10000;
+		//
 		SetRect(&HpRc, 0, 0, MaxHp, HprcBottom);
 		m_pStatusHealthBar->SetRectFrameSize(HpRc);
 		HprcRight = m_pStatusHealthBar->GetrectFrameSize()->right;
 		HprcBottom = m_pStatusHealthBar->GetrectFrameSize()->bottom;
-
+		
 		HprcSize = (prevRectSize * 0.81f) / HprcRight;
 		m_pStatusHealthBar->setScale(D3DXVECTOR3(HprcSize, 1.0f, 0));
+
+		recorrect = false;
 	}
 
 	if (g_pKeyManager->IsOnceKeyDown('Q'))

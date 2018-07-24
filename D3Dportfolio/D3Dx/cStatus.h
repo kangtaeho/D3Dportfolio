@@ -212,7 +212,7 @@ private:
 
 	SYNTHESIZE(cUIButton*, buttonState, ButtonState);
 	SYNTHESIZE(citem*, tempItemInfo, tempItemInform);
-
+	SYNTHESIZE(bool, recorrect, Recorrect);
 public:
 	cStatus();
 	virtual ~cStatus();
