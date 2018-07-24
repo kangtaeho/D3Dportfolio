@@ -374,3 +374,56 @@ float cSkill::CooldownTimer()
 {
 	return m_fCooldown-m_fCurrentCooldown;
 }
+
+void cSkill::CreateAOEMesh()
+{
+	ZeroMemory(&s_AoeMesh, sizeof(AOE_MESH));
+
+	ST_PNT_VERTEX v1;
+	v1.p = D3DXVECTOR3(-1, 0, 1);
+	v1.n = D3DXVECTOR3(0, 0, 0);
+	v1.t = D3DXVECTOR2(0, 0);
+
+	ST_PNT_VERTEX v2;
+	v2.p = D3DXVECTOR3(1, 0, 1);
+	v2.n = D3DXVECTOR3(0, 0, 0);
+	v2.t = D3DXVECTOR2(1, 0);
+
+	ST_PNT_VERTEX v3;
+	v3.p = D3DXVECTOR3(1, 0, -1);
+	v3.n = D3DXVECTOR3(0, 0, 0);
+	v3.t = D3DXVECTOR2(1, 1);
+
+	ST_PNT_VERTEX v4;
+	v4.p = D3DXVECTOR3(-1, 0, -1);
+	v4.n = D3DXVECTOR3(0, 0, 0);
+	v4.t = D3DXVECTOR2(0, 1);
+
+	std::vector<ST_PNT_VERTEX> index;
+	index.push_back(v1);
+	index.push_back(v3);
+	index.push_back(v4);
+	index.push_back(v1);
+	index.push_back(v2);
+	index.push_back(v3);
+
+	D3DXCreateMeshFVF(
+		2,
+		6,
+		D3DXMESH_MANAGED,
+		ST_PNT_VERTEX::FVF,
+		g_pD3DDevice,
+		&s_AoeMesh.AOEMesh
+	);
+
+	ST_PNT_VERTEX* vM;
+	s_AoeMesh.AOEMesh->LockVertexBuffer(0, (void**)&vM);
+
+	for (int i = 0; i < index.size(); i++)
+	{
+		vM[i] = index[i];
+	}
+
+	s_AoeMesh.AOEMesh->UnlockVertexBuffer();
+
+}

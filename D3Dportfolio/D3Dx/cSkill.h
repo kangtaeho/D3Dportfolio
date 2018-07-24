@@ -31,6 +31,15 @@ struct OBJECT_MESH
 	OBJECT_MESH() { animation = new cAction; }
 };
 
+struct AOE_MESH
+{
+	LPD3DXMESH AOEMesh;
+	LPD3DXMESH pointMesh;
+	float		scale;
+	D3DXVECTOR3 vPos;
+	D3DXMATRIX matWorld;
+};
+
 class cSkill : public cAction	// 부모에서 받는 애니메이션은 원본임(사실 잘 모르겟음)
 {
 protected:
@@ -83,7 +92,7 @@ protected:
 
 	std::vector<OBJECT_MESH> m_vecMesh;
 
-
+	AOE_MESH			s_AoeMesh;
 
 public:
 	cSkill();
@@ -136,5 +145,6 @@ public:
 	void SetBuffType(BUFF_TYPE buffType) { e_BuffType = buffType; }
 	float CooldownTimer();
 
+	void CreateAOEMesh();
 };
 

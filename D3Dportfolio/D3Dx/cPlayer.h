@@ -18,6 +18,8 @@ private:
 
 	bool isTrue;
 
+	D3DXVECTOR3*	m_pEnemyPos;
+
 public:
 	cPlayer();
 	~cPlayer();

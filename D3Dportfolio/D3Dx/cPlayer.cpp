@@ -8,6 +8,7 @@ cPlayer::cPlayer()
 	:m_bIsTarget(false)
 	,m_fRange(400)
 	,m_fRadius(13)
+	,m_pEnemyPos(NULL)
 {
 	
 }
@@ -42,9 +43,7 @@ void cPlayer::Update()
 	Check3DMousePointer();
 
 	aStar->Update(m_vPosition, m_fRotY, m_fSpeed, m_fRadius);
-	aStar->Stop(m_vPosition, m_fRange, m_pSphere->GetPos(), 100);
-
-	//cCharacter::Update();
+	aStar->Stop(m_vPosition, m_fRange, m_pEnemyPos, 0);
 
 	g_pSkillManager->Update();
 
@@ -61,8 +60,6 @@ void cPlayer::Update()
 	{
 		setAnimation("Run");
 	}
-
-
 }
 
 void cPlayer::Render()
@@ -87,23 +84,19 @@ void cPlayer::Check3DMousePointer()
 {
 	//if (!m_pMap) return;		// 충돌 판정 맵이 없다면,
 
-	cRayPicking ray;
-
 	if (g_pKeyManager->IsOnceKeyDown(VK_LBUTTON))
 	{
 		if (!g_pSkillManager->CheckReady()) return;
 
-		int isPick = 0;
-		m_vNextPosition = g_pCollisionManager->getRayPosition(isPick);
+		SAFE_DELETE(m_pEnemyPos);
 
-		// for (int i = 0; i < m_pMap->size(); i += 3)
-		// {
-		// 	if (ray.PickTri((*m_pMap)[i],
-		// 		(*m_pMap)[i + 1],
-		// 		(*m_pMap)[i + 2],
-		// 		g_pCameraManager->GetCameraEye(),
-		// 		m_vNextPosition)) break;
-		// }
+		int isPick = 0;
+		m_vNextPosition = g_pCollisionManager->getRayPosition(isPick, m_pSphere->m_pMesh, m_pSphere->GetPos()); //포지션 받고
+		m_vNextPosition = aStar->PushDestination(m_vNextPosition, m_fRadius); //만약에 충돌을 받으면 밀어낸다
+		aStar->Setup(m_vPosition, m_fRadius, m_vNextPosition);
+
+		m_pEnemyPos = new D3DXVECTOR3;
+		*m_pEnemyPos = m_vNextPosition;
 
 		m_vClickPos = m_vNextPosition;
 
@@ -113,6 +106,7 @@ void cPlayer::Check3DMousePointer()
 
 	if (g_pKeyManager->IsOnceKeyDown(VK_RBUTTON))
 	{
+		SAFE_DELETE(m_pEnemyPos);
 
 		int isPick = 0;
 		m_vNextPosition = g_pCollisionManager->getRayPosition(isPick,m_pSphere->m_pMesh,m_pSphere->GetPos()); //포지션 받고
@@ -121,8 +115,10 @@ void cPlayer::Check3DMousePointer()
 
 		if (isPick)
 		{
+			m_pEnemyPos = new D3DXVECTOR3;
+			*m_pEnemyPos = m_pSphere->GetPos();
 			if (D3DXVec3Length(&(m_vPosition - m_pSphere->GetPos())) < m_fRange)
-			{
+			{			
 				m_fRotY = GetAngle(m_vPosition, m_pSphere->GetPos());
 				g_pSkillManager->Fire("평타", &m_vPosition, &m_pSphere->GetPos());
 			}
