@@ -134,7 +134,7 @@ void cAStar::Setup(D3DXVECTOR3 position, float radius, D3DXVECTOR3 destination)
 */
 }
 
-void cAStar::Update(D3DXVECTOR3& position, float& rotY, float speed, float radius)
+void cAStar::Update(D3DXVECTOR3& position, float& rotY, float speed, float radius, D3DXVECTOR3* pEnemyPos)
 {
 	position = g_pCollisionManager->getVector2(position);
 	if (FinalAStar.size())
@@ -152,6 +152,13 @@ void cAStar::Update(D3DXVECTOR3& position, float& rotY, float speed, float radiu
 			tempNextPosition = tempNextPosition - position;
 			D3DXVec3Normalize(&tempNextPosition, &tempNextPosition);
 			tempNextPosition *= speed;
+			if (pEnemyPos)
+			{
+				if (D3DXVec3Length(&(*pEnemyPos - position)) < speed)
+				{
+					tempNextPosition = *pEnemyPos - position;
+				}
+			}
 			if (D3DXVec3Length(&(tempend - position)) < speed)
 			{
 				tempNextPosition = tempend - position;
