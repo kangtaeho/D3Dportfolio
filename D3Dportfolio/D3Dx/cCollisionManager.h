@@ -68,6 +68,7 @@ private:
 public:
 	bool Setup(int& allfilesize, int& loadfilesize);
 	void Release();
+	void Render();
 
 	LPD3DXMESH getGround() { return m_pMapMesh; }
 	STCollisionMapTool getCollisionMapTool() { return m_stMap; }
