@@ -466,9 +466,6 @@ void cStatus::update()
 
 	if (recorrect)
 	{
-		//MaxHp = 10000;
-		//CurrentHp = 10000;
-		//
 		SetRect(&HpRc, 0, 0, MaxHp, HprcBottom);
 		m_pStatusHealthBar->SetRectFrameSize(HpRc);
 		HprcRight = m_pStatusHealthBar->GetrectFrameSize()->right;
@@ -506,6 +503,8 @@ void cStatus::update()
 	{
 		for (auto p : m_mapStatusSkillInfo)
 		{
+			if (CurrentMp < 30) continue;
+
 			if (p.first == "w" && m_bSelected != true)
 			{
 				if (p.second->GetChosen() == true) continue;
@@ -542,6 +541,8 @@ void cStatus::update()
 	{
 		for (auto p : m_mapStatusSkillInfo)
 		{
+			if (CurrentMp < 50) continue;
+
 			if (p.first == "r" && m_bSelected != true)
 			{
 				if (p.second->GetChosen() == true) continue;
@@ -582,6 +583,9 @@ void cStatus::update()
 
 	if (CurrentHp <= 0)CurrentHp = 0;
 	if (CurrentMp <= 0)CurrentMp = 0;
+
+	isClickUi();
+
 	cMainUI::update();
 }
 void cStatus::release()
@@ -806,6 +810,35 @@ bool cStatus::isClickedSkill(OUT RECT* Outrc, int index)
 	}
 	return false;
 }
+
+bool cStatus::isClickUi()
+{
+	POINT pt;
+	GetCursorPos(&pt);
+	ScreenToClient(g_hWnd, &pt);
+
+	RECT* rc = new RECT;
+	D3DXMATRIX* matWorld = new D3DXMATRIX;
+	ST_UI_SIZE* stSize = new ST_UI_SIZE;
+
+	matWorld = &m_pStatusScreen->GetWolrdMatrix();
+	stSize = &m_pStatusScreen->GetUiSize();
+	SetRect(rc,
+		matWorld->_41,
+		matWorld->_42,
+		matWorld->_41 + (stSize->nWidth * 0.8f),
+		matWorld->_42 + (stSize->nHeight * 0.8f));
+
+	if (PtInRect(rc, pt))
+	{
+		if (g_pKeyManager->IsOnceKeyDown(VK_LBUTTON))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 void cStatus::GoldUpdate()
 {
 

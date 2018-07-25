@@ -5,7 +5,7 @@ class cPlayer;
 class cShop;
 class cStatus;
 class cHealthProgress;
-
+class cMinimap;
 class cPlayScene : public cGameNode
 {
 private:
@@ -13,6 +13,7 @@ private:
 	cShop* shop;
 	cMainUI* m_pMainUi;
 	cStatus* status;
+	cMinimap* m_pMinimap;
 	D3DXMATRIX WorldMatrix, matProj, matViewPort, matView;
 	bool changed;
 

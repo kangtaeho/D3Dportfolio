@@ -133,6 +133,10 @@
     <ClCompile Include="cToxicSkill.cpp">
       <Filter>D3DFramework\cSkillManager</Filter>
     </ClCompile>
+    <ClCompile Include="cStat.cpp" />
+    <ClCompile Include="cMinimap.cpp">
+      <Filter>소스파일\cMinimap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h">
@@ -276,6 +280,10 @@
     <ClInclude Include="cToxicSkill.h">
       <Filter>D3DFramework\cSkillManager</Filter>
     </ClInclude>
+    <ClInclude Include="cStat.h" />
+    <ClInclude Include="cMinimap.h">
+      <Filter>소스파일\cMinimap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="D3Dx.ico">
@@ -357,6 +365,9 @@
     </Filter>
     <Filter Include="D3DFramework\cCollisionManager">
       <UniqueIdentifier>{375547c1-a081-4b25-93c2-dfad2c6b1e31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스파일\cMinimap">
+      <UniqueIdentifier>{232a1edf-90db-441c-824b-ec778fb08658}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

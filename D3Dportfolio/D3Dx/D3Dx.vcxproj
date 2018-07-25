@@ -175,6 +175,7 @@
     <ClInclude Include="cMainScene.h" />
     <ClInclude Include="cMainUI.h" />
     <ClInclude Include="cMeleeSkill.h" />
+    <ClInclude Include="cMinimap.h" />
     <ClInclude Include="cObjectSkill.h" />
     <ClInclude Include="cPlayer.h" />
     <ClInclude Include="cPlayScene.h" />
@@ -225,6 +226,7 @@
     <ClCompile Include="cMainScene.cpp" />
     <ClCompile Include="cMainUI.cpp" />
     <ClCompile Include="cMeleeSkill.cpp" />
+    <ClCompile Include="cMinimap.cpp" />
     <ClCompile Include="cObjectSkill.cpp" />
     <ClCompile Include="cPlayer.cpp" />
     <ClCompile Include="cPlayScene.cpp" />

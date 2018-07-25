@@ -5,6 +5,7 @@
 #include "cShop.h"
 #include "cStatus.h"
 #include "cHealthProgress.h"
+#include "cMinimap.h"
 cPlayScene::cPlayScene()
 	: m_pPlayer(NULL)
 {
@@ -63,6 +64,8 @@ HRESULT cPlayScene::Setup()
 
 	shop = new cShop;
 	status = new cStatus;
+	m_pMinimap = new cMinimap;
+	m_pMinimap->setup();
 
 	m_pMainUi = status;
 	m_pMainUi->AddChild(shop, "SHOP");
@@ -108,6 +111,9 @@ void cPlayScene::Update()
 	if (m_pPlayer)
 		m_pPlayer->Update();
 
+	if (m_pMinimap)
+		m_pMinimap->update();
+
 	shop->GoldUpdate();
 	if (m_pMainUi)
 	{
@@ -122,7 +128,6 @@ void cPlayScene::Update()
 	status->SetvecInven(shop->GetvecInventory());
 	
 	status->InvenUpdate();
-
 
 	if (g_pKeyManager->IsOnceKeyDown('0'))
 	{
@@ -182,7 +187,8 @@ void cPlayScene::Render()
 	if (m_pMainUi)
 		m_pMainUi->render();
 
-	
+	if (m_pMinimap)
+		m_pMinimap->Render();
 
 	{//¸ÊÃß°¡
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
