@@ -216,6 +216,87 @@ void cCollisionManager::Release()
 	m_stMap.vecLine.clear();
 }
 
+void cCollisionManager::Render()
+{
+	MapRender();
+
+	for (auto p : m_stMap.vecCircle)
+	{
+		if (m_pNowCircle == p)
+		{
+			Mtl(false, true, false);
+		}
+		else
+		{
+			Mtl(false, false, true);
+		}
+		D3DXMatrixTranslation(&matT1, 0, 0, -CYLINDERHEIGHT / 2);
+		D3DXMatrixScaling(&matS, p->fRadius, p->fRadius, 1.0f);
+		D3DXMatrixRotationX(&matR, D3DX_PI / 2);
+		D3DXMatrixTranslation(&matT, p->mPosition.x, p->mPosition.y, p->mPosition.z);
+		mat = matT1 * matS * matR * matT;
+		g_pD3DDevice->SetTransform(D3DTS_WORLD, &mat);
+		m_pMesh->DrawSubset(0);
+		p->render();
+	}
+
+	Mtl(false, false, false);
+	D3DXMatrixIdentity(&mat);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &mat);
+	for (auto p : m_stMap.vecLine)
+	{
+		p->pCircles[0]->mPosition;
+		p->pCircles[0]->fRadius;
+		std::vector<ST_PC_VERTEX> tempCube;
+		p->vCrossVector;
+		ST_PC_VERTEX v;
+		v.c = D3DCOLOR_XRGB(255, 255, 255);
+		v.p = p->pCircles[0]->mPosition + p->pCircles[0]->fRadius * p->vCrossVector; v.p.y = 5000.0f; tempCube.push_back(v);
+		v.p = p->pCircles[0]->mPosition + p->pCircles[0]->fRadius * p->vCrossVector; v.p.y = 5000.0f + CYLINDERHEIGHT - 10; tempCube.push_back(v);
+		v.p = p->pCircles[1]->mPosition + p->pCircles[1]->fRadius * p->vCrossVector; v.p.y = 5000.0f + CYLINDERHEIGHT - 10; tempCube.push_back(v);//
+		v.p = p->pCircles[0]->mPosition + p->pCircles[0]->fRadius * p->vCrossVector; v.p.y = 5000.0f; tempCube.push_back(v);
+		v.p = p->pCircles[1]->mPosition + p->pCircles[1]->fRadius * p->vCrossVector; v.p.y = 5000.0f + CYLINDERHEIGHT - 10; tempCube.push_back(v);
+		v.p = p->pCircles[1]->mPosition + p->pCircles[1]->fRadius * p->vCrossVector; v.p.y = 5000.0f; tempCube.push_back(v);//
+		v.p = p->pCircles[0]->mPosition - p->pCircles[0]->fRadius * p->vCrossVector; v.p.y = 5000.0f; tempCube.push_back(v);
+		v.p = p->pCircles[1]->mPosition - p->pCircles[1]->fRadius * p->vCrossVector; v.p.y = 5000.0f + CYLINDERHEIGHT - 10; tempCube.push_back(v);
+		v.p = p->pCircles[0]->mPosition - p->pCircles[0]->fRadius * p->vCrossVector; v.p.y = 5000.0f + CYLINDERHEIGHT - 10; tempCube.push_back(v);//
+		v.p = p->pCircles[0]->mPosition - p->pCircles[0]->fRadius * p->vCrossVector; v.p.y = 5000.0f; tempCube.push_back(v);
+		v.p = p->pCircles[1]->mPosition - p->pCircles[1]->fRadius * p->vCrossVector; v.p.y = 5000.0f; tempCube.push_back(v);
+		v.p = p->pCircles[1]->mPosition - p->pCircles[1]->fRadius * p->vCrossVector; v.p.y = 5000.0f + CYLINDERHEIGHT - 10; tempCube.push_back(v);//
+		v.p = p->pCircles[0]->mPosition - p->pCircles[0]->fRadius * p->vCrossVector; v.p.y = 5000.0f; tempCube.push_back(v);
+		v.p = p->pCircles[0]->mPosition - p->pCircles[0]->fRadius * p->vCrossVector; v.p.y = 5000.0f + CYLINDERHEIGHT - 10; tempCube.push_back(v);
+		v.p = p->pCircles[0]->mPosition + p->pCircles[0]->fRadius * p->vCrossVector; v.p.y = 5000.0f + CYLINDERHEIGHT - 10; tempCube.push_back(v);//
+		v.p = p->pCircles[0]->mPosition - p->pCircles[0]->fRadius * p->vCrossVector; v.p.y = 5000.0f; tempCube.push_back(v);
+		v.p = p->pCircles[0]->mPosition + p->pCircles[0]->fRadius * p->vCrossVector; v.p.y = 5000.0f + CYLINDERHEIGHT - 10; tempCube.push_back(v);
+		v.p = p->pCircles[0]->mPosition + p->pCircles[0]->fRadius * p->vCrossVector; v.p.y = 5000.0f; tempCube.push_back(v);//
+		v.p = p->pCircles[1]->mPosition + p->pCircles[1]->fRadius * p->vCrossVector; v.p.y = 5000.0f; tempCube.push_back(v);
+		v.p = p->pCircles[1]->mPosition + p->pCircles[1]->fRadius * p->vCrossVector; v.p.y = 5000.0f + CYLINDERHEIGHT - 10; tempCube.push_back(v);
+		v.p = p->pCircles[1]->mPosition - p->pCircles[1]->fRadius * p->vCrossVector; v.p.y = 5000.0f + CYLINDERHEIGHT - 10; tempCube.push_back(v);//
+		v.p = p->pCircles[1]->mPosition + p->pCircles[1]->fRadius * p->vCrossVector; v.p.y = 5000.0f; tempCube.push_back(v);
+		v.p = p->pCircles[1]->mPosition - p->pCircles[1]->fRadius * p->vCrossVector; v.p.y = 5000.0f + CYLINDERHEIGHT - 10; tempCube.push_back(v);
+		v.p = p->pCircles[1]->mPosition - p->pCircles[1]->fRadius * p->vCrossVector; v.p.y = 5000.0f; tempCube.push_back(v);//
+		v.p = p->pCircles[0]->mPosition + p->pCircles[0]->fRadius * p->vCrossVector; v.p.y = 5000.0f + CYLINDERHEIGHT - 10; tempCube.push_back(v);
+		v.p = p->pCircles[0]->mPosition - p->pCircles[0]->fRadius * p->vCrossVector; v.p.y = 5000.0f + CYLINDERHEIGHT - 10; tempCube.push_back(v);
+		v.p = p->pCircles[1]->mPosition - p->pCircles[1]->fRadius * p->vCrossVector; v.p.y = 5000.0f + CYLINDERHEIGHT - 10; tempCube.push_back(v);//
+		v.p = p->pCircles[0]->mPosition + p->pCircles[0]->fRadius * p->vCrossVector; v.p.y = 5000.0f + CYLINDERHEIGHT - 10; tempCube.push_back(v);
+		v.p = p->pCircles[1]->mPosition - p->pCircles[1]->fRadius * p->vCrossVector; v.p.y = 5000.0f + CYLINDERHEIGHT - 10; tempCube.push_back(v);
+		v.p = p->pCircles[1]->mPosition + p->pCircles[1]->fRadius * p->vCrossVector; v.p.y = 5000.0f + CYLINDERHEIGHT - 10; tempCube.push_back(v);//
+		v.p = p->pCircles[0]->mPosition - p->pCircles[0]->fRadius * p->vCrossVector; v.p.y = 5000.0f; tempCube.push_back(v);
+		v.p = p->pCircles[0]->mPosition + p->pCircles[0]->fRadius * p->vCrossVector; v.p.y = 5000.0f; tempCube.push_back(v);
+		v.p = p->pCircles[1]->mPosition + p->pCircles[1]->fRadius * p->vCrossVector; v.p.y = 5000.0f; tempCube.push_back(v);//
+		v.p = p->pCircles[0]->mPosition - p->pCircles[0]->fRadius * p->vCrossVector; v.p.y = 5000.0f; tempCube.push_back(v);
+		v.p = p->pCircles[1]->mPosition + p->pCircles[1]->fRadius * p->vCrossVector; v.p.y = 5000.0f; tempCube.push_back(v);
+		v.p = p->pCircles[1]->mPosition - p->pCircles[1]->fRadius * p->vCrossVector; v.p.y = 5000.0f; tempCube.push_back(v);
+
+		g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
+		g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST,
+			tempCube.size() / 3,
+			&tempCube[0],
+			sizeof(ST_PC_VERTEX));
+	}
+
+}
+
 void cCollisionManager::LoadMap()
 {
 	std::string	sFullPath("map collision");

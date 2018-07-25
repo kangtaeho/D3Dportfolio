@@ -76,7 +76,7 @@ void cAStar::Update(D3DXVECTOR3& position, D3DXVECTOR3 NextPosition, float & rot
 	tempNextPosition = g_pCollisionManager->SetHeight(tempNextPosition);
 
 	rotY = g_pCollisionManager->getDirectionAngle(tempNextPosition - position);
-	//rotY += D3DX_PI / 2;
+	rotY += D3DX_PI / 2;
 	position = tempNextPosition;
 	position = PushDestination(position, radius);
 	position = g_pCollisionManager->SetHeight(position);
