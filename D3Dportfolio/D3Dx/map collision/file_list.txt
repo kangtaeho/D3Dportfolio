@@ -1,0 +1,2 @@
+map_collision.obj
+map_skp_sample.obj
