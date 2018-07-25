@@ -18,8 +18,9 @@ HRESULT cGameNode::Setup()
 	g_pKeyManager->Setup();
 	g_pSceneManager->Setup();
 	g_pCameraManager->Setup();
+	int fullFath, loadFath;
+	while (g_pCollisionManager->Setup(fullFath, loadFath));
 	
-	g_pCollisionManager->Setup();
 
 	return S_OK;
 

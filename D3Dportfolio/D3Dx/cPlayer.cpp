@@ -50,15 +50,15 @@ void cPlayer::Update()
 {
 	Check3DMousePointer();
 
-	m_AStar.Update(m_vPosition, m_fRotY, m_fSpeed, m_fRadius, m_pEnemyPos);
-	m_AStar.Stop(m_vPosition, m_fRange, m_pEnemyPos, 0);
+	m_AStar.Update(m_vPosition,m_vNextPosition, m_fRotY, m_fSpeed, m_fRadius, m_fRange,m_pEnemyPos);
+	//m_AStar.Stop(m_vPosition, m_fRange, m_pEnemyPos, 0);
 
 	g_pSkillManager->Update();
 
 	if (g_pSkillManager->IsCasting())
 	{
 		setAnimation("Attack1");
-		m_AStar.Stop();
+		//m_AStar.Stop();
 	}
 	else if(m_AStar.getAStarSize())
 	{
@@ -106,8 +106,8 @@ void cPlayer::Check3DMousePointer()
 
 		int isPick = 0;
 		m_vNextPosition = g_pCollisionManager->getRayPosition(isPick, m_pEnemy->getPosition(), m_pEnemy->GetRadius()); //포지션 받고
-		m_vNextPosition = m_AStar.PushDestination(m_vNextPosition, m_fRadius); //만약에 충돌을 받으면 밀어낸다
-		m_AStar.Setup(m_vPosition, m_fRadius, m_vNextPosition);
+		//m_vNextPosition = m_AStar.PushDestination(m_vNextPosition, m_fRadius); //만약에 충돌을 받으면 밀어낸다
+		//m_AStar.Setup(m_vPosition, m_fRadius, m_vNextPosition);
 
 		m_pEnemyPos = new D3DXVECTOR3;
 		*m_pEnemyPos = m_vNextPosition;
@@ -158,8 +158,8 @@ void cPlayer::AttackEnemy(cEnemy* enemy)
 
 	int isPick = 0;
 	m_vNextPosition = g_pCollisionManager->getRayPosition(isPick, enemy->getPosition(),enemy->GetRadius()); //포지션 받고
-	m_vNextPosition = m_AStar.PushDestination(m_vNextPosition, m_fRadius); //만약에 충돌을 받으면 밀어낸다
-	m_AStar.Setup(m_vPosition, m_fRadius, m_vNextPosition);
+	//m_vNextPosition = m_AStar.PushDestination(m_vNextPosition, m_fRadius); //만약에 충돌을 받으면 밀어낸다
+	//m_AStar.Setup(m_vPosition, m_fRadius, m_vNextPosition);
 
 	if (isPick)
 	{
