@@ -5,6 +5,7 @@
 #include "cShop.h"
 #include "cStatus.h"
 #include "cHealthProgress.h"
+#include "cMinimap.h"
 cPlayScene::cPlayScene()
 	: m_pPlayer(NULL)
 {
@@ -63,10 +64,13 @@ HRESULT cPlayScene::Setup()
 
 	shop = new cShop;
 	status = new cStatus;
+	m_pMinimap = new cMinimap;
+	m_pMinimap->setup();
 
 	m_pMainUi = status;
 	m_pMainUi->AddChild(shop, "SHOP");
 	m_pMainUi->setup();
+
 
 	changed = false;
 
@@ -81,6 +85,18 @@ HRESULT cPlayScene::Setup()
 	PlayerProgress->setup();
 
 	m_vecHealthProgress.push_back(PlayerProgress);
+
+	status->SetMAXHP(m_pPlayer->GetHP());
+	status->SetMAXMP(m_pPlayer->GetMP());
+	status->SetCURRENTHP(m_pPlayer->GetHP());
+	status->SetCURRENTMP(m_pPlayer->GetMP());
+
+	status->SetMoveSpeed(m_pPlayer->GetSpeed());
+	status->SetDefense(m_pPlayer->GetDEF());
+	status->SetAtk(m_pPlayer->GetATK());
+	status->SetAttackSpeed(m_pPlayer->GetATKSpeed());
+
+	status->SetRecorrect(true);
 	return S_OK;
 }
 
@@ -94,6 +110,9 @@ void cPlayScene::Update()
 {
 	if (m_pPlayer)
 		m_pPlayer->Update();
+
+	if (m_pMinimap)
+		m_pMinimap->update();
 
 	shop->GoldUpdate();
 	if (m_pMainUi)
@@ -109,7 +128,6 @@ void cPlayScene::Update()
 	status->SetvecInven(shop->GetvecInventory());
 	
 	status->InvenUpdate();
-
 
 	if (g_pKeyManager->IsOnceKeyDown('0'))
 	{
@@ -136,6 +154,8 @@ void cPlayScene::Update()
 
 	m_vecHealthProgress[0]->setBarPosition(tempposition, tempposition);
 
+	
+
 	m_vecHealthProgress[0]->SetMaxHp(status->GetMAXHP());
 	m_vecHealthProgress[0]->SetCurrentHp(status->GetCURRENTHP());
 	m_vecHealthProgress[0]->SetHitValue(status->GetHitValue());
@@ -151,6 +171,7 @@ void cPlayScene::Update()
 	if (g_pKeyManager->IsOnceKeyDown('P')) //스탯이 재조정된다면, 재조정되었다 알림.
 	{
 		m_vecHealthProgress[0]->SetReCorret(true);
+		//status->SetRecorrect(true);
 	}
 
 }
@@ -166,7 +187,8 @@ void cPlayScene::Render()
 	if (m_pMainUi)
 		m_pMainUi->render();
 
-	
+	if (m_pMinimap)
+		m_pMinimap->Render();
 
 	{//맵추가
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);

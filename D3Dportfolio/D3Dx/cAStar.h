@@ -28,19 +28,20 @@ private:
 	std::map<int, STCIRCLE*>	mapCircle;
 	std::vector<D3DXVECTOR3>	tempNextPosition;
 
+	STCIRCLE* tempCirclePointer;
+
 public:
 	cAStar();
 	~cAStar();
 	
-	//셋업으로 에이스타 지정
-	void Setup(D3DXVECTOR3 position, float radius, D3DXVECTOR3 destination);
-	//계속 업데이트 돌려서 캐릭터 포지션, RotY 지정
-	void Update(D3DXVECTOR3& position, float& rotY, float speed, float radius, D3DXVECTOR3* pEnemyPos = NULL);
-
+	void Update(D3DXVECTOR3& position, D3DXVECTOR3 NextPosition, float& rotY, float speed, float radius, float fRange = 0, 
+		D3DXVECTOR3* pEnemyPos = NULL, float fEnemyradius = 0);
+	D3DXVECTOR3 FindNextPosition(D3DXVECTOR3 position, D3DXVECTOR3 NextPosition, float radius);
+	
 	int getAStarSize() { return FinalAStar.size(); }
 
-	bool Stop(D3DXVECTOR3 position, float Range, D3DXVECTOR3* EnemyPosition, float EnemyRadius);
-	void Stop() { FinalAStar.clear(); }
+	//bool Stop(D3DXVECTOR3 position, float Range, D3DXVECTOR3* EnemyPosition, float EnemyRadius);
+	//void Stop() { FinalAStar.clear(); }
 	//충돌맵과 충돌되면 목적지를 밖으로 이동시켜서 리턴
 	D3DXVECTOR3 PushDestination(D3DXVECTOR3 destination, float characterradius);
 
@@ -49,10 +50,8 @@ public:
 	//제일 먼 원 찾기
 	STCIRCLE FindEndCircle(D3DXVECTOR3 position, STCIRCLE nowcircle, STLINE* nowline);
 	//다름 위치 찾기(원 기준으로 접선)
-	D3DXVECTOR3 FindNextPosition(D3DXVECTOR3 position, STCIRCLE nowcircle, float radius, bool lr);
+	D3DXVECTOR3 FindNextPosition(D3DXVECTOR3 position, D3DXVECTOR3 destination, STCIRCLE nowcircle, float radius, bool lr);
 
-
-	AStarFath* findAStar(D3DXVECTOR3 position, D3DXVECTOR3 destination, float radius, AStarFath* parent, int ChildNum);
-	D3DXVECTOR3 getPositionOutCircle(D3DXVECTOR3 position, D3DXVECTOR3 destination, float radius, STCIRCLE* circle);
+	D3DXVECTOR3 FindEndPositionWithCircle(D3DXVECTOR3 position, D3DXVECTOR3 destination, STCIRCLE& nowcircle, STLINE* nowline, float radius);
 };
 

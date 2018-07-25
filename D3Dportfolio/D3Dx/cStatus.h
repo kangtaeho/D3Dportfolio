@@ -212,7 +212,7 @@ private:
 
 	SYNTHESIZE(cUIButton*, buttonState, ButtonState);
 	SYNTHESIZE(citem*, tempItemInfo, tempItemInform);
-
+	SYNTHESIZE(bool, recorrect, Recorrect);
 public:
 	cStatus();
 	virtual ~cStatus();
@@ -225,11 +225,13 @@ public:
 
 	void HitProgress();
 	void setInventoryInfo();
-	void GoldUpdate();
-	void GoldRender();
+	void GoldUpdate() override;
+	void GoldRender() override;
 
 	bool isClickedSkill(OUT RECT* Outrc, int index);
 	void InvenUpdate();
 	void InvenRender();
+
+	virtual bool isClickUi() override;
 };
 

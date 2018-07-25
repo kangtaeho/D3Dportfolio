@@ -93,6 +93,8 @@ HRESULT Bitmap::addTexture(const char* textFileName, int frameWidth, int frameHe
 	stSize.nWidth = texture_Info->ImageInfo.Width;
 	stSize.nHeight = texture_Info->ImageInfo.Height;
 
+	texture_Info->m_stSize = stSize;
+
 	SetRect(&texture_Info->rectFrameSize, 0, 0, stSize.nWidth / frameWidth, stSize.nHeight / frameHeight);
 
 	texture_Info->fAccumTime = 0.0f;

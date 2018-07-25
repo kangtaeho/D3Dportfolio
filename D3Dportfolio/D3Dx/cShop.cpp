@@ -704,6 +704,7 @@ void cShop::update()
 		}
 	}*/
 
+	isClickUi();
 	cMainUI::update();
 }
 
@@ -1449,12 +1450,35 @@ bool cShop::CraftItem()
 	}
 	return false;
 }
+
+
 bool cShop::isClickUi()
 {
-	return true;
+	POINT pt;
+	GetCursorPos(&pt);
+	ScreenToClient(g_hWnd, &pt);
+
+	RECT* rc = new RECT;
+	D3DXMATRIX* pmatWorld = new D3DXMATRIX;
+	ST_UI_SIZE* stSize = new ST_UI_SIZE;
+
+	pmatWorld = &m_pShop->GetWolrdMatrix();
+	stSize = &m_pShop->GetUiSize();
+	SetRect(rc,
+		pmatWorld->_41,
+		pmatWorld->_42,
+		pmatWorld->_41 + (stSize->nWidth / 2) * 0.7f,
+		pmatWorld->_42 + (stSize->nHeight /2) * 0.7f);
+
+	if (PtInRect(rc, pt))
+	{
+		if (g_pKeyManager->IsOnceKeyDown(VK_LBUTTON))
+		{
+			return true;
+		}
+	}
+	return false;
 }
-
-
 
 
 void cShop::ItemDragDrop()

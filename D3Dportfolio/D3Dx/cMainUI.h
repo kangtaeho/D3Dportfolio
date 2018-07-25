@@ -41,7 +41,7 @@ public:
 	virtual void setup();
 	virtual void update();
 	virtual void render();
-	virtual bool isClickUi();
+	virtual bool isClickUi() = 0;
 
 	virtual void GoldUpdate() = 0;
 	virtual void GoldRender() = 0;
