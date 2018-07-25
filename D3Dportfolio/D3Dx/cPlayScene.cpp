@@ -97,6 +97,7 @@ HRESULT cPlayScene::Setup()
 	status->SetAttackSpeed(m_pPlayer->GetATKSpeed());
 
 	status->SetRecorrect(true);
+
 	return S_OK;
 }
 
@@ -108,8 +109,6 @@ void cPlayScene::Release()
 
 void cPlayScene::Update()
 {
-	if (m_pPlayer)
-		m_pPlayer->Update();
 
 	if (m_pMinimap)
 		m_pMinimap->update();
@@ -119,6 +118,15 @@ void cPlayScene::Update()
 	{
 		m_pMainUi->update();
 	}
+
+	if (m_pPlayer)
+	{
+		m_pPlayer->Update();
+	}
+
+	// if (m_pMainUi->GetNodeName() == "SHOP") isOpen = true;
+	// else isOpen = false;
+	// m_pPlayer->SetIsClickUI(isOpen);
 
 	if (g_pKeyManager->IsOnceKeyDown(VK_ESCAPE))
 	{
@@ -173,7 +181,6 @@ void cPlayScene::Update()
 		m_vecHealthProgress[0]->SetReCorret(true);
 		//status->SetRecorrect(true);
 	}
-
 }
 
 void cPlayScene::Render()
@@ -200,6 +207,6 @@ void cPlayScene::Render()
 		D3DXMatrixScaling(&matS, 300.0f, 300.0f, 300.0f);
 		mat = matS;
 	}
-	// g_pCollisionManager->MapRender();
+	//g_pCollisionManager->MapRender();
 
 }

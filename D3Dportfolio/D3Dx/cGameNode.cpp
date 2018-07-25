@@ -19,7 +19,7 @@ HRESULT cGameNode::Setup()
 	g_pSceneManager->Setup();
 	g_pCameraManager->Setup();
 	int fullFath, loadFath;
-	while (g_pCollisionManager->Setup(fullFath, loadFath));
+	while (!g_pCollisionManager->Setup(fullFath, loadFath));
 	
 
 	return S_OK;

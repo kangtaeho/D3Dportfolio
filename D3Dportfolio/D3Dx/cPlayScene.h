@@ -19,6 +19,9 @@ private:
 
 	std::vector<cHealthProgress*> m_vecHealthProgress;
 	
+
+	bool isOpen;
+
 public:
 	cPlayScene();
 	~cPlayScene();

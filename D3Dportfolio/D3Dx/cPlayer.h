@@ -3,6 +3,7 @@
 
 class cSphere;
 class cEnemy;
+class cShop;
 
 class cPlayer : public cCharacter
 {
@@ -11,7 +12,10 @@ private:
 	D3DXVECTOR3		m_vClickPos;
 
 	cEnemy*			m_pEnemy;
+	cShop*			m_pShop;
 
+
+	SYNTHESIZE(bool, isClickUi, IsClickUI);
 public:
 	cPlayer();
 	~cPlayer();
@@ -24,5 +28,6 @@ public:
 	void Check3DMousePointer();				// 마우스 체크
 	void AttackEnemy(cEnemy* enemy);
 
+	void SetShopAddressMemoryLink(cShop* shop) { m_pShop = shop; }
 };
 

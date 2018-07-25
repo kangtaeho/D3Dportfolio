@@ -4,6 +4,7 @@
 #include "cSphere.h"
 #include "cAStar.h"
 #include "cEnemy.h"
+#include "cShop.h"
 
 cPlayer::cPlayer()
 {
@@ -125,7 +126,7 @@ void cPlayer::Check3DMousePointer()
 
 	}
 
-	if (g_pKeyManager->IsOnceKeyDown(VK_RBUTTON))
+	if (g_pKeyManager->IsOnceKeyDown(VK_RBUTTON)&&!isClickUi)
 	{
 
 		AttackEnemy(m_pEnemy);

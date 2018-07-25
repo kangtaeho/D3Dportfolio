@@ -704,7 +704,7 @@ void cShop::update()
 		}
 	}*/
 
-	isClickUi();
+	
 	cMainUI::update();
 }
 
@@ -1468,16 +1468,14 @@ bool cShop::isClickUi()
 		pmatWorld->_41,
 		pmatWorld->_42,
 		pmatWorld->_41 + (stSize->nWidth / 2) * 0.7f,
-		pmatWorld->_42 + (stSize->nHeight /2) * 0.7f);
+		pmatWorld->_42 + (stSize->nHeight) * 0.7f);
 
 	if (PtInRect(rc, pt))
-	{
-		if (g_pKeyManager->IsOnceKeyDown(VK_LBUTTON))
-		{
-			return true;
-		}
+	{	
+	return true;	
 	}
-	return false;
+	else return false;
+
 }
 
 
