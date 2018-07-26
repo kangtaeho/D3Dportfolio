@@ -61,6 +61,9 @@ void cObjectManager::Setup()
 			temp->SetRadius(radius);
 			temp->SetRotY(rotY);
 
+			temp->getCirclePointer()->fRadius = radius;
+			temp->getCirclePointer()->mPosition = position;
+
 			m_vecObject.push_back(temp);
 		}
 	}
@@ -81,6 +84,7 @@ void cObjectManager::Release()
 void cObjectManager::Update()
 {
 	m_vecAllEnemy.clear();
+	m_vecALLObjectCircle.clear();
 	for (int i = 0; i < m_vecObject.size(); ++i)
 	{
 		m_vecObject[i]->Update();
@@ -88,7 +92,12 @@ void cObjectManager::Update()
 		{
 			m_vecAllEnemy.push_back(m_vecObject[i]);
 		}
+		m_vecALLObjectCircle.push_back(((cObject*)m_vecObject[i])->getCirclePointer());
 	}
+
+
+
+	g_pCollisionManager->SetvecObject(m_vecALLObjectCircle);
 }
 
 void cObjectManager::Render()

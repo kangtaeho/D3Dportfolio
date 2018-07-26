@@ -6,6 +6,7 @@ class cEnemy : public cCharacter
 {
 private:
 	cSphere	tempSphere;
+	STCIRCLE m_pCircle;
 
 public:
 	cEnemy();
@@ -17,5 +18,6 @@ public:
 	virtual void Render();
 
 	cSphere* getSphere() { return &tempSphere; }
+	STCIRCLE* getCirclePointer() { return &m_pCircle; }
 };
 

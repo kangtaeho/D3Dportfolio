@@ -82,6 +82,25 @@ bool cAStar::Update(D3DXVECTOR3& position, D3DXVECTOR3 NextPosition, float & rot
 			tempNextPosition.y = 0;
 		}
 	}
+	std::vector<STCIRCLE*> tempObjectCircle = g_pCollisionManager->GetvecObject();
+	for (int i = 0; i < g_pCollisionManager->GetvecObject().size(); ++i)
+	{
+		if (g_pCollisionManager->NextTickInCircle(
+			tempNextPosition,
+			radius,
+			g_pCollisionManager->GetvecObject()[i]->mPosition,
+			g_pCollisionManager->GetvecObject()[i]->fRadius))
+		{
+			tempNextPosition = g_pCollisionManager->MoveInCircle(
+				position,
+				tempNextPosition,
+				radius,
+				speed,
+				g_pCollisionManager->GetvecObject()[i]->mPosition,
+				g_pCollisionManager->GetvecObject()[i]->fRadius);
+			tempNextPosition.y = 0;
+		}
+	}
 
 	tempNextPosition = g_pCollisionManager->SetHeight(tempNextPosition);
 
