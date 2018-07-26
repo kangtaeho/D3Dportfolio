@@ -335,11 +335,14 @@ void cStatus::update()
 	{
 		if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo() != NULL)
 		{	
+			citem* item;
+
+			if (tempItemInfo != NULL)
+				item = tempItemInfo;
+
 			if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->GetEffected() == true)
 			{
-
 			}
-
 
 			if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Hp != NULL &&
 				m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->GetEffected() == false)
@@ -358,7 +361,6 @@ void cStatus::update()
 	{
 		m_bIsHit = true;
 		m_bCheckHpBar = true;
-		
 	}
 	if (m_pStatusHealthBar)
 	{

@@ -218,21 +218,17 @@ void cCollisionManager::Release()
 
 void cCollisionManager::Render()
 {
-<<<<<<< HEAD
-	D3DXMATRIX mat, matR, matS, matT, matT1;
-=======
+
 	D3DXMATRIX matT, matS, matR, matT1, mat;
 	D3DMATERIAL9 m_mtl;
 	
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
->>>>>>> e3eb431620c4dc364de07f1b39f1fafc2faa85bc
+
 	MapRender();
 
 	for (auto p : m_stMap.vecCircle)
 	{
-<<<<<<< HEAD
-=======
-		
+	
 		ZeroMemory(&m_mtl, sizeof(D3DMATERIAL9));
 		m_mtl.Ambient = D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f);
 		m_mtl.Diffuse = D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f);
@@ -240,7 +236,6 @@ void cCollisionManager::Render()
 
 		g_pD3DDevice->SetMaterial(&m_mtl);
 
->>>>>>> e3eb431620c4dc364de07f1b39f1fafc2faa85bc
 		D3DXMatrixTranslation(&matT1, 0, 0, -CYLINDERHEIGHT / 2);
 		D3DXMatrixScaling(&matS, p->fRadius, p->fRadius, 1.0f);
 		D3DXMatrixRotationX(&matR, D3DX_PI / 2);
