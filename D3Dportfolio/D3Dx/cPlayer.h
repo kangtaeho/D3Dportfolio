@@ -18,6 +18,9 @@ private:
 
 	std::vector<cCharacter*>* m_pVecEnemy;
 
+	// 테스트용 벡터
+	std::vector<cCharacter*> m_vecEnemy;
+
 public:
 	cPlayer();
 	~cPlayer();

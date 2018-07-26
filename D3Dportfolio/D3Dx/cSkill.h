@@ -91,8 +91,6 @@ protected:
 	bool				m_isUsingSkill;
 	bool				m_bIsFire;
 
-	std::vector<cCharacter>* m_pVecEnemy;
-
 	BUFF_TYPE e_BuffType;
 
 	// 오브젝트
@@ -103,7 +101,6 @@ protected:
 
 	AOE_MESH*			s_AoeMesh;
 
-
 	// 독데미지 판정
 	std::vector<TOXIC_ENEMY> m_vecToxic;
 	cCharacter* m_pTargetEnemy;
@@ -112,7 +109,7 @@ protected:
 	SYNTHESIZE(cPlayer*, m_pPlayer, Player);		// 버프를 생각을 못함,,, 구조 ㅄ됨
 	SYNTHESIZE(bool, m_bIsCasting, IsCasting);
 	SYNTHESIZE(bool, m_bIsCooldown, IsCooldown);// 쿨타임끝났냐?
-
+	SYNTHESIZE(std::vector<cCharacter*>*, m_pVecEnemy, VecEnemyPointer);
 
 public:
 	cSkill();
@@ -176,7 +173,8 @@ public:
 	void AddToxicEnemy(cCharacter* enemy);
 	void DamagedToxic();
 
-	void SetVecEnemy(std::vector<cCharacter>* pVecEnemy) { m_pVecEnemy = pVecEnemy; }
+
+	void SetVecEnemy(std::vector<cCharacter*>* pVecEnemy) { m_pVecEnemy = pVecEnemy; }
 
 };
 
