@@ -14,7 +14,8 @@ private:
 	cShop*			m_pShop;
 	cStatus*		m_pStatus;
 
-	bool m_bLoadingCompletion;
+	Bitmap*			m_pLoadingScreen;
+	float			m_fCurrentData;
 
 public:
 	cLoadingScene();

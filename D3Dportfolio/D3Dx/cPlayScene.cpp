@@ -216,6 +216,6 @@ void cPlayScene::Render()
 		mat = matS;
 	}
 
-	g_pCollisionManager->Render();
+	// g_pCollisionManager->Render();
 
 }

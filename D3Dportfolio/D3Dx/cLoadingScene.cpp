@@ -5,7 +5,7 @@
 #include "cStatus.h"
 
 cLoadingScene::cLoadingScene()
-	:m_bLoadingCompletion(false)
+	:m_fCurrentData(0.0f)
 {
 }
 
@@ -16,34 +16,43 @@ cLoadingScene::~cLoadingScene()
 
 HRESULT cLoadingScene::Setup()
 {
+	m_pLoadingScreen= g_pTextureManager->addTexture("loadingScreen", "./select/loadingScreen.png", NULL, NULL);
+	m_pLoadingScreen->setPosition(D3DXVECTOR3(0, 0, 0));
+	m_pLoadingScreen->setScale(D3DXVECTOR3(1, 1, 1));
 	return S_OK;
 }
 
 void cLoadingScene::Release()
 {
+	if (m_pLoadingScreen)
+		m_pLoadingScreen->release();
 }
 
 void cLoadingScene::Update()
 {
-
+	LoadingData();
 }
 
 void cLoadingScene::Render()
 {
+	if (m_pLoadingScreen)
+		m_pLoadingScreen->Render();
+
+	g_pFontManager->TextFont(10, 400, "%0.2f", m_fCurrentData);
 }
 
 void cLoadingScene::LoadingData()
 {
-	if (m_bLoadingCompletion) return;
 
-	// 플레이어
-	m_pPlayer = new cPlayer;
-	m_pPlayer->Setup("Teemo");
+	int fullFath, loadFath;
 
-	// UI
-	m_pShop = new cShop;
-	m_pStatus = new cStatus;
-
-	m_bLoadingCompletion = true;
+	for(int i=0; i<100; i++) g_pCollisionManager->Setup(fullFath, loadFath);
+	m_fCurrentData = ((float)loadFath / (float)fullFath) * 100.0;
+	
+	
+	if (loadFath == fullFath)
+	{
+		g_pSceneManager->ChangeScene("플레이씬");
+	}
 
 }

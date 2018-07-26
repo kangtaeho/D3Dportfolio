@@ -118,7 +118,7 @@ void cSelectScene::Update()
 
 	if (g_pKeyManager->IsOnceKeyDown('0'))
 	{
-		g_pSceneManager->ChangeScene("ÇÃ·¹ÀÌ¾À");
+		g_pSceneManager->ChangeScene("·Îµù¾À");
 	}
 
 }
@@ -260,7 +260,7 @@ void cSelectScene::SelectTimer()
 	{
 		if (m_fLimitedTime == 10)
 		{
-			g_pSceneManager->ChangeScene("ÇÃ·¹ÀÌ¾À");
+			g_pSceneManager->ChangeScene("·Îµù¾À");
 		}
 		else
 		{
