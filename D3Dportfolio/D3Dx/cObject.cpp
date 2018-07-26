@@ -43,9 +43,7 @@ void cObject::Setup(const char * name, int BlueTeam, float scale)
 	m_eState = IDLE;
 	m_fHP = 900.0f;
 
-	D3DXVECTOR3 tempsphere = m_vPosition;
-	tempsphere.y += m_fRadius;
-	tempSphere.Setup(tempsphere, m_fRadius);
+	D3DXCreateSphere(g_pD3DDevice, m_fRadius, 10, 10, &m_pSphere, NULL);
 }
 
 void cObject::Release()
@@ -139,7 +137,6 @@ void cObject::Update()
 
 	D3DXVECTOR3 SpherePosition = m_vPosition;
 	SpherePosition.y += m_fRadius;
-	tempSphere.SetPos(SpherePosition);
 }
 
 void cObject::Render()
@@ -157,5 +154,4 @@ void cObject::Render()
 	//애니메이션을 넣을때 cAction을 상속받은 후 아래처럼 사용
 	UpdateAnimation();
 	m_pSkinnedMesh->Update(m_pAnimController);
-	tempSphere.Render();
 }

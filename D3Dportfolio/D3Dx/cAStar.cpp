@@ -112,6 +112,90 @@ bool cAStar::Update(D3DXVECTOR3& position, D3DXVECTOR3 NextPosition, float & rot
 	return true;
 }
 
+bool cAStar::UpdateForEnemy(D3DXVECTOR3 & position, D3DXVECTOR3 NextPosition, float & rotY, float speed, float radius, float fRange, D3DXVECTOR3 * pEnemyPos, float fEnemyradius)
+{
+	if (pEnemyPos)
+	{
+		NextPosition = position;
+		D3DXVECTOR3 tempnextposition = position - *pEnemyPos;
+		if (D3DXVec3Length(&(tempnextposition)) > fRange)
+		{
+			D3DXVec3Normalize(&tempnextposition, &tempnextposition);
+			tempnextposition *= fRange;
+			NextPosition = *pEnemyPos + tempnextposition;
+		}
+	}
+	position = g_pCollisionManager->getVector2(position);
+	D3DXVECTOR3 tempend = g_pCollisionManager->getVector2(NextPosition);
+	m_vNextPosition = g_pCollisionManager->getVector2(m_vNextPosition);
+	if (position == tempend)
+	{
+		position = g_pCollisionManager->SetHeight(position);
+		return false;
+	}
+	if (m_vFinalDestination != NextPosition)
+	{
+		m_vFinalDestination = NextPosition;
+		tempend = FindNextPosition(position, m_vFinalDestination, radius);
+		m_vNextPosition = tempend;
+	}
+	if (D3DXVec3Length(&(m_vNextPosition - position)) < 1.0f)
+	{
+		tempend = FindNextPosition(position, m_vFinalDestination, radius);
+		m_vNextPosition = tempend;
+	}
+
+	position.y = 5000.0f;
+	m_vNextPosition = PushDestination(m_vNextPosition, radius);
+	D3DXVECTOR3 tempNextPosition = m_vNextPosition;
+	tempNextPosition = tempNextPosition - position;
+	D3DXVec3Normalize(&tempNextPosition, &tempNextPosition);
+	tempNextPosition *= speed;
+	if (pEnemyPos)
+	{
+		if (D3DXVec3Length(&(*pEnemyPos - position)) < speed)
+		{
+			tempNextPosition = *pEnemyPos - position;
+		}
+	}
+	if (D3DXVec3Length(&(m_vNextPosition - position)) < speed)
+	{
+		tempNextPosition = m_vNextPosition - position;
+	}
+	tempNextPosition += position;
+
+	std::vector<STCIRCLE*> tempObjectCircle = g_pCollisionManager->GetvecObject();
+	for (int i = 0; i < tempObjectCircle.size(); ++i)
+	{
+		D3DXVECTOR3 tempobjectposition = tempObjectCircle[i]->mPosition;
+		tempobjectposition.y = 5000.0f;
+		if (position == tempobjectposition)continue;
+		if (g_pCollisionManager->NextTickInCircle(
+			tempNextPosition,
+			radius,
+			tempObjectCircle[i]->mPosition,
+			tempObjectCircle[i]->fRadius))
+		{
+			tempNextPosition = g_pCollisionManager->MoveInCircle(
+				position,
+				tempNextPosition,
+				radius,
+				speed,
+				tempObjectCircle[i]->mPosition,
+				tempObjectCircle[i]->fRadius);
+			tempNextPosition.y = 0;
+		}
+	}
+
+	tempNextPosition = g_pCollisionManager->SetHeight(tempNextPosition);
+
+	rotY = g_pCollisionManager->getDirectionAngle(tempNextPosition - position);
+	rotY += D3DX_PI / 2;
+	position = tempNextPosition;
+	position = g_pCollisionManager->SetHeight(position);
+	return true;
+}
+
 D3DXVECTOR3 cAStar::FindNextPosition(D3DXVECTOR3 position, D3DXVECTOR3 NextPosition, float radius)
 {
 	D3DXVECTOR3 tempend = g_pCollisionManager->getVector2(NextPosition);

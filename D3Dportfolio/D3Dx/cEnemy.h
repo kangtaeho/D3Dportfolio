@@ -1,23 +1,36 @@
 #pragma once
 #include "cCharacter.h"
-#include "cSphere.h"
+
+class cRangeSkill;
 
 class cEnemy : public cCharacter
 {
 private:
-	cSphere	tempSphere;
+	LPD3DXMESH m_pSphere;
 	STCIRCLE m_pCircle;
+	std::vector<int> m_vecGoLine;
+	STCollisionMapTool m_stAllCircleLine;
+	std::vector<cCharacter*>* m_vecAllEnemy;
+	cCharacter* m_pEnemy;
+	float m_fSite;
+
+	cRangeSkill* m_pAttack;
+
+	SYNTHESIZE(bool, m_fBlue, Blue)
 
 public:
 	cEnemy();
 	~cEnemy();
 
-	virtual void Setup(const char* name);
+	virtual void Setup(const char* name, bool Blue);
 	virtual void Release();
 	virtual void Update();
 	virtual void Render();
 
-	cSphere* getSphere() { return &tempSphere; }
+	LPD3DXMESH getSphere() { return m_pSphere; }
 	STCIRCLE* getCirclePointer() { return &m_pCircle; }
+	void setGoLine(std::vector<int> GoLine) { m_vecGoLine = GoLine; }
+	void setCircleLine(STCollisionMapTool AllCircleLine) { m_stAllCircleLine = AllCircleLine; }
+	void setEnemy(std::vector<cCharacter*>* vecAllEnemy) { m_vecAllEnemy = vecAllEnemy; }
 };
 
