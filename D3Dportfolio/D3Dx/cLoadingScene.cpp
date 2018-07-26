@@ -55,4 +55,8 @@ void cLoadingScene::LoadingData()
 		g_pSceneManager->ChangeScene("วรทนภฬพภ");
 	}
 
+	if (g_pKeyManager->IsOnceKeyDown('0'))
+	{
+		g_pSceneManager->ChangeScene("วรทนภฬพภ");
+	}
 }

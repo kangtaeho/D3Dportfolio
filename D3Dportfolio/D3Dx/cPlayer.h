@@ -14,8 +14,10 @@ private:
 	cEnemy*			m_pEnemy;
 	cShop*			m_pShop;
 
-
 	SYNTHESIZE(bool, isClickUi, IsClickUI);
+
+	std::vector<cCharacter>* m_pVecEnemy;
+
 public:
 	cPlayer();
 	~cPlayer();
@@ -26,6 +28,9 @@ public:
 	virtual void Render();
 
 	void Check3DMousePointer();				// 마우스 체크
-	void AttackEnemy(cEnemy* enemy);
+	void AttackEnemy(cCharacter* enemy);
+
+	void SetVecEnemy(std::vector<cCharacter>* vecEnemy) { m_pVecEnemy = vecEnemy; }
+
 };
 

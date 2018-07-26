@@ -51,7 +51,8 @@ void cPlayer::Update()
 {
 	Check3DMousePointer();
 
-	m_AStar.Update(m_vPosition,m_vNextPosition, m_fRotY, m_fSpeed, m_fRadius, m_fRange,m_pEnemyPos);
+	bool isMove = false;
+	isMove = m_AStar.Update(m_vPosition,m_vNextPosition, m_fRotY, m_fSpeed, m_fRadius, m_fRange,m_pEnemyPos);
 
 	g_pSkillManager->Update();
 
@@ -59,7 +60,7 @@ void cPlayer::Update()
 	{
 		setAnimation("Attack1");
 	}
-	else if(m_AStar.getAStarSize())
+	else if(isMove)
 	{
 		setAnimation("Run");
 	}
@@ -129,7 +130,7 @@ void cPlayer::Check3DMousePointer()
 
 }
 
-void cPlayer::AttackEnemy(cEnemy* enemy)
+void cPlayer::AttackEnemy(cCharacter* enemy)
 {
 	SAFE_DELETE(m_pEnemyPos);
 

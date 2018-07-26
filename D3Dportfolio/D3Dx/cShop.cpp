@@ -589,6 +589,7 @@ void cShop::update()
 
 					m_sItemName = m_pItemInfo->GetItemInfo()->itemName;
 
+					if (ItemPrice > m_pGold.amount)continue;
 					if (i == 6)continue;
 
 					m_pItemInfo->GetItemInfo()->Itemtexture->setPosition(m_vecInventory[i]->GetvInvenPos());
@@ -732,6 +733,9 @@ bool cShop::isSoldInvenitem()
 
 		if (tempInvitem->GetItemInfo()->itemName == m_vecInventory[i]->GetinvitemInfo()->GetItemInfo()->itemName)
 		{
+
+			saveItem = *m_vecInventory[i]->GetinvitemInfo();
+
 			m_vecInventory[i]->GetinvitemInfo()->SetItemInfo(NULL);
 
 			m_vecInventory[i]->SethadItem(false);

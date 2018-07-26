@@ -3,7 +3,6 @@
 #include "Bitmap.h"
 #include "cUIButton.h"
 #include "cInventory.h"
-#include "citem.h"
 #include "cUiSkill.h"
 #include "cstat.h"
 cStatus::cStatus()
@@ -335,22 +334,22 @@ void cStatus::update()
 	{
 		if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo() != NULL)
 		{	
-			citem* item;
-
-			if (tempItemInfo != NULL)
-				item = tempItemInfo;
-
-			if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->GetEffected() == true)
-			{
-			}
-
 			if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Hp != NULL &&
 				m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->GetEffected() == false)
 			{
+				m_pHealthProgress->SetPrevHp(MaxHp);
 				MaxHp += m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Hp;
 				CurrentHp = MaxHp;
 				m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->SetEffected(true);
+				reSizeProgressBar();
+				m_pHealthProgress->SetReCorret(true);
+				m_pHealthProgress->SetReCorret(false);
 				continue;
+			}
+
+			if (tempItemInfo.GetItemInfo() != NULL)
+			{
+
 			}
 		}
 	}
@@ -577,6 +576,7 @@ void cStatus::update()
 		m_bCheckMpBar = true;
 		m_bUsedSkill = true;
 		m_bSelected = false;
+
 		for (auto p : m_mapStatusSkillInfo)
 		{
 			if (p.first == "w")p.second->SetUsing(true);
@@ -838,6 +838,24 @@ bool cStatus::isClickUi()
 	return false;
 }
 
+void cStatus::reSizeProgressBar()
+{
+	SetRect(&HpRc, 0, 0, MaxHp, HprcBottom);
+	m_pStatusHealthBar->SetRectFrameSize(HpRc);
+	HprcRight = m_pStatusHealthBar->GetrectFrameSize()->right;
+	HprcBottom = m_pStatusHealthBar->GetrectFrameSize()->bottom;
+
+	HprcSize = (prevRectSize * 0.81f) / HprcRight;
+	m_pStatusHealthBar->setScale(D3DXVECTOR3(HprcSize, 1.0f, 0));
+
+	SetRect(&MpRc, 0, 0, MaxMp, MpRcBottom);
+	m_pStatusMpBar->SetRectFrameSize(MpRc);
+	MpRcRight = m_pStatusMpBar->GetrectFrameSize()->right;
+	MpRcBottom = m_pStatusMpBar->GetrectFrameSize()->bottom;
+
+	MpRcSize = (prevRectSize * 0.81f) / MpRcRight;
+	m_pStatusMpBar->setScale(D3DXVECTOR3(MpRcSize, 1.0f, 0));
+}
 void cStatus::GoldUpdate()
 {
 

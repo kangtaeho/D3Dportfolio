@@ -1,9 +1,9 @@
 #pragma once
 #include "cMainUI.h"
-
-
+#include "citem.h"
+#include "cHealthProgress.h"
 class cInventory;
-class citem;
+
 class Bitmap;
 class cUIButton;
 class cUiSkill;
@@ -126,6 +126,8 @@ struct tagStatInfo
 class cStatus : public cMainUI
 {
 private:
+	cHealthProgress * m_pHealthProgress;
+
 	float prevRectSize;
 	bool m_bUsedSkill;
 	bool m_bSelected;
@@ -211,8 +213,9 @@ private:
 	SYNTHESIZE(std::vector<cInventory*>, m_vecInven, vecInven);
 
 	SYNTHESIZE(cUIButton*, buttonState, ButtonState);
-	SYNTHESIZE(citem*, tempItemInfo, tempItemInform);
+	SYNTHESIZE(citem, tempItemInfo, tempItemInform);
 	SYNTHESIZE(bool, recorrect, Recorrect);
+
 public:
 	cStatus();
 	virtual ~cStatus();
@@ -222,6 +225,8 @@ public:
 	virtual void release();
 	virtual void render();
 	
+
+	void reSizeProgressBar();
 
 	void HitProgress();
 	void setInventoryInfo();
@@ -233,5 +238,7 @@ public:
 	void InvenRender();
 
 	virtual bool isClickUi() override;
+
+	void setAddressLinkWithHealthProgress(cHealthProgress* hp) { m_pHealthProgress = hp; }
 };
 

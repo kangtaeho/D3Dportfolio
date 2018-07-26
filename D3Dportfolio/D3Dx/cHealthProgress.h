@@ -8,8 +8,6 @@ private:
 	RECT  m_HpBarRect;
 	RECT  m_MpBarRect;
 
-	float PrevHpSize;
-	float PrevMpSize;
 	float m_fHpBarSize;
 	float m_fHpBarRight;
 	float m_fHpBarBottom;
@@ -20,8 +18,8 @@ private:
 
 
 	SYNTHESIZE(bool, ReCorrectSize, ReCorret);
-
-
+	SYNTHESIZE(float, PrevHpSize, PrevHp);
+	SYNTHESIZE(float, PrevMpSize, PrevMp);
 
 	SYNTHESIZE(Bitmap*, m_pContainer, Container);
 	SYNTHESIZE(float, m_fHitvalue, HitValue);
