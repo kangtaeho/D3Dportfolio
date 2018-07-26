@@ -5,6 +5,7 @@ class cSkinnedMesh
 private:
 	LPD3DXFRAME					m_pRoot;
 	LPD3DXANIMATIONCONTROLLER	m_pAnimController;
+	LPD3DXANIMATIONCONTROLLER	m_pAnimControllerParent;
 
 	float	m_fBlendTime;
 	float	m_fPassedBlendTime;
@@ -16,7 +17,7 @@ public:
 
 	void Release(LPD3DXFRAME pFrame);
 
-	void CloneAniController(LPD3DXANIMATIONCONTROLLER* ppAnimController) { m_pAnimController->CloneAnimationController(m_pAnimController->GetMaxNumAnimationOutputs(), m_pAnimController->GetMaxNumAnimationSets(), m_pAnimController->GetMaxNumTracks(), m_pAnimController->GetMaxNumEvents(), ppAnimController); }
+	void CloneAniController(LPD3DXANIMATIONCONTROLLER* ppAnimController) { m_pAnimControllerParent->CloneAnimationController(m_pAnimControllerParent->GetMaxNumAnimationOutputs(), m_pAnimControllerParent->GetMaxNumAnimationSets(), m_pAnimControllerParent->GetMaxNumTracks(), m_pAnimControllerParent->GetMaxNumEvents(), ppAnimController); }
 	
 	void Setup(const char* szFolder, const char* szFile);
 	//애니메이션 있는 랜더 돌릴 땐 업데이트

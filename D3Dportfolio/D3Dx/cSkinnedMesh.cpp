@@ -15,6 +15,7 @@ cSkinnedMesh::~cSkinnedMesh()
 {
 	Release(m_pRoot);
 	SAFE_RELEASE(m_pAnimController);
+	SAFE_RELEASE(m_pAnimControllerParent);
 }
 
 void cSkinnedMesh::Release(LPD3DXFRAME pFrame)
@@ -41,6 +42,8 @@ void cSkinnedMesh::Setup(const char* szFolder, const char* szFile)
 		&m_pAnimController);
 
 	SetupBoneMatrixPtrs(m_pRoot); 
+
+	m_pAnimController->CloneAnimationController(m_pAnimController->GetMaxNumAnimationOutputs(), m_pAnimController->GetMaxNumAnimationSets(), m_pAnimController->GetMaxNumTracks(), m_pAnimController->GetMaxNumEvents(), &m_pAnimControllerParent);
 }
 
 void cSkinnedMesh::Update(LPD3DXANIMATIONCONTROLLER pAnimController)
