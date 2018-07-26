@@ -27,7 +27,5 @@ public:
 
 	void Check3DMousePointer();				// 마우스 체크
 	void AttackEnemy(cEnemy* enemy);
-
-	void SetShopAddressMemoryLink(cShop* shop) { m_pShop = shop; }
 };
 

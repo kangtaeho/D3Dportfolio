@@ -1464,6 +1464,7 @@ bool cShop::isClickUi()
 
 	pmatWorld = &m_pShop->GetWolrdMatrix();
 	stSize = &m_pShop->GetUiSize();
+
 	SetRect(rc,
 		pmatWorld->_41,
 		pmatWorld->_42,
@@ -1472,10 +1473,9 @@ bool cShop::isClickUi()
 
 	if (PtInRect(rc, pt))
 	{	
-	return true;	
+		return true;	
 	}
 	else return false;
-
 }
 
 

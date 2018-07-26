@@ -22,7 +22,7 @@ void cPlayer::Setup(const char* name)
 	m_fSpeed = 10.0f;
 	m_fHP = 300;
 	m_fMP = 250;
-
+	m_fDEF = 80;
 	cCharacter::Setup(name);
 	g_pSkillManager->AddSkill("ÆòÅ¸", RANGE_SKILL, 100, m_fRange, 20.0f, 0.5f, 3.0f, 20, true);
 	g_pSkillManager->AddSkill("r", OBJECT_SKILL, 100, 500, 10.0f, 0.5f, 10.0f, 10, true, "BantamTrap");
@@ -126,7 +126,7 @@ void cPlayer::Check3DMousePointer()
 
 	}
 
-	if (g_pKeyManager->IsOnceKeyDown(VK_RBUTTON)&&!isClickUi)
+	if (g_pKeyManager->IsOnceKeyDown(VK_RBUTTON)&& !isClickUi)
 	{
 
 		AttackEnemy(m_pEnemy);

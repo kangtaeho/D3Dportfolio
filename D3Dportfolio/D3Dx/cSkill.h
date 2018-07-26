@@ -4,7 +4,7 @@
 class cCube;
 class cSkinnedMesh;
 class cPlayer;
-class cEnemy;
+class cCharacter;
 
 enum SKILL_TYPE
 {
@@ -39,7 +39,7 @@ struct TOXIC_ENEMY
 	float removeTime;
 	float countTime;
 	float startTime;
-	cEnemy* enemy;
+	cCharacter* enemy;
 };
 
 struct AOE_MESH
@@ -111,10 +111,10 @@ protected:
 
 	// 독데미지 판정
 	std::vector<TOXIC_ENEMY> m_vecToxic;
-	cEnemy* m_pTargetEnemy;
+	cCharacter* m_pTargetEnemy;
 
 
-	std::vector<cEnemy>* m_pVecEnemy;
+	std::vector<cCharacter>* m_pVecEnemy;
 
 public:
 	cSkill();
@@ -136,7 +136,7 @@ public:
 
 	void Fire(D3DXVECTOR3* playerPos,
 		D3DXVECTOR3* tagetPos,
-		cEnemy* targetEnemy,
+		cCharacter* targetEnemy,
 			bool isNormal);
 
 	void Move();
@@ -175,10 +175,10 @@ public:
 	bool IsUsingSkill();
 
 	// 독데미지
-	void AddToxicEnemy(cEnemy* enemy);
+	void AddToxicEnemy(cCharacter* enemy);
 	void DamagedToxic();
 
-	void SetVecEnemy(std::vector<cEnemy>* pVecEnemy) { m_pVecEnemy = pVecEnemy; }
+	void SetVecEnemy(std::vector<cCharacter>* pVecEnemy) { m_pVecEnemy = pVecEnemy; }
 
 };
 

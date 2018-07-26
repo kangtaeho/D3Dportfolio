@@ -4,7 +4,7 @@
 
 #define g_pSkillManager cSkillManager::GetInstance()
 
-class cEnemy;
+class cCharacter;
 
 class cSkillManager
 {
@@ -32,7 +32,7 @@ public:
 	void Fire(std::string skillName,
 		D3DXVECTOR3* playerPos,
 		D3DXVECTOR3* tagetPos,
-		cEnemy* targetEnemy=NULL,
+		cCharacter* targetEnemy=NULL,
 		bool isNormal=true);	// 노말일 경우엔 평타로 생각함(즉 Ready를 거치지 않음)
 
 	bool IsCasting();

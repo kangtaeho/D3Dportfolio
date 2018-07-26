@@ -833,10 +833,7 @@ bool cStatus::isClickUi()
 
 	if (PtInRect(rc, pt))
 	{
-		if (g_pKeyManager->IsOnceKeyDown(VK_LBUTTON))
-		{
-			return true;
-		}
+		return true;
 	}
 	return false;
 }

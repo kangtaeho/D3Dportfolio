@@ -218,15 +218,17 @@ void cCollisionManager::Release()
 
 void cCollisionManager::Render()
 {
+
 	D3DXMATRIX matT, matS, matR, matT1, mat;
 	D3DMATERIAL9 m_mtl;
 	
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+
 	MapRender();
 
 	for (auto p : m_stMap.vecCircle)
 	{
-		
+	
 		ZeroMemory(&m_mtl, sizeof(D3DMATERIAL9));
 		m_mtl.Ambient = D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f);
 		m_mtl.Diffuse = D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f);

@@ -137,6 +137,9 @@
     <ClCompile Include="cMinimap.cpp">
       <Filter>소스파일\cMinimap</Filter>
     </ClCompile>
+    <ClCompile Include="cLoadingScene.cpp">
+      <Filter>소스파일\cScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h">
@@ -283,6 +286,9 @@
     <ClInclude Include="cStat.h" />
     <ClInclude Include="cMinimap.h">
       <Filter>소스파일\cMinimap</Filter>
+    </ClInclude>
+    <ClInclude Include="cLoadingScene.h">
+      <Filter>소스파일\cScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

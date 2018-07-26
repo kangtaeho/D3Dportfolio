@@ -171,6 +171,7 @@
     <ClInclude Include="cInventory.h" />
     <ClInclude Include="citem.h" />
     <ClInclude Include="cKeyManager.h" />
+    <ClInclude Include="cLoadingScene.h" />
     <ClInclude Include="cMainGame.h" />
     <ClInclude Include="cMainScene.h" />
     <ClInclude Include="cMainUI.h" />
@@ -222,6 +223,7 @@
     <ClCompile Include="cInventory.cpp" />
     <ClCompile Include="citem.cpp" />
     <ClCompile Include="cKeyManager.cpp" />
+    <ClCompile Include="cLoadingScene.cpp" />
     <ClCompile Include="cMainGame.cpp" />
     <ClCompile Include="cMainScene.cpp" />
     <ClCompile Include="cMainUI.cpp" />

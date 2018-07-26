@@ -72,6 +72,7 @@ HRESULT cPlayScene::Setup()
 	m_pMainUi->setup();
 
 
+
 	changed = false;
 
 	cHealthProgress* PlayerProgress = new cHealthProgress;
@@ -86,18 +87,17 @@ HRESULT cPlayScene::Setup()
 
 	m_vecHealthProgress.push_back(PlayerProgress);
 
+	
 	status->SetMAXHP(m_pPlayer->GetHP());
 	status->SetMAXMP(m_pPlayer->GetMP());
 	status->SetCURRENTHP(m_pPlayer->GetHP());
 	status->SetCURRENTMP(m_pPlayer->GetMP());
-
 	status->SetMoveSpeed(m_pPlayer->GetSpeed());
 	status->SetDefense(m_pPlayer->GetDEF());
 	status->SetAtk(m_pPlayer->GetATK());
 	status->SetAttackSpeed(m_pPlayer->GetATKSpeed());
-
+	
 	status->SetRecorrect(true);
-
 	return S_OK;
 }
 
@@ -124,9 +124,19 @@ void cPlayScene::Update()
 		m_pPlayer->Update();
 	}
 
-	// if (m_pMainUi->GetNodeName() == "SHOP") isOpen = true;
-	// else isOpen = false;
-	// m_pPlayer->SetIsClickUI(isOpen);
+
+
+	if (m_pMainUi->GetNodeName() == "SHOP")
+	{
+		if (shop->isClickUi())m_pPlayer->SetIsClickUI(true);
+		else m_pPlayer->SetIsClickUI(false);
+	}
+	else
+	{
+		m_pPlayer->SetIsClickUI(false);
+	}
+	
+	if (status->isClickUi())m_pPlayer->SetIsClickUI(true);
 
 	if (g_pKeyManager->IsOnceKeyDown(VK_ESCAPE))
 	{
@@ -134,7 +144,6 @@ void cPlayScene::Update()
 	}
 
 	status->SetvecInven(shop->GetvecInventory());
-	
 	status->InvenUpdate();
 
 	if (g_pKeyManager->IsOnceKeyDown('0'))
@@ -160,10 +169,9 @@ void cPlayScene::Update()
 	WorldMatrix = WorldMatrix * matView * matProj * matViewPort;
 	D3DXVec3TransformCoord(&tempposition, &tempposition, &WorldMatrix);
 
+
+	//½ºÅÈ¼³Á¤
 	m_vecHealthProgress[0]->setBarPosition(tempposition, tempposition);
-
-	
-
 	m_vecHealthProgress[0]->SetMaxHp(status->GetMAXHP());
 	m_vecHealthProgress[0]->SetCurrentHp(status->GetCURRENTHP());
 	m_vecHealthProgress[0]->SetHitValue(status->GetHitValue());
@@ -207,6 +215,7 @@ void cPlayScene::Render()
 		D3DXMatrixScaling(&matS, 300.0f, 300.0f, 300.0f);
 		mat = matS;
 	}
-	//g_pCollisionManager->MapRender();
+
+	g_pCollisionManager->Render();
 
 }
