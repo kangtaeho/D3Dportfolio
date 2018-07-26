@@ -23,6 +23,7 @@ private:
 
 	SYNTHESIZE(Bitmap*, m_pContainer, Container);
 	SYNTHESIZE(float, m_fHitvalue, HitValue);
+	SYNTHESIZE(bool, m_bisHit, isHit);
 	SYNTHESIZE(Bitmap*, m_pHpBar, HpBar);
 	SYNTHESIZE(Bitmap*, m_pMpBar, MpBar);
 	SYNTHESIZE(float, m_fMaxHp, MaxHp);
@@ -43,5 +44,7 @@ public:
 	void update();
 	void render();
 	void Release();
+
+	void setAddressLinkWithStatus() {}
 };
 

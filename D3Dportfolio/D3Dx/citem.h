@@ -2,9 +2,9 @@
 #include "cBluePrint.h"
 class Bitmap;
 
-
 struct tagItemStat
 {
+
 	float Hp;
 	float Mp;
 	float Attack;

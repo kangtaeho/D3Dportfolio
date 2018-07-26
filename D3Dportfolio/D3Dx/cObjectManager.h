@@ -8,6 +8,7 @@ class cObjectManager
 private:
 	std::vector<cCharacter*> m_vecObject;
 	std::vector<cCharacter*> m_vecAllEnemy;
+	std::vector<STCIRCLE*> m_vecALLObjectCircle;
 
 public:
 	cObjectManager();

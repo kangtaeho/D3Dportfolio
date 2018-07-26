@@ -31,19 +31,11 @@ struct STCIRCLE
 		D3DXVec3TransformCoord(&tempposition, &tempposition, &WorldMatrix);
 
 <<<<<<< HEAD
-<<<<<<< HEAD
-		g_pFontManager->TextFont(tempposition.x, tempposition.y, D3DXVECTOR3(255,0,255),"radius : %f", fRadius);
-		g_pFontManager->TextFont(tempposition.x, tempposition.y + 20, D3DXVECTOR3(255,0,255),"position : %f, %f", mPosition.x, mPosition.z);
+		g_pFontManager->TextFont(tempposition.x, tempposition.y, D3DXVECTOR3(255, 0, 255), "radius : %f", fRadius);
+		g_pFontManager->TextFont(tempposition.x, tempposition.y + 20, D3DXVECTOR3(255, 0, 255), "position : %f, %f", mPosition.x, mPosition.z);
 =======
-		// g_pFontManager->TextFont(tempposition.x, tempposition.y, "radius : %f", fRadius);
-		// g_pFontManager->TextFont(tempposition.x, tempposition.y + 20, "position : %f, %f", mPosition.x, mPosition.z);
->>>>>>> a818d4dde10241bb11b7e3db0e4f72377a58860f
-=======
-		// g_pFontManager->TextFont(tempposition.x, tempposition.y, "radius : %f", fRadius);
-		// g_pFontManager->TextFont(tempposition.x, tempposition.y + 20, "position : %f, %f", mPosition.x, mPosition.z);
->>>>>>> e2dd74fe8b197019b5f75729843c90185624dcc7
+>>>>>>> 4cf02ca6945bd55248615b80adc7cc3b156ca955
 	}
-
 };
 
 struct STLINE
@@ -74,6 +66,7 @@ private:
 	std::vector<D3DXVECTOR3>	vecSurface;
 	std::vector<D3DXVECTOR3>	vecV;
 
+	SYNTHESIZE(std::vector<STCIRCLE*>, vecObjectCircle, vecObject)
 
 public:
 	bool Setup(int& allfilesize, int& loadfilesize);

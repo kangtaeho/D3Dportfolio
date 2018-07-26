@@ -3,12 +3,11 @@
 #include "citem.h"
 #include "cHealthProgress.h"
 class cInventory;
-
 class Bitmap;
 class cUIButton;
 class cUiSkill;
 class cStat;
-
+class cPlayer;
 struct tagSkillInfo
 {
 	Bitmap* Skill_Q;
@@ -127,7 +126,7 @@ class cStatus : public cMainUI
 {
 private:
 	cHealthProgress * m_pHealthProgress;
-
+	cPlayer* m_pPlayer;
 	float prevRectSize;
 	bool m_bUsedSkill;
 	bool m_bSelected;
@@ -232,13 +231,13 @@ public:
 	void setInventoryInfo();
 	void GoldUpdate() override;
 	void GoldRender() override;
-
 	bool isClickedSkill(OUT RECT* Outrc, int index);
 	void InvenUpdate();
 	void InvenRender();
 
 	virtual bool isClickUi() override;
 
+	void setAddressLinkWithPlayer(cPlayer* player) { m_pPlayer = player; }
 	void setAddressLinkWithHealthProgress(cHealthProgress* hp) { m_pHealthProgress = hp; }
 };
 

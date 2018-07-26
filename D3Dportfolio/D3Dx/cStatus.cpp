@@ -5,6 +5,7 @@
 #include "cInventory.h"
 #include "cUiSkill.h"
 #include "cstat.h"
+#include "cPlayer.h"
 cStatus::cStatus()
 {
 }
@@ -334,17 +335,74 @@ void cStatus::update()
 	{
 		if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo() != NULL)
 		{	
+			if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Mp != NULL &&
+				m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->GetEffected() == false)
+			{
+				MaxMp += m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Mp;
+				CurrentMp = MaxMp;
+				reSizeProgressBar();
+				m_pHealthProgress->SetReCorret(true);
+				m_pPlayer->SetMP(MaxMp);
+			}
+
 			if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Hp != NULL &&
 				m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->GetEffected() == false)
 			{
-				m_pHealthProgress->SetPrevHp(MaxHp);
 				MaxHp += m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Hp;
 				CurrentHp = MaxHp;
 				m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->SetEffected(true);
 				reSizeProgressBar();
 				m_pHealthProgress->SetReCorret(true);
-				m_pHealthProgress->SetReCorret(false);
-				continue;
+
+				m_pPlayer->SetHP(MaxHp);
+				if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Mp != NULL)
+				{
+					MaxMp += m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Mp;
+					CurrentMp = MaxMp;
+					reSizeProgressBar();
+					m_pHealthProgress->SetReCorret(true);
+
+					m_pPlayer->SetMP(MaxMp);
+				}
+				if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Attack != NULL)
+				{
+					AtkValue += m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Attack;
+					
+					m_pPlayer->SetATK(AtkValue);
+				}
+				if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->AttackSpeed != NULL)
+				{
+					AttackSpeedValue += m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->AttackSpeed;
+
+					m_pPlayer->SetATKSpeed(AttackSpeedValue);
+				}
+				if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Defence != NULL)
+				{
+					DefenseValue += m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Defence;
+
+					m_pPlayer->SetDEF(DefenseValue);
+				}
+			}
+			if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Attack != NULL &&
+				m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->GetEffected() == false)
+			{
+				AtkValue += m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Attack;
+				m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->SetEffected(true);
+				m_pPlayer->SetATK(AtkValue);
+			}
+			if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->AttackSpeed != NULL &&
+				m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->GetEffected() == false)
+			{
+				AttackSpeedValue += m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->AttackSpeed;
+				m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->SetEffected(true);
+				m_pPlayer->SetATK(AttackSpeedValue);
+			}
+			if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Defence != NULL &&
+				m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->GetEffected() == false)
+			{
+				DefenseValue += m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Defence;
+				m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->SetEffected(true);
+				m_pPlayer->SetATK(DefenseValue);
 			}
 
 			if (tempItemInfo.GetItemInfo() != NULL)

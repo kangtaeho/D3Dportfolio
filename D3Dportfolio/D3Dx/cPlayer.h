@@ -8,15 +8,18 @@ class cShop;
 class cPlayer : public cCharacter
 {
 private:
-	cSphere*		m_pSphere;
-	D3DXVECTOR3		m_vClickPos;
+	cSphere * m_pSphere;
+	D3DXVECTOR3      m_vClickPos;
 
-	cEnemy*			m_pEnemy;
-	cShop*			m_pShop;
+	cEnemy*         m_pEnemy;
+	cShop*         m_pShop;
 
 	SYNTHESIZE(bool, isClickUi, IsClickUI);
 
 	std::vector<cCharacter*>* m_pVecEnemy;
+
+	// 테스트용 벡터
+	std::vector<cCharacter*> m_vecEnemy;
 
 public:
 	cPlayer();
@@ -27,10 +30,9 @@ public:
 	virtual void Update();
 	virtual void Render();
 
-	void Check3DMousePointer();				// 마우스 체크
+	void Check3DMousePointer();            // 마우스 체크
 	void AttackEnemy(cCharacter* enemy);
 
 	void SetVecEnemy(std::vector<cCharacter*>* vecEnemy) { m_pVecEnemy = vecEnemy; }
 
 };
-

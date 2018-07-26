@@ -76,14 +76,14 @@ HRESULT cPlayScene::Setup()
 
 	cHealthProgress* PlayerProgress = new cHealthProgress;
 	Bitmap* Container; Bitmap* HpBar; Bitmap* MpBar;
-	Container = g_pTextureManager->addTexture("Container", "./status/playerHpContainer.dds", NULL, NULL);
-	HpBar = g_pTextureManager->addTexture("PlayerHpBar", "./status/playerHpBar.dds", PROGRESSBAR, 1, 1);
-	MpBar = g_pTextureManager->addTexture("PlayerMpBar", "./status/playerMpBar.dds", PROGRESSBAR, 1, 1);
+	Container = g_pTextureManager->addTexture("Container...", "./status/playerHpContainer.dds", NULL, NULL);
+	HpBar = g_pTextureManager->addTexture("PlayerHpBar...", "./status/playerHpBar.dds", PROGRESSBAR, 1, 1);
+	MpBar = g_pTextureManager->addTexture("PlayerMpBar...", "./status/playerMpBar.dds", PROGRESSBAR, 1, 1);
 	PlayerProgress->SetContainer(Container);
 	PlayerProgress->SetHpBar(HpBar);
 	PlayerProgress->SetMpBar(MpBar);
 	PlayerProgress->setup();
-
+	
 	m_vecHealthProgress.push_back(PlayerProgress);
 
 	
@@ -99,6 +99,8 @@ HRESULT cPlayScene::Setup()
 	status->SetRecorrect(true);
 
 	status->setAddressLinkWithHealthProgress(m_vecHealthProgress[0]);
+
+	status->setAddressLinkWithPlayer(m_pPlayer);
 	return S_OK;
 }
 
@@ -170,11 +172,15 @@ void cPlayScene::Update()
 
 
 	//½ºÅÈ¼³Á¤
+	
+
 	m_vecHealthProgress[0]->setBarPosition(tempposition, tempposition);
+
 	m_vecHealthProgress[0]->SetMaxHp(status->GetMAXHP());
 	m_vecHealthProgress[0]->SetCurrentHp(status->GetCURRENTHP());
 	m_vecHealthProgress[0]->SetHitValue(status->GetHitValue());
 	m_vecHealthProgress[0]->SetHpBarSize(status->GetCheckHpBar());
+	m_vecHealthProgress[0]->SetisHit(status->GetIsHit());
 
 	m_vecHealthProgress[0]->SetMaxMp(status->GetMAXMP());
 	m_vecHealthProgress[0]->SetCurrentMp(status->GetCURRENTMP());

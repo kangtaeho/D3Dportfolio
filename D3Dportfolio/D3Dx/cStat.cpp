@@ -23,11 +23,6 @@ void cStat::setup()
 	AtkNum =  g_pTextureManager->addTexture("AtkNum", "./status/StatusNum.dds", SUBUI, NULL);
 	DefenseNum  = g_pTextureManager->addTexture("DefenseNum", "./status/StatusNum.dds", SUBUI, NULL);
 	MoveSpeedNum = g_pTextureManager->addTexture("MoveSpeedNum", "./status/StatusNum.dds", SUBUI, NULL);
-
-	AttackSpeedValue = 0;
-	AtkValue = 0;
-	DefenseValue = 0;
-	MoveSpeedValue = 0;
 }
 
 

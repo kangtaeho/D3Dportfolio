@@ -167,3 +167,11 @@ cSkill* cSkillManager::GetSkill(std::string skillName)
 
 	return m_mapSkill[skillName];
 }
+
+void cSkillManager::RegisterVecEnemy(std::vector<cCharacter*>* vecEnemy)
+{
+	for (auto p : m_mapSkill)	// 다른 스킬이 하나라도 입력을 받았으면
+	{
+		p.second->SetVecEnemyPointer(vecEnemy);
+	}
+}

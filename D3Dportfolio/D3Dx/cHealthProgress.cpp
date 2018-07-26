@@ -33,8 +33,8 @@ void cHealthProgress::setup()
 
 	m_fHpBarSize = m_fHpBarRight / m_fMaxHp;
 
-	m_pHpBar->setScale(D3DXVECTOR3(m_fHpBarSize, 1.0f, 0));
 	m_pHpBar->SetRectFrameSize(m_HpBarRect);
+	m_pHpBar->setScale(D3DXVECTOR3(m_fHpBarSize, 1.0f, 0));
 
 	PrevHpSize = m_fHpBarRight;
 
@@ -66,6 +66,11 @@ void cHealthProgress::update()
 	m_pHpBar->update(0);
 	m_pMpBar->update(0);
 
+
+	if (m_pHpBar->GetrectFrameSize()->right <= 0) m_pHpBar->GetrectFrameSize()->right = 0;
+	if (m_pMpBar->GetrectFrameSize()->right <= 0)m_pMpBar->GetrectFrameSize()->right = 0;
+
+
 	if (ReCorrectSize)
 	{
 		SetRect(&m_HpBarRect, 0, 0, m_fMaxHp, m_fHpBarBottom);
@@ -77,7 +82,6 @@ void cHealthProgress::update()
 		m_fHpBarSize = PrevHpSize / m_fHpBarRight;
 
 		m_pHpBar->setScale(D3DXVECTOR3(m_fHpBarSize, 1.0f, 0));
-
 
 		SetRect(&m_MpBarRect, 0, 0, m_fMaxMp, m_fMpBarBottom);
 		m_pMpBar->SetRectFrameSize(m_MpBarRect);
@@ -94,19 +98,16 @@ void cHealthProgress::update()
 		if (m_fCurrentHp > 0)
 			m_fCurrentHp = m_fCurrentHp - m_fHitvalue;
 
-		if (m_pHpBar->GetrectFrameSize()->right <= 0) m_pHpBar->GetrectFrameSize()->right = 0;
-
 		if (m_pHpBar->GetrectFrameSize()->left < m_pHpBar->GetrectFrameSize()->right)
 			m_pHpBar->GetrectFrameSize()->right -= m_fHitvalue;
 
 		m_bCheckHpBarSize = false;
 	}
+
 	if (m_bCheckMpBarSize)
 	{
 		if (m_fCurrentMp > 0)
 			m_fCurrentMp = m_fCurrentMp - m_fUsedMpValue;
-
-		if (m_pMpBar->GetrectFrameSize()->right <= 0)m_pMpBar->GetrectFrameSize()->right = 0;
 
 		if (m_pMpBar->GetrectFrameSize()->left < m_pMpBar->GetrectFrameSize()->right)
 		{

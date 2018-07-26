@@ -79,6 +79,7 @@ public:
 
 	D3DXVECTOR3 GetAniPosition() { return texture_Info->vAniPosition; }
 	RECT* GetrectFrameSize() { return  &texture_Info->rectFrameSize; }
+	RECT* GetRectRenderFrame() { return &texture_Info->rectRenderFrame; }
 	void SetRectFrameSize(RECT rc) { texture_Info->rectFrameSize = rc; }
 	void setCurrentFrame(float index) { texture_Info->niCurrentFrameNum = index; }
 };

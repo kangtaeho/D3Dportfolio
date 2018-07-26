@@ -12,10 +12,7 @@ private:
 	Bitmap* AtkNum;
 	Bitmap* DefenseNum;
 	Bitmap* MoveSpeedNum;
-	int AttackSpeedValue;
-	int AtkValue;
-	int DefenseValue;
-	int MoveSpeedValue;
+
 public:
 	cStat();
 	~cStat();

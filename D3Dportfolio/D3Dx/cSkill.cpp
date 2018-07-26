@@ -33,6 +33,7 @@ cSkill::cSkill()
 	, m_pPlayer(NULL)
 	, m_pTargetEnemy(NULL)
 	, e_BuffType(BUFF_TYPE_COUNT)
+	, m_pVecEnemy(NULL)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 }
@@ -157,6 +158,7 @@ void cSkill::MeshMove()
 		D3DXVec3Normalize(&dir, &dir);
 
 		m_vecMesh[i].pos += dir*m_fPosSpeed;
+		m_vecMesh[i].pos = g_pCollisionManager->SetHeight(m_vecMesh[i].pos);
 
 	}
 }
@@ -258,19 +260,24 @@ void cSkill::RemoveMeshTime()
 	{
 		m_vecMesh[i].removeTime += g_pTimeManager->GetElapsedTime();
 		
+		bool isCollision = false;
+
 		if (m_pVecEnemy)
 		{
 			for (int j = 0; j < m_pVecEnemy->size(); j++)
 			{
-				if (D3DXVec3Length(&(m_vecMesh[i].pos - (*m_pVecEnemy)[j].getPosition())) < 20)
+				if (D3DXVec3Length(&(m_vecMesh[i].pos - (*m_pVecEnemy)[j]->getPosition())) < 20.0)
 				{
 					SAFE_DELETE(m_vecMesh[i].animation);
 					m_vecMesh.erase(m_vecMesh.begin() + i);
-					continue;
+					isCollision = true;
+					break;
 				}
 			}
 		}
 			
+		if (isCollision) continue;
+
 		if (m_vecMesh[i].removeTime > m_fRemoveTime)
 		{
 			SAFE_DELETE(m_vecMesh[i].animation);
@@ -284,7 +291,7 @@ void cSkill::AutoFire()
 {
 	if (!m_bIsAutoFire) return;
 
-	if (D3DXVec3Length(&(*m_pTargetPos - *m_pPlayerPos)) < m_fRange)
+	if (D3DXVec3Length(&(*m_pTargetPos - *m_pPlayerPos)) <= m_fRange)
 	{
 		m_fStartTime = g_pTimeManager->GetLastUpdateTime();
 		m_bIsCasting = true;
@@ -330,7 +337,7 @@ void cSkill::CreateMesh()
 		if (m_pMesh)
 		{
 			OBJECT_MESH mesh;
-			mesh.pos = m_vPos;
+			mesh.pos = *m_pPlayerPos;
 			mesh.target = *m_pTargetPos;
 			mesh.removeTime = 0;
 			mesh.startTime = g_pTimeManager->GetLastUpdateTime();
@@ -510,6 +517,10 @@ void cSkill::CreateAOEMesh(bool isCreatePointMesh, float pointScale)
 		s_AoeMesh->pointMesh->UnlockIndexBuffer();
 		s_AoeMesh->pointScale = pointScale;
 
+	}
+	else
+	{
+		s_AoeMesh->pointMesh = NULL;
 	}
 
 }

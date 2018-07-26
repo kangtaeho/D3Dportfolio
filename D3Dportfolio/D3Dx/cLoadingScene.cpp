@@ -48,7 +48,7 @@ void cLoadingScene::LoadingData()
 
 	for(int i=0; i<100; i++) g_pCollisionManager->Setup(fullFath, loadFath);
 	m_fCurrentData = ((float)loadFath / (float)fullFath) * 100.0;
-	
+
 	
 	if (loadFath == fullFath)
 	{

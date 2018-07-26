@@ -83,8 +83,6 @@ protected:
 	float				m_fPassedTime;		// 경과시간.
 	float				m_fRemoveTime;		// 삭제할 시간(오브젝트용)
 
-	SYNTHESIZE(bool, m_bIsCasting, IsCasting);
-	SYNTHESIZE(bool, m_bIsCooldown, IsCooldown);// 쿨타임끝났냐?
 	bool				m_bIsTarget;		// 타겟팅이냐?
 	bool				m_bIsRemove;		// 오브젝트 삭제할꺼냐.
 
@@ -93,13 +91,8 @@ protected:
 	bool				m_isUsingSkill;
 	bool				m_bIsFire;
 
-	SYNTHESIZE(bool, m_bIsReady, IsReady); // 스킬 사용 준비가 되었냐?
-
-	// 버프 받았을때 상태 처리를 위한 플레이어 포인터
-	SYNTHESIZE(cPlayer*, m_pPlayer, Player);		// 버프를 생각을 못함,,, 구조 ㅄ됨
-	// SYNTHESIZE_REF(BUFF_TYPE, e_BuffType, , BuffType); 이렇게하면 겟셋안됨
 	BUFF_TYPE e_BuffType;
-	
+
 	// 오브젝트
 	cSkinnedMesh*		m_pMesh;
 	cCube*				m_pCube;
@@ -108,13 +101,15 @@ protected:
 
 	AOE_MESH*			s_AoeMesh;
 
-
 	// 독데미지 판정
 	std::vector<TOXIC_ENEMY> m_vecToxic;
 	cCharacter* m_pTargetEnemy;
 
-
-	std::vector<cCharacter>* m_pVecEnemy;
+	SYNTHESIZE(bool, m_bIsReady, IsReady); // 스킬 사용 준비가 되었냐?
+	SYNTHESIZE(cPlayer*, m_pPlayer, Player);		// 버프를 생각을 못함,,, 구조 ㅄ됨
+	SYNTHESIZE(bool, m_bIsCasting, IsCasting);
+	SYNTHESIZE(bool, m_bIsCooldown, IsCooldown);// 쿨타임끝났냐?
+	SYNTHESIZE(std::vector<cCharacter*>*, m_pVecEnemy, VecEnemyPointer);
 
 public:
 	cSkill();
@@ -178,7 +173,8 @@ public:
 	void AddToxicEnemy(cCharacter* enemy);
 	void DamagedToxic();
 
-	void SetVecEnemy(std::vector<cCharacter>* pVecEnemy) { m_pVecEnemy = pVecEnemy; }
+
+	void SetVecEnemy(std::vector<cCharacter*>* pVecEnemy) { m_pVecEnemy = pVecEnemy; }
 
 };
 
