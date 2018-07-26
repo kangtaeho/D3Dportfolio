@@ -218,17 +218,32 @@ void cCollisionManager::Release()
 
 void cCollisionManager::Render()
 {
-
-	D3DXMATRIX matT, matS, matR, matT1, mat;
+	D3DXMATRIX mat, matT, matR, matS, matT1;
 	D3DMATERIAL9 m_mtl;
-	
+
+	D3DLIGHT9	stLight;
+	ZeroMemory(&stLight, sizeof(D3DLIGHT9));
+
+	stLight.Type = D3DLIGHT_DIRECTIONAL;
+	stLight.Ambient = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+	stLight.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+	stLight.Specular = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+
+	D3DXVECTOR3 vDir(1.0f, -1.0f, 1.0f);
+	D3DXVec3Normalize(&vDir, &vDir);
+	stLight.Direction = vDir;
+	g_pD3DDevice->SetLight(0, &stLight);
+
+	g_pD3DDevice->LightEnable(0, true);
+
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+	g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, false);
+	g_pD3DDevice->SetTexture(0, NULL);
 
 	MapRender();
 
 	for (auto p : m_stMap.vecCircle)
 	{
-	
 		ZeroMemory(&m_mtl, sizeof(D3DMATERIAL9));
 		m_mtl.Ambient = D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f);
 		m_mtl.Diffuse = D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f);
@@ -243,7 +258,7 @@ void cCollisionManager::Render()
 		mat = matT1 * matS * matR * matT;
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &mat);
 		m_pCylinder->DrawSubset(0);
-		p->render();
+		//p->render();
 	}
 
 	D3DXMatrixIdentity(&mat);
@@ -300,6 +315,7 @@ void cCollisionManager::Render()
 			sizeof(ST_PC_VERTEX));
 	}
 
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 }
 
 void cCollisionManager::LoadMap()
@@ -452,21 +468,65 @@ D3DXVECTOR3 cCollisionManager::getRayPosition(int& isIntersect, D3DXVECTOR3 posi
 	float u, v, f;
 	DWORD face;
 	D3DXVECTOR3 tempEye = g_pCameraManager->GetCameraEye();
-	if (TargetRadius)
-	{
-		if (abs(g_pCollisionManager->WherePositionposition(position, g_pCameraManager->GetCameraEye(), g_pCameraManager->GetCameraEye() + m_vDirection).z) < TargetRadius)
-		{
-			isIntersect = 1;
-			return position;
-		}
-	}
 	int tempBool = 0;
 	D3DXIntersect(m_pMapMesh,
 		&g_pCameraManager->GetCameraEye(),
 		&m_vDirection,
 		&tempBool, &face,
 		&u, &v, &f, NULL, NULL);
-	return g_pCameraManager->GetCameraEye() + m_vDirection * f;
+	D3DXVECTOR3 tempPosition = g_pCameraManager->GetCameraEye() + m_vDirection * f;
+	if (TargetRadius)
+	{
+/*
+		POINT ptMouse;
+		GetCursorPos(&ptMouse);
+		ScreenToClient(g_hWnd, &ptMouse);
+		D3DXMATRIX tempMat1;
+		D3DXMatrixIdentity(&tempMat1);
+		D3DXVECTOR3 tempMouse((float)ptMouse.x, (float)ptMouse.y, 1.0f);
+		D3DXVECTOR3 tempCenter((float)ptMouse.x, (float)ptMouse.y, 0.0f);
+
+		D3DXMATRIX tempMat;
+		D3DXMatrixScaling(&tempMat, 1 / TargetRadius, 1 / TargetRadius, 1.0f);
+		D3DXVec3TransformCoord(&tempMouse, &tempMouse, &tempMat);
+		D3DXVec3TransformCoord(&tempCenter, &tempCenter, &tempMat);
+
+		D3DXVECTOR3 tempDirection;
+		g_pD3DDevice->GetViewport(&tempViewPort);
+		g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &invProj);
+		g_pD3DDevice->GetTransform(D3DTS_VIEW, &invView);
+		D3DXVec3Unproject(&tempMouse, &tempMouse, &tempViewPort, &invProj, &invView, &tempMat1);
+		D3DXVec3Unproject(&tempCenter, &tempCenter, &tempViewPort, &invProj, &invView, &tempMat1);
+		tempDirection = tempMouse - tempCenter;
+		D3DXVec3Normalize(&tempDirection, &tempDirection);
+		
+		tempEye = g_pCameraManager->GetCameraEye();
+		D3DXMATRIX tempMatEye;
+		D3DXMatrixTranslation(&tempMatEye, -position.x, -position.y, -position.z);
+		D3DXVec3TransformCoord(&tempEye, &tempEye, &tempMatEye);
+
+		D3DXIntersect(m_pSphere,
+			&tempEye,
+			&tempDirection,
+			&isIntersect, &face,
+			&u, &v, &f, NULL, NULL);
+*/
+		position.y = 5000.0f;
+		tempPosition.y = 5000.0f;
+		if (D3DXVec3Length(&(tempPosition - position)) < TargetRadius)
+		{
+			isIntersect = 1;
+			return g_pCollisionManager->SetHeight(position);
+		}
+	}
+	D3DXIntersect(m_pMapMesh,
+		&g_pCameraManager->GetCameraEye(),
+		&m_vDirection,
+		&tempBool, &face,
+		&u, &v, &f, NULL, NULL);
+	tempPosition = g_pCameraManager->GetCameraEye() + m_vDirection * f;
+	tempPosition = g_pCollisionManager->SetHeight(tempPosition);
+	return tempPosition;
 }
 
 D3DXVECTOR3 cCollisionManager::NextPositionPerTick(D3DXVECTOR3 position, D3DXVECTOR3 nextposition, float speed)
