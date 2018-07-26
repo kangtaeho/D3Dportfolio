@@ -97,6 +97,8 @@ HRESULT cPlayScene::Setup()
 	status->SetAttackSpeed(m_pPlayer->GetATKSpeed());
 	
 	status->SetRecorrect(true);
+
+	status->setAddressLinkWithHealthProgress(m_vecHealthProgress[0]);
 	return S_OK;
 }
 

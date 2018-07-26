@@ -12,7 +12,15 @@ private:
 
 	typedef std::map<std::string, LPCSKINNEDMESH>::iterator		miXfile;
 
+	FILE* fp;
+	std::vector<std::string> m_vecAllFileName;
+	std::vector<std::string> m_vecAllFolderName;
+	std::vector<int>			AllFileSize;
+	std::vector<int>			LoadFileSize;
+	int FileIndex;
+
 public:
+	bool Setup(int& allfilesize, int& loadfilesize);
 	void Release();
 
 	//LPCSkinnedMesh를 선언해서 사용하세요

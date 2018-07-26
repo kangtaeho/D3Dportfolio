@@ -37,7 +37,15 @@ void cEnemy::Update()
 void cEnemy::Render()
 {
 	// 테스트용 체력바 표시
+<<<<<<< HEAD
+<<<<<<< HEAD
+	g_pFontManager->TextFont(10, 400, D3DXVECTOR3(255,0,255),"적 체력 %0.2f", m_fHP);
+=======
 	// g_pFontManager->TextFont(10, 400, "적 체력 %0.2f", m_fHP);
+>>>>>>> a818d4dde10241bb11b7e3db0e4f72377a58860f
+=======
+	// g_pFontManager->TextFont(10, 400, "적 체력 %0.2f", m_fHP);
+>>>>>>> e2dd74fe8b197019b5f75729843c90185624dcc7
 	cCharacter::Render();
 	tempSphere.Render();
 }

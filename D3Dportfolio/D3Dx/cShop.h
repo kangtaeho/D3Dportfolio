@@ -1,10 +1,9 @@
 #pragma once
 #include "cMainUI.h"
-
+#include "citem.h"
 class Bitmap;
 class cUIButton;
 class cBluePrint;
-class citem;
 class cInventory;
 
 enum tagShopState
@@ -143,6 +142,7 @@ protected:
 	D3DXVECTOR3* scale, *position;
 	std::vector<cInventory*> m_vecWholeItem;
 
+	SYNTHESIZE(citem, saveItem, savedItem);
 public:
 	cShop();
 	virtual ~cShop();
