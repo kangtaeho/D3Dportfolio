@@ -42,7 +42,10 @@ void cEnemy::Update()
 
 void cEnemy::Render()
 {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8d4fe7cdc0cf6b55203b0b52d49962789cb58415
 	cCharacter::Render();
 	tempSphere.Render();
 }
