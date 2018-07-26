@@ -94,7 +94,7 @@ void cSkillManager::AddSkill(std::string skillName,
 void cSkillManager::Fire(std::string skillName,
 	D3DXVECTOR3* playerPos,
 	D3DXVECTOR3* tagetPos,
-	cEnemy* targetEnemy,
+	cCharacter* targetEnemy,
 	bool isNormal)
 {
 

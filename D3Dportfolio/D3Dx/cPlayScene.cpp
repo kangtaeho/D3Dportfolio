@@ -207,6 +207,7 @@ void cPlayScene::Render()
 		D3DXMatrixScaling(&matS, 300.0f, 300.0f, 300.0f);
 		mat = matS;
 	}
-	//g_pCollisionManager->MapRender();
+
+	g_pCollisionManager->Render();
 
 }

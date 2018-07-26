@@ -3,7 +3,7 @@
 #include "cCube.h"
 #include "cSkinnedMesh.h"
 #include "cPlayer.h"
-#include "cEnemy.h"
+#include "cCharacter.h"
 
 cSkill::cSkill()
 	: e_skillType(SKILL_TYPE_COUNT)
@@ -90,7 +90,7 @@ void cSkill::Render()
 
 void cSkill::Fire(D3DXVECTOR3* playerPos,
 				D3DXVECTOR3* tagetPos,
-				cEnemy* targetEnemy,
+				cCharacter* targetEnemy,
 				bool isNormal)
 
 {
@@ -585,7 +585,7 @@ bool cSkill::IsUsingSkill()
 
 }
 
-void cSkill::AddToxicEnemy(cEnemy * enemy)
+void cSkill::AddToxicEnemy(cCharacter* enemy)
 {
 	TOXIC_ENEMY t;
 	t.enemy = enemy;

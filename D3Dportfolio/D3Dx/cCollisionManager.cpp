@@ -218,29 +218,39 @@ void cCollisionManager::Release()
 
 void cCollisionManager::Render()
 {
+<<<<<<< HEAD
+	D3DXMATRIX mat, matR, matS, matT, matT1;
+=======
+	D3DXMATRIX matT, matS, matR, matT1, mat;
+	D3DMATERIAL9 m_mtl;
+	
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+>>>>>>> e3eb431620c4dc364de07f1b39f1fafc2faa85bc
 	MapRender();
 
 	for (auto p : m_stMap.vecCircle)
 	{
-		if (m_pNowCircle == p)
-		{
-			Mtl(false, true, false);
-		}
-		else
-		{
-			Mtl(false, false, true);
-		}
+<<<<<<< HEAD
+=======
+		
+		ZeroMemory(&m_mtl, sizeof(D3DMATERIAL9));
+		m_mtl.Ambient = D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f);
+		m_mtl.Diffuse = D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f);
+		m_mtl.Specular = D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f);
+
+		g_pD3DDevice->SetMaterial(&m_mtl);
+
+>>>>>>> e3eb431620c4dc364de07f1b39f1fafc2faa85bc
 		D3DXMatrixTranslation(&matT1, 0, 0, -CYLINDERHEIGHT / 2);
 		D3DXMatrixScaling(&matS, p->fRadius, p->fRadius, 1.0f);
 		D3DXMatrixRotationX(&matR, D3DX_PI / 2);
 		D3DXMatrixTranslation(&matT, p->mPosition.x, p->mPosition.y, p->mPosition.z);
 		mat = matT1 * matS * matR * matT;
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &mat);
-		m_pMesh->DrawSubset(0);
+		m_pCylinder->DrawSubset(0);
 		p->render();
 	}
 
-	Mtl(false, false, false);
 	D3DXMatrixIdentity(&mat);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &mat);
 	for (auto p : m_stMap.vecLine)
