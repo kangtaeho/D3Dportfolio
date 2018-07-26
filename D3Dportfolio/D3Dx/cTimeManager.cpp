@@ -43,9 +43,9 @@ void cTimeManager::Render()
 {
 	if (!g_pFontManager->GetIsSetup()) return;
 
-	g_pFontManager->TextFont(10, 10, "FPS : %d", m_lFrameRate);
-	g_pFontManager->TextFont(10, 30, "WorldTime : %f", m_fWorldTime);
-	g_pFontManager->TextFont(10, 50, "ElapsedTime : %f", m_fElapsedTime);
+	g_pFontManager->TextFont(10, 10, D3DXVECTOR3(255,0,255),	"FPS : %d", m_lFrameRate);
+	g_pFontManager->TextFont(10, 30, D3DXVECTOR3(255,0,255),	"WorldTime : %f", m_fWorldTime);
+	g_pFontManager->TextFont(10, 50, D3DXVECTOR3(255,0,255),	"ElapsedTime : %f", m_fElapsedTime);
 
 }
 

@@ -13,7 +13,7 @@ public:
 	SYNTHESIZE(bool, m_bIsSetup, IsSetup);
 
 	void Setup();
-	void TextFont(int x, int y, const char* text, ...);
+	void TextFont(int x, int y, D3DXVECTOR3 color, const char* text, ...);
 	void Destroy();
 
 };

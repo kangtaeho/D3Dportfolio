@@ -61,7 +61,6 @@ HRESULT cPlayScene::Setup()
 	m_pPlayer = new cPlayer;
 	m_pPlayer->Setup("Teemo");
 
-
 	shop = new cShop;
 	status = new cStatus;
 	m_pMinimap = new cMinimap;
@@ -123,8 +122,6 @@ void cPlayScene::Update()
 	{
 		m_pPlayer->Update();
 	}
-
-
 
 	if (m_pMainUi->GetNodeName() == "SHOP")
 	{

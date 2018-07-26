@@ -32,7 +32,7 @@ void cFontManager::Setup()
 	m_bIsSetup = true;
 }
 
-void cFontManager::TextFont(int x, int y, const char* text, ...)
+void cFontManager::TextFont(int x, int y, D3DXVECTOR3 color, const char* text, ...)
 {
 	RECT rc;
 	char str[258] = { 0, };		// ÃÊ±âÈ­
@@ -45,7 +45,11 @@ void cFontManager::TextFont(int x, int y, const char* text, ...)
 	vsprintf_s(str, text, ap);
 	va_end(ap);
 
-	m_pFont->DrawTextA(NULL, str, -1, &rc, DT_LEFT, D3DCOLOR_XRGB(255, 0, 255));
+	int r = color.x;
+	int g = color.y;
+	int b = color.z;
+	
+	m_pFont->DrawTextA(NULL, str, -1, &rc, DT_LEFT, D3DCOLOR_XRGB(r, g, b));
 
 }
 

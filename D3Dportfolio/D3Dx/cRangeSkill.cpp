@@ -44,17 +44,13 @@ void cRangeSkill::Update()
 
 void cRangeSkill::Render()
 {
-	
-	 g_pFontManager->TextFont(100, 100, " 쿨다운 %0.2f ", m_fCurrentCooldown);
-	 g_pFontManager->TextFont(100, 120, " 캐스팅시간 %0.2f ", m_fPassedTime);
-	 
+
 	 if (m_pTargetPos && m_pPlayerPos)
 	 {
 	 	D3DXVECTOR3 v = (*m_pTargetPos - *m_pPlayerPos);
 	 	float le = D3DXVec3Length(&v);
-	 	g_pFontManager->TextFont(100, 140, " 거리 %0.3f ", le);
+	 	g_pFontManager->TextFont(100, 140, D3DXVECTOR3(255, 0, 255), " 거리 %0.3f ", le);
 	 }
 	
-
 	RenderCube();
 }

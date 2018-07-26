@@ -75,8 +75,8 @@ void cPlayer::Render()
 	POINT ptMouse;
 	GetCursorPos(&ptMouse);
 	ScreenToClient(g_hWnd, &ptMouse);
-	g_pFontManager->TextFont(ptMouse.x, ptMouse.y, "2D : %0.2f, %0.2f", (float)ptMouse.x, (float)ptMouse.y);
-	g_pFontManager->TextFont(ptMouse.x, ptMouse.y + 20, "3D : %0.2f, %0.2f, %0.2f", (float)m_vNextPosition.x, (float)m_vNextPosition.y, (float)m_vNextPosition.z);
+	g_pFontManager->TextFont(ptMouse.x, ptMouse.y, D3DXVECTOR3(255, 0, 255), "2D : %0.2f, %0.2f", (float)ptMouse.x, (float)ptMouse.y);
+	g_pFontManager->TextFont(ptMouse.x, ptMouse.y + 20, D3DXVECTOR3(255, 0, 255), "3D : %0.2f, %0.2f, %0.2f", (float)m_vNextPosition.x, (float)m_vNextPosition.y, (float)m_vNextPosition.z);
 
 	g_pSkillManager->Render();
 

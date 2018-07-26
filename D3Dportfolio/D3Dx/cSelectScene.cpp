@@ -151,8 +151,6 @@ void cSelectScene::Render()
 
 	if (m_pNumSecond)
 		m_pNumSecond->aniRender();
-
-	g_pFontManager->TextFont(10, 300, "е╦юс %0.2f", m_fPassedTime);
 }
 
 void cSelectScene::Release()

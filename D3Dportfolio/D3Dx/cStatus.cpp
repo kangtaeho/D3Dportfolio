@@ -680,7 +680,7 @@ void cStatus::render()
 		if (p.second->GetChosen() == true && p.second->GetUsing() == true)
 		{
 			g_pFontManager->TextFont(p.second->GetskillInfo()->GetPosition().x +18,
-				p.second->GetskillInfo()->GetPosition().y + 15, "%d",
+				p.second->GetskillInfo()->GetPosition().y + 15, D3DXVECTOR3(255,0,255),"%d",
 				g_pSkillManager->GetSkill(p.first)->CooldownTimer());
 
 			if (g_pSkillManager->GetSkill(p.first)->CooldownTimer() == 0)
@@ -692,13 +692,13 @@ void cStatus::render()
 		}
 	}
 
-	g_pFontManager->TextFont(m_pStatusHealthBar->GetPosition().x + 200, m_pStatusHealthBar->GetPosition().y, "%d", MaxHp);
-	g_pFontManager->TextFont(m_pStatusHealthBar->GetPosition().x + 180, m_pStatusHealthBar->GetPosition().y, "/");
-	g_pFontManager->TextFont(m_pStatusHealthBar->GetPosition().x + 120, m_pStatusHealthBar->GetPosition().y, "%d", CurrentHp);
+	g_pFontManager->TextFont(m_pStatusHealthBar->GetPosition().x + 200, m_pStatusHealthBar->GetPosition().y,D3DXVECTOR3(255,0,255), "%d", MaxHp);
+	g_pFontManager->TextFont(m_pStatusHealthBar->GetPosition().x + 180, m_pStatusHealthBar->GetPosition().y,D3DXVECTOR3(255,0,255), "/");
+	g_pFontManager->TextFont(m_pStatusHealthBar->GetPosition().x + 120, m_pStatusHealthBar->GetPosition().y,D3DXVECTOR3(255,0,255), "%d", CurrentHp);
 
-	g_pFontManager->TextFont(m_pStatusMpBar->GetPosition().x + 200, m_pStatusMpBar->GetPosition().y, "%d", MaxMp);
-	g_pFontManager->TextFont(m_pStatusMpBar->GetPosition().x + 180, m_pStatusMpBar->GetPosition().y, "/");
-	g_pFontManager->TextFont(m_pStatusMpBar->GetPosition().x + 120, m_pStatusMpBar->GetPosition().y, "%d", CurrentMp);
+	g_pFontManager->TextFont(m_pStatusMpBar->GetPosition().x + 200, m_pStatusMpBar->GetPosition().y, D3DXVECTOR3(255, 0, 255), "%d", MaxMp);
+	g_pFontManager->TextFont(m_pStatusMpBar->GetPosition().x + 180, m_pStatusMpBar->GetPosition().y, D3DXVECTOR3(255, 0, 255), "/");
+	g_pFontManager->TextFont(m_pStatusMpBar->GetPosition().x + 120, m_pStatusMpBar->GetPosition().y, D3DXVECTOR3(255, 0, 255), "%d", CurrentMp);
 }
 
 void cStatus::HitProgress()

@@ -38,7 +38,7 @@ void cLoadingScene::Render()
 	if (m_pLoadingScreen)
 		m_pLoadingScreen->Render();
 
-	g_pFontManager->TextFont(10, 400, "%0.2f", m_fCurrentData);
+	g_pFontManager->TextFont(692, 531, D3DXVECTOR3(255, 255, 255), "%0.0f", m_fCurrentData);
 }
 
 void cLoadingScene::LoadingData()
