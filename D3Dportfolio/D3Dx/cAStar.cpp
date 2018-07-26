@@ -11,7 +11,7 @@ cAStar::~cAStar()
 {
 }
 
-void cAStar::Update(D3DXVECTOR3& position, D3DXVECTOR3 NextPosition, float & rotY, float speed, float radius, float fRange, D3DXVECTOR3 * pEnemyPos, float fEnemyradius)
+bool cAStar::Update(D3DXVECTOR3& position, D3DXVECTOR3 NextPosition, float & rotY, float speed, float radius, float fRange, D3DXVECTOR3 * pEnemyPos, float fEnemyradius)
 {
 	if (pEnemyPos)
 	{
@@ -26,17 +26,27 @@ void cAStar::Update(D3DXVECTOR3& position, D3DXVECTOR3 NextPosition, float & rot
 	}
 	position = g_pCollisionManager->getVector2(position);
 	D3DXVECTOR3 tempend = g_pCollisionManager->getVector2(NextPosition);
+	m_vNextPosition = g_pCollisionManager->getVector2(m_vNextPosition);
 	if (position == tempend)
 	{
 		position = g_pCollisionManager->SetHeight(position);
-		return;
+		return false;
+	}
+	if (m_vFinalDestination != NextPosition)
+	{
+		m_vFinalDestination = NextPosition;
+		tempend = FindNextPosition(position, m_vFinalDestination, radius);
+		m_vNextPosition = tempend;
+	}
+	if (D3DXVec3Length(&(m_vNextPosition - position)) < 1.0f)
+	{
+		tempend = FindNextPosition(position, m_vFinalDestination, radius);
+		m_vNextPosition = tempend;
 	}
 
-	tempend = FindNextPosition(position, NextPosition, radius);
-
 	position.y = 5000.0f;
-	tempend = PushDestination(tempend, radius);
-	D3DXVECTOR3 tempNextPosition = tempend;
+	m_vNextPosition = PushDestination(m_vNextPosition, radius);
+	D3DXVECTOR3 tempNextPosition = m_vNextPosition;
 	tempNextPosition = tempNextPosition - position;
 	D3DXVec3Normalize(&tempNextPosition, &tempNextPosition);
 	tempNextPosition *= speed;
@@ -47,9 +57,9 @@ void cAStar::Update(D3DXVECTOR3& position, D3DXVECTOR3 NextPosition, float & rot
 			tempNextPosition = *pEnemyPos - position;
 		}
 	}
-	if (D3DXVec3Length(&(tempend - position)) < speed)
+	if (D3DXVec3Length(&(m_vNextPosition - position)) < speed)
 	{
-		tempNextPosition = tempend - position;
+		tempNextPosition = m_vNextPosition - position;
 	}
 	tempNextPosition += position;
 
@@ -80,6 +90,7 @@ void cAStar::Update(D3DXVECTOR3& position, D3DXVECTOR3 NextPosition, float & rot
 	position = tempNextPosition;
 	position = PushDestination(position, radius);
 	position = g_pCollisionManager->SetHeight(position);
+	return true;
 }
 
 D3DXVECTOR3 cAStar::FindNextPosition(D3DXVECTOR3 position, D3DXVECTOR3 NextPosition, float radius)

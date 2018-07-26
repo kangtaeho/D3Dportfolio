@@ -30,6 +30,8 @@ struct STCIRCLE
 		WorldMatrix = WorldMatrix * matView * matProj * matViewPort;
 		D3DXVec3TransformCoord(&tempposition, &tempposition, &WorldMatrix);
 
+		g_pFontManager->TextFont(tempposition.x, tempposition.y, "radius : %f", fRadius);
+		g_pFontManager->TextFont(tempposition.x, tempposition.y + 20, "position : %f, %f", mPosition.x, mPosition.z);
 	}
 
 };

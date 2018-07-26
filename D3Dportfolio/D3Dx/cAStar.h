@@ -20,26 +20,19 @@ struct AStarFath
 class cAStar
 {
 private:
-	std::vector<D3DXVECTOR3>	FinalAStar;
-
-	std::vector<AStarFath*>		AllAStarFath;
-	std::vector<AStarFath*>		AllEndAStarFath;
-	D3DXVECTOR3					vEndPosition;
-	std::map<int, STCIRCLE*>	mapCircle;
-	std::vector<D3DXVECTOR3>	tempNextPosition;
-
-	STCIRCLE* tempCirclePointer;
+	STLINE * m_pNowLine;
+	STCIRCLE*		m_pNowCircle;
+	D3DXVECTOR3		m_vNextPosition;
+	D3DXVECTOR3		m_vFinalDestination;
 
 public:
 	cAStar();
 	~cAStar();
 	
-	void Update(D3DXVECTOR3& position, D3DXVECTOR3 NextPosition, float& rotY, float speed, float radius, float fRange = 0, 
+	bool Update(D3DXVECTOR3& position, D3DXVECTOR3 NextPosition, float& rotY, float speed, float radius, float fRange = 0, 
 		D3DXVECTOR3* pEnemyPos = NULL, float fEnemyradius = 0);
 	D3DXVECTOR3 FindNextPosition(D3DXVECTOR3 position, D3DXVECTOR3 NextPosition, float radius);
 	
-	int getAStarSize() { return FinalAStar.size(); }
-
 	//bool Stop(D3DXVECTOR3 position, float Range, D3DXVECTOR3* EnemyPosition, float EnemyRadius);
 	//void Stop() { FinalAStar.clear(); }
 	//충돌맵과 충돌되면 목적지를 밖으로 이동시켜서 리턴

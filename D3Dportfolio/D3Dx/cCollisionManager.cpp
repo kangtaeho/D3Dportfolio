@@ -444,55 +444,34 @@ D3DXVECTOR3 cCollisionManager::SetHeight(D3DXVECTOR3 position)
 
 D3DXVECTOR3 cCollisionManager::getRayPosition(int& isIntersect, D3DXVECTOR3 position, float TargetRadius)
 {
-	D3DXVECTOR3		m_vDirection;
-	D3DXMATRIX invProj, invViewPort;
-	D3DVIEWPORT9 tempViewPort;
-	g_pD3DDevice->GetViewport(&tempViewPort);
-	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &invProj);
-
 	POINT ptMouse;
 	GetCursorPos(&ptMouse);
 	ScreenToClient(g_hWnd, &ptMouse);
+	D3DXMATRIX tempMat;
+	D3DXMatrixIdentity(&tempMat);
+	D3DXVECTOR3 tempMouse((float)ptMouse.x, (float)ptMouse.y, 1.0f);
+	D3DXVECTOR3 tempCenter((float)ptMouse.x, (float)ptMouse.y, 0.0f);
 
-	m_vDirection.x = ((2.0f * ptMouse.x) / tempViewPort.Width - 1.0f) / invProj._11;
-	m_vDirection.y = ((-2.0f * ptMouse.y) / tempViewPort.Height + 1.0f) / invProj._22;
-	m_vDirection.z = 1.0f;
-
-	D3DXMATRIX invView;
-	g_pD3DDevice->GetTransform(D3DTS_VIEW, &invView);
-	D3DXMatrixInverse(&invView, 0, &invView);
-
-	D3DXVec3TransformNormal(&m_vDirection, &m_vDirection, &invView);
+	D3DXVECTOR3 m_vDirection;
+	D3DXMATRIX Proj, View;
+	D3DVIEWPORT9 ViewPort;
+	g_pD3DDevice->GetViewport(&ViewPort);
+	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &Proj);
+	g_pD3DDevice->GetTransform(D3DTS_VIEW, &View);
+	D3DXVec3Unproject(&tempMouse, &tempMouse, &ViewPort, &Proj, &View, &tempMat);
+	D3DXVec3Unproject(&tempCenter, &tempCenter, &ViewPort, &Proj, &View, &tempMat);
+	m_vDirection = tempMouse - tempCenter;
 	D3DXVec3Normalize(&m_vDirection, &m_vDirection);
 
 	float u, v, f;
 	DWORD face;
-	D3DXVECTOR3 tempEye = g_pCameraManager->GetCameraEye();
 	int tempBool = 0;
 	D3DXIntersect(m_pMapMesh,
 		&g_pCameraManager->GetCameraEye(),
 		&m_vDirection,
 		&tempBool, &face,
 		&u, &v, &f, NULL, NULL);
-	D3DXVECTOR3 tempPosition = g_pCameraManager->GetCameraEye() + m_vDirection * f;
-	if (TargetRadius)
-	{
-		position.y = 5000.0f;
-		tempPosition.y = 5000.0f;
-		if (D3DXVec3Length(&(tempPosition - position)) < TargetRadius)
-		{
-			isIntersect = 1;
-			return g_pCollisionManager->SetHeight(position);
-		}
-	}
-	D3DXIntersect(m_pMapMesh,
-		&g_pCameraManager->GetCameraEye(),
-		&m_vDirection,
-		&tempBool, &face,
-		&u, &v, &f, NULL, NULL);
-	tempPosition = g_pCameraManager->GetCameraEye() + m_vDirection * f;
-	tempPosition = g_pCollisionManager->SetHeight(tempPosition);
-	return tempPosition;
+	return g_pCameraManager->GetCameraEye() + m_vDirection * f;
 }
 
 D3DXVECTOR3 cCollisionManager::getRayPosition(int & isIntersect, D3DXVECTOR3 position, LPD3DXMESH TargetSphere, float TargetRadius)
