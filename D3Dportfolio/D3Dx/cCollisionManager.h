@@ -80,6 +80,7 @@ public:
 
 	D3DXVECTOR3 SetHeight(D3DXVECTOR3 position);
 	D3DXVECTOR3 getRayPosition(int& isIntersect, D3DXVECTOR3 position = D3DXVECTOR3(0, 0, 0), float TargetRadius = 0);
+	D3DXVECTOR3 getRayPosition(int& isIntersect, D3DXVECTOR3 position, LPD3DXMESH TargetSphere = NULL, float TargetRadius = 0);
 
 	D3DXVECTOR3 NextPositionPerTick(D3DXVECTOR3 position, D3DXVECTOR3 nextposition, float speed);
 

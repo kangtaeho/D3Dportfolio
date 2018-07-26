@@ -477,40 +477,6 @@ D3DXVECTOR3 cCollisionManager::getRayPosition(int& isIntersect, D3DXVECTOR3 posi
 	D3DXVECTOR3 tempPosition = g_pCameraManager->GetCameraEye() + m_vDirection * f;
 	if (TargetRadius)
 	{
-/*
-		POINT ptMouse;
-		GetCursorPos(&ptMouse);
-		ScreenToClient(g_hWnd, &ptMouse);
-		D3DXMATRIX tempMat1;
-		D3DXMatrixIdentity(&tempMat1);
-		D3DXVECTOR3 tempMouse((float)ptMouse.x, (float)ptMouse.y, 1.0f);
-		D3DXVECTOR3 tempCenter((float)ptMouse.x, (float)ptMouse.y, 0.0f);
-
-		D3DXMATRIX tempMat;
-		D3DXMatrixScaling(&tempMat, 1 / TargetRadius, 1 / TargetRadius, 1.0f);
-		D3DXVec3TransformCoord(&tempMouse, &tempMouse, &tempMat);
-		D3DXVec3TransformCoord(&tempCenter, &tempCenter, &tempMat);
-
-		D3DXVECTOR3 tempDirection;
-		g_pD3DDevice->GetViewport(&tempViewPort);
-		g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &invProj);
-		g_pD3DDevice->GetTransform(D3DTS_VIEW, &invView);
-		D3DXVec3Unproject(&tempMouse, &tempMouse, &tempViewPort, &invProj, &invView, &tempMat1);
-		D3DXVec3Unproject(&tempCenter, &tempCenter, &tempViewPort, &invProj, &invView, &tempMat1);
-		tempDirection = tempMouse - tempCenter;
-		D3DXVec3Normalize(&tempDirection, &tempDirection);
-		
-		tempEye = g_pCameraManager->GetCameraEye();
-		D3DXMATRIX tempMatEye;
-		D3DXMatrixTranslation(&tempMatEye, -position.x, -position.y, -position.z);
-		D3DXVec3TransformCoord(&tempEye, &tempEye, &tempMatEye);
-
-		D3DXIntersect(m_pSphere,
-			&tempEye,
-			&tempDirection,
-			&isIntersect, &face,
-			&u, &v, &f, NULL, NULL);
-*/
 		position.y = 5000.0f;
 		tempPosition.y = 5000.0f;
 		if (D3DXVec3Length(&(tempPosition - position)) < TargetRadius)
@@ -527,6 +493,51 @@ D3DXVECTOR3 cCollisionManager::getRayPosition(int& isIntersect, D3DXVECTOR3 posi
 	tempPosition = g_pCameraManager->GetCameraEye() + m_vDirection * f;
 	tempPosition = g_pCollisionManager->SetHeight(tempPosition);
 	return tempPosition;
+}
+
+D3DXVECTOR3 cCollisionManager::getRayPosition(int & isIntersect, D3DXVECTOR3 position, LPD3DXMESH TargetSphere, float TargetRadius)
+{
+	POINT ptMouse;
+	GetCursorPos(&ptMouse);
+	ScreenToClient(g_hWnd, &ptMouse);
+	D3DXMATRIX tempMat;
+	D3DXMatrixIdentity(&tempMat);
+	D3DXVECTOR3 tempMouse((float)ptMouse.x, (float)ptMouse.y, 1.0f);
+	D3DXVECTOR3 tempCenter((float)ptMouse.x, (float)ptMouse.y, 0.0f);
+
+	D3DXVECTOR3 m_vDirection;
+	D3DXMATRIX Proj, View;
+	D3DVIEWPORT9 ViewPort;
+	g_pD3DDevice->GetViewport(&ViewPort);
+	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &Proj);
+	g_pD3DDevice->GetTransform(D3DTS_VIEW, &View);
+	D3DXVec3Unproject(&tempMouse, &tempMouse, &ViewPort, &Proj, &View, &tempMat);
+	D3DXVec3Unproject(&tempCenter, &tempCenter, &ViewPort, &Proj, &View, &tempMat);
+	m_vDirection = tempMouse - tempCenter;
+	D3DXVec3Normalize(&m_vDirection, &m_vDirection);
+
+	float u, v, f;
+	DWORD face;
+	if (TargetSphere)
+	{
+		D3DXVECTOR3 tempEye = g_pCameraManager->GetCameraEye();
+		D3DXMATRIX tempMatEye;
+		D3DXMatrixTranslation(&tempMatEye, -position.x, -position.y - TargetRadius, -position.z);
+		D3DXVec3TransformCoord(&tempEye, &tempEye, &tempMatEye);
+
+		D3DXIntersect(TargetSphere,
+			&tempEye,
+			&m_vDirection,
+			&isIntersect, &face,
+			&u, &v, &f, NULL, NULL);
+	}
+	int tempBool = 0;
+	D3DXIntersect(m_pMapMesh,
+		&g_pCameraManager->GetCameraEye(),
+		&m_vDirection,
+		&tempBool, &face,
+		&u, &v, &f, NULL, NULL);
+	return g_pCameraManager->GetCameraEye() + m_vDirection * f;
 }
 
 D3DXVECTOR3 cCollisionManager::NextPositionPerTick(D3DXVECTOR3 position, D3DXVECTOR3 nextposition, float speed)
