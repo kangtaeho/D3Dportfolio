@@ -30,14 +30,10 @@ struct STCIRCLE
 		WorldMatrix = WorldMatrix * matView * matProj * matViewPort;
 		D3DXVec3TransformCoord(&tempposition, &tempposition, &WorldMatrix);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 		g_pFontManager->TextFont(tempposition.x, tempposition.y, D3DXVECTOR3(255, 0, 255), "radius : %f", fRadius);
 		g_pFontManager->TextFont(tempposition.x, tempposition.y + 20, D3DXVECTOR3(255, 0, 255), "position : %f, %f", mPosition.x, mPosition.z);
-=======
->>>>>>> 4cf02ca6945bd55248615b80adc7cc3b156ca955
-=======
->>>>>>> 4cf02ca6945bd55248615b80adc7cc3b156ca955
+
 	}
 };
 

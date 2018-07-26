@@ -27,18 +27,12 @@ void cPlayer::Setup(const char* name)
 	m_fATKSpeed = 50;
 
 	cCharacter::Setup(name);
-<<<<<<< HEAD
-<<<<<<< HEAD
-	g_pSkillManager->AddSkill("평타", RANGE_SKILL, 100, m_fRange, 20.0f, 0.5f, 3.0f, 20, true);
-	g_pSkillManager->AddSkill("r", OBJECT_SKILL, 100, 500, 10.0f, 0.5f, 10.0f, 10, true, "BantamTrap");
-	g_pSkillManager->GetSkill("r")->SetPlayer(this);   // 테두리 때문에
-=======
-=======
->>>>>>> 4cf02ca6945bd55248615b80adc7cc3b156ca955
+
+
 	g_pSkillManager->AddSkill("평타", RANGE_SKILL, 80, m_fRange, 20.0f, 0.3f, 2.5f, 20, true);
 	g_pSkillManager->AddSkill("r", OBJECT_SKILL, 100, 500, 10.0f, 0.5f, 20.0f, 40, true, "BantamTrap");
 	g_pSkillManager->GetSkill("r")->SetPlayer(this);	// 테두리 때문에
->>>>>>> 4cf02ca6945bd55248615b80adc7cc3b156ca955
+
 	g_pSkillManager->AddSkill("w", BUFF_SKILL, 0, 0, 0, 0.5, 10, 10, false, NULL);
 	g_pSkillManager->GetSkill("w")->SetPlayer(this);
 	g_pSkillManager->GetSkill("w")->SetBuffType(MOVEUP);
@@ -121,15 +115,9 @@ void cPlayer::Check3DMousePointer()
 		SAFE_DELETE(m_pEnemyPos);
 
 		int isPick = 0;
-<<<<<<< HEAD
-<<<<<<< HEAD
-		m_vNextPosition = g_pCollisionManager->getRayPosition(isPick, m_pEnemy->getPosition(), m_pEnemy->GetRadius()); //포지션 받고   
-=======
+
 		m_vNextPosition = g_pCollisionManager->getRayPosition(isPick,m_pEnemy->getPosition(), m_pEnemy->getSphere()->m_pMesh, m_pEnemy->GetRadius()); //포지션 받고	
->>>>>>> 4cf02ca6945bd55248615b80adc7cc3b156ca955
-=======
-		m_vNextPosition = g_pCollisionManager->getRayPosition(isPick,m_pEnemy->getPosition(), m_pEnemy->getSphere()->m_pMesh, m_pEnemy->GetRadius()); //포지션 받고	
->>>>>>> 4cf02ca6945bd55248615b80adc7cc3b156ca955
+
 
 		m_pEnemyPos = new D3DXVECTOR3;
 		*m_pEnemyPos = m_vNextPosition;
@@ -159,15 +147,9 @@ void cPlayer::AttackEnemy(cCharacter* enemy)
 	SAFE_DELETE(m_pEnemyPos);
 
 	int isPick = 0;
-<<<<<<< HEAD
-<<<<<<< HEAD
-	m_vNextPosition = g_pCollisionManager->getRayPosition(isPick, enemy->getPosition(), enemy->GetRadius()); //포지션 받고
-=======
+
 	m_vNextPosition = g_pCollisionManager->getRayPosition(isPick, m_pEnemy->getPosition(), m_pEnemy->getSphere()->m_pMesh,enemy->GetRadius()); //포지션 받고
->>>>>>> 4cf02ca6945bd55248615b80adc7cc3b156ca955
-=======
-	m_vNextPosition = g_pCollisionManager->getRayPosition(isPick, m_pEnemy->getPosition(), m_pEnemy->getSphere()->m_pMesh,enemy->GetRadius()); //포지션 받고
->>>>>>> 4cf02ca6945bd55248615b80adc7cc3b156ca955
+
 
 	if (isPick)
 	{

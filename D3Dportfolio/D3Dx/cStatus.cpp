@@ -584,6 +584,8 @@ void cStatus::update()
 	{
 		for (auto p : m_mapStatusSkillInfo)
 		{
+			if (CurrentMp < 20)continue;
+
 			if (p.first == "e" && m_bSelected != true)
 			{
 				if (p.second->GetChosen() == true) continue;
@@ -591,10 +593,11 @@ void cStatus::update()
 				p.second->SetChosen(true);
 				p.second->GetskillInfo()->Setalphavalue(100);
 				m_bSelected = true;
+				UsedMp = 20;
+				g_pSkillManager->IsReady("e");
 			}
 
 		}
-		g_pSkillManager->IsReady("e");
 	}
 	if (g_pKeyManager->IsOnceKeyDown('R'))
 	{
@@ -616,6 +619,18 @@ void cStatus::update()
 		}
 	}
 
+	if (g_pSkillManager->GetSkill("e")->IsUsingSkill())
+	{
+		m_bIsUsed = true;
+		m_bCheckMpBar = true;
+		m_bUsedSkill = true;
+		m_bSelected = false;
+
+		for (auto p : m_mapStatusSkillInfo)
+		{
+			if (p.first == "e")p.second->SetUsing(true);
+		}
+	}
 	if (g_pSkillManager->GetSkill("r")->IsUsingSkill())
 	{
 		m_bIsUsed = true;
