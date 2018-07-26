@@ -24,7 +24,7 @@ void cPlayer::Setup(const char* name)
 	m_fMP = 250;
 
 	cCharacter::Setup(name);
-	g_pSkillManager->AddSkill("평타", RANGE_SKILL, 100, m_fRange, 20.0f, 0.5f, 3.0f, 20, true);
+	g_pSkillManager->AddSkill("평타", RANGE_SKILL, 80, m_fRange, 20.0f, 0.3f, 2.5f, 20, true);
 	g_pSkillManager->AddSkill("r", OBJECT_SKILL, 100, 500, 10.0f, 0.5f, 10.0f, 10, true, "BantamTrap");
 	g_pSkillManager->GetSkill("r")->SetPlayer(this);	// 테두리 때문에
 	g_pSkillManager->AddSkill("w", BUFF_SKILL, 0, 0, 0, 0.5, 10, 10, false, NULL);
@@ -105,7 +105,7 @@ void cPlayer::Check3DMousePointer()
 		SAFE_DELETE(m_pEnemyPos);
 
 		int isPick = 0;
-		m_vNextPosition = g_pCollisionManager->getRayPosition(isPick, m_pEnemy->getPosition(), m_pEnemy->GetRadius()); //포지션 받고	
+		m_vNextPosition = g_pCollisionManager->getRayPosition(isPick,m_pEnemy->getPosition(), m_pEnemy->getSphere()->m_pMesh, m_pEnemy->GetRadius()); //포지션 받고	
 
 		m_pEnemyPos = new D3DXVECTOR3;
 		*m_pEnemyPos = m_vNextPosition;
@@ -135,7 +135,7 @@ void cPlayer::AttackEnemy(cCharacter* enemy)
 	SAFE_DELETE(m_pEnemyPos);
 
 	int isPick = 0;
-	m_vNextPosition = g_pCollisionManager->getRayPosition(isPick, enemy->getPosition(),enemy->GetRadius()); //포지션 받고
+	m_vNextPosition = g_pCollisionManager->getRayPosition(isPick, m_pEnemy->getPosition(), m_pEnemy->getSphere()->m_pMesh,enemy->GetRadius()); //포지션 받고
 
 	if (isPick)
 	{

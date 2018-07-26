@@ -167,3 +167,7 @@ cSkill* cSkillManager::GetSkill(std::string skillName)
 
 	return m_mapSkill[skillName];
 }
+
+void cSkillManager::RegisterVecEnemy(std::vector<cCharacter*>* vecEnemy)
+{
+}

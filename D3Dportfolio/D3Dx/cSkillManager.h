@@ -42,5 +42,7 @@ public:
 	void CancelSkill();
 	cSkill* GetSkill(std::string skillName);
 
+	void RegisterVecEnemy(std::vector<cCharacter*>* vecEnemy);
+
 };
 

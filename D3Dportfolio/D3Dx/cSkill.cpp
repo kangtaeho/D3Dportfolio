@@ -157,6 +157,7 @@ void cSkill::MeshMove()
 		D3DXVec3Normalize(&dir, &dir);
 
 		m_vecMesh[i].pos += dir*m_fPosSpeed;
+		m_vecMesh[i].pos = g_pCollisionManager->SetHeight(m_vecMesh[i].pos);
 
 	}
 }
@@ -330,7 +331,7 @@ void cSkill::CreateMesh()
 		if (m_pMesh)
 		{
 			OBJECT_MESH mesh;
-			mesh.pos = m_vPos;
+			mesh.pos = *m_pPlayerPos;
 			mesh.target = *m_pTargetPos;
 			mesh.removeTime = 0;
 			mesh.startTime = g_pTimeManager->GetLastUpdateTime();
