@@ -15,6 +15,7 @@ cEnemy::~cEnemy()
 
 void cEnemy::Setup(const char * name, bool Blue)
 {
+	m_bLive = true;
 	// 테스트용입니다
 	m_fRadius = 30;
 	m_fHP = 100;
@@ -52,7 +53,7 @@ void cEnemy::Setup(const char * name, bool Blue)
 	D3DXCreateSphere(g_pD3DDevice, m_fRadius, 10, 10, &m_pSphere, NULL);
 
 	m_pAttack = new cRangeSkill;
-	m_pAttack->Setup(RANGE_SKILL, 20, 100, 20, 2, 0, 10, true, NULL);
+	m_pAttack->Setup(RANGE_SKILL, 20, 100, 20, 3, 0, 10, true, NULL);
 
 }
 
@@ -76,7 +77,7 @@ void cEnemy::Update()
 	{
 		for (int tempEnemy = 0; tempEnemy < m_vecAllEnemy->size(); ++tempEnemy)
 		{
-			if (D3DXVec3Length(&((*m_vecAllEnemy)[tempEnemy]->getPosition() - m_vPosition)) < m_fSite)
+			if (D3DXVec3Length(&((*m_vecAllEnemy)[tempEnemy]->getPosition() - m_vPosition)) < m_fSite && ((cEnemy*)(*m_vecAllEnemy)[tempEnemy])->GetHP() > 0)
 			{
 				m_pEnemy = (*m_vecAllEnemy)[tempEnemy];
 
@@ -84,9 +85,18 @@ void cEnemy::Update()
 			}
 		}
 	}
+	else
+	{
+		if (m_pEnemy->GetHP() <= 0)m_pEnemy = NULL;
+	}
 	D3DXVECTOR3* tempEnemyPosition = NULL;
 	if (m_pEnemy)tempEnemyPosition = m_pEnemy->getPositionPointer();
-	if (m_AStar.UpdateForEnemy(m_vPosition, m_vNextPosition, m_fRotY, m_fSpeed, m_fRadius, m_fRange, tempEnemyPosition, 0))setAnimation("Run");
+	if (m_fHP <= 0)
+	{
+		setAnimation("Death", false);
+		if (EndAnimation())m_bLive = false;
+	}
+	else if (m_AStar.UpdateForEnemy(m_vPosition, m_vNextPosition, m_fRotY, m_fSpeed, m_fRadius, m_fRange, tempEnemyPosition, 0))setAnimation("Run");
 	else if(m_pEnemy)
 	{
 		m_pAttack->SetIsReady(true);

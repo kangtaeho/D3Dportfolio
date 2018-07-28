@@ -185,7 +185,7 @@ void cObjectManager::Update()
 
 	for (int i = 0; i < m_vecMinion.size(); ++i)
 	{
-		if (m_vecMinion[i]->GetHP() <= 0)
+		if (!((cEnemy*)m_vecMinion[i])->getLive())
 		{
 			SAFE_DELETE(m_vecMinion[i]);
 			m_vecMinion.erase(m_vecMinion.begin() + i);

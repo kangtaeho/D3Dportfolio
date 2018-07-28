@@ -14,6 +14,8 @@ private:
 	cCharacter* m_pEnemy;
 	float m_fSite;
 
+	bool m_bLive;
+
 	cRangeSkill* m_pAttack;
 
 	SYNTHESIZE(bool, m_fBlue, Blue)
@@ -32,5 +34,6 @@ public:
 	void setGoLine(std::vector<int> GoLine) { m_vecGoLine = GoLine; }
 	void setCircleLine(STCollisionMapTool AllCircleLine) { m_stAllCircleLine = AllCircleLine; }
 	void setEnemy(std::vector<cCharacter*>* vecAllEnemy) { m_vecAllEnemy = vecAllEnemy; }
+	bool getLive() { return m_bLive; }
 };
 
