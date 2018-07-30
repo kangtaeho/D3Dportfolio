@@ -20,7 +20,7 @@ bool cAStar::Update(D3DXVECTOR3& position, D3DXVECTOR3 NextPosition, float & rot
 		if (D3DXVec3Length(&(tempnextposition)) > fRange)
 		{
 			D3DXVec3Normalize(&tempnextposition, &tempnextposition);
-			tempnextposition *= fRange;
+			tempnextposition *= (fRange - 10);
 			NextPosition = *pEnemyPos + tempnextposition;
 		}
 	}

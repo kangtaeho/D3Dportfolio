@@ -79,28 +79,26 @@ void cObject::Update()
 		{
 			FullName += "Red";
 		}
-		m_pSkinnedMesh = g_pXfileManager->FindXfile(FullName.c_str());
+		if (m_pSkinnedMesh != g_pXfileManager->FindXfile(FullName.c_str()))
+		{
+			m_pSkinnedMesh = g_pXfileManager->FindXfile(FullName.c_str());
+			m_pSkinnedMesh->CloneAniController(&m_pAnimController);
+		}
 
-		if (m_eState == IDLE)
+		if (m_fHP > 600)
 		{
 			setAnimation("Idle", false, 1.0f);
 		}
-		else if (m_fHP > 300 && m_eState == IDLE)
+		else if (m_fHP > 300)
 		{
-			m_pSkinnedMesh->CloneAniController(&m_pAnimController);
-			m_eState = SKILL1;
 			setAnimation("Crush", false, 1.0f);
 		}
-		else if (m_fHP > 0 && m_eState == SKILL1)
+		else if (m_fHP > 0)
 		{
-			m_pSkinnedMesh->CloneAniController(&m_pAnimController);
-			m_eState = SKILL2;
 			setAnimation("Crush", false, 1.0f);
 		}
-		else if(m_fHP <= 0 && m_eState == SKILL2)
+		else if(m_fHP <= 0)
 		{
-			m_pSkinnedMesh->CloneAniController(&m_pAnimController);
-			m_eState = SKILL3;
 			setAnimation("Crush", false, 1.0f);
 		}
 	}
@@ -154,4 +152,14 @@ void cObject::Render()
 	//애니메이션을 넣을때 cAction을 상속받은 후 아래처럼 사용
 	UpdateAnimation();
 	m_pSkinnedMesh->Update(m_pAnimController);
+
+	g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+
+	g_pD3DDevice->SetTexture(0, NULL);
+	m_matWorld = matR * matT;
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	m_pSphere->DrawSubset(0);
+
+	g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+
 }

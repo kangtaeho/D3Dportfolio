@@ -153,6 +153,23 @@ void cObjectManager::Update()
 			m_vecAllEnemy.push_back(m_vecObject[i]);
 		}
 	}
+	for (int i = 0; i < m_vecMinion.size(); ++i)
+	{
+		if (!((cEnemy*)m_vecMinion[i])->getLive())
+		{
+			SAFE_DELETE(m_vecMinion[i]);
+			m_vecMinion.erase(m_vecMinion.begin() + i);
+		}
+		if (((cEnemy*)m_vecMinion[i])->GetBlue())
+		{
+			m_vecAllBlue.push_back(m_vecMinion[i]);
+		}
+		else
+		{
+			m_vecAllEnemy.push_back(m_vecMinion[i]);
+		}
+	}
+
 	for (int i = 0; i < m_vecObject.size(); ++i)
 	{
 		m_vecObject[i]->Update();
@@ -183,22 +200,6 @@ void cObjectManager::Update()
 		MinionTimeCount = 0.0f;
 	}
 
-	for (int i = 0; i < m_vecMinion.size(); ++i)
-	{
-		if (!((cEnemy*)m_vecMinion[i])->getLive())
-		{
-			SAFE_DELETE(m_vecMinion[i]);
-			m_vecMinion.erase(m_vecMinion.begin() + i);
-		}
-		if (((cEnemy*)m_vecMinion[i])->GetBlue())
-		{
-			m_vecAllBlue.push_back(m_vecMinion[i]);
-		}
-		else
-		{
-			m_vecAllEnemy.push_back(m_vecMinion[i]);
-		}
-	}
 	for (int i = 0; i < m_vecMinion.size(); ++i)
 	{
 		((cEnemy*)m_vecMinion[i])->Update();

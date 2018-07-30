@@ -6,8 +6,6 @@ class cRangeSkill;
 class cEnemy : public cCharacter
 {
 private:
-	LPD3DXMESH m_pSphere;
-	STCIRCLE m_pCircle;
 	std::vector<int> m_vecGoLine;
 	STCollisionMapTool m_stAllCircleLine;
 	std::vector<cCharacter*>* m_vecAllEnemy;
@@ -19,6 +17,10 @@ private:
 	cRangeSkill* m_pAttack;
 
 	SYNTHESIZE(bool, m_fBlue, Blue)
+
+protected:
+	LPD3DXMESH m_pSphere;
+	STCIRCLE m_pCircle;
 
 public:
 	cEnemy();

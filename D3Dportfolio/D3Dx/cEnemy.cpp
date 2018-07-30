@@ -22,7 +22,7 @@ void cEnemy::Setup(const char * name, bool Blue)
 	m_vPosition = m_AStar.PushDestination(m_vPosition, m_fRadius); //만약에 충돌을 받으면 밀어낸다
 	m_vPosition = g_pCollisionManager->SetHeight(m_vPosition);
 																   // 테스트용입니다
-	m_fSpeed = 5.0f;
+	m_fSpeed = 3.0f;
 	m_fRange = 80.0f;
 	m_fBlue = Blue;
 
@@ -53,7 +53,6 @@ void cEnemy::Setup(const char * name, bool Blue)
 	D3DXCreateSphere(g_pD3DDevice, m_fRadius, 10, 10, &m_pSphere, NULL);
 
 	m_pAttack = new cRangeSkill;
-	m_pAttack->Setup(RANGE_SKILL, 20, 100, 20, 3, 0, 10, true, NULL);
 
 }
 
@@ -67,10 +66,12 @@ void cEnemy::Update()
 	SpherePosition.y += m_fRadius;
 	m_pCircle.mPosition = m_vPosition;
 	if (m_vecGoLine.size())
-		m_vNextPosition = m_stAllCircleLine.vecCircle[m_vecGoLine.front()]->mPosition;
-	if (g_pCollisionManager->NextTickInCircle(m_vPosition, m_fRadius, m_stAllCircleLine.vecCircle[m_vecGoLine.front()]->mPosition, m_stAllCircleLine.vecCircle[m_vecGoLine.front()]->fRadius))
 	{
-		m_vecGoLine.erase(m_vecGoLine.begin());
+		m_vNextPosition = m_stAllCircleLine.vecCircle[m_vecGoLine.front()]->mPosition;
+		if (g_pCollisionManager->NextTickInCircle(m_vPosition, m_fRadius, m_stAllCircleLine.vecCircle[m_vecGoLine.front()]->mPosition, m_stAllCircleLine.vecCircle[m_vecGoLine.front()]->fRadius))
+		{
+			m_vecGoLine.erase(m_vecGoLine.begin());
+		}
 	}
 
 	if (!m_pEnemy)
@@ -99,6 +100,7 @@ void cEnemy::Update()
 	else if (m_AStar.UpdateForEnemy(m_vPosition, m_vNextPosition, m_fRotY, m_fSpeed, m_fRadius, m_fRange, tempEnemyPosition, 0))setAnimation("Run");
 	else if(m_pEnemy)
 	{
+		m_pAttack->Setup(RANGE_SKILL, 10, 100 + m_pEnemy->GetRadius(), 20, 3, 0, 10, true, NULL);
 		m_pAttack->SetIsReady(true);
 		m_pAttack->Fire(&m_vPosition, m_pEnemy->getPositionPointer(), m_pEnemy, false);
 		setAnimation("Attack");
