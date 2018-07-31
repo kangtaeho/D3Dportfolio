@@ -66,6 +66,12 @@ void cObjectManager::Setup()
 			temp->getCirclePointer()->fRadius = radius;
 			temp->getCirclePointer()->mPosition = position;
 
+			temp->setEnemy(&m_vecAllEnemy);
+			if (!blue)
+			{
+				temp->setEnemy(&m_vecAllBlue);
+			}
+
 			m_vecObject.push_back(temp);
 		}
 		else if (szTemp[0] == 'C')
@@ -194,7 +200,7 @@ void cObjectManager::Update()
 	m_vecAllBlue.push_back(m_pPlayer);
 	for (int i = 0; i < m_vecObject.size(); ++i)
 	{
-		m_vecObject[i]->Update();
+		((cObject*)m_vecObject[i])->Update();
 		m_vecALLObjectCircle.push_back(((cObject*)m_vecObject[i])->getCirclePointer());
 	}
 
