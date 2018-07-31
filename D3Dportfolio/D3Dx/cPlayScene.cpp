@@ -107,6 +107,7 @@ HRESULT cPlayScene::Setup()
 	m_pEnemyManager->Setup();
 	m_pEnemyManager->setLinkPlayer(m_pPlayer);
 	m_pPlayer->SetVecEnemy(m_pEnemyManager->getAllEnemy());
+	m_pPlayer->SkillRegisterTarget();
 
 	return S_OK;
 }

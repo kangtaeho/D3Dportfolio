@@ -258,20 +258,21 @@ void cSkill::RemoveMeshTime()
 	for (int i = 0; i < m_vecMesh.size(); i++)
 	{
 		m_vecMesh[i].removeTime += g_pTimeManager->GetElapsedTime();
-		
+
 		if (m_pVecEnemy)
 		{
 			for (int j = 0; j < m_pVecEnemy->size(); j++)
 			{
 				if (D3DXVec3Length(&(m_vecMesh[i].pos - (*m_pVecEnemy)[j]->getPosition())) < 60)
 				{
+					(*m_pVecEnemy)[j]->SetHP((*m_pVecEnemy)[j]->GetHP() - m_fDamage);
 					SAFE_DELETE(m_vecMesh[i].animation);
 					m_vecMesh.erase(m_vecMesh.begin() + i);
-					continue;
+					return;
 				}
 			}
 		}
-			
+	
 		if (m_vecMesh[i].removeTime > m_fRemoveTime)
 		{
 			SAFE_DELETE(m_vecMesh[i].animation);
@@ -538,7 +539,7 @@ void cSkill::RenderAOEMesh()
 			D3DXMATRIX	matS, matT;
 
 			D3DXMatrixScaling(&matS, m_fRange, 1, m_fRange);
-			D3DXMatrixTranslation(&matT, m_pPlayer->getPosition().x, m_pPlayer->getPosition().y, m_pPlayer->getPosition().z);
+			D3DXMatrixTranslation(&matT, m_pPlayer->getPosition().x, m_pPlayer->getPosition().y+5, m_pPlayer->getPosition().z);
 
 			matAOEWorld = matS*matT;
 
@@ -555,7 +556,7 @@ void cSkill::RenderAOEMesh()
 				D3DXVECTOR3 p = g_pCollisionManager->getRayPosition(isPick);
 
 				D3DXMatrixScaling(&matS, s_AoeMesh->pointScale, 1, s_AoeMesh->pointScale);
-				D3DXMatrixTranslation(&matT, p.x, p.y, p.z);
+				D3DXMatrixTranslation(&matT, p.x, p.y+7, p.z);
 
 				matPointWorld = matS*matT;
 

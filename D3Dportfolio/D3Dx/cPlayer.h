@@ -36,5 +36,5 @@ public:
 	void AttackEnemy(cCharacter* enemy);
 
 	void SetVecEnemy(std::vector<cCharacter*>* vecEnemy) { m_pVecEnemy = vecEnemy; }
-
+	void SkillRegisterTarget(){ g_pSkillManager->RegisterVecEnemy(m_pVecEnemy); }
 };

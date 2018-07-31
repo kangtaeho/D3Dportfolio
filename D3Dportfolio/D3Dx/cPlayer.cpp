@@ -43,15 +43,6 @@ void cPlayer::Setup(const char* name)
 	g_pSkillManager->AddSkill("e", TOXIC_SKILL, 50, 400, 20.0f, 0.5, 10.0f, 10, true);
 	g_pSkillManager->GetSkill("e")->SetPlayer(this);
 
-	//m_pSphere = new cSphere;
-	//m_pSphere->Setup(D3DXVECTOR3(200, 5000, 200), 100);
-	//
-	//m_pEnemy = new cEnemy;
-	//m_pEnemy->Setup("order_minion_caster_", 0);
-
-	//m_vecEnemy.push_back(m_pEnemy);
-	//m_pVecEnemy = &m_vecEnemy;
-	g_pSkillManager->RegisterVecEnemy(m_pVecEnemy);
 	m_fRespwan = 0.0f;
 }
 
