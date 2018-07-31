@@ -1,5 +1,3 @@
-summoner rift
-summoner_rift
 character
 BantamTrap
 character

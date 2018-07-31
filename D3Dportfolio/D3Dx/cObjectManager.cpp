@@ -246,8 +246,8 @@ void cObjectManager::Render()
 
 bool cObjectManager::getNexusLiving(bool Blue)
 {
-	cCharacter* tempNexus;
-	std::string tempName;
+	cCharacter* tempNexus = NULL;
+	std::string tempName = NULL;
 
 	for (int i = 0; i < m_vecObject.size(); ++i)
 	{

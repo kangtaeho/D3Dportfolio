@@ -19,7 +19,7 @@ cPlayer::~cPlayer()
 void cPlayer::Setup(const char* name)
 {
 	m_fRange = 400;
-	m_fSpeed = 10.0f;
+	m_fSpeed = 7.0f;
 	m_fMAXHP = 300;
 	m_fMAXMP = 250;
 	m_fHP = 300;
@@ -145,7 +145,12 @@ void cPlayer::Check3DMousePointer()
 		for (int i = 0; i < m_pVecEnemy->size(); ++i)
 		{
 			m_vNextPosition = g_pCollisionManager->getRayPosition(isPick, (*m_pVecEnemy)[i]->getPosition(), ((cEnemy*)(*m_pVecEnemy)[i])->getSphere(), (*m_pVecEnemy)[i]->GetRadius()); //포지션 받고	
-			if (isPick)break;
+
+			if (isPick)
+			{
+				m_pEnemy = (cEnemy*)(*m_pVecEnemy)[i];
+				break;
+			}
 		}
 		
 

@@ -263,7 +263,7 @@ void cSkill::RemoveMeshTime()
 		{
 			for (int j = 0; j < m_pVecEnemy->size(); j++)
 			{
-				if (D3DXVec3Length(&(m_vecMesh[i].pos - (*m_pVecEnemy)[j]->getPosition())) < 20)
+				if (D3DXVec3Length(&(m_vecMesh[i].pos - (*m_pVecEnemy)[j]->getPosition())) < 60)
 				{
 					SAFE_DELETE(m_vecMesh[i].animation);
 					m_vecMesh.erase(m_vecMesh.begin() + i);
@@ -321,6 +321,7 @@ void cSkill::CreateMesh()
 		m_pCube->Setup(D3DXVECTOR3(20.0, 20.0, 50.0), NULL);
 		D3DXMATRIX matR, matT;
 		D3DXMatrixRotationY(&matR, m_fRotY);
+		m_vPos = *m_pPlayerPos;
 		//  플레이어 위치에 바로 큐브생성
 		D3DXMatrixTranslation(&matT, m_vPos.x, m_vPos.y, m_vPos.z);
 		m_matWorld = matR*matT;
@@ -331,7 +332,7 @@ void cSkill::CreateMesh()
 		if (m_pMesh)
 		{
 			OBJECT_MESH mesh;
-			mesh.pos = m_vPos;
+			mesh.pos = *m_pPlayerPos;
 			mesh.target = *m_pTargetPos;
 			mesh.removeTime = 0;
 			mesh.startTime = g_pTimeManager->GetLastUpdateTime();
@@ -376,7 +377,7 @@ void cSkill::BuffStart()
 	switch (e_BuffType)
 	{
 	case MOVEUP:
-		m_pPlayer->SetSpeed(m_pPlayer->GetSpeed()*5.0f);
+		m_pPlayer->SetSpeed(m_pPlayer->GetSpeed()*2.0f);
 		break;
 	case DAMAGEUP:
 		break;
@@ -396,7 +397,7 @@ void cSkill::BuffEnd()
 		switch (e_BuffType)
 		{
 		case MOVEUP:
-			m_pPlayer->SetSpeed(m_pPlayer->GetSpeed() / 5.0f);
+			m_pPlayer->SetSpeed(m_pPlayer->GetSpeed() / 2.0f);
 			break;
 		case DAMAGEUP:
 			break;
