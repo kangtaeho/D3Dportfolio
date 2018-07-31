@@ -45,12 +45,14 @@ void cLoadingScene::LoadingData()
 {
 
 	int fullFath, loadFath;
+	int fullFath1, loadFath1;
 
 	for(int i=0; i<100; i++) g_pCollisionManager->Setup(fullFath, loadFath);
-	m_fCurrentData = ((float)loadFath / (float)fullFath) * 100.0;
-
 	
-	if (loadFath == fullFath)
+	g_pXfileManager->Setup(fullFath1, loadFath1);
+	m_fCurrentData = ((float)(loadFath + loadFath1) / (float)(fullFath + fullFath1)) * 100.0;
+	
+	if (m_fCurrentData >= 100.0f)
 	{
 		g_pSceneManager->ChangeScene("ÇÃ·¹ÀÌ¾À");
 	}

@@ -25,7 +25,7 @@ private:
 
 	bool m_bIsMoveWindow;
 public:
-
+	void setCameraPos(D3DXVECTOR3 lookat) { m_fCameraPosX = lookat.x; m_fCameraPosZ = lookat.z; }
 
 	void Setup();
 	void Update();

@@ -2,6 +2,7 @@
 #include "cObjectManager.h"
 #include "cObject.h"
 #include "cEnemy.h"
+#include "cPlayer.h"
 
 
 cObjectManager::cObjectManager()
@@ -127,6 +128,25 @@ void cObjectManager::Setup()
 		tempCountount++;
 	}
 	MinionTimeCount = 0.0f;
+
+	for (int i = 0; i < 2; ++i)
+	{
+		cEnemy* tempEnemy = new cEnemy;
+		tempEnemy->SetRadius(10.0f);
+		*tempEnemy->getPositionPointer() = m_stMinionLine.vecCircle[m_vecMinionLineIndex[1].front()]->mPosition;
+		tempEnemy->setEnemy(&m_vecAllEnemy);
+		if (!i)
+		{
+			*tempEnemy->getPositionPointer() = m_stMinionLine.vecCircle[m_vecMinionLineIndex[1].back()]->mPosition;
+			tempEnemy->setEnemy(&m_vecAllBlue);
+		}
+		tempEnemy->setGoLine(m_vecMinionLineIndex[1]);
+		tempEnemy->setCircleLine(m_stMinionLine);
+		tempEnemy->Setup("Order_Minion_Melee_", i);
+
+		m_vecMinion.push_back(tempEnemy);
+	}
+	MinionTimeCount = 0.0f;
 }
 
 void cObjectManager::Release()
@@ -159,6 +179,7 @@ void cObjectManager::Update()
 		{
 			SAFE_DELETE(m_vecMinion[i]);
 			m_vecMinion.erase(m_vecMinion.begin() + i);
+			i = 0;
 		}
 		if (((cEnemy*)m_vecMinion[i])->GetBlue())
 		{
@@ -170,6 +191,7 @@ void cObjectManager::Update()
 		}
 	}
 
+	m_vecAllBlue.push_back(m_pPlayer);
 	for (int i = 0; i < m_vecObject.size(); ++i)
 	{
 		m_vecObject[i]->Update();
@@ -178,7 +200,7 @@ void cObjectManager::Update()
 
 	MinionTimeCount += g_pTimeManager->GetElapsedTime();
 
-	if (MinionTimeCount > 10)
+	if (MinionTimeCount > 10)// && m_vecMinion.size() < 2)
 	{
 		for (int i = 0; i < 2; ++i)
 		{
@@ -220,4 +242,25 @@ void cObjectManager::Render()
 	{
 		((cEnemy*)m_vecMinion[i])->Render();
 	}
+}
+
+bool cObjectManager::getNexusLiving(bool Blue)
+{
+	cCharacter* tempNexus;
+	std::string tempName;
+
+	for (int i = 0; i < m_vecObject.size(); ++i)
+	{
+		tempName = ((cObject*)m_vecObject[i])->getName();
+		if (tempName.c_str()[5] == 'N')
+		{
+			if (((cObject*)m_vecObject[i])->GetBlue() == Blue)
+			{
+				tempNexus = m_vecObject[i];
+			}
+		}
+	}
+	if (tempNexus->GetHP() > 0)return true;
+
+	return false;
 }

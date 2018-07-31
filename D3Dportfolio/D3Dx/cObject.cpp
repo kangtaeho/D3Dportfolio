@@ -153,13 +153,13 @@ void cObject::Render()
 	UpdateAnimation();
 	m_pSkinnedMesh->Update(m_pAnimController);
 
-	g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-
-	g_pD3DDevice->SetTexture(0, NULL);
-	m_matWorld = matR * matT;
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-	m_pSphere->DrawSubset(0);
-
-	g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+	//g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+	//
+	//g_pD3DDevice->SetTexture(0, NULL);
+	//m_matWorld = matR * matT;
+	//g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	//m_pSphere->DrawSubset(0);
+	//
+	//g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 
 }

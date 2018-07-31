@@ -36,7 +36,9 @@ protected:
 
 	SYNTHESIZE(float, m_fSpeed, Speed);
 	SYNTHESIZE(float, m_fRadius, Radius);
-
+	
+	SYNTHESIZE(float, m_fMAXHP, MAXHP);
+	SYNTHESIZE(float, m_fMAXMP, MAXMP);
 	SYNTHESIZE(float, m_fHP, HP);
 	SYNTHESIZE(float, m_fMP, MP);
 	SYNTHESIZE(float, m_fATK, ATK);

@@ -16,6 +16,8 @@ private:
 
 	cRangeSkill* m_pAttack;
 
+	bool m_bAttack;
+
 	SYNTHESIZE(bool, m_fBlue, Blue)
 
 protected:
@@ -37,5 +39,6 @@ public:
 	void setCircleLine(STCollisionMapTool AllCircleLine) { m_stAllCircleLine = AllCircleLine; }
 	void setEnemy(std::vector<cCharacter*>* vecAllEnemy) { m_vecAllEnemy = vecAllEnemy; }
 	bool getLive() { return m_bLive; }
+	void setEnemy(cCharacter* enemy) { m_pEnemy = enemy; }
 };
 

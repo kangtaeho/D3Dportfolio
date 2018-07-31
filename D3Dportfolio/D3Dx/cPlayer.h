@@ -21,6 +21,8 @@ private:
 	// 테스트용 벡터
 	std::vector<cCharacter*> m_vecEnemy;
 
+	float m_fRespwan;
+
 public:
 	cPlayer();
 	~cPlayer();

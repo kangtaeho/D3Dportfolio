@@ -2,6 +2,7 @@
 
 class cObject;
 class cCharacter;
+class cPlayer;
 
 class cObjectManager
 {
@@ -15,6 +16,7 @@ private:
 	STCollisionMapTool		m_stMinionLine;
 
 	std::vector<int>	m_vecMinionLineIndex[3];
+	cPlayer* m_pPlayer;
 
 	float MinionTimeCount;
 
@@ -28,5 +30,7 @@ public:
 	void Render();
 
 	std::vector<cCharacter*>* getAllEnemy() { return &m_vecAllEnemy; }
+	void setLinkPlayer(cPlayer* player) { m_pPlayer = player; }
+	bool getNexusLiving(bool Blue);
 };
 

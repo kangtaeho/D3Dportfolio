@@ -16,15 +16,15 @@ cAction::~cAction()
 
 void cAction::SetAnimationIndex(int nIndex)
 {
-	int n = m_pAnimController->GetNumAnimationSets();
-	if (nIndex > n)	nIndex = nIndex % n;
+	int n = m_pAnimController->GetNumAnimationSets();		//최대 애니메이션 갯수 n에 받아오기
+	if (nIndex > n)	nIndex = nIndex % n;					//최대보다 크면 최대로 나머지
 
-	LPD3DXANIMATIONSET	pAniSet = NULL;
-	m_pAnimController->GetAnimationSet(nIndex, &pAniSet);
-	m_pAnimController->SetTrackAnimationSet(0, pAniSet);
-	m_pAnimController->SetTrackPosition(0, 0);
+	LPD3DXANIMATIONSET	pAniSet = NULL;						//애니메이션 정보 선언
+	m_pAnimController->GetAnimationSet(nIndex, &pAniSet);	//애니메이션 정보 가져오기
+	m_pAnimController->SetTrackAnimationSet(0, pAniSet);	//애니메이션 정보를 트랙에 넣어주기
+	m_pAnimController->SetTrackPosition(0, 0);				//애니메이션 시작 정보 넣어주기
 
-	SAFE_RELEASE(pAniSet);
+	SAFE_RELEASE(pAniSet);									//애니메이션 정보 삭제
 }
 
 int cAction::findAnimation(const char* name)
@@ -101,10 +101,27 @@ bool cAction::isNameAniPlaying(const char* name)
 	bool temp = false;
 	LPD3DXANIMATIONSET	pAniSet = NULL;
 
-	m_pAnimController->GetTrackAnimationSet(0, &pAniSet);
-	if (std::string(pAniSet->GetName()) == std::string(name) && !EndAnimation())temp = true;
+	m_pAnimController->GetTrackAnimationSet(0, &pAniSet);										//이름에 따른 애니메이션 정보 가져오기
+	if (std::string(pAniSet->GetName()) == std::string(name) && !EndAnimation())temp = true;	//이름이 같은지 확인 후 애니메이션이 끝났는지 확인
 
 	SAFE_RELEASE(pAniSet);
 
 	return temp;
+}
+
+bool cAction::MidAnimation()
+{
+	LPD3DXANIMATIONSET	pAniSet = NULL;
+	D3DXTRACK_DESC		desc;
+
+	m_pAnimController->GetTrackAnimationSet(0, &pAniSet);			//애니메이션 정보 가져오기
+	m_pAnimController->GetTrackDesc(0, &desc);						//현재 트랙 정보 가져오기
+	float period = pAniSet->GetPeriod() / desc.Speed;				//애니메이션의 전체 시간 / 트랙의 스피드
+	float current = fmod(desc.Position, period);					//현재 애니메이션이 흐른 시간을 나머지계산으로 구하기
+	float NowPer = current / period;								//현재 흐른 시간의 퍼센트
+	float tick = g_pTimeManager->GetElapsedTime() / period;			//흐른 값의 tick값
+
+	SAFE_RELEASE(pAniSet);
+
+	return NowPer - 0.5 > tick;										//1 - 현재 흐른 시간의 퍼센트가 흐른 값의 틱값보다 작은지, 작으면 끝난거다.
 }

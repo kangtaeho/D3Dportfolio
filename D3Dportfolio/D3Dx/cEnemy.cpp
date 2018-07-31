@@ -47,13 +47,14 @@ void cEnemy::Setup(const char * name, bool Blue)
 	cCharacter::Setup(FullName.c_str());
 	m_pCircle.fRadius = m_fRadius;
 	m_pCircle.mPosition = m_vPosition;
+	m_pCircle.iIndex = Blue;
 
 	m_pEnemy = NULL;
 	m_fSite = 300.0f;
 	D3DXCreateSphere(g_pD3DDevice, m_fRadius, 10, 10, &m_pSphere, NULL);
 
 	m_pAttack = new cRangeSkill;
-
+	m_bAttack = false;
 }
 
 void cEnemy::Release()
@@ -62,6 +63,10 @@ void cEnemy::Release()
 
 void cEnemy::Update()
 {
+	if (m_pEnemy)
+	{
+		if (D3DXVec3Length(&(m_pEnemy->getPosition() - m_vPosition)) > 800.0f)m_pEnemy = NULL;
+	}
 	D3DXVECTOR3 SpherePosition = m_vPosition;
 	SpherePosition.y += m_fRadius;
 	m_pCircle.mPosition = m_vPosition;
@@ -97,13 +102,20 @@ void cEnemy::Update()
 		setAnimation("Death", false);
 		if (EndAnimation())m_bLive = false;
 	}
-	else if (m_AStar.UpdateForEnemy(m_vPosition, m_vNextPosition, m_fRotY, m_fSpeed, m_fRadius, m_fRange, tempEnemyPosition, 0))setAnimation("Run");
+	else if (m_AStar.UpdateForEnemy(m_vPosition, m_vNextPosition, m_fRotY, m_fSpeed, m_fRadius, m_fRange, tempEnemyPosition, m_pEnemy))setAnimation("Run");
 	else if(m_pEnemy)
 	{
-		m_pAttack->Setup(RANGE_SKILL, 10, 100 + m_pEnemy->GetRadius(), 20, 3, 0, 10, true, NULL);
-		m_pAttack->SetIsReady(true);
-		m_pAttack->Fire(&m_vPosition, m_pEnemy->getPositionPointer(), m_pEnemy, false);
+		m_pAttack->Setup(RANGE_SKILL, 10, 100 + m_pEnemy->GetRadius(), D3DXVec3Length(&(m_pEnemy->getPosition() - m_vPosition)), 0.0f, 0.0f, 10, true, NULL);
 		setAnimation("Attack");
+		if (MidAnimation())
+		{
+			if (!m_bAttack)
+			{
+				m_pAttack->Fire(&m_vPosition, m_pEnemy->getPositionPointer(), m_pEnemy, true);
+				m_bAttack = true;
+			}
+		}
+		else m_bAttack = false;
 	}
 
 	m_pAttack->Update();
@@ -125,15 +137,16 @@ void cEnemy::Render()
 	UpdateAnimation();
 	m_pSkinnedMesh->Update(m_pAnimController);
 
-	g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-
-	matT;
-	D3DXMatrixIdentity(&matT);
-	g_pD3DDevice->SetTexture(0, NULL);
-	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y + m_fRadius, m_vPosition.z);
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matT);
-	m_pSphere->DrawSubset(0);
-
-	g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+	
+	//g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+	//
+	//matT;
+	//D3DXMatrixIdentity(&matT);
+	//g_pD3DDevice->SetTexture(0, NULL);
+	//D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y + m_fRadius, m_vPosition.z);
+	//g_pD3DDevice->SetTransform(D3DTS_WORLD, &matT);
+	//m_pSphere->DrawSubset(0);
+	//
+	//g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 
 }

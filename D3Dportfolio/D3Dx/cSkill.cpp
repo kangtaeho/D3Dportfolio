@@ -229,6 +229,7 @@ void cSkill::RemoveTarget()
 {
 	if (!m_pTargetPos) return; // 대상 타겟이 없으면 리턴
 	if (!m_pTargetEnemy) return;
+	if (!m_pCube)return;
 
 	if (D3DXVec3Length(&(*m_pTargetPos - m_vPos)) < 10.0f)
 	{
@@ -262,7 +263,7 @@ void cSkill::RemoveMeshTime()
 		{
 			for (int j = 0; j < m_pVecEnemy->size(); j++)
 			{
-				if (D3DXVec3Length(&(m_vecMesh[i].pos - (*m_pVecEnemy)[j].getPosition())) < 20)
+				if (D3DXVec3Length(&(m_vecMesh[i].pos - (*m_pVecEnemy)[j]->getPosition())) < 20)
 				{
 					SAFE_DELETE(m_vecMesh[i].animation);
 					m_vecMesh.erase(m_vecMesh.begin() + i);

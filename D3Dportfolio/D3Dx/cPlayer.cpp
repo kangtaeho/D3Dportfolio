@@ -20,6 +20,8 @@ void cPlayer::Setup(const char* name)
 {
 	m_fRange = 400;
 	m_fSpeed = 10.0f;
+	m_fMAXHP = 300;
+	m_fMAXMP = 250;
 	m_fHP = 300;
 	m_fMP = 250;
 	m_fDEF = 50;
@@ -28,6 +30,7 @@ void cPlayer::Setup(const char* name)
 
 	cCharacter::Setup(name);
 
+	m_fRadius = 13.0f;
 
 	g_pSkillManager->AddSkill("평타", RANGE_SKILL, 80, m_fRange, 20.0f, 0.3f, 2.5f, 20, true);
 	g_pSkillManager->AddSkill("r", OBJECT_SKILL, 100, 500, 10.0f, 0.5f, 20.0f, 40, true, "BantamTrap");
@@ -40,15 +43,16 @@ void cPlayer::Setup(const char* name)
 	g_pSkillManager->AddSkill("e", TOXIC_SKILL, 50, 400, 20.0f, 0.5, 10.0f, 10, true);
 	g_pSkillManager->GetSkill("e")->SetPlayer(this);
 
-	m_pSphere = new cSphere;
-	m_pSphere->Setup(D3DXVECTOR3(200, 5000, 200), 100);
+	//m_pSphere = new cSphere;
+	//m_pSphere->Setup(D3DXVECTOR3(200, 5000, 200), 100);
+	//
+	//m_pEnemy = new cEnemy;
+	//m_pEnemy->Setup("order_minion_caster_", 0);
 
-	m_pEnemy = new cEnemy;
-	m_pEnemy->Setup("order_minion_caster_Red");
-
-	m_vecEnemy.push_back(m_pEnemy);
-	m_pVecEnemy = &m_vecEnemy;
+	//m_vecEnemy.push_back(m_pEnemy);
+	//m_pVecEnemy = &m_vecEnemy;
 	g_pSkillManager->RegisterVecEnemy(m_pVecEnemy);
+	m_fRespwan = 0.0f;
 }
 
 void cPlayer::Release()
@@ -59,6 +63,7 @@ void cPlayer::Release()
 
 void cPlayer::Update()
 {
+	if (g_pKeyManager->IsStayKeyDown(VK_SPACE))g_pCameraManager->setCameraPos(m_vPosition);
 	Check3DMousePointer();
 
 	bool isMove = false;
@@ -66,13 +71,35 @@ void cPlayer::Update()
 
 	g_pSkillManager->Update();
 
-	if (g_pSkillManager->IsCasting())
+	if (m_fRespwan)
+	{
+		m_fRespwan -= g_pTimeManager->GetElapsedTime();
+		if (m_fRespwan <= 0)
+		{
+			m_fHP = 300.0f;
+			m_vPosition = g_pCollisionManager->SetHeight(D3DXVECTOR3(0, 0, 0));
+			m_vNextPosition = m_vPosition;
+			m_fRespwan = 0.0f;
+		}
+	}
+
+	if (m_fHP <= 0)
+	{
+		setAnimation("Death", false);
+		if(!m_fRespwan)
+			m_fRespwan = 10.0f;
+	}
+	else if (g_pSkillManager->IsCasting())
 	{
 		setAnimation("Attack1");
+		if(m_pEnemy)
+			m_pEnemy->setEnemy(this);
 	}
 	else if (isMove)
 	{
 		setAnimation("Run");
+		if (m_pEnemyPos && m_pEnemy)
+			*m_pEnemyPos = m_pEnemy->getPosition();
 	}
 	else
 	{
@@ -86,16 +113,16 @@ void cPlayer::Render()
 	POINT ptMouse;
 	GetCursorPos(&ptMouse);
 	ScreenToClient(g_hWnd, &ptMouse);
-	g_pFontManager->TextFont(ptMouse.x, ptMouse.y, D3DXVECTOR3(255, 0, 255), "2D : %0.2f, %0.2f", (float)ptMouse.x, (float)ptMouse.y);
-	g_pFontManager->TextFont(ptMouse.x, ptMouse.y + 20, D3DXVECTOR3(255, 0, 255), "3D : %0.2f, %0.2f, %0.2f", (float)m_vNextPosition.x, (float)m_vNextPosition.y, (float)m_vNextPosition.z);
+	//g_pFontManager->TextFont(ptMouse.x, ptMouse.y, D3DXVECTOR3(255, 0, 255), "2D : %0.2f, %0.2f", (float)ptMouse.x, (float)ptMouse.y);
+	//g_pFontManager->TextFont(ptMouse.x, ptMouse.y + 20, D3DXVECTOR3(255, 0, 255), "3D : %0.2f, %0.2f, %0.2f", (float)m_vNextPosition.x, (float)m_vNextPosition.y, (float)m_vNextPosition.z);
 
 	g_pSkillManager->Render();
 
-	if (m_pSphere)
-		m_pSphere->Render();
-
-	if (m_pEnemy)
-		m_pEnemy->Render();
+	//if (m_pSphere)
+	//	m_pSphere->Render();
+	//
+	//if (m_pEnemy)
+	//	m_pEnemy->Render();
 
 	cCharacter::Render();
 }
@@ -115,8 +142,12 @@ void cPlayer::Check3DMousePointer()
 		SAFE_DELETE(m_pEnemyPos);
 
 		int isPick = 0;
-
-		m_vNextPosition = g_pCollisionManager->getRayPosition(isPick,m_pEnemy->getPosition(), m_pEnemy->getSphere()->m_pMesh, m_pEnemy->GetRadius()); //포지션 받고	
+		for (int i = 0; i < m_pVecEnemy->size(); ++i)
+		{
+			m_vNextPosition = g_pCollisionManager->getRayPosition(isPick, (*m_pVecEnemy)[i]->getPosition(), ((cEnemy*)(*m_pVecEnemy)[i])->getSphere(), (*m_pVecEnemy)[i]->GetRadius()); //포지션 받고	
+			if (isPick)break;
+		}
+		
 
 
 		m_pEnemyPos = new D3DXVECTOR3;
@@ -126,7 +157,11 @@ void cPlayer::Check3DMousePointer()
 
 		if (g_pSkillManager->GetSkill("e")->GetIsReady())
 		{
-			g_pSkillManager->Fire("e", &m_vPosition, m_pEnemy->getPositionPointer(), m_pEnemy);
+			if (m_pEnemy)
+			{
+				m_pEnemy->setEnemy(this);
+				g_pSkillManager->Fire("e", &m_vPosition, m_pEnemy->getPositionPointer(), m_pEnemy);
+			}
 		}
 		else if (g_pSkillManager->GetSkill("r")->GetIsReady())
 		{
@@ -148,17 +183,31 @@ void cPlayer::AttackEnemy(cCharacter* enemy)
 
 	int isPick = 0;
 
-	m_vNextPosition = g_pCollisionManager->getRayPosition(isPick, m_pEnemy->getPosition(), m_pEnemy->getSphere()->m_pMesh,enemy->GetRadius()); //포지션 받고
-
+	for (int i = 0; i < m_pVecEnemy->size(); ++i)
+	{
+		m_vNextPosition = g_pCollisionManager->getRayPosition(isPick, (*m_pVecEnemy)[i]->getPosition(), ((cEnemy*)(*m_pVecEnemy)[i])->getSphere(), (*m_pVecEnemy)[i]->GetRadius()); //포지션 받고	
+		if (isPick)
+		{
+			m_pEnemy = (cEnemy*)(*m_pVecEnemy)[i];
+			break;
+		}
+	}
+	if (m_pEnemy && m_pEnemy->GetHP() <= 0)
+	{
+		m_pEnemy = NULL;
+		isPick = 0;
+		m_vNextPosition = m_vPosition;
+	}
 
 	if (isPick)
 	{
 		m_pEnemyPos = new D3DXVECTOR3;
-		*m_pEnemyPos = enemy->getPosition();
-		if (D3DXVec3Length(&(m_vPosition - enemy->getPosition())) < m_fRange);
+		*m_pEnemyPos = m_pEnemy->getPosition();
+		if (D3DXVec3Length(&(m_vPosition - m_pEnemy->getPosition())) < m_fRange);
 		{
-			m_fRotY = GetAngle(m_vPosition, enemy->getPosition());
-			g_pSkillManager->Fire("평타", &m_vPosition, enemy->getPositionPointer(), enemy);
+			m_fRotY = GetAngle(m_vPosition, m_pEnemy->getPosition());
+			g_pSkillManager->Fire("평타", &m_vPosition, m_pEnemy->getPositionPointer(), m_pEnemy);
+			//SAFE_DELETE(m_pEnemyPos);
 		}
 	}
 }

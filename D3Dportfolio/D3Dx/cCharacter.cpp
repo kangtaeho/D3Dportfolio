@@ -15,6 +15,7 @@ cCharacter::cCharacter()
 
 cCharacter::~cCharacter()
 {
+	SAFE_RELEASE(m_pAnimController);
 }
 
 void cCharacter::Setup(const char* name)
