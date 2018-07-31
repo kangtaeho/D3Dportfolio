@@ -5,6 +5,7 @@
 #include "cAStar.h"
 #include "cEnemy.h"
 #include "cShop.h"
+#include "Bitmap.h"
 
 cPlayer::cPlayer()
 {
@@ -43,12 +44,13 @@ void cPlayer::Setup(const char* name)
 	g_pSkillManager->AddSkill("e", TOXIC_SKILL, 50, 400, 20.0f, 0.5, 10.0f, 10, true);
 	g_pSkillManager->GetSkill("e")->SetPlayer(this);
 
+	CreateTargetMesh();
+
 	m_fRespwan = 0.0f;
 }
 
 void cPlayer::Release()
 {
-	delete m_pSphere;
 	g_pSkillManager->Release();
 }
 
@@ -104,16 +106,10 @@ void cPlayer::Render()
 	POINT ptMouse;
 	GetCursorPos(&ptMouse);
 	ScreenToClient(g_hWnd, &ptMouse);
-	//g_pFontManager->TextFont(ptMouse.x, ptMouse.y, D3DXVECTOR3(255, 0, 255), "2D : %0.2f, %0.2f", (float)ptMouse.x, (float)ptMouse.y);
-	//g_pFontManager->TextFont(ptMouse.x, ptMouse.y + 20, D3DXVECTOR3(255, 0, 255), "3D : %0.2f, %0.2f, %0.2f", (float)m_vNextPosition.x, (float)m_vNextPosition.y, (float)m_vNextPosition.z);
 
 	g_pSkillManager->Render();
 
-	//if (m_pSphere)
-	//	m_pSphere->Render();
-	//
-	//if (m_pEnemy)
-	//	m_pEnemy->Render();
+	ClickTargetRender();
 
 	cCharacter::Render();
 }
@@ -205,5 +201,87 @@ void cPlayer::AttackEnemy(cCharacter* enemy)
 			g_pSkillManager->Fire("ÆòÅ¸", &m_vPosition, m_pEnemy->getPositionPointer(), m_pEnemy);
 			//SAFE_DELETE(m_pEnemyPos);
 		}
+	}
+}
+
+void cPlayer::CreateTargetMesh()
+{
+	ST_PNT_VERTEX v1;
+	v1.p = D3DXVECTOR3(-1, 0, 1);
+	v1.n = D3DXVECTOR3(0, 1, 0);
+	v1.t = D3DXVECTOR2(0, 0);
+
+	ST_PNT_VERTEX v2;
+	v2.p = D3DXVECTOR3(1, 0, 1);
+	v2.n = D3DXVECTOR3(0, 1, 0);
+	v2.t = D3DXVECTOR2(1, 0);
+
+	ST_PNT_VERTEX v3;
+	v3.p = D3DXVECTOR3(1, 0, -1);
+	v3.n = D3DXVECTOR3(0, 1, 0);
+	v3.t = D3DXVECTOR2(1, 1);
+
+	ST_PNT_VERTEX v4;
+	v4.p = D3DXVECTOR3(-1, 0, -1);
+	v4.n = D3DXVECTOR3(0, 1, 0);
+	v4.t = D3DXVECTOR2(0, 1);
+
+	std::vector<ST_PNT_VERTEX> index;
+	index.push_back(v1);
+	index.push_back(v3);
+	index.push_back(v4);
+	index.push_back(v1);
+	index.push_back(v2);
+	index.push_back(v3);
+
+	D3DXCreateMeshFVF(
+		2,
+		6,
+		D3DXMESH_MANAGED,
+		ST_PNT_VERTEX::FVF,
+		g_pD3DDevice,
+		&m_pTargetMesh
+	);
+
+	ST_PNT_VERTEX* vM;
+	m_pTargetMesh->LockVertexBuffer(0, (void**)&vM);
+
+	for (int i = 0; i < index.size(); i++)
+	{
+		vM[i] = index[i];
+	}
+
+	m_pTargetMesh->UnlockVertexBuffer();
+
+	WORD * wM;
+	m_pTargetMesh->LockIndexBuffer(0, (void**)&wM);
+
+	for (int i = 0; i < index.size(); i++)
+	{
+		wM[i] = i;
+	}
+
+	m_pTargetMesh->UnlockIndexBuffer();
+}
+
+void cPlayer::ClickTargetRender()
+{
+	if (m_pEnemy)
+	{
+		D3DXMATRIX	matAOEWorld, matPointWorld;
+		D3DXMATRIX	matS, matT;
+
+		D3DXMatrixScaling(&matS, m_pEnemy->GetRadius()+10, 1, m_pEnemy->GetRadius()+10);
+		D3DXMatrixTranslation(&matT, m_pEnemy->getPosition().x, m_pEnemy->getPosition().y + 5, m_pEnemy->getPosition().z);
+
+		matAOEWorld = matS*matT;
+
+		g_pD3DDevice->SetTransform(D3DTS_WORLD, &matAOEWorld);
+		g_pD3DDevice->SetFVF(ST_PNT_VERTEX::FVF);
+		LPDIRECT3DTEXTURE9 texture = g_pTextureManager->GetTexture("./select/targetRound.png");
+		g_pD3DDevice->SetTexture(0, texture);
+
+		m_pTargetMesh->DrawSubset(0);
+
 	}
 }
