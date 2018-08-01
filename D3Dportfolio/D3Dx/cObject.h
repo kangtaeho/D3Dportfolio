@@ -8,6 +8,7 @@ private:
 	std::string m_sName;
 	int m_bBlue;
 	cAction m_pAction;
+	D3DXVECTOR3 m_vFirePosition;
 	SYNTHESIZE(float, m_fScale, Scale);
 
 public:

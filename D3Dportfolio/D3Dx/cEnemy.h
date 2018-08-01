@@ -8,13 +8,9 @@ class cEnemy : public cCharacter
 private:
 	std::vector<int> m_vecGoLine;
 	STCollisionMapTool m_stAllCircleLine;
-	std::vector<cCharacter*>* m_vecAllEnemy;
-	cCharacter* m_pEnemy;
-	float m_fSite;
 
 	bool m_bLive;
 
-	cRangeSkill* m_pAttack;
 
 	bool m_bAttack;
 
@@ -23,6 +19,10 @@ private:
 protected:
 	LPD3DXMESH m_pSphere;
 	STCIRCLE m_pCircle;
+	cCharacter* m_pEnemy;
+	std::vector<cCharacter*>* m_vecAllEnemy;
+	cRangeSkill* m_pAttack;
+	float m_fSite;
 
 public:
 	cEnemy();
