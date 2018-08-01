@@ -171,7 +171,7 @@ void Bitmap::Render()
 		}
 		texture_Info->Sprite->SetTransform(&texture_Info->matWorld);
 
-		SetRect(&texture_Info->rc, 0, 0, texture_Info->ImageInfo.Width, texture_Info->ImageInfo.Height);
+		//SetRect(&texture_Info->rc, 0, 0, texture_Info->ImageInfo.Width, texture_Info->ImageInfo.Height);
 
 		texture_Info->Sprite->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_TEXTURE);
 

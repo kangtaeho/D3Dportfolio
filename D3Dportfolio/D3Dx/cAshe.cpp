@@ -89,8 +89,6 @@ void cAshe::Render()
 	if (m_pAttack)
 		m_pAttack->Render();
 
-	g_pFontManager->TextFont(10, 400, D3DXVECTOR3(255, 0, 255), "%0.2f", m_fDangerTime);
-
 	cCharacter::Render();
 }
 

@@ -4,21 +4,31 @@
 class cSphere;
 class cEnemy;
 class cShop;
+
 class cAshe;
+
+class cHealthProgress;
+
 
 class cPlayer : public cCharacter
 {
 private:
-
+	D3DXVECTOR3         m_vSavePos;
 	D3DXVECTOR3			m_vClickPos;
 	cCharacter*			m_pEnemy;
 	cShop*				m_pShop;
 
 	LPD3DXMESH			m_pTargetMesh;
-
+	cHealthProgress*    m_pTelePortProgress;
 	std::vector<cCharacter*>* m_pVecEnemy;
 	float m_fRespwan;
+	float m_fMaxTelePortTime;
+	float m_fTelePortTime;
+	float m_fTime;
+	
+	bool m_bProgressing;
 
+	SYNTHESIZE(bool, m_bTelePort, TelePort);
 	SYNTHESIZE(bool, isClickUi, IsClickUI);
 	SYNTHESIZE(cAshe*, m_pAshe, Ashe);
 
