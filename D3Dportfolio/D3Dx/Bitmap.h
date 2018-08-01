@@ -61,6 +61,7 @@ public:
 	ST_UI_SIZE GetUiSize() { return texture_Info->m_stSize; }
 
 	RECT GetRect() { return texture_Info->rc; }
+	RECT* GETRECT() { return &texture_Info->rc; }
 	D3DXMATRIX &GetWolrdMatrix() { return texture_Info->matWorld; }
 
 	LPD3DXSPRITE GetSprite() { return texture_Info->Sprite; }

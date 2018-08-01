@@ -17,6 +17,8 @@ private:
 	float m_fMpBarBottom;
 
 
+	SYNTHESIZE(Bitmap*, m_pProgress, Progress);
+
 	SYNTHESIZE(bool, ReCorrectSize, ReCorret);
 	SYNTHESIZE(float, PrevHpSize, PrevHp);
 	SYNTHESIZE(float, PrevMpSize, PrevMp);

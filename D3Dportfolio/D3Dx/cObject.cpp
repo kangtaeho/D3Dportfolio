@@ -140,7 +140,7 @@ void cObject::Update()
 		{
 			if (m_pEnemy->GetHP() <= 0 || D3DXVec3Length(&(m_pEnemy->getPosition() - m_vPosition)) > m_fSite)m_pEnemy = NULL;
 		}
-		if (m_pEnemy)
+		if (m_pEnemy && m_fHP > 0)
 		{
 			m_pAttack->Fire(&m_vFirePosition, m_pEnemy->getPositionPointer(), m_pEnemy, true);
 		}

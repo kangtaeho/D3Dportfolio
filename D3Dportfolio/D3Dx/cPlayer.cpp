@@ -6,7 +6,8 @@
 #include "cEnemy.h"
 #include "cShop.h"
 #include "Bitmap.h"
-
+#include "cHealthProgress.h"
+#include <ctime>
 cPlayer::cPlayer()
 {
 
@@ -51,6 +52,24 @@ void cPlayer::Setup(const char* name)
 	CreateTargetMesh();
 
 	m_fRespwan = 0.0f;
+	m_fTelePortTime = 0.0f;
+	m_fTime = 0.0f;
+	m_fMaxTelePortTime = 8.0f;
+	m_pTelePortProgress = new cHealthProgress;
+
+	Bitmap* TelePortContainer; Bitmap* TelePortBar;
+	TelePortContainer = g_pTextureManager->addTexture("TelePortContainer", "./status/TelePortContainer.dds", NULL, NULL);
+	TelePortBar = g_pTextureManager->addTexture("TelePortBar", "./status/TelePortBar.dds", NULL,NULL);
+
+	TelePortContainer->setScale(D3DXVECTOR3(2.5f, 1.2f, 0));
+	TelePortBar->setScale(D3DXVECTOR3(2.5f, 1.2f, 0));
+
+	m_pTelePortProgress->SetContainer(TelePortContainer);
+	m_pTelePortProgress->SetProgress(TelePortBar);
+
+	m_pTelePortProgress->setup();
+	m_bTelePort = false;
+	m_bProgressing = false;
 }
 
 void cPlayer::Release()
@@ -73,11 +92,97 @@ void cPlayer::Update()
 		if (m_fRespwan <= 0)
 		{
 			m_fHP = m_fMAXHP;
-			m_vPosition = g_pCollisionManager->SetHeight(D3DXVECTOR3(0, 0, 0));
+			//m_vPosition = g_pCollisionManager->SetHeight(D3DXVECTOR3(0, 0, 0));
+			m_vPosition = g_pCollisionManager->SetHeight(D3DXVECTOR3(-3118, 5224, -3642));
 			m_vNextPosition = m_vPosition;
+			g_pCameraManager->setCameraPos(D3DXVECTOR3(-3118, 5224, -3642));
 			m_fRespwan = 0.0f;
 		}
 	}
+
+	if (m_vSavePos != m_vPosition)
+	{
+		m_bTelePort = false;
+		m_bProgressing = false;
+
+		m_vSavePos = m_vPosition;
+		m_fTelePortTime = 0.0f;
+	}
+
+	if (g_pKeyManager->IsOnceKeyDown('B'))
+	{
+		if (!m_fTelePortTime)
+		{
+			m_bTelePort = true;
+			m_bProgressing = true;
+			m_vSavePos = m_vPosition;
+			m_fTelePortTime = m_pTelePortProgress->GetProgress()->GETRECT()->right;
+			m_pTelePortProgress->GetProgress()->GETRECT()->right = 0;
+		}
+	}
+
+	D3DXVECTOR3 tempposition(0, 0, 0);
+	D3DXMATRIX WorldMatrix, matProj, matViewPort, matView;
+	D3DXMatrixTranslation(&WorldMatrix, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	D3DVIEWPORT9 tempViewPort;
+	g_pD3DDevice->GetViewport(&tempViewPort);
+	D3DXMatrixIdentity(&matViewPort);
+	matViewPort._11 = tempViewPort.Width / (float)2;
+	matViewPort._22 = -(int)tempViewPort.Height / (float)2;
+	matViewPort._33 = tempViewPort.MaxZ - tempViewPort.MinZ;
+	matViewPort._41 = tempViewPort.X + tempViewPort.Width / (float)2;
+	matViewPort._42 = tempViewPort.Y + tempViewPort.Height / (float)2;
+	matViewPort._43 = tempViewPort.MinZ;
+	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
+	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
+
+	WorldMatrix = WorldMatrix * matView * matProj * matViewPort;
+	D3DXVec3TransformCoord(&tempposition, &tempposition, &WorldMatrix);
+
+	if (m_bTelePort)
+	{
+		m_pTelePortProgress->GetContainer()->setPosition(D3DXVECTOR3(WINSIZEX / 2 - 100, WINSIZEY / 2 + 100, 0));
+		m_pTelePortProgress->GetProgress()->setPosition(D3DXVECTOR3(WINSIZEX / 2 - 100, WINSIZEY / 2 + 100, 0));
+	}
+
+	m_pTelePortProgress->update();
+
+	if (m_bProgressing)
+	{
+		srand(GetTickCount());
+		float time = rand() % 3;
+
+		if(m_pTelePortProgress->GetProgress()->GETRECT()->right < m_pTelePortProgress->GetContainer()->GETRECT()->right)
+		m_pTelePortProgress->GetProgress()->GETRECT()->right += time;
+
+		if (m_pTelePortProgress->GetProgress()->GETRECT()->right >= m_pTelePortProgress->GetContainer()->GETRECT()->right)
+		{
+			m_bProgressing = false;
+			m_fTelePortTime = m_pTelePortProgress->GetProgress()->GETRECT()->right;
+		}
+	}
+
+	if (m_fTelePortTime && m_bTelePort)
+	{
+		if (!m_bProgressing)
+		{
+			setAnimation("Dance");
+			m_fTelePortTime -= 0.5f;
+			m_pTelePortProgress->GetProgress()->GETRECT()->right = m_fTelePortTime;
+
+			
+		}
+
+		if (m_fTelePortTime <= 0)
+		{
+			m_vPosition = g_pCollisionManager->SetHeight(D3DXVECTOR3(-3118, 5224, -3642));
+			m_vNextPosition = m_vPosition;
+			g_pCameraManager->setCameraPos(D3DXVECTOR3(-3118, 5224, -3642));
+			m_fTelePortTime = 0.0f;
+			m_bTelePort = false;
+		}
+	}
+
 
 	if (m_fHP <= 0)
 	{
@@ -118,6 +223,15 @@ void cPlayer::Render()
 
 	ClickTargetRender();
 
+	if (m_bTelePort)
+	{
+		m_pTelePortProgress->render();
+
+		g_pFontManager->TextFont(WINSIZEX / 2 + 10, WINSIZEY / 2 + 80, D3DXVECTOR3(8, 130, 123), "±ÍÈ¯");
+
+		if(!m_bProgressing)
+		g_pFontManager->TextFont(WINSIZEX / 2 + 10, WINSIZEY / 2 + 120, D3DXVECTOR3(8, 130, 123),"%0.1f", m_fTelePortTime / 10);
+	}
 	cCharacter::Render();
 }
 

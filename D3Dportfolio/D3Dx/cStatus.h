@@ -185,7 +185,7 @@ private:
 	Bitmap* m_pStatusScreen;
 	Bitmap* m_pBuffInfo;
 	Bitmap* m_pStatusPlayerInfoIcon;
-	Bitmap* m_pTeleport;
+	
 	cUIButton* m_pSkillButton;
 
 	
@@ -193,6 +193,7 @@ private:
 
 
 
+	SYNTHESIZE(Bitmap*, m_pTeleport, BTelePort);
 	SYNTHESIZE(int, AttackSpeedValue, AttackSpeed);
 	SYNTHESIZE(int, AtkValue, Atk);
 	SYNTHESIZE(int, DefenseValue, Defense);

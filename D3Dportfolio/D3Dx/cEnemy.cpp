@@ -58,7 +58,7 @@ void cEnemy::Setup(const char * name, bool Blue)
 	m_bAttack = false;
 
 	m_pProgressBar = new cHealthProgress;
-	Bitmap* Container;  Bitmap* HpBar; Bitmap* MpBar;
+	Bitmap* Container;  Bitmap* HpBar; 
 	Container = g_pTextureManager->addTexture("EnemyContainer", "./status/EnemyHpContainer.dds", NULL, NULL);
 	HpBar = g_pTextureManager->addTexture("EnemyHpBar", "./status/EnemyHpBar.dds", PROGRESSBAR, 1, 1);
 	//MpBar = g_pTextureManager->addTexture("EnemyMpBar", "./status/EnemyMpBar.dds", PROGRESSBAR, 1, 1);
