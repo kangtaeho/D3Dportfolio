@@ -1,16 +1,15 @@
 #pragma once
 #include "cEnemy.h"
 
-
+class cHealthProgress;
 class cObject : public cEnemy
 {
 private:
 	std::string m_sName;
 	int m_bBlue;
 	cAction m_pAction;
-	D3DXVECTOR3 m_vFirePosition;
 	SYNTHESIZE(float, m_fScale, Scale);
-
+	cHealthProgress* m_pObjectProgressBar;
 public:
 	cObject();
 	~cObject();

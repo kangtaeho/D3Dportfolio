@@ -191,10 +191,13 @@ void cPlayScene::Update()
 	//½ºÅÈ¼³Á¤
 	m_vecHealthProgress[0]->setBarPosition(tempposition, tempposition);
 
-	m_vecHealthProgress[0]->SetMaxHp(status->GetMAXHP());
-	m_vecHealthProgress[0]->SetCurrentHp(status->GetCURRENTHP());
+	m_vecHealthProgress[0]->SetMaxHp(m_pPlayer->GetMAXHP());
+	m_vecHealthProgress[0]->SetCurrentHp(m_pPlayer->GetHP());
 	m_vecHealthProgress[0]->SetHitValue(status->GetHitValue());
 	m_vecHealthProgress[0]->SetHpBarSize(status->GetCheckHpBar());
+
+	m_vecHealthProgress[0]->GetHpBar()->GetrectFrameSize()->right = m_pPlayer->GetHP();
+
 	m_vecHealthProgress[0]->SetisHit(status->GetIsHit());
 
 	m_vecHealthProgress[0]->SetMaxMp(status->GetMAXMP());

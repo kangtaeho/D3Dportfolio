@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "cEnemy.h"
 #include "cRangeSkill.h"
-
+#include "cHealthProgress.h"
 
 cEnemy::cEnemy()
 {
@@ -18,10 +18,11 @@ void cEnemy::Setup(const char * name, bool Blue)
 	m_bLive = true;
 	// 테스트용입니다
 	m_fRadius = 30;
+	m_fMAXHP = 100;
 	m_fHP = 100;
 	m_vPosition = m_AStar.PushDestination(m_vPosition, m_fRadius); //만약에 충돌을 받으면 밀어낸다
 	m_vPosition = g_pCollisionManager->SetHeight(m_vPosition);
-																   // 테스트용입니다
+	// 테스트용입니다
 	m_fSpeed = 3.0f;
 	m_fRange = 80.0f;
 	m_fBlue = Blue;
@@ -55,6 +56,20 @@ void cEnemy::Setup(const char * name, bool Blue)
 
 	m_pAttack = new cRangeSkill;
 	m_bAttack = false;
+
+
+	m_pProgressBar = new cHealthProgress;
+	Bitmap* Container;  Bitmap* HpBar; Bitmap* MpBar;
+	Container = g_pTextureManager->addTexture("EnemyContainer", "./status/EnemyHpContainer.dds", NULL, NULL);
+	HpBar = g_pTextureManager->addTexture("EnemyHpBar", "./status/EnemyHpBar.dds", PROGRESSBAR, 1, 1);
+	//MpBar = g_pTextureManager->addTexture("EnemyMpBar", "./status/EnemyMpBar.dds", PROGRESSBAR, 1, 1);
+	m_pProgressBar->SetContainer(Container);
+	m_pProgressBar->SetHpBar(HpBar);
+	m_pProgressBar->SetMaxHp(m_fMAXHP);
+	m_pProgressBar->SetCurrentHp(m_fHP);
+	//m_pProgressBar->SetMpBar(MpBar);
+	m_pProgressBar->setup();
+
 }
 
 void cEnemy::Release()
@@ -103,7 +118,7 @@ void cEnemy::Update()
 		if (EndAnimation())m_bLive = false;
 	}
 	else if (m_AStar.UpdateForEnemy(m_vPosition, m_vNextPosition, m_fRotY, m_fSpeed, m_fRadius, m_fRange, tempEnemyPosition, m_pEnemy))setAnimation("Run");
-	else if(m_pEnemy)
+	else if (m_pEnemy)
 	{
 		m_pAttack->Setup(RANGE_SKILL, 10, 100 + m_pEnemy->GetRadius(), D3DXVec3Length(&(m_pEnemy->getPosition() - m_vPosition)), 0.0f, 0.0f, 10, true, NULL);
 		setAnimation("Attack");
@@ -119,6 +134,35 @@ void cEnemy::Update()
 	}
 
 	m_pAttack->Update();
+
+
+	D3DXVECTOR3 tempposition(0, 0, 0);
+	D3DXMATRIX WorldMatrix, matProj, matViewPort, matView;
+	D3DXMatrixTranslation(&WorldMatrix, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	D3DVIEWPORT9 tempViewPort;
+	g_pD3DDevice->GetViewport(&tempViewPort);
+	D3DXMatrixIdentity(&matViewPort);
+	matViewPort._11 = tempViewPort.Width / (float)2;
+	matViewPort._22 = -(int)tempViewPort.Height / (float)2;
+	matViewPort._33 = tempViewPort.MaxZ - tempViewPort.MinZ;
+	matViewPort._41 = tempViewPort.X + tempViewPort.Width / (float)2;
+	matViewPort._42 = tempViewPort.Y + tempViewPort.Height / (float)2;
+	matViewPort._43 = tempViewPort.MinZ;
+	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
+	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
+
+	WorldMatrix = WorldMatrix * matView * matProj * matViewPort;
+	D3DXVec3TransformCoord(&tempposition, &tempposition, &WorldMatrix);
+
+	//m_pProgressBar->setBarPosition(tempposition, tempposition);
+
+	m_pProgressBar->GetContainer()->setPosition(D3DXVECTOR3(tempposition.x - 45, tempposition.y - 70, tempposition.z));
+	m_pProgressBar->GetHpBar()->setPosition(m_pProgressBar->GetContainer()->GetPosition());
+
+	m_pProgressBar->update();
+	m_pProgressBar->GetHpBar()->GetrectFrameSize()->right = m_fHP;
+
+	if (m_pProgressBar->GetHpBar()->GetrectFrameSize()->right <= 0) m_pProgressBar->GetHpBar()->GetrectFrameSize()->right = 0;
 }
 
 void cEnemy::Render()
@@ -137,7 +181,8 @@ void cEnemy::Render()
 	UpdateAnimation();
 	m_pSkinnedMesh->Update(m_pAnimController);
 
-	
+	m_pProgressBar->render();
+
 	//g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 	//
 	//matT;

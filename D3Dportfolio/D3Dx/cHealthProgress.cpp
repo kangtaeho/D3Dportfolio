@@ -9,13 +9,13 @@ cHealthProgress::cHealthProgress()
 
 cHealthProgress::~cHealthProgress()
 {
-	
+
 }
 
 void cHealthProgress::setup()
 {
 	m_bCheckHpBarSize = false;
-	
+
 
 	ReCorrectSize = true;
 
@@ -23,7 +23,7 @@ void cHealthProgress::setup()
 	m_fCurrentMp = m_fMaxMp;
 	m_fUsedMpValue = 30;
 	m_bCheckMpBarSize = false;
-	
+
 
 
 	m_fHpBarRight = m_pHpBar->GetrectFrameSize()->right;
@@ -40,35 +40,50 @@ void cHealthProgress::setup()
 
 
 
-	m_fMpBarRight = m_pMpBar->GetrectFrameSize()->right;
-	m_fMpBarBottom = m_pMpBar->GetrectFrameSize()->bottom;
+	if (m_pMpBar != NULL)
+	{
+		m_fMpBarRight = m_pMpBar->GetrectFrameSize()->right;
+		m_fMpBarBottom = m_pMpBar->GetrectFrameSize()->bottom;
 
-	SetRect(&m_MpBarRect, 0, 0, m_fMaxMp, m_fMpBarBottom);
+		SetRect(&m_MpBarRect, 0, 0, m_fMaxMp, m_fMpBarBottom);
 
-	m_fMpBarSize = m_fMpBarRight / m_fMaxMp;
-	m_pMpBar->SetRectFrameSize(m_MpBarRect);
-	m_pMpBar->setScale(D3DXVECTOR3(m_fMpBarSize, 0.7f, 0));
+		m_fMpBarSize = m_fMpBarRight / m_fMaxMp;
+		m_pMpBar->SetRectFrameSize(m_MpBarRect);
+		m_pMpBar->setScale(D3DXVECTOR3(m_fMpBarSize, 0.7f, 0));
 
-	PrevMpSize = m_fMpBarRight;
+		PrevMpSize = m_fMpBarRight;
+	}
+
 	//m_pMpBar->SetRectFrameSize(m_BarRect);
 	//m_pMpBar->setScale(D3DXVECTOR3(m_fBarSize, 1.0f, 0));
 }
 
 void cHealthProgress::setBarPosition(D3DXVECTOR3 HpPosition, D3DXVECTOR3 MpPosition)
 {
-	m_pContainer->setPosition(D3DXVECTOR3(HpPosition.x - 80, HpPosition.y - 70, 0));
-	m_pHpBar->setPosition(D3DXVECTOR3(HpPosition.x - 48,HpPosition.y - 62,0));
-	m_pMpBar->setPosition(D3DXVECTOR3(HpPosition.x - 48 ,HpPosition.y - 52,0));
+	if (m_pContainer)
+		m_pContainer->setPosition(D3DXVECTOR3(HpPosition.x - 80, HpPosition.y - 70, 0));
+	if (m_pHpBar)
+		m_pHpBar->setPosition(D3DXVECTOR3(HpPosition.x - 48, HpPosition.y - 62, 0));
+	if (m_pMpBar)
+		m_pMpBar->setPosition(D3DXVECTOR3(HpPosition.x - 48, HpPosition.y - 52, 0));
 }
 void cHealthProgress::update()
 {
-	m_pContainer->update();
-	m_pHpBar->update(0);
-	m_pMpBar->update(0);
+	if (m_pContainer)
+		m_pContainer->update();
+	if (m_pHpBar)
+		m_pHpBar->update(0);
+	if (m_pMpBar)
+		m_pMpBar->update(0);
 
 
 	if (m_pHpBar->GetrectFrameSize()->right <= 0) m_pHpBar->GetrectFrameSize()->right = 0;
-	if (m_pMpBar->GetrectFrameSize()->right <= 0)m_pMpBar->GetrectFrameSize()->right = 0;
+
+	if (m_pMpBar)
+	{
+		if (m_pMpBar->GetrectFrameSize()->right <= 0)m_pMpBar->GetrectFrameSize()->right = 0;
+	}
+
 
 
 	if (ReCorrectSize)
@@ -83,13 +98,16 @@ void cHealthProgress::update()
 
 		m_pHpBar->setScale(D3DXVECTOR3(m_fHpBarSize, 1.0f, 0));
 
-		SetRect(&m_MpBarRect, 0, 0, m_fMaxMp, m_fMpBarBottom);
-		m_pMpBar->SetRectFrameSize(m_MpBarRect);
-		m_fMpBarRight = m_pMpBar->GetrectFrameSize()->right;
-		m_fMpBarBottom = m_pMpBar->GetrectFrameSize()->bottom;
+		if (m_pMpBar != NULL)
+		{
+			SetRect(&m_MpBarRect, 0, 0, m_fMaxMp, m_fMpBarBottom);
+			m_pMpBar->SetRectFrameSize(m_MpBarRect);
+			m_fMpBarRight = m_pMpBar->GetrectFrameSize()->right;
+			m_fMpBarBottom = m_pMpBar->GetrectFrameSize()->bottom;
 
-		m_fMpBarSize = PrevMpSize / m_fMpBarRight;
-		m_pMpBar->setScale(D3DXVECTOR3(m_fMpBarSize, 0.7f, 0));
+			m_fMpBarSize = PrevMpSize / m_fMpBarRight;
+			m_pMpBar->setScale(D3DXVECTOR3(m_fMpBarSize, 0.7f, 0));
+		}
 		ReCorrectSize = false;
 	}
 
@@ -104,7 +122,7 @@ void cHealthProgress::update()
 		m_bCheckHpBarSize = false;
 	}
 
-	if (m_bCheckMpBarSize)
+	if (m_bCheckMpBarSize && m_pMpBar)
 	{
 		if (m_fCurrentMp > 0)
 			m_fCurrentMp = m_fCurrentMp - m_fUsedMpValue;
@@ -115,16 +133,19 @@ void cHealthProgress::update()
 		}
 		m_bCheckMpBarSize = false;
 	}
-	
+
 }
 void cHealthProgress::render()
 {
-	m_pContainer->Render();
-	m_pHpBar->aniRender();
-	m_pMpBar->aniRender();
+	if (m_pContainer)
+		m_pContainer->Render();
+	if (m_pHpBar)
+		m_pHpBar->aniRender();
+	if (m_pMpBar)
+		m_pMpBar->aniRender();
 }
 
 void cHealthProgress::Release()
 {
-	
+
 }

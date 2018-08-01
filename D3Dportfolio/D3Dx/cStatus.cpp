@@ -21,7 +21,7 @@ void cStatus::setup()
 	g_pTextureManager->addTexture("shopButtonOver", "./status/shopButtonOver.dds", BUTTON, 1, 1);
 	g_pTextureManager->addTexture("shopButtonUP", "./status/shopButtonUP.dds", BUTTON, 1, 1);
 
-	
+
 	m_pRect = new RECT[6];
 
 	UsedMp = 0;
@@ -116,10 +116,10 @@ void cStatus::setup()
 	m_pPlayerInfo->SkillInfo.Skill_Passive->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x + 110, m_pStatusScreen->GetPosition().y - 35, 0));
 
 
-	m_pPlayerInfo->SkillInfo.Skill_Q->setScale(D3DXVECTOR3(0.8f,0.8f,0));
-	m_pPlayerInfo->SkillInfo.Skill_W->setScale(D3DXVECTOR3(0.8f,0.8f,0));
-	m_pPlayerInfo->SkillInfo.Skill_E->setScale(D3DXVECTOR3(0.8f,0.8f,0));
-	m_pPlayerInfo->SkillInfo.Skill_R->setScale(D3DXVECTOR3(0.8f,0.8f,0));
+	m_pPlayerInfo->SkillInfo.Skill_Q->setScale(D3DXVECTOR3(0.8f, 0.8f, 0));
+	m_pPlayerInfo->SkillInfo.Skill_W->setScale(D3DXVECTOR3(0.8f, 0.8f, 0));
+	m_pPlayerInfo->SkillInfo.Skill_E->setScale(D3DXVECTOR3(0.8f, 0.8f, 0));
+	m_pPlayerInfo->SkillInfo.Skill_R->setScale(D3DXVECTOR3(0.8f, 0.8f, 0));
 	m_pPlayerInfo->SkillInfo.Skill_Passive->setScale(D3DXVECTOR3(0.55f, 0.55f, 0));
 
 
@@ -127,7 +127,7 @@ void cStatus::setup()
 	m_pStatInfo->Screen->setPosition(D3DXVECTOR3(m_pStatusScreen->GetPosition().x - 230, m_pStatusScreen->GetPosition().y + 20, 0));
 	m_pStatInfo->Screen->setScale(D3DXVECTOR3(1.2f, 0.7f, 0));
 
-	m_pStatInfo->MoveSpeed->setPosition(D3DXVECTOR3(m_pStatInfo->Screen->GetPosition().x + 10,m_pStatInfo->Screen->GetPosition().y +10,0));
+	m_pStatInfo->MoveSpeed->setPosition(D3DXVECTOR3(m_pStatInfo->Screen->GetPosition().x + 10, m_pStatInfo->Screen->GetPosition().y + 10, 0));
 	m_pStatInfo->Defense->setPosition(D3DXVECTOR3(m_pStatInfo->Screen->GetPosition().x + 80, m_pStatInfo->Screen->GetPosition().y + 10, 0));
 	m_pStatInfo->AttackSpeed->setPosition(D3DXVECTOR3(m_pStatInfo->Screen->GetPosition().x + 10, m_pStatInfo->Screen->GetPosition().y + 60, 0));
 	m_pStatInfo->Atk->setPosition(D3DXVECTOR3(m_pStatInfo->Screen->GetPosition().x + 80, m_pStatInfo->Screen->GetPosition().y + 60, 0));
@@ -138,11 +138,11 @@ void cStatus::setup()
 	m_pStatInfo->Atk->setScale(D3DXVECTOR3(0.8f, 0.8f, 0));
 
 
-	m_pStatInfo->StatNum->MoveSpeedNum_unit->setPosition(D3DXVECTOR3(m_pStatInfo->MoveSpeed->GetPosition().x + 48, m_pStatInfo->MoveSpeed->GetPosition().y +3, 0));
+	m_pStatInfo->StatNum->MoveSpeedNum_unit->setPosition(D3DXVECTOR3(m_pStatInfo->MoveSpeed->GetPosition().x + 48, m_pStatInfo->MoveSpeed->GetPosition().y + 3, 0));
 	m_pStatInfo->StatNum->MoveSpeedNum_ten->setPosition(D3DXVECTOR3(m_pStatInfo->MoveSpeed->GetPosition().x + 38, m_pStatInfo->MoveSpeed->GetPosition().y + 3, 0));
 	m_pStatInfo->StatNum->MoveSpeedNum_huand->setPosition(D3DXVECTOR3(m_pStatInfo->MoveSpeed->GetPosition().x + 28, m_pStatInfo->MoveSpeed->GetPosition().y + 3, 0));
 
-	m_pStatInfo->StatNum->DefenseNum_unit->setPosition(D3DXVECTOR3(m_pStatInfo->Defense->GetPosition().x + 48,m_pStatInfo->Defense->GetPosition().y + 3,0));
+	m_pStatInfo->StatNum->DefenseNum_unit->setPosition(D3DXVECTOR3(m_pStatInfo->Defense->GetPosition().x + 48, m_pStatInfo->Defense->GetPosition().y + 3, 0));
 	m_pStatInfo->StatNum->DefenseNum_ten->setPosition(D3DXVECTOR3(m_pStatInfo->Defense->GetPosition().x + 38, m_pStatInfo->Defense->GetPosition().y + 3, 0));
 	m_pStatInfo->StatNum->DefenseNum_huand->setPosition(D3DXVECTOR3(m_pStatInfo->Defense->GetPosition().x + 28, m_pStatInfo->Defense->GetPosition().y + 3, 0));
 
@@ -234,7 +234,7 @@ void cStatus::setup()
 	m_pPlayerInfo->HealthInfo.Mp = MaxMp;
 	MpRcRight = m_pStatusMpBar->GetrectFrameSize()->right;
 	MpRcBottom = m_pStatusMpBar->GetrectFrameSize()->bottom;
-	
+
 	SetRect(&MpRc, 0, 0, MaxMp, MpRcBottom);
 	MpRcSize = MpRcRight / MaxMp * 0.81f;
 	m_pStatusMpBar->SetRectFrameSize(MpRc);
@@ -306,8 +306,8 @@ void cStatus::update()
 	m_pStatInfo->StatNum->AtkNum_unit->setCurrentFrame((AtkValue % 10) / 1);
 	m_pStatInfo->StatNum->AtkNum_ten->setCurrentFrame((AtkValue % 100) / 10);
 	m_pStatInfo->StatNum->AtkNum_huand->setCurrentFrame((AtkValue % 1000) / 100);
-	
-	
+
+
 	if (m_pStatusInventory)
 		m_pStatusInventory->update();
 	if (m_pStatusScreen)
@@ -334,7 +334,7 @@ void cStatus::update()
 	for (int i = 0; i < m_pStatusInvenInfo.size(); i++)
 	{
 		if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo() != NULL)
-		{	
+		{
 			if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Mp != NULL &&
 				m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->GetEffected() == false)
 			{
@@ -354,7 +354,8 @@ void cStatus::update()
 				reSizeProgressBar();
 				m_pHealthProgress->SetReCorret(true);
 
-				m_pPlayer->SetHP(MaxHp);
+				m_pPlayer->SetMAXHP(MaxHp);
+				m_pPlayer->SetHP(CurrentHp);
 				if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Mp != NULL)
 				{
 					MaxMp += m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Mp;
@@ -367,8 +368,9 @@ void cStatus::update()
 				if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Attack != NULL)
 				{
 					AtkValue += m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Attack;
-					
+
 					m_pPlayer->SetATK(AtkValue);
+					g_pSkillManager->GetSkill("평타")->SetDamage(AtkValue);
 				}
 				if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->AttackSpeed != NULL)
 				{
@@ -389,6 +391,7 @@ void cStatus::update()
 				AtkValue += m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Attack;
 				m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->SetEffected(true);
 				m_pPlayer->SetATK(AtkValue);
+				g_pSkillManager->GetSkill("평타")->SetDamage(AtkValue);
 			}
 			if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->AttackSpeed != NULL &&
 				m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->GetEffected() == false)
@@ -413,12 +416,13 @@ void cStatus::update()
 	}
 
 	HitProgress();
-
+	m_pStatusHealthBar->GetrectFrameSize()->right = m_pPlayer->GetHP();
 	if (g_pKeyManager->IsOnceKeyDown('V')) // 맞았는가 확인 .
 	{
 		m_bIsHit = true;
 		m_bCheckHpBar = true;
 	}
+
 	if (m_pStatusHealthBar)
 	{
 		m_pStatusHealthBar->update(0);
@@ -428,7 +432,7 @@ void cStatus::update()
 		if (m_pStatusHealthBar->GetrectFrameSize()->left < m_pStatusHealthBar->GetrectFrameSize()->right &&
 			m_bIsHit)
 		{
-			m_pStatusHealthBar->GetrectFrameSize()->right -= hit;
+			m_pStatusHealthBar->GetrectFrameSize()->right = m_pPlayer->GetHP();
 			m_bIsHit = false;
 		}
 	}
@@ -447,7 +451,7 @@ void cStatus::update()
 	}
 	/*for (int i = 0; i < m_pStatusSkillInfo.size(); i++)
 	{
-		m_pStatusSkillInfo[i]->update();
+	m_pStatusSkillInfo[i]->update();
 	}*/
 
 	for (auto p : m_mapStatusSkillInfo)
@@ -466,9 +470,9 @@ void cStatus::update()
 	if (g_pKeyManager->IsOnceKeyDown(VK_ESCAPE))m_pShopOpend = false;
 
 
-	
 
-	
+
+
 
 	m_mapiter = m_mapChild.find("SHOP");
 	if (m_mapiter != m_mapChild.end())
@@ -529,7 +533,7 @@ void cStatus::update()
 		m_pStatusHealthBar->SetRectFrameSize(HpRc);
 		HprcRight = m_pStatusHealthBar->GetrectFrameSize()->right;
 		HprcBottom = m_pStatusHealthBar->GetrectFrameSize()->bottom;
-		
+
 		HprcSize = (prevRectSize * 0.81f) / HprcRight;
 		m_pStatusHealthBar->setScale(D3DXVECTOR3(HprcSize, 1.0f, 0));
 
@@ -570,12 +574,11 @@ void cStatus::update()
 
 				p.second->SetChosen(true);
 				p.second->GetskillInfo()->Setalphavalue(100);
-				
+
 				m_bSelected = true;
 				UsedMp = 30;
 				g_pSkillManager->IsReady("w");
 			}
-
 		}
 	}
 
@@ -611,7 +614,7 @@ void cStatus::update()
 
 				p.second->SetChosen(true);
 				p.second->GetskillInfo()->Setalphavalue(100);
-				
+
 				m_bSelected = true;
 				UsedMp = 50;
 				g_pSkillManager->IsReady("r");
@@ -685,33 +688,33 @@ void cStatus::render()
 	m_pStatInfo->Defense->Render();
 
 
-	if(MoveSpeedValue != 0)
-	m_pStatInfo->StatNum->MoveSpeedNum_unit->aniRender();
-	if(MoveSpeedValue >=10)
-	m_pStatInfo->StatNum->MoveSpeedNum_ten->aniRender();
-	if(MoveSpeedValue >=100)
-	m_pStatInfo->StatNum->MoveSpeedNum_huand->aniRender();
+	if (MoveSpeedValue != 0)
+		m_pStatInfo->StatNum->MoveSpeedNum_unit->aniRender();
+	if (MoveSpeedValue >= 10)
+		m_pStatInfo->StatNum->MoveSpeedNum_ten->aniRender();
+	if (MoveSpeedValue >= 100)
+		m_pStatInfo->StatNum->MoveSpeedNum_huand->aniRender();
 
-	if(DefenseValue != 0)
-	m_pStatInfo->StatNum->DefenseNum_unit->aniRender();
-	if(DefenseValue >=10)
-	m_pStatInfo->StatNum->DefenseNum_ten->aniRender();
-	if(DefenseValue >=100)
-	m_pStatInfo->StatNum->DefenseNum_huand->aniRender();
+	if (DefenseValue != 0)
+		m_pStatInfo->StatNum->DefenseNum_unit->aniRender();
+	if (DefenseValue >= 10)
+		m_pStatInfo->StatNum->DefenseNum_ten->aniRender();
+	if (DefenseValue >= 100)
+		m_pStatInfo->StatNum->DefenseNum_huand->aniRender();
 
-	if(AttackSpeedValue != 0)
-	m_pStatInfo->StatNum->AttackSpeedNum_unit->aniRender();
-	if(AttackSpeedValue >=10)
-	m_pStatInfo->StatNum->AttackSpeedNum_ten->aniRender();
-	if(AttackSpeedValue >=100)
-	m_pStatInfo->StatNum->AttackSpeedNum_huand->aniRender();
+	if (AttackSpeedValue != 0)
+		m_pStatInfo->StatNum->AttackSpeedNum_unit->aniRender();
+	if (AttackSpeedValue >= 10)
+		m_pStatInfo->StatNum->AttackSpeedNum_ten->aniRender();
+	if (AttackSpeedValue >= 100)
+		m_pStatInfo->StatNum->AttackSpeedNum_huand->aniRender();
 
-	if(AtkValue != 0)
-	m_pStatInfo->StatNum->AtkNum_unit->aniRender();
-	if(AtkValue >=10)
-	m_pStatInfo->StatNum->AtkNum_ten->aniRender();
-	if(AtkValue >=100)
-	m_pStatInfo->StatNum->AtkNum_huand->aniRender();
+	if (AtkValue != 0)
+		m_pStatInfo->StatNum->AtkNum_unit->aniRender();
+	if (AtkValue >= 10)
+		m_pStatInfo->StatNum->AtkNum_ten->aniRender();
+	if (AtkValue >= 100)
+		m_pStatInfo->StatNum->AtkNum_huand->aniRender();
 
 	if (m_pCharacterBar)
 		m_pCharacterBar->Render();
@@ -747,13 +750,13 @@ void cStatus::render()
 
 
 	cMainUI::render();
-	
+
 	for (auto p : m_mapStatusSkillInfo)
 	{
 		if (p.second->GetChosen() == true && p.second->GetUsing() == true)
 		{
-			g_pFontManager->TextFont(p.second->GetskillInfo()->GetPosition().x +18,
-				p.second->GetskillInfo()->GetPosition().y + 15, D3DXVECTOR3(255,0,255),"%d",
+			g_pFontManager->TextFont(p.second->GetskillInfo()->GetPosition().x + 18,
+				p.second->GetskillInfo()->GetPosition().y + 15, D3DXVECTOR3(255, 0, 255), "%d",
 				g_pSkillManager->GetSkill(p.first)->CooldownTimer());
 
 			if (g_pSkillManager->GetSkill(p.first)->CooldownTimer() == 0)
@@ -765,9 +768,9 @@ void cStatus::render()
 		}
 	}
 
-	g_pFontManager->TextFont(m_pStatusHealthBar->GetPosition().x + 200, m_pStatusHealthBar->GetPosition().y,D3DXVECTOR3(255,0,255), "%d", MaxHp);
-	g_pFontManager->TextFont(m_pStatusHealthBar->GetPosition().x + 180, m_pStatusHealthBar->GetPosition().y,D3DXVECTOR3(255,0,255), "/");
-	g_pFontManager->TextFont(m_pStatusHealthBar->GetPosition().x + 120, m_pStatusHealthBar->GetPosition().y,D3DXVECTOR3(255,0,255), "%d", CurrentHp);
+	g_pFontManager->TextFont(m_pStatusHealthBar->GetPosition().x + 200, m_pStatusHealthBar->GetPosition().y, D3DXVECTOR3(255, 0, 255), "%0.0f", m_pPlayer->GetMAXHP());
+	g_pFontManager->TextFont(m_pStatusHealthBar->GetPosition().x + 180, m_pStatusHealthBar->GetPosition().y, D3DXVECTOR3(255, 0, 255), "/");
+	g_pFontManager->TextFont(m_pStatusHealthBar->GetPosition().x + 120, m_pStatusHealthBar->GetPosition().y, D3DXVECTOR3(255, 0, 255), "%0.0f", m_pPlayer->GetHP());
 
 	g_pFontManager->TextFont(m_pStatusMpBar->GetPosition().x + 200, m_pStatusMpBar->GetPosition().y, D3DXVECTOR3(255, 0, 255), "%d", MaxMp);
 	g_pFontManager->TextFont(m_pStatusMpBar->GetPosition().x + 180, m_pStatusMpBar->GetPosition().y, D3DXVECTOR3(255, 0, 255), "/");
@@ -778,8 +781,8 @@ void cStatus::HitProgress()
 {
 	if (m_bCheckHpBar)
 	{
-		if(CurrentHp > 0)
-		CurrentHp = CurrentHp - hit;
+		if (CurrentHp > 0)
+			CurrentHp = CurrentHp - hit;
 
 		HprcRight = m_pStatusHealthBar->GetrectFrameSize()->right;
 		HprcBottom = m_pStatusHealthBar->GetrectFrameSize()->bottom;
@@ -806,7 +809,7 @@ void cStatus::InvenUpdate()
 		if (m_vecInven[i]->GetinvitemInfo()->GetItemInfo() != NULL)
 		{
 			m_pStatusInvenInfo = m_vecInven;
-	
+
 
 			t[i] = D3DXVECTOR3(m_vecInvenPos[i].x, m_vecInvenPos[i].y, 0);
 			s[i] = D3DXVECTOR3(0.55f, 0.55f, 0.7f);
@@ -816,7 +819,7 @@ void cStatus::InvenUpdate()
 				t[i].y,
 				t[i].z);
 
-			WorldMatrix[i] = matS[i]*matT[i];
+			WorldMatrix[i] = matS[i] * matT[i];
 
 			m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Itemtexture->setWorldMatrix(WorldMatrix[i]);
 		}
