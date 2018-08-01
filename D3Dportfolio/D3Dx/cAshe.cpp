@@ -3,6 +3,7 @@
 #include "cAStar.h"
 #include "cRangeSkill.h"
 #include "cEnemy.h"
+#include "cHealthProgress.h"
 #include <ctime>
 
 cAshe::cAshe()
@@ -63,6 +64,20 @@ void cAshe::Setup(const char * name)
 
 	m_eAIState = AI_PATROL;
 
+
+	m_pProgressBar = new cHealthProgress;
+	Bitmap* Container;  Bitmap* HpBar; Bitmap* MpBar;
+	Container = g_pTextureManager->addTexture("AsheHpContainer", "./status/AsheHpContainer.dds", NULL, NULL);
+	HpBar = g_pTextureManager->addTexture("AsheHpBar", "./status/AsheHpBar.dds", PROGRESSBAR, 1, 1);
+	MpBar = g_pTextureManager->addTexture("AsheMpBar", "./status/AsheMpBar.dds", PROGRESSBAR, 1, 1);
+
+	m_pProgressBar->SetContainer(Container);
+	m_pProgressBar->SetHpBar(HpBar);
+	m_pProgressBar->SetMaxHp(m_fMAXHP);
+	m_pProgressBar->SetCurrentHp(m_fHP);
+	m_pProgressBar->SetMpBar(MpBar);
+	m_pProgressBar->SetMaxMp(m_fMAXMP);
+	m_pProgressBar->setup();
 }
 
 void cAshe::Release()
@@ -74,6 +89,32 @@ void cAshe::Release()
 
 void cAshe::Update()
 {
+	D3DXVECTOR3 tempposition(0, 0, 0);
+	D3DXMATRIX WorldMatrix, matProj, matViewPort, matView;
+	D3DXMatrixTranslation(&WorldMatrix, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	D3DVIEWPORT9 tempViewPort;
+	g_pD3DDevice->GetViewport(&tempViewPort);
+	D3DXMatrixIdentity(&matViewPort);
+	matViewPort._11 = tempViewPort.Width / (float)2;
+	matViewPort._22 = -(int)tempViewPort.Height / (float)2;
+	matViewPort._33 = tempViewPort.MaxZ - tempViewPort.MinZ;
+	matViewPort._41 = tempViewPort.X + tempViewPort.Width / (float)2;
+	matViewPort._42 = tempViewPort.Y + tempViewPort.Height / (float)2;
+	matViewPort._43 = tempViewPort.MinZ;
+	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
+	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
+
+	WorldMatrix = WorldMatrix * matView * matProj * matViewPort;
+	D3DXVec3TransformCoord(&tempposition, &tempposition, &WorldMatrix);
+
+	m_pProgressBar->GetContainer()->setPosition(D3DXVECTOR3(tempposition.x - 70,tempposition.y - 100,0));
+	m_pProgressBar->GetHpBar()->setPosition(D3DXVECTOR3(tempposition.x - 38,tempposition.y - 92,0));
+	m_pProgressBar->GetMpBar()->setPosition(D3DXVECTOR3(tempposition.x - 38,tempposition.y - 82,0));
+
+	m_pProgressBar->GetHpBar()->GetrectFrameSize()->right = m_fHP;
+
+	if (m_pProgressBar)
+		m_pProgressBar->update();
 	if (m_pAttack)
 		m_pAttack->Update();
 
@@ -89,7 +130,8 @@ void cAshe::Render()
 {
 	if (m_pAttack)
 		m_pAttack->Render();
-
+	if (m_pProgressBar)
+		m_pProgressBar->render();
 	cCharacter::Render();
 }
 

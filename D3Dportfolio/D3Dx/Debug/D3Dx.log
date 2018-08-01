@@ -1,2 +1,6 @@
-﻿  D3Dx.vcxproj -> C:\Users\kang\Documents\GitHub\D3Dportfolio\D3Dportfolio\Debug\D3Dx.exe
-  D3Dx.vcxproj -> C:\Users\kang\Documents\GitHub\D3Dportfolio\D3Dportfolio\Debug\D3Dx.pdb (Full PDB)
+﻿  cAshe.cpp
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cashe.cpp(62): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cashe.cpp(113): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cashe.cpp(212): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\user\desktop\d3dportfolio\d3dportfolio\d3dx\cashe.cpp(226): warning C4390: ';': 제어된 빈 문이 있습니다. 이 문이 필요합니까?
+  D3Dx.vcxproj -> C:\Users\USER\Desktop\D3Dportfolio\D3Dportfolio\Debug\D3Dx.exe
