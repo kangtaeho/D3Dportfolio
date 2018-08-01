@@ -61,7 +61,7 @@ void cShop::setup()
 
 	m_pItemEx = new ex;
 
-	
+
 	tempInvitem = new citem;
 
 	m_pItemInfo = new citem;
@@ -109,7 +109,7 @@ void cShop::setup()
 	m_pWholeB->setScale(D3DXVECTOR3(0.75f, 0.75f, 0));
 
 	setInventoryInfo();
-	
+
 	ItemSetting();
 	setItemPosition();
 	setWholeItemPosition();
@@ -123,12 +123,12 @@ void cShop::setup()
 	m_pGold.Gold_thous = new Bitmap;
 
 	m_pGold.Gold_units = g_pTextureManager->addTexture("Gold_units", "./item/GoldNum.dds", ANIMATION, 10.0f, 1.0f);
-	m_pGold.Gold_tens =  g_pTextureManager->addTexture("Gold_tens", "./item/GoldNum.dds", ANIMATION, 10.0f, 1.0f);
+	m_pGold.Gold_tens = g_pTextureManager->addTexture("Gold_tens", "./item/GoldNum.dds", ANIMATION, 10.0f, 1.0f);
 	m_pGold.Gold_huans = g_pTextureManager->addTexture("Gold_huans", "./item/GoldNum.dds", ANIMATION, 10.0f, 1.0f);
 	m_pGold.Gold_thous = g_pTextureManager->addTexture("Gold_thous", "./item/GoldNum.dds", ANIMATION, 10.0f, 1.0f);
 
 
-	
+
 }
 void cShop::sortItemInfo()
 {
@@ -229,7 +229,7 @@ void cShop::ItemSetting()
 	Trinity_Force->GetItemInfo()->Mp = 100.0f;
 	Trinity_Force->GetItemInfo()->Hp = 100.0f;
 	Trinity_Force->GetItemInfo()->AttackSpeed = 2.0f;
-	Trinity_Force->GetItemInfo()->Attack = 50.0f;
+	Trinity_Force->GetItemInfo()->Attack = 30.0f;
 	m_vecItem.push_back(Trinity_Force);
 
 	citem* Ward = new citem;
@@ -451,7 +451,7 @@ void cShop::setBluePrintInfo(std::string strKey, int index)
 }
 void cShop::update()
 {
-	
+
 	if (m_pShop)
 		m_pShop->update(0);
 
@@ -639,7 +639,7 @@ void cShop::update()
 	{
 		p->update();
 	}
-	
+
 	//for (int i = 0; i < m_vecInventory.size(); i++)
 	//{
 	//	if (m_vecInventory[i]->GetinvitemInfo()->GetItemInfo() == NULL) continue;
@@ -682,7 +682,7 @@ void cShop::update()
 
 	ItemDragDrop();
 
-	
+
 	if (ClickedItem == "potionBp")
 	{
 		m_pItemEx->potion->setPosition(D3DXVECTOR3(600, 600, 0));
@@ -690,28 +690,28 @@ void cShop::update()
 	/*
 	for (int i = 0; i < m_vecPrintitem.size(); i++)
 	{
-		if (m_vecPrintitem.size() == 0)continue;
+	if (m_vecPrintitem.size() == 0)continue;
 
-		if (m_vecPrintitem[i]->GetItemInfo() != NULL)
-		{
-			position[i] = D3DXVECTOR3(m_vecMtrlPos[i].x, m_vecMtrlPos[i].y, 0);
+	if (m_vecPrintitem[i]->GetItemInfo() != NULL)
+	{
+	position[i] = D3DXVECTOR3(m_vecMtrlPos[i].x, m_vecMtrlPos[i].y, 0);
 
-			D3DXMatrixTranslation(&matT[i], position[i].x,
-				position[i].y, 0);
+	D3DXMatrixTranslation(&matT[i], position[i].x,
+	position[i].y, 0);
 
-			m_matWorld[i] = matT[i];
+	m_matWorld[i] = matT[i];
 
-			m_vecPrintitem[i]->GetItemInfo()->Itemtexture->setWorldMatrix(m_matWorld[i]);
-		}
+	m_vecPrintitem[i]->GetItemInfo()->Itemtexture->setWorldMatrix(m_matWorld[i]);
+	}
 	}*/
 
-	
+
 	cMainUI::update();
 }
 
 bool cShop::returnItem()
 {
-	for (int i = m_vecInventory.size() - 1; i >=0; i--)
+	for (int i = m_vecInventory.size() - 1; i >= 0; i--)
 	{
 		if (m_vecInventory[i]->GetinvitemInfo()->GetItemInfo() != NULL)
 		{
@@ -1037,47 +1037,47 @@ void cShop::render()
 
 	/*if (ClickedItem == "LongSwordBp")
 	{
-		m_pItemEx->LongSword->Render();
+	m_pItemEx->LongSword->Render();
 	}
 	if (ClickedItem == "DaggerBp")
 	{
-		m_pItemEx->Dagger->Render();
+	m_pItemEx->Dagger->Render();
 	}
 	if (ClickedItem == "phageBp")
 	{
-		m_pItemEx->phage->Render();
+	m_pItemEx->phage->Render();
 	}
 	if (ClickedItem == "SheenBp")
 	{
-		m_pItemEx->Sheen->Render();
+	m_pItemEx->Sheen->Render();
 	}
 	if (ClickedItem == "Red_OrbBp")
 	{
-		m_pItemEx->Red_Orb->Render();
+	m_pItemEx->Red_Orb->Render();
 	}
 	if (ClickedItem == "Trinity_ForceBp")
 	{
-		m_pItemEx->Trinity_Force->Render();
+	m_pItemEx->Trinity_Force->Render();
 	}
 	if (ClickedItem == "spBp")
 	{
-		m_pItemEx->sp->Render();
+	m_pItemEx->sp->Render();
 	}
 	if (ClickedItem == "Blue_OrbBp")
 	{
-		m_pItemEx->Blue_Orb->Render();
+	m_pItemEx->Blue_Orb->Render();
 	}
 	if (ClickedItem == "shoesBp")
 	{
-		m_pItemEx->shoes->Render();
+	m_pItemEx->shoes->Render();
 	}
 	if (ClickedItem == "WardBp")
 	{
-		m_pItemEx->Ward->Render();
+	m_pItemEx->Ward->Render();
 	}
 	if (ClickedItem == "potionBp")
 	{
-		m_pItemEx->potion->Render();
+	m_pItemEx->potion->Render();
 	}*/
 
 	int a = 0;
@@ -1132,7 +1132,7 @@ void cShop::render()
 	}
 
 	GoldRender();
-	
+
 	//g_pTextureManager->aniRender("Gold");
 	cMainUI::render();
 }
@@ -1476,8 +1476,8 @@ bool cShop::isClickUi()
 		pmatWorld->_42 + (stSize->nHeight) * 0.7f);
 
 	if (PtInRect(rc, pt))
-	{	
-		return true;	
+	{
+		return true;
 	}
 	else return false;
 }
@@ -1515,7 +1515,7 @@ void cShop::ItemDragDrop()
 		tempsize = stSize[i];
 		itemp = rc[i];
 
-	
+
 		if (PtInRect(&rc[i], pt))
 		{
 			if (g_pKeyManager->IsOnceKeyDown(VK_LBUTTON))

@@ -59,8 +59,11 @@ HRESULT cPlayScene::Setup()
 	g_pTextureManager->addTexture("shopButtonDown", "./status/shopButtonDown.dds", BUTTON, 1, 1);
 	g_pTextureManager->addTexture("shopButtonOver", "./status/shopButtonOver.dds", BUTTON, 1, 1);
 	g_pTextureManager->addTexture("shopButtonUP", "./status/shopButtonUP.dds", BUTTON, 1, 1);
+	g_pTextureManager->addTexture("Dead", "./status/Dead.dds", 0, 0);
+
 	//g_pXfileManager->AddXfile("Map", "summoner rift", "summoner_rift.x");
 
+	g_pTextureManager->findTexture("Dead")->Setalphavalue(0);
 	m_pPlayer = new cPlayer;
 	m_pPlayer->Setup("Teemo");
 
@@ -128,6 +131,8 @@ void cPlayScene::Release()
 
 void cPlayScene::Update()
 {
+	g_pTextureManager->findTexture("Dead")->update();
+
 	if (m_pEnemyManager)
 		m_pEnemyManager->Update();
 
@@ -191,10 +196,15 @@ void cPlayScene::Update()
 	//스탯설정
 	m_vecHealthProgress[0]->setBarPosition(tempposition, tempposition);
 
-	m_vecHealthProgress[0]->SetMaxHp(status->GetMAXHP());
-	m_vecHealthProgress[0]->SetCurrentHp(status->GetCURRENTHP());
+	m_vecHealthProgress[0]->SetMaxHp(m_pPlayer->GetMAXHP());
+	m_vecHealthProgress[0]->SetCurrentHp(m_pPlayer->GetHP());
 	m_vecHealthProgress[0]->SetHitValue(status->GetHitValue());
 	m_vecHealthProgress[0]->SetHpBarSize(status->GetCheckHpBar());
+
+	
+
+	m_vecHealthProgress[0]->GetHpBar()->GetrectFrameSize()->right = m_pPlayer->GetHP();
+	
 	m_vecHealthProgress[0]->SetisHit(status->GetIsHit());
 
 	m_vecHealthProgress[0]->SetMaxMp(status->GetMAXMP());
@@ -210,11 +220,18 @@ void cPlayScene::Update()
 		//status->SetRecorrect(true);
 	}
 
-
+	if (m_pPlayer->GetHP() <= 0)
+		g_pTextureManager->findTexture("Dead")->Setalphavalue(150);
+	else g_pTextureManager->findTexture("Dead")->Setalphavalue(0);
 	// 애쉬
 	if (m_pAshe)
 		m_pAshe->Update();
 
+
+	if (m_vecHealthProgress[0]->GetHpBar()->GetrectFrameSize()->right <= 0)
+	{
+		m_vecHealthProgress[0]->GetHpBar()->GetrectFrameSize()->right = 0;
+	}
 }
 
 void cPlayScene::Render()
@@ -251,4 +268,5 @@ void cPlayScene::Render()
 	if (m_pAshe)
 		m_pAshe->Render();
 
+	g_pTextureManager->findTexture("Dead")->Render();
 }

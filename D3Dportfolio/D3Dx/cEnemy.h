@@ -2,13 +2,14 @@
 #include "cCharacter.h"
 
 class cRangeSkill;
+class cHealthProgress;
 
 class cEnemy : public cCharacter
 {
 private:
 	std::vector<int> m_vecGoLine;
 	STCollisionMapTool m_stAllCircleLine;
-
+	cHealthProgress* m_pProgressBar;
 	bool m_bLive;
 
 

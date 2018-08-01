@@ -71,7 +71,7 @@ protected:
 	float				m_fRotY;
 	float				m_fRotX;			
 
-	float				m_fDamage;
+	
 	float				m_fRange;			// 타겟범위
 	float				m_fPosSpeed;		// 포스 스피드
 
@@ -113,7 +113,7 @@ protected:
 	SYNTHESIZE(bool, m_bIsCasting, IsCasting);
 	SYNTHESIZE(bool, m_bIsCooldown, IsCooldown);// 쿨타임끝났냐?
 	SYNTHESIZE(std::vector<cCharacter*>*, m_pVecEnemy, VecEnemyPointer);
-
+	SYNTHESIZE(float, m_fDamage, Damage);
 public:
 	cSkill();
 	virtual ~cSkill();
