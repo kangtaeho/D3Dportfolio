@@ -40,6 +40,10 @@ void cCharacter::Render()
 	D3DXMatrixIdentity(&matS);
 	D3DXMatrixIdentity(&matR);
 	D3DXMatrixIdentity(&matT);
+
+	if (m_pMatScale)
+		matS = *m_pMatScale;
+
 	D3DXMatrixRotationY(&matR, m_fRotY);
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	m_matWorld = matS * matR * matT;

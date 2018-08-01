@@ -121,6 +121,7 @@ void cObject::Update()
 		else if(m_fHP <= 0)
 		{
 			setAnimation("Crush", false, 1.0f);
+			m_eState = DEAD;
 		}
 
 

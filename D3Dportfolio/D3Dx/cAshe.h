@@ -21,13 +21,31 @@ class cAshe : public cCharacter
 {
 private:
 
+	LPD3DXMESH m_pSphere;
+
 	cRangeSkill* m_pAttack;
 	
-	std::vector<cCharacter*>* m_vecAllEnemy;
-	std::vector<AI_POS> m_vecPosAI;
+	std::vector<cCharacter*>*	m_vecAllEnemy;
+	std::vector<AI_POS>			m_vecPosAI;
 
-	AI_POS m_sMovePos;
-	D3DXVECTOR3 m_vStartPos;
+	cCharacter*					m_pEnemy;
+
+	AI_POS						m_sMovePos;
+	AI_POS						m_sBackPos;
+	AI_POS						m_sStartPos;
+
+
+	D3DXVECTOR3					m_vStartPos;
+
+	AI_TYPE						m_eAIState;
+
+	float						m_fSite;
+	float						m_fPassedTime;
+	bool						m_bIsDead;
+	bool						m_bIsDanger;
+
+	float						m_fNowHP;
+	float						m_fDangerTime;
 
 public:
 	cAshe();
@@ -39,6 +57,13 @@ public:
 	virtual void Render();
 
 	void ChangePos();
+	void ControlAI();
+	void RespawnAshe();
 
+	LPD3DXMESH getSphere() { return m_pSphere; }
+	void SetVecEnemey(std::vector<cCharacter*>* enemy) { m_vecAllEnemy = enemy; }
+
+	void DangerTime();
+	void BackAshe();
 };
 

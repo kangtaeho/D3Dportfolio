@@ -115,6 +115,9 @@ HRESULT cPlayScene::Setup()
 
 	m_pAshe = new cAshe;
 	m_pAshe->Setup("Ashe");
+	m_pAshe->SetVecEnemey(m_pEnemyManager->getAllBlue());
+
+	m_pPlayer->SetAshe(m_pAshe);
 
 	return S_OK;
 

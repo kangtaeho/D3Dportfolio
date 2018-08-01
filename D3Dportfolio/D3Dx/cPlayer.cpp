@@ -6,6 +6,7 @@
 #include "cEnemy.h"
 #include "cShop.h"
 #include "Bitmap.h"
+#include "cAshe.h"
 
 cPlayer::cPlayer()
 {
@@ -177,15 +178,30 @@ void cPlayer::AttackEnemy(cCharacter* enemy)
 
 	int isPick = 0;
 
-	for (int i = 0; i < m_pVecEnemy->size(); ++i)
+	bool isCheck = false;
+	if (m_pAshe)
 	{
-		m_vNextPosition = g_pCollisionManager->getRayPosition(isPick, (*m_pVecEnemy)[i]->getPosition(), ((cEnemy*)(*m_pVecEnemy)[i])->getSphere(), (*m_pVecEnemy)[i]->GetRadius()); //포지션 받고	
+		m_vNextPosition = g_pCollisionManager->getRayPosition(isPick, m_pAshe->getPosition(),m_pAshe->getSphere(), m_pAshe->GetRadius()); //포지션 받고
 		if (isPick)
 		{
-			m_pEnemy = (cEnemy*)(*m_pVecEnemy)[i];
-			break;
+			m_pEnemy = (cAshe*)m_pAshe;
+			isCheck = true;
 		}
 	}
+
+	if (!isCheck)
+	{
+		for (int i = 0; i < m_pVecEnemy->size(); ++i)
+		{
+			m_vNextPosition = g_pCollisionManager->getRayPosition(isPick, (*m_pVecEnemy)[i]->getPosition(), ((cEnemy*)(*m_pVecEnemy)[i])->getSphere(), (*m_pVecEnemy)[i]->GetRadius()); //포지션 받고	
+			if (isPick)
+			{
+				m_pEnemy = (cEnemy*)(*m_pVecEnemy)[i];
+				break;
+			}
+		}
+	}
+
 	if (m_pEnemy && m_pEnemy->GetHP() <= 0)
 	{
 		m_pEnemy = NULL;
@@ -201,7 +217,6 @@ void cPlayer::AttackEnemy(cCharacter* enemy)
 		{
 			m_fRotY = GetAngle(m_vPosition, m_pEnemy->getPosition());
 			g_pSkillManager->Fire("평타", &m_vPosition, m_pEnemy->getPositionPointer(), m_pEnemy);
-			//SAFE_DELETE(m_pEnemyPos);
 		}
 	}
 }

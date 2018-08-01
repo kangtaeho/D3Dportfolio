@@ -30,6 +30,8 @@ public:
 	void Render();
 
 	std::vector<cCharacter*>* getAllEnemy() { return &m_vecAllEnemy; }
+	std::vector<cCharacter*>* getAllBlue() { return &m_vecAllBlue; }
+
 	void setLinkPlayer(cPlayer* player) { m_pPlayer = player; }
 	bool getNexusLiving(bool Blue);
 };

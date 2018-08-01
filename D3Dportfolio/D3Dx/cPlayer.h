@@ -4,13 +4,14 @@
 class cSphere;
 class cEnemy;
 class cShop;
+class cAshe;
 
 class cPlayer : public cCharacter
 {
 private:
 
 	D3DXVECTOR3			m_vClickPos;
-	cEnemy*				m_pEnemy;
+	cCharacter*			m_pEnemy;
 	cShop*				m_pShop;
 
 	LPD3DXMESH			m_pTargetMesh;
@@ -19,6 +20,7 @@ private:
 	float m_fRespwan;
 
 	SYNTHESIZE(bool, isClickUi, IsClickUI);
+	SYNTHESIZE(cAshe*, m_pAshe, Ashe);
 
 public:
 	cPlayer();

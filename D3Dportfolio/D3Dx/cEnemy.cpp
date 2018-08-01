@@ -76,6 +76,8 @@ void cEnemy::Release()
 
 void cEnemy::Update()
 {
+	m_isLive = m_bLive;
+
 	if (m_pEnemy)
 	{
 		if (D3DXVec3Length(&(m_pEnemy->getPosition() - m_vPosition)) > 800.0f)m_pEnemy = NULL;

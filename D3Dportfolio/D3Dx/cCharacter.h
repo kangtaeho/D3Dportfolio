@@ -24,6 +24,7 @@ protected:
 	D3DXVECTOR3						m_vNextPosition;
 
 	D3DXMATRIX						m_matWorld;
+	D3DXMATRIX*						m_pMatScale;
 
 	float							m_fRotY;
 	float							m_fRange;
@@ -33,9 +34,11 @@ protected:
 	cAStar							m_AStar;
 
 	CHARACTER_STATE					m_eState;
+	cCharacter*						m_pEnemy;
 
 	SYNTHESIZE(float, m_fSpeed, Speed);
 	SYNTHESIZE(float, m_fRadius, Radius);
+	SYNTHESIZE(bool, m_isLive, IsLive);
 	
 	SYNTHESIZE(float, m_fMAXHP, MAXHP);
 	SYNTHESIZE(float, m_fMAXMP, MAXMP);
@@ -60,6 +63,8 @@ public:
 	D3DXVECTOR3 getNextPosition() { return m_vNextPosition; }
 	D3DXVECTOR3* getPositionPointer() { return &m_vPosition; }
 	D3DXVECTOR3 getPosition() { return m_vPosition; }
+	CHARACTER_STATE getState() { return m_eState; }
+	void setEnemy(cCharacter* enemy) { m_pEnemy = enemy; }
 
 };
 

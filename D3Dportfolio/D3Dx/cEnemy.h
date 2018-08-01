@@ -20,7 +20,6 @@ private:
 protected:
 	LPD3DXMESH m_pSphere;
 	STCIRCLE m_pCircle;
-	cCharacter* m_pEnemy;
 	std::vector<cCharacter*>* m_vecAllEnemy;
 	cRangeSkill* m_pAttack;
 	float m_fSite;
@@ -40,6 +39,5 @@ public:
 	void setCircleLine(STCollisionMapTool AllCircleLine) { m_stAllCircleLine = AllCircleLine; }
 	void setEnemy(std::vector<cCharacter*>* vecAllEnemy) { m_vecAllEnemy = vecAllEnemy; }
 	bool getLive() { return m_bLive; }
-	void setEnemy(cCharacter* enemy) { m_pEnemy = enemy; }
 };
 
