@@ -40,6 +40,7 @@ void cRangeSkill::Update()
 	Move();
 	RemoveTarget();
 	AutoFire();
+	UpdateDamageRender();
 }
 
 void cRangeSkill::Render()
@@ -53,4 +54,5 @@ void cRangeSkill::Render()
 	 }
 	
 	RenderCube();
+	RenderDR();
 }

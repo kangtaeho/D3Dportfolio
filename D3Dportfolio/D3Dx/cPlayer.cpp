@@ -26,14 +26,16 @@ void cPlayer::Setup(const char* name)
 	m_fHP = 300;
 	m_fMP = 250;
 	m_fDEF = 50;
-	m_fATK = 80;
+	m_fATK = 50;
 	m_fATKSpeed = 50;
 
 	cCharacter::Setup(name);
 
 	m_fRadius = 13.0f;
 
-	g_pSkillManager->AddSkill("평타", RANGE_SKILL, 80, m_fRange, 20.0f, 0.3f, 2.5f, 20, true);
+	g_pSkillManager->AddSkill("평타", RANGE_SKILL, m_fATK, m_fRange, 20.0f, 0.3f, 2.5f, 20, true);
+	g_pSkillManager->GetSkill("평타")->SetDamageRender("normalShot");
+
 	g_pSkillManager->AddSkill("r", OBJECT_SKILL, 100, 500, 10.0f, 0.5f, 20.0f, 40, true, "BantamTrap");
 	g_pSkillManager->GetSkill("r")->SetPlayer(this);	// 테두리 때문에
 
@@ -106,6 +108,7 @@ void cPlayer::Render()
 	POINT ptMouse;
 	GetCursorPos(&ptMouse);
 	ScreenToClient(g_hWnd, &ptMouse);
+	g_pFontManager->TextFont(ptMouse.x, ptMouse.y, D3DXVECTOR3(255,0, 255), "3D %0.2f, %0.2f, %0.2f", (float)m_vNextPosition.x, (float)m_vNextPosition.y, (float)m_vNextPosition.z);
 
 	g_pSkillManager->Render();
 
@@ -116,11 +119,6 @@ void cPlayer::Render()
 
 void cPlayer::Check3DMousePointer()
 {
-
-	if (g_pKeyManager->IsOnceKeyDown('3'))
-	{
-		g_pSkillManager->IsReady("e");
-	}
 
 	if (g_pKeyManager->IsOnceKeyDown(VK_LBUTTON))
 	{

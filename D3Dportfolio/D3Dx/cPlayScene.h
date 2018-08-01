@@ -1,12 +1,16 @@
 #pragma once
 #include "cGameNode.h"
 #include  "cMainUI.h"
+
 class cPlayer;
+class cAshe;
 class cShop;
 class cStatus;
 class cHealthProgress;
 class cMinimap;
 class cObjectManager;
+
+
 class cPlayScene : public cGameNode
 {
 private:
@@ -21,8 +25,9 @@ private:
 
 	std::vector<cHealthProgress*> m_vecHealthProgress;
 	
-
 	bool isOpen;
+
+	cAshe* m_pAshe;
 
 public:
 	cPlayScene();

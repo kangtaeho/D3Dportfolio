@@ -5,6 +5,7 @@ class cCube;
 class cSkinnedMesh;
 class cPlayer;
 class cCharacter;
+class cDamageRender;
 
 enum SKILL_TYPE
 {
@@ -105,6 +106,8 @@ protected:
 	std::vector<TOXIC_ENEMY> m_vecToxic;
 	cCharacter* m_pTargetEnemy;
 
+	cDamageRender*		m_pDamageRender;
+
 	SYNTHESIZE(bool, m_bIsReady, IsReady); // 스킬 사용 준비가 되었냐?
 	SYNTHESIZE(cPlayer*, m_pPlayer, Player);		// 버프를 생각을 못함,,, 구조 ㅄ됨
 	SYNTHESIZE(bool, m_bIsCasting, IsCasting);
@@ -173,8 +176,10 @@ public:
 	void AddToxicEnemy(cCharacter* enemy);
 	void DamagedToxic();
 
-
 	void SetVecEnemy(std::vector<cCharacter*>* pVecEnemy) { m_pVecEnemy = pVecEnemy; }
 
-};
+	void SetDamageRender(std::string texName);
+	void UpdateDamageRender();
+	void RenderDR();
 
+};

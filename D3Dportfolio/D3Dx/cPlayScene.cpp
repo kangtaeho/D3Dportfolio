@@ -7,6 +7,8 @@
 #include "cHealthProgress.h"
 #include "cMinimap.h"
 #include "cObjectManager.h"
+#include "cAshe.h"
+
 cPlayScene::cPlayScene()
 	: m_pPlayer(NULL)
 {
@@ -71,8 +73,6 @@ HRESULT cPlayScene::Setup()
 	m_pMainUi->AddChild(shop, "SHOP");
 	m_pMainUi->setup();
 
-
-
 	changed = false;
 
 	cHealthProgress* PlayerProgress = new cHealthProgress;
@@ -109,13 +109,21 @@ HRESULT cPlayScene::Setup()
 	m_pPlayer->SetVecEnemy(m_pEnemyManager->getAllEnemy());
 	m_pPlayer->SkillRegisterTarget();
 
+
+	m_pAshe = new cAshe;
+	m_pAshe->Setup("Ashe");
+
 	return S_OK;
+
 }
 
 void cPlayScene::Release()
 {
 	if(m_pPlayer)
 		m_pPlayer->Release();
+
+	if (m_pAshe)
+		m_pAshe->Release();
 }
 
 void cPlayScene::Update()
@@ -180,10 +188,7 @@ void cPlayScene::Update()
 	WorldMatrix = WorldMatrix * matView * matProj * matViewPort;
 	D3DXVec3TransformCoord(&tempposition, &tempposition, &WorldMatrix);
 
-
 	//½ºÅÈ¼³Á¤
-	
-
 	m_vecHealthProgress[0]->setBarPosition(tempposition, tempposition);
 
 	m_vecHealthProgress[0]->SetMaxHp(status->GetMAXHP());
@@ -204,23 +209,30 @@ void cPlayScene::Update()
 		m_vecHealthProgress[0]->SetReCorret(true);
 		//status->SetRecorrect(true);
 	}
+
+
+	// ¾Ö½¬
+	if (m_pAshe)
+		m_pAshe->Update();
+
 }
 
 void cPlayScene::Render()
 {
 	if (m_pEnemyManager)
 		m_pEnemyManager->Render();
-	if (m_pPlayer)
-		m_pPlayer->Render();
-	
 
 	//status->InvenRender();
 	m_vecHealthProgress[0]->render();
+
 	if (m_pMainUi)
 		m_pMainUi->render();
 
 	if (m_pMinimap)
 		m_pMinimap->Render();
+
+	if (m_pPlayer)
+		m_pPlayer->Render();
 
 	{//¸ÊÃß°¡
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
@@ -236,6 +248,7 @@ void cPlayScene::Render()
 			g_pXfileManager->FindXfile("summoner_rift")->Render(NULL);
 	}
 
-	// g_pCollisionManager->Render();
+	if (m_pAshe)
+		m_pAshe->Render();
 
 }

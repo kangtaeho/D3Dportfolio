@@ -4,6 +4,7 @@
 #include "cSkinnedMesh.h"
 #include "cPlayer.h"
 #include "cCharacter.h"
+#include "cDamageRender.h"
 
 cSkill::cSkill()
 	: e_skillType(SKILL_TYPE_COUNT)
@@ -186,6 +187,7 @@ void cSkill::Casting()
 		m_bIsReady = false;
 		m_isUsingSkill = true;
 	}
+
 }
 
 void cSkill::CoolDownSetup()
@@ -236,7 +238,9 @@ void cSkill::RemoveTarget()
 		delete m_pCube;
 		m_pCube = NULL;
 		m_bIsRemove = false;
-		//m_pTargetPos = NULL;
+
+		if (m_pDamageRender)
+			m_pDamageRender->ShowDamage(m_pTargetEnemy->getPosition(), (int)m_fDamage);
 
 		switch (e_skillType)
 		{
@@ -530,7 +534,6 @@ void cSkill::DestroyAOEMesh()
 void cSkill::RenderAOEMesh()
 {
 
-	//if (m_bIsAutoFire) return;
 	if (m_bIsReady && !m_bIsFire)
 	{
 		if (s_AoeMesh)
@@ -617,4 +620,22 @@ void cSkill::DamagedToxic()
 		}
 
 	}
+}
+
+void cSkill::SetDamageRender(std::string texName)
+{
+	m_pDamageRender = new cDamageRender;
+	m_pDamageRender->Setup(texName);
+}
+
+void cSkill::UpdateDamageRender()
+{
+	if (m_pDamageRender)
+		m_pDamageRender->Update();
+}
+
+void cSkill::RenderDR()
+{
+	if (m_pDamageRender)
+		m_pDamageRender->Render();
 }
