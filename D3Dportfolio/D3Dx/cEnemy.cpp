@@ -22,7 +22,7 @@ void cEnemy::Setup(const char * name, bool Blue)
 	m_fHP = 100;
 	m_vPosition = m_AStar.PushDestination(m_vPosition, m_fRadius); //만약에 충돌을 받으면 밀어낸다
 	m_vPosition = g_pCollisionManager->SetHeight(m_vPosition);
-	// 테스트용입니다
+																   // 테스트용입니다
 	m_fSpeed = 3.0f;
 	m_fRange = 80.0f;
 	m_fBlue = Blue;
@@ -57,7 +57,6 @@ void cEnemy::Setup(const char * name, bool Blue)
 	m_pAttack = new cRangeSkill;
 	m_bAttack = false;
 
-
 	m_pProgressBar = new cHealthProgress;
 	Bitmap* Container;  Bitmap* HpBar; Bitmap* MpBar;
 	Container = g_pTextureManager->addTexture("EnemyContainer", "./status/EnemyHpContainer.dds", NULL, NULL);
@@ -69,7 +68,6 @@ void cEnemy::Setup(const char * name, bool Blue)
 	m_pProgressBar->SetCurrentHp(m_fHP);
 	//m_pProgressBar->SetMpBar(MpBar);
 	m_pProgressBar->setup();
-
 }
 
 void cEnemy::Release()
@@ -118,7 +116,7 @@ void cEnemy::Update()
 		if (EndAnimation())m_bLive = false;
 	}
 	else if (m_AStar.UpdateForEnemy(m_vPosition, m_vNextPosition, m_fRotY, m_fSpeed, m_fRadius, m_fRange, tempEnemyPosition, m_pEnemy))setAnimation("Run");
-	else if (m_pEnemy)
+	else if(m_pEnemy)
 	{
 		m_pAttack->Setup(RANGE_SKILL, 10, 100 + m_pEnemy->GetRadius(), D3DXVec3Length(&(m_pEnemy->getPosition() - m_vPosition)), 0.0f, 0.0f, 10, true, NULL);
 		setAnimation("Attack");
@@ -134,7 +132,6 @@ void cEnemy::Update()
 	}
 
 	m_pAttack->Update();
-
 
 	D3DXVECTOR3 tempposition(0, 0, 0);
 	D3DXMATRIX WorldMatrix, matProj, matViewPort, matView;
@@ -162,7 +159,10 @@ void cEnemy::Update()
 	m_pProgressBar->update();
 	m_pProgressBar->GetHpBar()->GetrectFrameSize()->right = m_fHP;
 
-	if (m_pProgressBar->GetHpBar()->GetrectFrameSize()->right <= 0) m_pProgressBar->GetHpBar()->GetrectFrameSize()->right = 0;
+	if (m_pProgressBar->GetHpBar()->GetrectFrameSize()->right <= 0)
+	{
+		m_pProgressBar->GetHpBar()->GetrectFrameSize()->right = 0;
+	}
 }
 
 void cEnemy::Render()
@@ -181,8 +181,10 @@ void cEnemy::Render()
 	UpdateAnimation();
 	m_pSkinnedMesh->Update(m_pAnimController);
 
-	m_pProgressBar->render();
-
+	if (m_pProgressBar->GetHpBar()->GetrectFrameSize()->right > 0)
+	{
+		m_pProgressBar->render();
+	}
 	//g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 	//
 	//matT;

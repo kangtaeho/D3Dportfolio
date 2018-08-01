@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "cObject.h"
+#include "cRangeSkill.h"
 #include "cHealthProgress.h"
 
 cObject::cObject()
@@ -43,6 +44,12 @@ void cObject::Setup(const char * name, int BlueTeam, float scale)
 	m_eState = IDLE;
 	m_fMAXHP = 900.0f;
 	m_fHP = 900.0f;
+	m_fSite = 700;
+	m_pAttack = new cRangeSkill;
+	m_pAttack->Setup(RANGE_SKILL, 40, 600, 15, 0, 2, 1000, true, NULL);
+
+	m_vFirePosition = m_vPosition;
+	m_vFirePosition.y += 250.0f;
 
 	D3DXCreateSphere(g_pD3DDevice, m_fRadius, 10, 10, &m_pSphere, NULL);
 
@@ -94,6 +101,7 @@ void cObject::Update()
 		}
 		if (m_pSkinnedMesh != g_pXfileManager->FindXfile(FullName.c_str()))
 		{
+			SAFE_RELEASE(m_pAnimController);
 			m_pSkinnedMesh = g_pXfileManager->FindXfile(FullName.c_str());
 			m_pSkinnedMesh->CloneAniController(&m_pAnimController);
 		}
@@ -110,10 +118,34 @@ void cObject::Update()
 		{
 			setAnimation("Crush", false, 1.0f);
 		}
-		else if (m_fHP <= 0)
+		else if(m_fHP <= 0)
 		{
 			setAnimation("Crush", false, 1.0f);
 		}
+
+
+		if (!m_pEnemy)
+		{
+			for (int tempEnemy = 0; tempEnemy < m_vecAllEnemy->size(); ++tempEnemy)
+			{
+				if (D3DXVec3Length(&((*m_vecAllEnemy)[tempEnemy]->getPosition() - m_vPosition)) < m_fSite && ((cEnemy*)(*m_vecAllEnemy)[tempEnemy])->GetHP() > 0)
+				{
+					m_pEnemy = (*m_vecAllEnemy)[tempEnemy];
+
+					break;
+				}
+			}
+		}
+		else
+		{
+			if (m_pEnemy->GetHP() <= 0 || D3DXVec3Length(&(m_pEnemy->getPosition() - m_vPosition)) > m_fSite)m_pEnemy = NULL;
+		}
+		if (m_pEnemy)
+		{
+			m_pAttack->Fire(&m_vFirePosition, m_pEnemy->getPositionPointer(), m_pEnemy, true);
+		}
+
+		m_pAttack->Update();
 	}
 	else
 	{
@@ -148,7 +180,6 @@ void cObject::Update()
 
 	D3DXVECTOR3 SpherePosition = m_vPosition;
 	SpherePosition.y += m_fRadius;
-
 
 	D3DXVECTOR3 tempposition(0, 0, 0);
 	D3DXMATRIX WorldMatrix, matProj, matViewPort, matView;
@@ -195,6 +226,10 @@ void cObject::Render()
 	UpdateAnimation();
 	m_pSkinnedMesh->Update(m_pAnimController);
 
+	if (m_sName.c_str()[0] == 'T')
+	{
+		m_pAttack->Render();
+	}
 	m_pObjectProgressBar->render();
 	//g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 	//

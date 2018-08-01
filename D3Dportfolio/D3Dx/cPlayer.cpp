@@ -71,7 +71,7 @@ void cPlayer::Update()
 		m_fRespwan -= g_pTimeManager->GetElapsedTime();
 		if (m_fRespwan <= 0)
 		{
-			m_fHP = 300.0f;
+			m_fHP = m_fMAXHP;
 			m_vPosition = g_pCollisionManager->SetHeight(D3DXVECTOR3(0, 0, 0));
 			m_vNextPosition = m_vPosition;
 			m_fRespwan = 0.0f;
@@ -80,6 +80,7 @@ void cPlayer::Update()
 
 	if (m_fHP <= 0)
 	{
+		m_fHP = 0;
 		setAnimation("Death", false);
 		if(!m_fRespwan)
 			m_fRespwan = 10.0f;
