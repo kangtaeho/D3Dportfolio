@@ -46,19 +46,19 @@ cXManager::~cXManager()
 
 bool cXManager::Setup(int & allfilesize, int & loadfilesize)
 {
-	if (FileIndex == m_vecAllFileName.size())return true;
-
 	allfilesize = loadfilesize = 0;
-
-	AddXfile(m_vecAllFileName[FileIndex].c_str(), m_vecAllFolderName[FileIndex].c_str(), (m_vecAllFileName[FileIndex] + ".x").c_str());
-	FileIndex++;
-	LoadFileSize[FileIndex] = AllFileSize[FileIndex];
 
 	for (int i = 0; i < AllFileSize.size(); ++i)
 	{
 		allfilesize += AllFileSize[i];
 		loadfilesize += LoadFileSize[i];
 	}
+	if (FileIndex == m_vecAllFileName.size())return true;
+
+	AddXfile(m_vecAllFileName[FileIndex].c_str(), m_vecAllFolderName[FileIndex].c_str(), (m_vecAllFileName[FileIndex] + ".x").c_str());
+	LoadFileSize[FileIndex] = AllFileSize[FileIndex];
+
+	FileIndex++;
 
 	return false;
 }

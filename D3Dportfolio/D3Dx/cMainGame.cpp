@@ -56,7 +56,7 @@ void cMainGame::Render()
 	g_pSceneManager->Render();
 
 /*------------------------------------------------------------------------*/
-	g_pTimeManager->Render();
+	//g_pTimeManager->Render();
 	g_pD3DDevice->EndScene();
 
 	g_pD3DDevice->Present(NULL, NULL, NULL, NULL);

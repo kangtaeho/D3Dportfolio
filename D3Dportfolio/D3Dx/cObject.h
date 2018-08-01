@@ -1,16 +1,14 @@
 #pragma once
-#include "cCharacter.h"
-#include "cSphere.h"
+#include "cEnemy.h"
 
 
-class cObject : public cCharacter
+class cObject : public cEnemy
 {
 private:
 	std::string m_sName;
 	int m_bBlue;
 	cAction m_pAction;
-	cSphere	tempSphere;
-	STCIRCLE m_pCircle;
+	D3DXVECTOR3 m_vFirePosition;
 	SYNTHESIZE(float, m_fScale, Scale);
 
 public:
@@ -26,7 +24,5 @@ public:
 	int getBlue() { return m_bBlue; }
 	float getRotY() { return m_fRotY; }
 	void SetRotY(float rotY) { m_fRotY = rotY; }
-	cSphere* getSphere() { return &tempSphere; }
-	STCIRCLE* getCirclePointer() { return &m_pCircle; }
 };
 

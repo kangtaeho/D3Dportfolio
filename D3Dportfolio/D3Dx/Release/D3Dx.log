@@ -1,11 +1,10 @@
-﻿  cHealthProgress.cpp
-cHealthProgress.cpp(31): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-cHealthProgress.cpp(57): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-cHealthProgress.cpp(58): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-cHealthProgress.cpp(67): warning C4244: '-=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  cPlayer.cpp
+d:\국비\teamportfolio\d3dportfolio - 복사본 (3)\d3dportfolio\d3dx\cplayer.cpp(145): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+d:\국비\teamportfolio\d3dportfolio - 복사본 (3)\d3dportfolio\d3dx\cplayer.cpp(186): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+d:\국비\teamportfolio\d3dportfolio - 복사본 (3)\d3dportfolio\d3dx\cplayer.cpp(206): warning C4390: ';': 제어된 빈 문이 있습니다. 이 문이 필요합니까?
   코드를 생성하고 있습니다.
-  0 of 2620 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  2 of 3280 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
-  D3Dx.vcxproj -> C:\Users\USER\Desktop\D3Dportfolio\D3Dportfolio\Release\D3Dx.exe
+  D3Dx.vcxproj -> D:\국비\TeamPortfolio\D3Dportfolio - 복사본 (3)\D3Dportfolio\Release\D3Dx.exe

@@ -36,5 +36,5 @@ void cToxicSkill::Update()
 void cToxicSkill::Render()
 {
 	RenderCube();
-	RenderAOEMesh();
+	//RenderAOEMesh();
 }

@@ -8,18 +8,17 @@ class cShop;
 class cPlayer : public cCharacter
 {
 private:
-	cSphere * m_pSphere;
-	D3DXVECTOR3      m_vClickPos;
 
-	cEnemy*         m_pEnemy;
-	cShop*         m_pShop;
+	D3DXVECTOR3			m_vClickPos;
+	cEnemy*				m_pEnemy;
+	cShop*				m_pShop;
 
-	SYNTHESIZE(bool, isClickUi, IsClickUI);
+	LPD3DXMESH			m_pTargetMesh;
 
 	std::vector<cCharacter*>* m_pVecEnemy;
+	float m_fRespwan;
 
-	// 테스트용 벡터
-	std::vector<cCharacter*> m_vecEnemy;
+	SYNTHESIZE(bool, isClickUi, IsClickUI);
 
 public:
 	cPlayer();
@@ -34,5 +33,9 @@ public:
 	void AttackEnemy(cCharacter* enemy);
 
 	void SetVecEnemy(std::vector<cCharacter*>* vecEnemy) { m_pVecEnemy = vecEnemy; }
+	void SkillRegisterTarget(){ g_pSkillManager->RegisterVecEnemy(m_pVecEnemy); }
+
+	void CreateTargetMesh();
+	void ClickTargetRender();
 
 };

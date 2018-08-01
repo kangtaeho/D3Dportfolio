@@ -140,6 +140,12 @@
     <ClCompile Include="cLoadingScene.cpp">
       <Filter>소스파일\cScene</Filter>
     </ClCompile>
+    <ClCompile Include="cObject.cpp">
+      <Filter>소스파일\cCharacter</Filter>
+    </ClCompile>
+    <ClCompile Include="cObjectManager.cpp">
+      <Filter>소스파일\cCharacter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h">
@@ -289,6 +295,12 @@
     </ClInclude>
     <ClInclude Include="cLoadingScene.h">
       <Filter>소스파일\cScene</Filter>
+    </ClInclude>
+    <ClInclude Include="cObject.h">
+      <Filter>소스파일\cCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="cObjectManager.h">
+      <Filter>소스파일\cCharacter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

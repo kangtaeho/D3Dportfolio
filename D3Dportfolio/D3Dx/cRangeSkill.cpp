@@ -40,6 +40,7 @@ void cRangeSkill::Update()
 	Move();
 	RemoveTarget();
 	AutoFire();
+	UpdateDamageRender();
 }
 
 void cRangeSkill::Render()
@@ -49,8 +50,9 @@ void cRangeSkill::Render()
 	 {
 	 	D3DXVECTOR3 v = (*m_pTargetPos - *m_pPlayerPos);
 	 	float le = D3DXVec3Length(&v);
-	 	g_pFontManager->TextFont(100, 140, D3DXVECTOR3(255, 0, 255), " 거리 %0.3f ", le);
+	 	//g_pFontManager->TextFont(100, 140, D3DXVECTOR3(255, 0, 255), " 거리 %0.3f ", le);
 	 }
 	
 	RenderCube();
+	RenderDR();
 }

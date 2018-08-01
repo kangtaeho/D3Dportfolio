@@ -1,4 +1,5 @@
 #pragma once
+class cCharacter;
 
 struct AStarFath
 {
@@ -31,6 +32,8 @@ public:
 	
 	bool Update(D3DXVECTOR3& position, D3DXVECTOR3 NextPosition, float& rotY, float speed, float radius, float fRange = 0, 
 		D3DXVECTOR3* pEnemyPos = NULL, float fEnemyradius = 0);
+	bool UpdateForEnemy(D3DXVECTOR3& position, D3DXVECTOR3 NextPosition, float& rotY, float speed, float radius, float fRange = 0,
+		D3DXVECTOR3* pEnemyPos = NULL, cCharacter* enemy = NULL);
 	D3DXVECTOR3 FindNextPosition(D3DXVECTOR3 position, D3DXVECTOR3 NextPosition, float radius);
 	
 	//bool Stop(D3DXVECTOR3 position, float Range, D3DXVECTOR3* EnemyPosition, float EnemyRadius);

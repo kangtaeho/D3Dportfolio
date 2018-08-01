@@ -4,6 +4,7 @@
 #include "cSkinnedMesh.h"
 #include "cPlayer.h"
 #include "cCharacter.h"
+#include "cDamageRender.h"
 
 cSkill::cSkill()
 	: e_skillType(SKILL_TYPE_COUNT)
@@ -33,7 +34,6 @@ cSkill::cSkill()
 	, m_pPlayer(NULL)
 	, m_pTargetEnemy(NULL)
 	, e_BuffType(BUFF_TYPE_COUNT)
-	, m_pVecEnemy(NULL)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 }
@@ -158,7 +158,6 @@ void cSkill::MeshMove()
 		D3DXVec3Normalize(&dir, &dir);
 
 		m_vecMesh[i].pos += dir*m_fPosSpeed;
-		m_vecMesh[i].pos = g_pCollisionManager->SetHeight(m_vecMesh[i].pos);
 
 	}
 }
@@ -188,6 +187,7 @@ void cSkill::Casting()
 		m_bIsReady = false;
 		m_isUsingSkill = true;
 	}
+
 }
 
 void cSkill::CoolDownSetup()
@@ -231,13 +231,16 @@ void cSkill::RemoveTarget()
 {
 	if (!m_pTargetPos) return; // 대상 타겟이 없으면 리턴
 	if (!m_pTargetEnemy) return;
+	if (!m_pCube)return;
 
 	if (D3DXVec3Length(&(*m_pTargetPos - m_vPos)) < 10.0f)
 	{
 		delete m_pCube;
 		m_pCube = NULL;
 		m_bIsRemove = false;
-		m_pTargetPos = NULL;
+
+		if (m_pDamageRender)
+			m_pDamageRender->ShowDamage(m_pTargetEnemy->getPosition(), (int)m_fDamage);
 
 		switch (e_skillType)
 		{
@@ -259,25 +262,21 @@ void cSkill::RemoveMeshTime()
 	for (int i = 0; i < m_vecMesh.size(); i++)
 	{
 		m_vecMesh[i].removeTime += g_pTimeManager->GetElapsedTime();
-		
-		bool isCollision = false;
 
 		if (m_pVecEnemy)
 		{
 			for (int j = 0; j < m_pVecEnemy->size(); j++)
 			{
-				if (D3DXVec3Length(&(m_vecMesh[i].pos - (*m_pVecEnemy)[j]->getPosition())) < 20.0)
+				if (D3DXVec3Length(&(m_vecMesh[i].pos - (*m_pVecEnemy)[j]->getPosition())) < 60)
 				{
+					(*m_pVecEnemy)[j]->SetHP((*m_pVecEnemy)[j]->GetHP() - m_fDamage);
 					SAFE_DELETE(m_vecMesh[i].animation);
 					m_vecMesh.erase(m_vecMesh.begin() + i);
-					isCollision = true;
-					break;
+					return;
 				}
 			}
 		}
-			
-		if (isCollision) continue;
-
+	
 		if (m_vecMesh[i].removeTime > m_fRemoveTime)
 		{
 			SAFE_DELETE(m_vecMesh[i].animation);
@@ -291,7 +290,7 @@ void cSkill::AutoFire()
 {
 	if (!m_bIsAutoFire) return;
 
-	if (D3DXVec3Length(&(*m_pTargetPos - *m_pPlayerPos)) <= m_fRange)
+	if (D3DXVec3Length(&(*m_pTargetPos - *m_pPlayerPos)) < m_fRange)
 	{
 		m_fStartTime = g_pTimeManager->GetLastUpdateTime();
 		m_bIsCasting = true;
@@ -327,6 +326,7 @@ void cSkill::CreateMesh()
 		m_pCube->Setup(D3DXVECTOR3(20.0, 20.0, 50.0), NULL);
 		D3DXMATRIX matR, matT;
 		D3DXMatrixRotationY(&matR, m_fRotY);
+		m_vPos = *m_pPlayerPos;
 		//  플레이어 위치에 바로 큐브생성
 		D3DXMatrixTranslation(&matT, m_vPos.x, m_vPos.y, m_vPos.z);
 		m_matWorld = matR*matT;
@@ -382,7 +382,7 @@ void cSkill::BuffStart()
 	switch (e_BuffType)
 	{
 	case MOVEUP:
-		m_pPlayer->SetSpeed(m_pPlayer->GetSpeed()*5.0f);
+		m_pPlayer->SetSpeed(m_pPlayer->GetSpeed()*2.0f);
 		break;
 	case DAMAGEUP:
 		break;
@@ -402,7 +402,7 @@ void cSkill::BuffEnd()
 		switch (e_BuffType)
 		{
 		case MOVEUP:
-			m_pPlayer->SetSpeed(m_pPlayer->GetSpeed() / 5.0f);
+			m_pPlayer->SetSpeed(m_pPlayer->GetSpeed() / 2.0f);
 			break;
 		case DAMAGEUP:
 			break;
@@ -518,10 +518,6 @@ void cSkill::CreateAOEMesh(bool isCreatePointMesh, float pointScale)
 		s_AoeMesh->pointScale = pointScale;
 
 	}
-	else
-	{
-		s_AoeMesh->pointMesh = NULL;
-	}
 
 }
 
@@ -538,7 +534,6 @@ void cSkill::DestroyAOEMesh()
 void cSkill::RenderAOEMesh()
 {
 
-	//if (m_bIsAutoFire) return;
 	if (m_bIsReady && !m_bIsFire)
 	{
 		if (s_AoeMesh)
@@ -547,7 +542,7 @@ void cSkill::RenderAOEMesh()
 			D3DXMATRIX	matS, matT;
 
 			D3DXMatrixScaling(&matS, m_fRange, 1, m_fRange);
-			D3DXMatrixTranslation(&matT, m_pPlayer->getPosition().x, m_pPlayer->getPosition().y, m_pPlayer->getPosition().z);
+			D3DXMatrixTranslation(&matT, m_pPlayer->getPosition().x, m_pPlayer->getPosition().y+5, m_pPlayer->getPosition().z);
 
 			matAOEWorld = matS*matT;
 
@@ -564,7 +559,7 @@ void cSkill::RenderAOEMesh()
 				D3DXVECTOR3 p = g_pCollisionManager->getRayPosition(isPick);
 
 				D3DXMatrixScaling(&matS, s_AoeMesh->pointScale, 1, s_AoeMesh->pointScale);
-				D3DXMatrixTranslation(&matT, p.x, p.y, p.z);
+				D3DXMatrixTranslation(&matT, p.x, p.y+7, p.z);
 
 				matPointWorld = matS*matT;
 
@@ -625,4 +620,22 @@ void cSkill::DamagedToxic()
 		}
 
 	}
+}
+
+void cSkill::SetDamageRender(std::string texName)
+{
+	m_pDamageRender = new cDamageRender;
+	m_pDamageRender->Setup(texName);
+}
+
+void cSkill::UpdateDamageRender()
+{
+	if (m_pDamageRender)
+		m_pDamageRender->Update();
+}
+
+void cSkill::RenderDR()
+{
+	if (m_pDamageRender)
+		m_pDamageRender->Render();
 }
