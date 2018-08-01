@@ -44,6 +44,7 @@ private:
 	float						m_fPassedTime;
 	bool						m_bIsDead;
 	bool						m_bIsDanger;
+	bool						m_bIsFire;
 
 	float						m_fNowHP;
 	float						m_fDangerTime;
