@@ -20,6 +20,7 @@ cPlayer::~cPlayer()
 
 void cPlayer::Setup(const char* name)
 {
+	cCharacter::Setup(name);
 	m_fRange = 400;
 	m_fSpeed = 7.0f;
 	m_fMAXHP = 300;
@@ -29,9 +30,10 @@ void cPlayer::Setup(const char* name)
 	m_fDEF = 50;
 	m_fATK = 50;
 	m_fATKSpeed = 50;
+	m_fTime = 0.5f;
+	m_fRegainHP = 0.1f;
+	m_fRegainMP = 0.1f;
 
-
-	cCharacter::Setup(name);
 	m_vPosition = D3DXVECTOR3(-3118, 5224, -3642);
 	m_vNextPosition = D3DXVECTOR3(-3118, 5224, -3642);
 	m_fRadius = 13.0f;
@@ -53,7 +55,6 @@ void cPlayer::Setup(const char* name)
 
 	m_fRespwan = 0.0f;
 	m_fTelePortTime = 0.0f;
-	m_fTime = 0.0f;
 	m_fMaxTelePortTime = 8.0f;
 	m_pTelePortProgress = new cHealthProgress;
 
@@ -66,7 +67,6 @@ void cPlayer::Setup(const char* name)
 
 	m_pTelePortProgress->SetContainer(TelePortContainer);
 	m_pTelePortProgress->SetProgress(TelePortBar);
-
 	m_pTelePortProgress->setup();
 	m_bTelePort = false;
 	m_bProgressing = false;
@@ -86,6 +86,16 @@ void cPlayer::Update()
 
 	g_pSkillManager->Update();
 
+	if (m_fTime)
+	{
+		m_fTime -= g_pTimeManager->GetElapsedTime();
+
+		if (m_fTime <= 0)
+		{
+			if (m_fHP < m_fMAXHP) m_fHP += m_fRegainHP * 5.0f;
+			m_fTime = 0.5f;
+		}
+	}
 	if (m_fRespwan)
 	{
 		m_fRespwan -= g_pTimeManager->GetElapsedTime();
@@ -150,7 +160,7 @@ void cPlayer::Update()
 	if (m_bProgressing)
 	{
 		srand(GetTickCount());
-		float time = rand() % 3;
+		float time = rand() % 5;
 
 		if(m_pTelePortProgress->GetProgress()->GETRECT()->right < m_pTelePortProgress->GetContainer()->GETRECT()->right)
 		m_pTelePortProgress->GetProgress()->GETRECT()->right += time;
@@ -169,8 +179,6 @@ void cPlayer::Update()
 			setAnimation("Dance");
 			m_fTelePortTime -= 0.5f;
 			m_pTelePortProgress->GetProgress()->GETRECT()->right = m_fTelePortTime;
-
-			
 		}
 
 		if (m_fTelePortTime <= 0)
@@ -232,6 +240,10 @@ void cPlayer::Render()
 		if(!m_bProgressing)
 		g_pFontManager->TextFont(WINSIZEX / 2 + 10, WINSIZEY / 2 + 120, D3DXVECTOR3(8, 130, 123),"%0.1f", m_fTelePortTime / 10);
 	}
+
+	g_pFontManager->TextFont(760,730, D3DXVECTOR3(255, 255, 255), "%0.1f",m_fRegainHP);
+	g_pFontManager->TextFont(760, 750, D3DXVECTOR3(255, 255, 255), "%0.1f", m_fRegainMP);
+
 	cCharacter::Render();
 }
 

@@ -11,6 +11,7 @@ struct tagItemStat
 	float Defence;
 	float Speed;
 	float AttackSpeed;
+	float ReGainHp;
 	int price;
 	ST_UI_SIZE m_stSize;
 	std::string itemName;

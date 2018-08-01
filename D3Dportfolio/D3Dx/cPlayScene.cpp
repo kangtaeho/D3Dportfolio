@@ -99,7 +99,9 @@ HRESULT cPlayScene::Setup()
 	status->SetDefense(m_pPlayer->GetDEF());
 	status->SetAtk(m_pPlayer->GetATK());
 	status->SetAttackSpeed(m_pPlayer->GetATKSpeed());
-	
+
+
+
 	status->SetRecorrect(true);
 
 	status->setAddressLinkWithHealthProgress(m_vecHealthProgress[0]);
@@ -151,7 +153,7 @@ void cPlayScene::Update()
 		m_pMainUi->update();
 	}
 
-	m_pMainUi->GetGold().amount += 0.05;
+	//shop->GetGold().amount += 10.0f;  //食奄陥たたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたた食奄醤
 
 	if (m_pMainUi->GetNodeName() == "SHOP")
 	{

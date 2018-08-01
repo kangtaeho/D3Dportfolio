@@ -335,6 +335,12 @@ void cStatus::update()
 	{
 		if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo() != NULL)
 		{
+			if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->ReGainHp != NULL &&
+				m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->GetEffected() == false)
+			{
+				m_pPlayer->SetRegainHP(m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->ReGainHp);
+			}
+
 			if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Mp != NULL &&
 				m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->GetEffected() == false)
 			{
@@ -416,7 +422,9 @@ void cStatus::update()
 	}
 
 	HitProgress();
+
 	m_pStatusHealthBar->GetrectFrameSize()->right = m_pPlayer->GetHP();
+
 	if (g_pKeyManager->IsOnceKeyDown('V')) // 맞았는가 확인 .
 	{
 		m_bIsHit = true;

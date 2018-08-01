@@ -183,7 +183,7 @@ void cShop::ItemSetting()
 	potion->setup("potion", "./item/potion.dds", START_ITEM, CONSUME);
 	potion->GetItemInfo()->price = 50;
 	potion->GetItemInfo()->Itemtexture->setScale(D3DXVECTOR3(0.7f, 0.7f, 0));
-	potion->GetItemInfo()->Hp = 30.0f;
+	potion->GetItemInfo()->ReGainHp = 3.0f;
 	m_vecItem.push_back(potion);
 	citem* shoes = new citem;
 	shoes->setup("shoes", "./item/1001_Boots_of_Speed.dds", START_ITEM, EQUIPABLE);

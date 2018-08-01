@@ -192,7 +192,7 @@ private:
 	cUIButton* m_pShopButton;
 
 
-
+	
 	SYNTHESIZE(Bitmap*, m_pTeleport, BTelePort);
 	SYNTHESIZE(int, AttackSpeedValue, AttackSpeed);
 	SYNTHESIZE(int, AtkValue, Atk);

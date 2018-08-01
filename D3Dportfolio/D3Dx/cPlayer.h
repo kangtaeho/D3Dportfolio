@@ -21,6 +21,7 @@ private:
 	float m_fMaxTelePortTime;
 	float m_fTelePortTime;
 	float m_fTime;
+	
 	bool m_bProgressing;
 
 	SYNTHESIZE(bool, m_bTelePort, TelePort);
