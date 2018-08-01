@@ -29,8 +29,10 @@ void cPlayer::Setup(const char* name)
 	m_fATK = 50;
 	m_fATKSpeed = 50;
 
-	cCharacter::Setup(name);
 
+	cCharacter::Setup(name);
+	m_vPosition = D3DXVECTOR3(-3118, 5224, -3642);
+	m_vNextPosition = D3DXVECTOR3(-3118, 5224, -3642);
 	m_fRadius = 13.0f;
 
 	g_pSkillManager->AddSkill("ÆòÅ¸", RANGE_SKILL, m_fATK, m_fRange, 20.0f, 0.3f, 2.5f, 20, true);
@@ -59,7 +61,6 @@ void cPlayer::Release()
 void cPlayer::Update()
 {
 	if (g_pKeyManager->IsStayKeyDown(VK_SPACE))g_pCameraManager->setCameraPos(m_vPosition);
-	Check3DMousePointer();
 
 	bool isMove = false;
 	isMove = m_AStar.Update(m_vPosition, m_vNextPosition, m_fRotY, m_fSpeed, m_fRadius, m_fRange, m_pEnemyPos);
@@ -84,6 +85,7 @@ void cPlayer::Update()
 		setAnimation("Death", false);
 		if(!m_fRespwan)
 			m_fRespwan = 10.0f;
+		return;
 	}
 	else if (g_pSkillManager->IsCasting())
 	{
@@ -102,6 +104,7 @@ void cPlayer::Update()
 		setAnimation();
 	}
 
+	Check3DMousePointer();
 }
 
 void cPlayer::Render()

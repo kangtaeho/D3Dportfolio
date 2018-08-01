@@ -60,7 +60,9 @@ HRESULT cPlayScene::Setup()
 	g_pTextureManager->addTexture("shopButtonOver", "./status/shopButtonOver.dds", BUTTON, 1, 1);
 	g_pTextureManager->addTexture("shopButtonUP", "./status/shopButtonUP.dds", BUTTON, 1, 1);
 	g_pTextureManager->addTexture("Dead", "./status/Dead.dds", 0, 0);
+
 	//g_pXfileManager->AddXfile("Map", "summoner rift", "summoner_rift.x");
+
 	g_pTextureManager->findTexture("Dead")->Setalphavalue(0);
 	m_pPlayer = new cPlayer;
 	m_pPlayer->Setup("Teemo");

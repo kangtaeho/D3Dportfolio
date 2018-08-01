@@ -768,13 +768,13 @@ void cStatus::render()
 		}
 	}
 
-	g_pFontManager->TextFont(m_pStatusHealthBar->GetPosition().x + 200, m_pStatusHealthBar->GetPosition().y, D3DXVECTOR3(255, 0, 255), "%0.0f", m_pPlayer->GetMAXHP());
-	g_pFontManager->TextFont(m_pStatusHealthBar->GetPosition().x + 180, m_pStatusHealthBar->GetPosition().y, D3DXVECTOR3(255, 0, 255), "/");
-	g_pFontManager->TextFont(m_pStatusHealthBar->GetPosition().x + 120, m_pStatusHealthBar->GetPosition().y, D3DXVECTOR3(255, 0, 255), "%0.0f", m_pPlayer->GetHP());
+	g_pFontManager->TextFont(m_pStatusHealthBar->GetPosition().x + 200, m_pStatusHealthBar->GetPosition().y, D3DXVECTOR3(0, 0, 0), "%0.0f", m_pPlayer->GetMAXHP());
+	g_pFontManager->TextFont(m_pStatusHealthBar->GetPosition().x + 180, m_pStatusHealthBar->GetPosition().y, D3DXVECTOR3(0, 0, 0), "/");
+	g_pFontManager->TextFont(m_pStatusHealthBar->GetPosition().x + 120, m_pStatusHealthBar->GetPosition().y, D3DXVECTOR3(0, 0, 0), "%0.0f", m_pPlayer->GetHP());
 
-	g_pFontManager->TextFont(m_pStatusMpBar->GetPosition().x + 200, m_pStatusMpBar->GetPosition().y, D3DXVECTOR3(255, 0, 255), "%d", MaxMp);
-	g_pFontManager->TextFont(m_pStatusMpBar->GetPosition().x + 180, m_pStatusMpBar->GetPosition().y, D3DXVECTOR3(255, 0, 255), "/");
-	g_pFontManager->TextFont(m_pStatusMpBar->GetPosition().x + 120, m_pStatusMpBar->GetPosition().y, D3DXVECTOR3(255, 0, 255), "%d", CurrentMp);
+	g_pFontManager->TextFont(m_pStatusMpBar->GetPosition().x + 200, m_pStatusMpBar->GetPosition().y, D3DXVECTOR3(0, 0, 0), "%d", MaxMp);
+	g_pFontManager->TextFont(m_pStatusMpBar->GetPosition().x + 180, m_pStatusMpBar->GetPosition().y, D3DXVECTOR3(0, 0, 0), "/");
+	g_pFontManager->TextFont(m_pStatusMpBar->GetPosition().x + 120, m_pStatusMpBar->GetPosition().y, D3DXVECTOR3(0, 0, 0), "%d", CurrentMp);
 }
 
 void cStatus::HitProgress()

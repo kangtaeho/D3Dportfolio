@@ -11,8 +11,10 @@ cCameraManager::cCameraManager()
 	, m_fDistance(3000)
 	, m_isRButtonDown(false)
 	, m_bIsMoveWindow(false)
-	, m_fCameraPosX(0)
-	, m_fCameraPosZ(0)
+	, m_fCameraPosX(-3118)
+	, m_fCameraPosZ(-3642)
+
+	//D3DXVECTOR3(-3118, 5224, -3642);
 {
 }
 
@@ -55,7 +57,7 @@ void cCameraManager::Update()
 
 	D3DXVec3TransformCoord(&m_vEye, &m_vEye, &(matRotX*matRotY));
 
-	m_vLookAt = D3DXVECTOR3(m_fCameraPosX, 5100, m_fCameraPosZ);
+	m_vLookAt = D3DXVECTOR3(m_fCameraPosX, 5224, m_fCameraPosZ);
 	m_vEye = m_vLookAt + m_vEye;
 
 	D3DXMATRIX matView;
