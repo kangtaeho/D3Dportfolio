@@ -263,6 +263,8 @@ void cAshe::RespawnAshe()
 
 		m_fPassedTime = 0.0f;
 		m_bIsDead = false;
+
+		m_bIsGetGold = false;
 	}
 }
 

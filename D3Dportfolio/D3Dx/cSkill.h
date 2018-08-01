@@ -114,6 +114,8 @@ protected:
 	SYNTHESIZE(bool, m_bIsCooldown, IsCooldown);// ÄðÅ¸ÀÓ³¡³µ³Ä?
 	SYNTHESIZE(std::vector<cCharacter*>*, m_pVecEnemy, VecEnemyPointer);
 	SYNTHESIZE(float, m_fDamage, Damage);
+	SYNTHESIZE(bool, m_bIsKill, IsKill);
+
 public:
 	cSkill();
 	virtual ~cSkill();

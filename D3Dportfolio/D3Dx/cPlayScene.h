@@ -29,6 +29,8 @@ private:
 
 	cAshe* m_pAshe;
 
+	bool isKill;
+
 public:
 	cPlayScene();
 	~cPlayScene();

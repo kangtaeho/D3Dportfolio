@@ -11,6 +11,7 @@
 
 cPlayScene::cPlayScene()
 	: m_pPlayer(NULL)
+	, isKill(false)
 {
 }
 
@@ -121,6 +122,7 @@ HRESULT cPlayScene::Setup()
 
 	m_pPlayer->SetAshe(m_pAshe);
 
+	
 	return S_OK;
 
 }
@@ -154,6 +156,21 @@ void cPlayScene::Update()
 	if (m_pMainUi)
 	{
 		m_pMainUi->update();
+	}
+
+	for (int i = 0; i < m_pEnemyManager->getAllEnemy()->size(); i++)
+	{
+		if ((*m_pEnemyManager->getAllEnemy())[i]->GetHP() <= 0 && !(*m_pEnemyManager->getAllEnemy())[i]->GetIsGetGold())
+		{
+			shop->GetGold().amount += 30.0f;
+			(*m_pEnemyManager->getAllEnemy())[i]->SetIsGetGold(true);
+		}
+	}
+
+	if (m_pAshe->GetHP() <= 0&&!m_pAshe->GetIsGetGold())
+	{
+		shop->GetGold().amount += 500.0f;
+		m_pAshe->SetIsGetGold(true);
 	}
 
 	//shop->GetGold().amount += 10.0f;  //食奄陥たたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたたた食奄醤

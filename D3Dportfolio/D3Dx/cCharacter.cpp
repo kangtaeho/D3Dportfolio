@@ -8,6 +8,7 @@ cCharacter::cCharacter()
 	, m_fRotY(0.0f)
 	, m_vNextPosition(0, 0, 0)
 	, m_pSkinnedMesh(NULL)
+	, m_bIsGetGold(false)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 }

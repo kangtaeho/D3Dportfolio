@@ -30,6 +30,7 @@ cSkill::cSkill()
 	, m_bIsAutoFire(false)
 	, m_bIsReady(false)
 	, m_bIsFire(false)
+	, m_bIsKill(false)
 	, m_pMesh(NULL)
 	, m_pPlayer(NULL)
 	, m_pTargetEnemy(NULL)
@@ -246,6 +247,9 @@ void cSkill::RemoveTarget()
 		{
 		case RANGE_SKILL:
 			m_pTargetEnemy->SetHP(m_pTargetEnemy->GetHP() - m_fDamage);
+
+			if (m_pTargetEnemy->GetHP() <= 0) m_bIsKill = true;
+
 			break;
 		case TOXIC_SKILL:
 			AddToxicEnemy(m_pTargetEnemy);

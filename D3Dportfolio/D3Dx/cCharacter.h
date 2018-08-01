@@ -50,6 +50,7 @@ protected:
 	SYNTHESIZE(float, m_fRegainMP, RegainMP);
 	SYNTHESIZE(float, m_fDEF, DEF);
 	SYNTHESIZE(float, m_fMDEF, MDEF);
+	SYNTHESIZE(bool, m_bIsGetGold, IsGetGold);
 
 public:
 	cCharacter();
