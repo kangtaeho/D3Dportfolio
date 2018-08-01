@@ -31,10 +31,12 @@ void cToxicSkill::Update()
 	RemoveTarget();
 	AutoFire();
 	DamagedToxic();
+	UpdateDamageRender();
 }
 
 void cToxicSkill::Render()
 {
 	RenderCube();
+	RenderDR();
 	//RenderAOEMesh();
 }

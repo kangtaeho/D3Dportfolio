@@ -43,15 +43,17 @@ void cPlayer::Setup(const char* name)
 	g_pSkillManager->AddSkill("평타", RANGE_SKILL, m_fATK, m_fRange, 20.0f, 0.3f, 2.5f, 20, true);
 	g_pSkillManager->GetSkill("평타")->SetDamageRender("normalShot");
 
-	g_pSkillManager->AddSkill("r", OBJECT_SKILL, 100, 500, 10.0f, 0.5f, 20.0f, 40, true, "BantamTrap");
+	g_pSkillManager->AddSkill("r", OBJECT_SKILL, 99, 500, 10.0f, 0.5f, 25.0f, 80, true, "BantamTrap");
 	g_pSkillManager->GetSkill("r")->SetPlayer(this);	// 테두리 때문에
+	g_pSkillManager->GetSkill("r")->SetDamageRender("normalShot1");
 
 	g_pSkillManager->AddSkill("w", BUFF_SKILL, 0, 0, 0, 0.5, 10, 10, false, NULL);
 	g_pSkillManager->GetSkill("w")->SetPlayer(this);
 	g_pSkillManager->GetSkill("w")->SetBuffType(MOVEUP);
 
-	g_pSkillManager->AddSkill("e", TOXIC_SKILL, 50, 400, 20.0f, 0.5, 10.0f, 10, true);
+	g_pSkillManager->AddSkill("e", TOXIC_SKILL, 50, 400, 20.0f, 0.5, 15.0f, 10, true);
 	g_pSkillManager->GetSkill("e")->SetPlayer(this);
+	g_pSkillManager->GetSkill("e")->SetDamageRender("normalShot2");
 
 	CreateTargetMesh();
 

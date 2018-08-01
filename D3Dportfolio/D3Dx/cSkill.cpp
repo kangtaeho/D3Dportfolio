@@ -269,6 +269,9 @@ void cSkill::RemoveMeshTime()
 			{
 				if (D3DXVec3Length(&(m_vecMesh[i].pos - (*m_pVecEnemy)[j]->getPosition())) < 60)
 				{
+					if (m_pDamageRender)
+						m_pDamageRender->ShowDamage((*m_pVecEnemy)[j]->getPosition(), (int)m_fDamage);
+
 					(*m_pVecEnemy)[j]->SetHP((*m_pVecEnemy)[j]->GetHP() - m_fDamage);
 					SAFE_DELETE(m_vecMesh[i].animation);
 					m_vecMesh.erase(m_vecMesh.begin() + i);
@@ -611,6 +614,10 @@ void cSkill::DamagedToxic()
 		if ((m_vecToxic[i].removeTime - m_vecToxic[i].countTime) > 0)
 		{
 			m_vecToxic[i].countTime+=2.0f;
+
+			if (m_pDamageRender)
+				m_pDamageRender->ShowDamage(m_vecToxic[i].enemy->getPosition(), (int)m_fDamage / 2.0f);
+
 			m_vecToxic[i].enemy->SetHP(m_vecToxic[i].enemy->GetHP() - m_fDamage / 2.0f);
 		}
 

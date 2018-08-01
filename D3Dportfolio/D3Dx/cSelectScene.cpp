@@ -246,7 +246,6 @@ void cSelectScene::SelectTimer()
 
 	int time = m_fLimitedTime - m_fPassedTime;
 
-
 	int second = time / 10;
 	int first = time % 10;
 
@@ -279,13 +278,13 @@ void cSelectScene::SelectChampion()
 	m_pPlayerSelect->setScale(D3DXVECTOR3(1, 1, 1));
 	m_bIsLockIn = true;
 
-	srand(GetTickCount());
-	int rndNum = rand() % 10;
+	// srand(GetTickCount());
+	int rndNum = 4.0f;
 
-	while (rndNum == m_nPickIndex)
-	{
-		rndNum = rand() % 10;
-	}
+	// while (rndNum == m_nPickIndex)
+	// {
+	// 	rndNum = rand() % 10;
+	// }
 
 	m_pEnemyChamp = m_vecIcon[rndNum];
 	m_pEnemyChamp->setPosition(D3DXVECTOR3(1111, 74, 0));
