@@ -31,6 +31,7 @@ void cAshe::Setup(const char * name)
 	m_fRadius = 40;
 	m_bIsDead = false;
 	m_bIsDanger = false;
+	m_bIsFire = false;
 
 	m_fNowHP = m_fHP;
 
@@ -55,7 +56,7 @@ void cAshe::Setup(const char * name)
 	m_vNextPosition = m_sMovePos.pos[0];
 
 	m_pAttack = new cRangeSkill;
-	m_pAttack->Setup(RANGE_SKILL, m_fATK, m_fRange, 25.0f, 0.35f, 3.0f, 20, true, NULL);
+	m_pAttack->Setup(RANGE_SKILL, m_fATK, m_fRange, 25.0f, 0.35f, 2.7f, 20, true, NULL);
 
 	m_pMatScale = new D3DXMATRIX;
 	D3DXMatrixScaling(m_pMatScale, 0.8, 0.8, 0.8);
@@ -150,6 +151,7 @@ void cAshe::ControlAI()
 	else if (m_pAttack->GetIsCasting())
 	{
 		if(m_pEnemy) m_fRotY = GetAngle(m_vPosition, m_pEnemy->getPosition());
+		m_vNextPosition = m_vPosition;
 		setAnimation("Attack1");
 	}
 	else if (isMove)
