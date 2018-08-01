@@ -146,6 +146,12 @@
     <ClCompile Include="cObjectManager.cpp">
       <Filter>소스파일\cCharacter</Filter>
     </ClCompile>
+    <ClCompile Include="cAshe.cpp">
+      <Filter>소스파일\cCharacter</Filter>
+    </ClCompile>
+    <ClCompile Include="cDamageRender.cpp">
+      <Filter>소스파일\cCharacter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap.h">
@@ -300,6 +306,12 @@
       <Filter>소스파일\cCharacter</Filter>
     </ClInclude>
     <ClInclude Include="cObjectManager.h">
+      <Filter>소스파일\cCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="cAshe.h">
+      <Filter>소스파일\cCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="cDamageRender.h">
       <Filter>소스파일\cCharacter</Filter>
     </ClInclude>
   </ItemGroup>

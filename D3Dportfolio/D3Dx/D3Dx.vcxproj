@@ -23,13 +23,13 @@
     <ProjectGuid>{590D056D-3D4D-4C0C-811A-8AF55BFB001B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>D3Dx</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -156,6 +156,7 @@
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="cAction.h" />
     <ClInclude Include="cAllocatedHierachy.h" />
+    <ClInclude Include="cAshe.h" />
     <ClInclude Include="cAStar.h" />
     <ClInclude Include="cBluePrint.h" />
     <ClInclude Include="cBuffSkill.h" />
@@ -163,6 +164,7 @@
     <ClInclude Include="cCharacter.h" />
     <ClInclude Include="cCollisionManager.h" />
     <ClInclude Include="cCube.h" />
+    <ClInclude Include="cDamageRender.h" />
     <ClInclude Include="cDeviceManager.h" />
     <ClInclude Include="cEnemy.h" />
     <ClInclude Include="cFontManager.h" />
@@ -210,6 +212,7 @@
     <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="cAction.cpp" />
     <ClCompile Include="cAllocatedHierachy.cpp" />
+    <ClCompile Include="cAshe.cpp" />
     <ClCompile Include="cAStar.cpp" />
     <ClCompile Include="cBluePrint.cpp" />
     <ClCompile Include="cBuffSkill.cpp" />
@@ -217,6 +220,7 @@
     <ClCompile Include="cCharacter.cpp" />
     <ClCompile Include="cCollisionManager.cpp" />
     <ClCompile Include="cCube.cpp" />
+    <ClCompile Include="cDamageRender.cpp" />
     <ClCompile Include="cDeviceManager.cpp" />
     <ClCompile Include="cEnemy.cpp" />
     <ClCompile Include="cFontManager.cpp" />
