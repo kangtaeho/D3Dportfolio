@@ -338,7 +338,14 @@ void cStatus::update()
 			if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->ReGainHp != NULL &&
 				m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->GetEffected() == false)
 			{
-				m_pPlayer->SetRegainHP(m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->ReGainHp);
+				if (g_pKeyManager->IsOnceKeyDown('1'))
+				{
+					m_pPlayer->SetRegainHP(m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->ReGainHp);
+
+					m_pStatusInvenInfo[i]->GetinvitemInfo()->SetItemInfo(NULL);
+					m_pStatusInvenInfo[i]->SethadItem(false);
+					break;
+				}
 			}
 
 			if (m_pStatusInvenInfo[i]->GetinvitemInfo()->GetItemInfo()->Mp != NULL &&
@@ -821,6 +828,9 @@ void cStatus::InvenUpdate()
 
 			t[i] = D3DXVECTOR3(m_vecInvenPos[i].x, m_vecInvenPos[i].y, 0);
 			s[i] = D3DXVECTOR3(0.55f, 0.55f, 0.7f);
+
+			if (m_vecInven[i]->GetinvitemInfo()->GetItemInfo()->itemName == "potion")
+				s[i] = D3DXVECTOR3(0.7f, 0.7f, 0.7f);
 
 			D3DXMatrixScaling(&matS[i], s[i].x, s[i].y, s[i].z);
 			D3DXMatrixTranslation(&matT[i], t[i].x,

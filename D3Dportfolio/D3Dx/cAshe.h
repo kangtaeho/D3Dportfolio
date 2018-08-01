@@ -1,6 +1,7 @@
 #pragma once
 #include "cCharacter.h"
 
+class cHealthProgress;
 enum AI_TYPE
 {
 	AI_PATROL,	// Å½Áö
@@ -20,7 +21,7 @@ struct AI_POS
 class cAshe : public cCharacter
 {
 private:
-
+	cHealthProgress * m_pProgressBar;
 	LPD3DXMESH m_pSphere;
 
 	cRangeSkill* m_pAttack;

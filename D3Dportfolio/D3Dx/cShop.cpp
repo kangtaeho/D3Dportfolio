@@ -546,6 +546,8 @@ void cShop::update()
 	{
 		m_pItemInfo = tempitem;
 		std::string tempName;
+
+		if(tempitem != NULL)
 		tempName = m_pItemInfo->GetItemInfo()->itemName;
 
 		tempitem->GetItemInfo()->Itemtexture->GetPosition();

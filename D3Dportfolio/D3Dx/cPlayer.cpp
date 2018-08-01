@@ -72,6 +72,7 @@ void cPlayer::Setup(const char* name)
 	m_pTelePortProgress->setup();
 	m_bTelePort = false;
 	m_bProgressing = false;
+	count = 0;
 }
 
 void cPlayer::Release()
@@ -88,16 +89,28 @@ void cPlayer::Update()
 
 	g_pSkillManager->Update();
 
+	if (m_fRegainHP != 0.1f)
+	{
+		count++;
+		if (count % 300 == 0)
+		{
+			m_fRegainHP = 0.1f;
+			count = 0;
+		}
+	}
+
 	if (m_fTime)
 	{
 		m_fTime -= g_pTimeManager->GetElapsedTime();
 
 		if (m_fTime <= 0)
 		{
-			if (m_fHP < m_fMAXHP) m_fHP += m_fRegainHP * 5.0f;
+			if (m_fHP < m_fMAXHP && m_fHP != 0) m_fHP += m_fRegainHP;
 			m_fTime = 0.5f;
 		}
 	}
+
+
 	if (m_fRespwan)
 	{
 		m_fRespwan -= g_pTimeManager->GetElapsedTime();
